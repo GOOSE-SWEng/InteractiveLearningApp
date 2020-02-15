@@ -1,5 +1,6 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -19,9 +20,8 @@ public class InteractiveLearningApp extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		stage = primaryStage;
 		stage.initStyle(StageStyle.TRANSPARENT);
-		stage.setWidth(defaultXSize);
-		stage.setHeight(defaultYSize);
-		Scene scene = new Scene();
+		BorderPane bp = new BorderPane();
+		Scene scene = new Scene(bp, defaultXSize, defaultYSize);
 		stage.setScene(scene);
 		stage.show();	
 	}
