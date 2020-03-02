@@ -1,4 +1,6 @@
 package main;
+import java.util.ArrayList;
+
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -7,70 +9,70 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import userInterface.ResizeBar;
-import userInterface.ToolBar;
-
+import userInterface.*;
+import slides.*;
 
 public class InteractiveLearningApp extends Application{
-	
 	public static int defaultXSize = 1280;
 	public static int defaultYSize = 720;
-	
 	//Current screen offset
 	private double yOffset = 0;
 	private double xOffset = 0;
-	
+	private static Scene start;
 	private static Stage mainStage;
 	
+	Thread runThread;
+	
+	
+	static ArrayList<Slide> slides = new ArrayList<Slide>();
+	
+/*MEDIA ARRAYLIST DECLARATION
+ * ETC...
+ * 2DGraphics
+ * 3DGraphics
+ * Images
+ * Video
+ * Text
+ * Audio
+ * Buttons links
+ */
 	
 	public static void main(String[] args) {
 		System.out.println("Running...");
 		launch(args);
 		System.out.println("Finished...");
-
 	}
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		mainStage = primaryStage;
+		start = StartScreen.createStartScreen(mainStage, defaultXSize, defaultYSize);
+		mainStage.setScene(start);
 		
-		primaryStage.setTitle("Interactive Learning Application");
+		/*LOADING PROCESS*/
 		
-		SubScene toolBar = ToolBar.createToolBar(defaultXSize);
-		SubScene resizeBar = ResizeBar.CreateResizeBar(defaultXSize);
-		
-		toolBar.setOnMousePressed(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				xOffset = event.getSceneX();
-				yOffset = event.getSceneY();
-			}
-		});
-		
-		//Move window with mouse
-		toolBar.setOnMouseDragged(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				mainStage.setX(event.getScreenX() - xOffset);
-				mainStage.setY(event.getScreenY() - yOffset);	
-			}
-		});
-		
-		
-		//setting stage style to transparent removes the default toolbar
-		mainStage.initStyle(StageStyle.TRANSPARENT);
-		BorderPane borderPane = new BorderPane();
-		
-		borderPane.setTop(toolBar);
-		borderPane.setBottom(resizeBar);
-		
-		Scene scene = new Scene(borderPane, defaultXSize, defaultYSize);
-		mainStage.setScene(scene);
-		
-		mainStage.show();	
+		mainStage.show();
 	}
+	
+	public static void run() {
+		FileBrowser fb = new FileBrowser();
+		//File file = RETURN FILE FROM BROWSER
+		//parseXML(file, ArrayLists HERE);
+		//createSlides(ARRAYLISTS);
+		showSlide(1);
+	}
+	
 	
 	public static Stage getStage() {
 		return mainStage;
+	}
+
+	public static void setMainStage(Stage mainStage) {
+		InteractiveLearningApp.mainStage = mainStage;
+	}
+
+	public static void showSlide(int index) {
+		mainStage.setScene(slides.get(index).update());
+		
 	}
 }
