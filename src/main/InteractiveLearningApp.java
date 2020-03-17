@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import userInterface.*;
 import slides.*;
+import media.*;
 
 public class InteractiveLearningApp extends Application{
 	public static int defaultXSize = 1280;
@@ -23,8 +24,16 @@ public class InteractiveLearningApp extends Application{
 	
 	Thread runThread;
 	
-	
 	static ArrayList<Slide> slides = new ArrayList<Slide>();
+	static ArrayList<Audio> audio = new ArrayList<Audio>();
+	static ArrayList<Graphics2D> graphics2d = new ArrayList<Graphics2D>();
+	static ArrayList<Graphics3D> graphics3d = new ArrayList<Graphics3D>();
+	static ArrayList<Image> images = new ArrayList<Image>();
+	static ArrayList<Shape> shapes = new ArrayList<Shape>();
+	static ArrayList<SlideText> slideTexts = new ArrayList<SlideText>();
+	static ArrayList<Video> videos = new ArrayList<Video>();
+	
+	//static ArrayList<Video> videos = new ArrayList<Video>();
 	
 /*MEDIA ARRAYLIST DECLARATION
  * ETC...
@@ -61,7 +70,6 @@ public class InteractiveLearningApp extends Application{
 		//createSlides(ARRAYLISTS);
 		showSlide(1);
 	}
-	
 	
 	public static Stage getStage() {
 		return mainStage;
