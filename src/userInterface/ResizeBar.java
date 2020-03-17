@@ -42,6 +42,7 @@ public class ResizeBar {
 		
 		SubScene resizeBar = new SubScene(gridPane, winWidth, 20);
 		resizeBar.widthProperty().bind(InteractiveLearningApp.getStage().widthProperty());
+		resizeBar.setUserAgentStylesheet("style/hotBar.css");
 		
 		return resizeBar;
 	}

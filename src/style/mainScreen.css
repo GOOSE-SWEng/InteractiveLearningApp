@@ -1,0 +1,37 @@
+//Main screen style Sheet
+
+.root{
+	-fx-background-color: gray;
+	-fx-background-image: url("SpaceBG.jpg");
+	-fx-background-repeat: stretch;
+	-fx-background-size: 1280 720;
+    -fx-background-position: center center;
+}
+
+.button{
+	-fx-background-color: blue;
+	-fx-text-fill: white;
+
+}
+.text{
+	-fx-font-size: 11pt;
+	-fx-font-family: "arial";
+	-fx-font-style: italic;
+    -fx-effect: dropshadow(one-pass-box, black,0,0,0,2);
+}
+
+#mainTitle{
+	-fx-font-size: 48pt;
+	-fx-font-family: "arial";
+	-fx-font-style: italic;
+	-fx-fill: white ;//#00FFB8;
+	-fx-effect: dropshadow(one-pass-box, black,0,0,0,4);
+}
+#list{
+	-fx-font-size: 24pt;
+	-fx-font-family: "arial";
+	-fx-font-style: italic;
+	-fx-fill: WHITE;
+	-fx-effect: dropshadow(one-pass-box, black,0,0,0,2);
+
+}

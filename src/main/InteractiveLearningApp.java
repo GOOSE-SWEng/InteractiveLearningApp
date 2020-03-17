@@ -22,6 +22,9 @@ public class InteractiveLearningApp extends Application{
 	private static Scene start;
 	private static Stage mainStage;
 	
+	//Triggers Exhibit Mode
+	private boolean exhibitMode = false;
+	
 	Thread runThread;
 	
 	static ArrayList<Slide> slides = new ArrayList<Slide>();
