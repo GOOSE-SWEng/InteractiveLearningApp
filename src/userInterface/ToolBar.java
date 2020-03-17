@@ -1,14 +1,27 @@
+package userInterface;
+
+import java.io.File;
+
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import main.InteractiveLearningApp;
 
-//TODO add additional comments, to make things clearer
+/*TODO
+ * add additional comments
+ * when the maximize window button is pressed, update the text on the button to say "minimize window"
+ */
 
 public class ToolBar {
 	
@@ -18,9 +31,11 @@ public class ToolBar {
 	Button newFileButton;
 	Button optionsButton;
 	Button settingsButton;
-	Button minimizeButton;
-	Button maximizeButton;
+	Button minimizeWindowButton;
+	Button maximizeWindowButton;
+	static GridPane gridPane;
 	Text title;
+	
 	
 	public static SubScene createToolBar(int winWidth) {
 		
@@ -31,9 +46,11 @@ public class ToolBar {
 		Button openButton = new Button("Open");
 		Button settingsButton = new Button("Settings");
 		Button newFileButton = new Button("New File");
-		Button minimizeWindowButton = new Button("Minimize Window");
+		Button minimizeWindowButton = new Button("Minimize to Tray");
 		Button maximizeWindowButton = new Button("Maximize Window");
 		Button exitButton = new Button("Exit");
+		
+		
 		
 		//connects each button to its corresponding event
 		openButton.setOnAction(e -> OpenButtonPressed());
@@ -42,6 +59,7 @@ public class ToolBar {
 		minimizeWindowButton.setOnAction(e -> MinimizeButtonPressed());
 		maximizeWindowButton.setOnAction(e -> MaximizeButtonPressed());
 		exitButton.setOnAction(e -> ExitButtonPressed());
+		
 		
 		//adds 10 pixel padding to the top, bottom, left and right of the toolbar
 		gridPane.setPadding(new Insets(10,10,10,10));
@@ -53,6 +71,7 @@ public class ToolBar {
 		gridPane.setAlignment(Pos.CENTER);
 		
 		//sets the title to always be in the centre
+		//and resize button to be on the left of the toolbar
 		GridPane.setHalignment(title, HPos.CENTER);
 		gridPane.setHgap(0);
 		
@@ -65,45 +84,85 @@ public class ToolBar {
 		gridPane.add(maximizeWindowButton, 5, 0);
 		gridPane.add(exitButton, 6, 0);
 		
+		
+		//creates column constraints so if the toolbar is resized, the distance between buttons 
+		//remains consistent
+		/*TODO
+		 * work with the design and marketing manager to get the toolbar looking good 
+		 */
+	
+		ColumnConstraints column0 = new ColumnConstraints();
+		column0.setPercentWidth(5);
 		ColumnConstraints column1 = new ColumnConstraints();
 		column1.setPercentWidth(5);
 		ColumnConstraints column2 = new ColumnConstraints();
 		column2.setPercentWidth(5);
 		ColumnConstraints column3 = new ColumnConstraints();
-		column3.setPercentWidth(10);
+		column3.setPercentWidth(55);
 		ColumnConstraints column4 = new ColumnConstraints();
-		column4.setPercentWidth(55);
+		column4.setPercentWidth(10);
 		ColumnConstraints column5 = new ColumnConstraints();
 		column5.setPercentWidth(10);
 		ColumnConstraints column6 = new ColumnConstraints();
 		column6.setPercentWidth(10);
-		ColumnConstraints column7 = new ColumnConstraints();
-		column7.setPercentWidth(5);
 
-		gridPane.getColumnConstraints().addAll(column1, column2, column3, 
-											   column4, column5, column6,
-											   column7);
+		gridPane.getColumnConstraints().addAll(column0, column1, column2, column3, 
+											   column4, column5, column6);
 		
 		//great a subscene on top of the gridpane, with a width defined by the windowwidth and a height of 20
 		SubScene toolBar = new SubScene(gridPane, winWidth, 20);
 		
+		toolBar.widthProperty().bind(InteractiveLearningApp.getStage().widthProperty());
 		return toolBar;
 	}
 	
-	
 	public static void OpenButtonPressed() {
+		/*
+		 * TODO
+		 * Maybe make our own file browser? (would be a lot of work but could be something to do on the side
+		 * 
+		 */
 		System.out.println("Open Button Pressed");
-		//TODO add functionality so a file browser opens
+		FileChooser fileChooser = new FileChooser();
+		
+		/*
+		 * TODO: Add appropriate file extension filters (e.g. .stl files)
+		fileChooser.getExtensionFilters().addAll(c)
+		
+		
+		*/
+		fileChooser.setTitle("Open a new Presentation");
+		File selectedFile = fileChooser.showOpenDialog(InteractiveLearningApp.getStage());
+		
+		//from here file can be returned or parsed to another method for scene building
 	}
 	
 	public static void SettingsButtonPressed() {
+	/*
+	 * TOOD maybe have the settings scene as a separate class?
+	 * This is just a basic idea of what it should do
+	 */
 		System.out.println("Settings Button Pressed");
-		//TODO add functionality so a settings scene opens
+		Label settingsLabel = new Label("This will be the settings screen");
+		
+		StackPane settingsLayout = new StackPane();
+		settingsLayout.getChildren().add(settingsLabel);
+		
+		Stage settingsWindow = new Stage();
+		Scene settingsScene = new Scene(settingsLayout,230,100);
+		
+		settingsWindow.setTitle("Settings Screen");
+		settingsWindow.setScene(settingsScene);
+		
+		settingsWindow.setX(InteractiveLearningApp.getStage().getX() + 200);
+		settingsWindow.setY(InteractiveLearningApp.getStage().getX() + 100);
+		
+		settingsWindow.show();
 	}
 	
 	public static void NewFileButtonPressed() {
 		System.out.println("New File Button Pressed");
-		//TODO add functionality so a new empty scne opens??
+		//TODO add functionality so a new empty scene opens??
 		//not sure abt this one 
 	}
 	
@@ -120,6 +179,7 @@ public class ToolBar {
 		if (InteractiveLearningApp.getStage().isMaximized() == false) {
 			InteractiveLearningApp.getStage().setMaximized(true);
 		}
+		
 		//if window is maximized, returns to the default window size and sets the the value to false
 		else {
 			InteractiveLearningApp.getStage().setWidth(InteractiveLearningApp.defaultXSize);
@@ -133,6 +193,4 @@ public class ToolBar {
 		System.out.println("Exit Button Pressed");
 		InteractiveLearningApp.getStage().close();
 	}
-	
-	
 }
