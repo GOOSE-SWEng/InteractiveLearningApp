@@ -20,6 +20,7 @@ public class InteractiveLearningApp extends Application{
 	private double yOffset = 0;
 	private double xOffset = 0;
 	private static Scene start;
+	private static Scene settings;
 	private static Stage mainStage;
 	
 	//Triggers Exhibit Mode
@@ -59,7 +60,8 @@ public class InteractiveLearningApp extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		mainStage = primaryStage;
 		start = StartScreen.createStartScreen(mainStage, defaultXSize, defaultYSize);
-		mainStage.setScene(start);
+		settings = Settings.createSettings(mainStage, defaultXSize, defaultYSize);
+		mainStage.setScene(settings);
 		
 		/*LOADING PROCESS*/
 		
