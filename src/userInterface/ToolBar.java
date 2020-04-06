@@ -42,14 +42,15 @@ public class ToolBar {
 		//instantiate the new grid pane, then instantiate the buttons to fill it
 		GridPane gridPane = new GridPane();
 		
+		//To be replaced with icons
 		Text title = new Text("Home Screen");
+		title.setId("title");
 		Button openButton = new Button("Open");
 		Button settingsButton = new Button("Settings");
 		Button newFileButton = new Button("New File");
 		Button minimizeWindowButton = new Button("Minimize to Tray");
 		Button maximizeWindowButton = new Button("Maximize Window");
 		Button exitButton = new Button("Exit");
-		
 		
 		
 		//connects each button to its corresponding event
@@ -62,16 +63,16 @@ public class ToolBar {
 		
 		
 		//adds 10 pixel padding to the top, bottom, left and right of the toolbar
-		gridPane.setPadding(new Insets(10,10,10,10));
+		
+		gridPane.setPadding(new Insets(10,0,10,0));
 		
 		//sets the text so it is aligned in the centre of  its bounding box
 		title.setTextAlignment(TextAlignment.CENTER);
-		
-		
 		gridPane.setAlignment(Pos.CENTER);
 		
 		//sets the title to always be in the centre
 		//and resize button to be on the left of the toolbar
+		
 		GridPane.setHalignment(title, HPos.CENTER);
 		gridPane.setHgap(0);
 		
@@ -83,8 +84,18 @@ public class ToolBar {
 		gridPane.add(minimizeWindowButton, 4, 0);
 		gridPane.add(maximizeWindowButton, 5, 0);
 		gridPane.add(exitButton, 6, 0);
+		gridPane.setGridLinesVisible(true);
 		
+		//Sets to middle of each cell
+		GridPane.setHalignment(title, HPos.CENTER);
+		GridPane.setHalignment(openButton, HPos.CENTER);
+		GridPane.setHalignment(settingsButton, HPos.CENTER);
+		GridPane.setHalignment(newFileButton, HPos.CENTER);
+		GridPane.setHalignment(minimizeWindowButton, HPos.CENTER);
+		GridPane.setHalignment(maximizeWindowButton, HPos.CENTER);
+		GridPane.setHalignment(exitButton, HPos.CENTER);
 		
+
 		//creates column constraints so if the toolbar is resized, the distance between buttons 
 		//remains consistent
 		/*TODO
@@ -98,13 +109,13 @@ public class ToolBar {
 		ColumnConstraints column2 = new ColumnConstraints();
 		column2.setPercentWidth(5);
 		ColumnConstraints column3 = new ColumnConstraints();
-		column3.setPercentWidth(55);
+		column3.setPercentWidth(70);
 		ColumnConstraints column4 = new ColumnConstraints();
-		column4.setPercentWidth(10);
+		column4.setPercentWidth(5);
 		ColumnConstraints column5 = new ColumnConstraints();
-		column5.setPercentWidth(10);
+		column5.setPercentWidth(5);
 		ColumnConstraints column6 = new ColumnConstraints();
-		column6.setPercentWidth(10);
+		column6.setPercentWidth(5);
 
 		gridPane.getColumnConstraints().addAll(column0, column1, column2, column3, 
 											   column4, column5, column6);
@@ -113,6 +124,7 @@ public class ToolBar {
 		SubScene toolBar = new SubScene(gridPane, winWidth, 20);
 		
 		toolBar.widthProperty().bind(InteractiveLearningApp.getStage().widthProperty());
+		toolBar.setUserAgentStylesheet("style/hotBar.css");
 		return toolBar;
 	}
 	
