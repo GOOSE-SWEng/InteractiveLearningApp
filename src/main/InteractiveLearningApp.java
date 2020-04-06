@@ -23,6 +23,12 @@ public class InteractiveLearningApp extends Application{
 	private static Scene settings;
 	private static Stage mainStage;
 	
+	////////////
+	private static SubScene test;
+	private static Scene testScene;
+	private static Slide silde;
+	////////////
+	
 	//Triggers Exhibit Mode
 	private boolean exhibitMode = false;
 	
@@ -61,6 +67,7 @@ public class InteractiveLearningApp extends Application{
 		mainStage = primaryStage;
 		start = StartScreen.createStartScreen(mainStage, defaultXSize, defaultYSize);
 		settings = Settings.createSettings(mainStage, defaultXSize, defaultYSize);
+		//mainStage.setScene(start);
 		mainStage.setScene(settings);
 		
 		/*LOADING PROCESS*/

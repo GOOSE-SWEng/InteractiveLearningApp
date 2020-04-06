@@ -1,2 +1,0 @@
-README
-Interactive Learning Application

@@ -57,7 +57,7 @@ public class StartScreen {
 		gp.add(settingsButton, 0, 1);
 		gp.add(quitButton, 0, 2);
 		gp.setAlignment(Pos.CENTER);
-		gp.setGridLinesVisible(true);
+		//gp.setGridLinesVisible(true);
 		gp.setVgap(20);
 		borderPane.setTop(toolBar);
 		borderPane.setBottom(resizeBar);
