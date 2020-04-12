@@ -23,12 +23,6 @@ public class InteractiveLearningApp extends Application{
 	private static Scene settings;
 	private static Stage mainStage;
 	
-	////////////
-	private static SubScene test;
-	private static Scene testScene;
-	private static Slide silde;
-	////////////
-	
 	//Triggers Exhibit Mode
 	private boolean exhibitMode = false;
 	
@@ -43,7 +37,12 @@ public class InteractiveLearningApp extends Application{
 	static ArrayList<SlideText> slideTexts = new ArrayList<SlideText>();
 	static ArrayList<Video> videos = new ArrayList<Video>();
 	
-	//static ArrayList<Video> videos = new ArrayList<Video>();
+	static ArrayList<VideoLayer> videoLayers = new ArrayList<VideoLayer>();
+	static ArrayList<Graphics2D> graphics2dLayers = new ArrayList<Graphics2D>();
+	static ArrayList<Graphics3DLayer> graphics3dLayers = new ArrayList<Graphics3DLayer>();
+	static ArrayList<ImageLayer> imageLayers = new ArrayList<ImageLayer>();
+	static ArrayList<TextLayer> textLayers = new ArrayList<TextLayer>();
+	static ArrayList<AudioLayer> audioLayers = new ArrayList<AudioLayer>();
 	
 /*MEDIA ARRAYLIST DECLARATION
  * ETC...
