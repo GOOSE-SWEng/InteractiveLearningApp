@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<slideshow>
+	<documentinfo>
+		<author>GOOSE SOFTWARE DEVELOPMENT COMPANY LTD</author>
+		<datemodified>25/02/20</datemodified>
+		<version>1.0</version>
+		<totalslides>20</totalslides>
+		<comment>Slideshow presentation "Interactive Learning Application" to aid students to learn complex topics and facts.</comment>
+	</documentinfo>
+	<defaults>
+		<backgroundcolor>Black</backgroundcolor>
+		<font>Arial</font>
+		<fontsize>24</fontsize>
+		<fontcolor>Black</fontcolor>
+		<linecolor>Black</linecolor>
+		<fillcolor>Black</fillcolor>
+		<slidewidth>1280</slidewidth>
+		<slideheight>720</slideheight>
+	</defaults>
+	<slide id='Home' duration='60'>
+		<text font='arial' fontsize='24' fontcolor='black' xpos='100' ypos='100' starttime='0' endtime='10000'>
+			HELLO THERE, WE ARE OUT HERE VIBIN <b>You</b> are <i>Gorgeous</i>
+		</text>
+		<line xstart='0' ystart='0' xend='100' yend='100' linecolor='Black' starttime='0' endtime='100'></line>
+		<shape type='rectangle' xstart='0' ystart='0' width='1280' height='720' fillcolor='Black' starttime='0' endtime='100'>
+			<shading x1='0' y1='0' color1='Black' x2='100' y2='100' color2='Black' cyclic='True'></shading>
+		</shape>
+		<audio urlname='src/audio' starttime='0' loop='true'></audio>
+		<image urlname='/src/resources/GooseLogo.png' xstart='0' ystart='0' width='1280' height='720' starttime='0' endtime='100'></image>
+		<video urlname='src/video' starttime='0' loop='false' xstart='0'></video>
+		<model urlname='src/model' starttime='0' endtime='0' width='0' height='0'></model>
+	</slide>
+</slideshow>

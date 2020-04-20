@@ -16,11 +16,11 @@ public class TextLayer {
 	ArrayList<SlideText> slideText = new ArrayList<SlideText>();
   SubScene window;
 	
-	public TextLayer(int width,int height, ArrayList<SlideText> slideText){
+	public TextLayer(int width,int height){
 		this.height = height;
 		this.width = width;
 		sp.setMinSize(width,height);
-    this.slideText = slideText;
+    //this.slideText = slideText;
     sp.setAlignment(Pos.TOP_LEFT);
 	}
 	

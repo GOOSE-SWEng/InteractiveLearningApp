@@ -1,20 +1,30 @@
 package media;
 
 import java.awt.Color;
+import java.io.File;
 
 import javafx.scene.SubScene;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class Audio {
 	String source;
-	Boolean loop;
 	Boolean controls;
 	SubScene subScene;
+	MediaPlayer player;
 	StackPane sp;
 	int startTime;
 	int slideNumber;
 	
-	public Audio(String urlName, int startTime, Boolean loop, Boolean controls, int controlX, int controlY, int width, int height, int slideNumber) {
+	public Audio(String urlName, int startTime, Boolean looping, Boolean controls, int controlX, int controlY, int width, int height, int slideNumber) {
+		
+		player = new MediaPlayer(new Media(new File(urlName).toURI().toString()));
+		if (looping) {
+			player.setCycleCount(MediaPlayer.INDEFINITE);
+		} else {
+			player.setCycleCount(1);
+		}
 		source = urlName;
 		subScene = new SubScene(sp,width,height);
 		this.startTime= startTime;
@@ -28,10 +38,11 @@ public class Audio {
 		//remove the object from the pane
 	}
 	public void start() {
-		// start playing the audi0
+		// start playing the audio
+		player.play();
 	}
 	public void stop() {
-		// stop playing the audio 
+		player.stop();
 	}
 	public int getStartTime() {
 		return(startTime);

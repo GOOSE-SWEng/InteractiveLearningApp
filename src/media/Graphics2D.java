@@ -18,10 +18,10 @@ public class Graphics2D {
 	StackPane sp = new StackPane();
 	
 	// constructor
-	public Graphics2D(int width, int height, ArrayList<Shape> shapes) {
+	public Graphics2D(int width, int height) {
 		this.paneHeight = height;
 		this.paneWidth = width;
-		this.shapes = shapes; // clones arrayList
+		//this.shapes = shapes; // clones arrayList
 		Window = new SubScene(sp,paneWidth,paneHeight);//creates the layer subscene
 	}
 	

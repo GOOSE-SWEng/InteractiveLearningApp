@@ -14,12 +14,12 @@ public class ImageLayer {
 	ArrayList<SlideImage> images = new ArrayList<SlideImage>();
 	SubScene window;
 	
-	public ImageLayer(int width,int height, ArrayList<SlideImage> images){
+	public ImageLayer(int width,int height){
 		sceneHeight = height;
 		sceneWidth = width;
     sp.setMinSize(sceneWidth,sceneHeight);
     sp.setAlignment(Pos.TOP_LEFT);
-		this.images = images;
+		//this.images = images;
 	}
 	
 	public void add(String urlName, int xStart, int yStart, int width, int height, int startTime, int endTime, int slideNumber) {

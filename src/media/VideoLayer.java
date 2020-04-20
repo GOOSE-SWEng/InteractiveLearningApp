@@ -1,9 +1,9 @@
 package media;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javafx.scene.SubScene;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.StackPane;
 
 public class VideoLayer {
@@ -11,24 +11,28 @@ public class VideoLayer {
 	int width;
 	StackPane sp = new StackPane();
 	ArrayList<Video> videos = new ArrayList<Video>();
-	SubScene window = new SubScene(sp,width,height);
-	
-	public VideoLayer(int width,int height){
+	SubScene window = new SubScene(sp, width, height);
+
+	public VideoLayer(int width, int height) {
 		this.height = height;
 		this.width = width;
-		sp.setMinSize(width,height);
+		sp.setMinSize(width, height);
 	}
-	
-	public void add(String urlName, int startTime, Boolean loop, int xStart, int yStart) {
-		Video video = new Video( urlName, startTime, loop, xStart, yStart, width, height);//creates te video object and its subscene
-		videos.add(video);// adds the video object to the array list
-		sp.getChildren().add(video.get());// adds the SubScene(created with the constructor) to the video layer stack pane
+
+	public void addVideo(String urlName, int startTime, Boolean loop, int xStart, int yStart) throws IOException {
+		// creates the video object and its subscene
+		Video video = new Video(urlName, startTime, loop, xStart, yStart, width, height);
+		// adds the video object to the array list
+		videos.add(video);
+		// adds the SubScene(created with the constructor) to the video layer stack pane
+		sp.getChildren().add(video.get());
 	}
-	
-	public void remove(Video video) {
+
+	public void removeVideo(Video video) {
 		sp.getChildren().remove(video.get());
 	}
-	
+
+	//please comment on what this exactly is
 	public SubScene get() {
 		return (window);
 	}

@@ -1,4 +1,6 @@
 package main;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import javafx.application.Application;
@@ -11,6 +13,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import userInterface.*;
 import slides.*;
+import tools.XMLParser;
 import media.*;
 
 public class InteractiveLearningApp extends Application{
@@ -34,7 +37,7 @@ public class InteractiveLearningApp extends Application{
 	static ArrayList<Graphics3D> graphics3d = new ArrayList<Graphics3D>();
 	static ArrayList<Image> images = new ArrayList<Image>();
 	static ArrayList<Shape> shapes = new ArrayList<Shape>();
-	static ArrayList<SlideText> slideTexts = new ArrayList<SlideText>();
+	static ArrayList<SlideText> slideText = new ArrayList<SlideText>();
 	static ArrayList<Video> videos = new ArrayList<Video>();
 	
 	static ArrayList<VideoLayer> videoLayers = new ArrayList<VideoLayer>();
@@ -43,6 +46,9 @@ public class InteractiveLearningApp extends Application{
 	static ArrayList<ImageLayer> imageLayers = new ArrayList<ImageLayer>();
 	static ArrayList<TextLayer> textLayers = new ArrayList<TextLayer>();
 	static ArrayList<AudioLayer> audioLayers = new ArrayList<AudioLayer>();
+	
+	String vidUrl = Paths.get("src/Sun.mp4").toUri().toString();
+	String xml = "src/resources/xml.xml";
 	
 /*MEDIA ARRAYLIST DECLARATION
  * ETC...
@@ -63,6 +69,7 @@ public class InteractiveLearningApp extends Application{
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		new XMLParser(xml, audioLayers, videoLayers, textLayers, imageLayers, graphics2dLayers, graphics3dLayers);
 		mainStage = primaryStage;
 		start = StartScreen.createStartScreen(mainStage, defaultXSize, defaultYSize);
 		settings = Settings.createSettings(mainStage, defaultXSize, defaultYSize);
@@ -70,7 +77,9 @@ public class InteractiveLearningApp extends Application{
 		mainStage.setScene(start);
 		
 		/*LOADING PROCESS*/
-		
+		Scene slide1 = createSlide();
+
+		mainStage.setScene(slide1);
 		mainStage.show();
 	}
 	
@@ -81,6 +90,13 @@ public class InteractiveLearningApp extends Application{
 		//createSlides(ARRAYLISTS);
 		showSlide(1);
 	}
+	
+	public Scene createSlide() throws IOException{
+		BorderPane bp = new BorderPane();
+		bp.setCenter(textLayers.get(0).get());
+		return new Scene(bp, defaultXSize, defaultYSize);
+	}
+	
 	
 	public static Stage getStage() {
 		return mainStage;
