@@ -67,7 +67,7 @@ public class InteractiveLearningApp extends Application{
 		start = StartScreen.createStartScreen(mainStage, defaultXSize, defaultYSize);
 		settings = Settings.createSettings(mainStage, defaultXSize, defaultYSize);
 		//mainStage.setScene(start);
-		mainStage.setScene(settings);
+		mainStage.setScene(start);
 		
 		/*LOADING PROCESS*/
 		

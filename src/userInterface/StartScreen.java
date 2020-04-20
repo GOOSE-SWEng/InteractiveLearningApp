@@ -22,6 +22,7 @@ public class StartScreen {
 	static double xOffset = 0;
 	static double yOffset = 0;
 	static Group logo3D;
+	static Scene startScreen;
 	public static Scene createStartScreen(Stage mainStage, int defaultXSize, int defaultYSize) {
 		SubScene toolBar = ToolBar.createToolBar(defaultXSize);
 		SubScene resizeBar = ResizeBar.CreateResizeBar(defaultXSize);
@@ -49,6 +50,7 @@ public class StartScreen {
 		
 		//Setup left size of the screen
 		Button openButton =  new Button("Open");
+		openButton.setOnMouseClicked(e->nightmodeStyle());
 		Button settingsButton = new Button("Settings");
 		Button quitButton = new Button("Quit");
 		GridPane gp = new GridPane();
@@ -88,9 +90,15 @@ public class StartScreen {
 		
 		borderPane.setLeft(gp);
 		borderPane.setRight(logoPane);
-		Scene startScreen = new Scene(borderPane, defaultXSize, defaultYSize);
+		startScreen = new Scene(borderPane, defaultXSize, defaultYSize);
 		startScreen.getStylesheets().add("style/startScreen.css");
 		return startScreen;
+	}
+	public static void nightmodeStyle() {
+		startScreen.getStylesheets().add("style/startScreenNight.css");
+	}
+	public static void colourblindStyle() {
+		startScreen.getStylesheets().add("style/startScreenCB.css");
 	}
 
 }
