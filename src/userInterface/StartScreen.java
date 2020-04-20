@@ -97,6 +97,9 @@ public class StartScreen {
 	public static void nightmodeStyle() {
 		startScreen.getStylesheets().add("style/startScreenNight.css");
 	}
+	
+	
+	
 	public static void colourblindStyle() {
 		startScreen.getStylesheets().add("style/startScreenCB.css");
 	}
