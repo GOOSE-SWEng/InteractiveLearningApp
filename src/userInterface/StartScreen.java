@@ -85,15 +85,16 @@ public class StartScreen {
 			System.out.println("Image not found");
 		}
 		
-		
-
-		
 		borderPane.setLeft(gp);
 		borderPane.setRight(logoPane);
 		startScreen = new Scene(borderPane, defaultXSize, defaultYSize);
 		startScreen.getStylesheets().add("style/startScreen.css");
+		
+		//ADD ALL STYLE SHEETS HERE THEN CYCLE THROUGH ACCORDINGLY
 		return startScreen;
 	}
+	
+	
 	public static void nightmodeStyle() {
 		startScreen.getStylesheets().add("style/startScreenNight.css");
 	}

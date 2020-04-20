@@ -1,3 +1,5 @@
+package media;
+
 import java.awt.Color;
 
 import javafx.scene.SubScene;
