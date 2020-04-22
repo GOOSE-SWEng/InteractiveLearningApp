@@ -14,19 +14,21 @@ public class ImageLayer {
 	ArrayList<SlideImage> images = new ArrayList<SlideImage>();
 	SubScene window;
 	
-	public ImageLayer(int width,int height){
+	public ImageLayer(int width,int height, ArrayList<SlideImage> images){
 		sceneHeight = height;
 		sceneWidth = width;
-    sp.setMinSize(sceneWidth,sceneHeight);
-    sp.setAlignment(Pos.TOP_LEFT);
-		//this.images = images;
+		sp.setMinSize(sceneWidth,sceneHeight);
+		sp.setAlignment(Pos.TOP_LEFT);
+		this.images = images;
+		System.out.println("Image Layer created: " + width + ", " + height);
 	}
 	
 	public void add(String urlName, int xStart, int yStart, int width, int height, int startTime, int endTime, int slideNumber) {
 		//constructor for the image object
 		SlideImage image = new SlideImage(urlName, xStart, yStart, width, height, startTime, endTime, slideNumber, sceneWidth, sceneHeight);
-    images.add(image);
+		images.add(image);
 		sp.getChildren().add(image.get());
+		
 	}
 	
 	public void remove(SlideImage object) {

@@ -32,6 +32,7 @@ public class XMLParser {
 	static String xmlName = "src/xml.xml";
 	static Document xmlDoc;
 	int currentSlide = 0;
+	int slideCount;
 	public static ArrayList<Slide> slides = new ArrayList<>();
 	public static ArrayList<AudioLayer> audioLayers = new ArrayList<>();
 	public static ArrayList<VideoLayer> videoLayers = new ArrayList<>();
@@ -39,8 +40,17 @@ public class XMLParser {
 	public static ArrayList<ImageLayer> imageLayers = new ArrayList<>();
 	public static ArrayList<Graphics2D> g2dLayers = new ArrayList<>();
 	public static ArrayList<Graphics3DLayer> graphics3DLayers = new ArrayList<>();
+	
+	static ArrayList<Audio> audio = new ArrayList<Audio>();
+	static ArrayList<Graphics2D> graphics2d = new ArrayList<Graphics2D>();
+	static ArrayList<Model> models = new ArrayList<Model>();
+	static ArrayList<SlideImage> images = new ArrayList<SlideImage>();
+	static ArrayList<Shape> shapes = new ArrayList<Shape>();
+	static ArrayList<SlideText> slideText = new ArrayList<SlideText>();
+	static ArrayList<Video> videos = new ArrayList<Video>();
 
-	public XMLParser(String fileDir, ArrayList<AudioLayer> audioLayers, ArrayList<VideoLayer> videoLayers, ArrayList<TextLayer> textLayers, ArrayList<ImageLayer> imageLayers,ArrayList<Graphics2D> g2dLayers, ArrayList<Graphics3DLayer> graphics3DLayers) {
+	public XMLParser(String fileDir, ArrayList<AudioLayer> audioLayers, ArrayList<VideoLayer> videoLayers, ArrayList<TextLayer> textLayers, ArrayList<ImageLayer> imageLayers,ArrayList<Graphics2D> g2dLayers, ArrayList<Graphics3DLayer> graphics3DLayers,
+			ArrayList<Audio> audio,ArrayList<Graphics2D> graphics2d,ArrayList<Model> models,ArrayList<SlideImage> images,ArrayList<Shape> shapes,ArrayList<SlideText> slideText, ArrayList<Video> videos) {
 
 		this.audioLayers = audioLayers;
 		this.videoLayers = videoLayers;
@@ -48,6 +58,14 @@ public class XMLParser {
 		this.imageLayers = imageLayers;
 		this.g2dLayers = g2dLayers;
 		this.graphics3DLayers = graphics3DLayers;
+		
+		this.audio = audio;
+		this.graphics2d = graphics2d;
+		this.models = models;
+		this.images =images;
+		this.shapes = shapes;
+		this.slideText = slideText;
+		this.videos = videos;
 		
 		//Store the document in memory
 		xmlDoc = getDocument(fileDir); 
@@ -113,7 +131,7 @@ public class XMLParser {
 		//Show number of slides
 		System.out.println("==============================");
 		System.out.println("Number of slides: " + slideList.getLength());
-		
+		slideCount = slideList.getLength();
 		/*
 		 * Cycles through each slide tag
 		 * Gets first tag name
@@ -122,16 +140,6 @@ public class XMLParser {
 		 */
 		
 		for(int j=0;j<slideList.getLength();j++) {
-			videoLayers.add(new VideoLayer(1280, 720));
-			audioLayers.add(new AudioLayer(1280, 720));
-			textLayers.add(new TextLayer(1280, 720));
-			imageLayers.add(new ImageLayer(1280, 720));
-			g2dLayers.add(new Graphics2D(1280, 720));
-			graphics3DLayers.add(new Graphics3DLayer(1280, 720));
-			
-			
-			
-			
 			System.out.println("CurrentSlide: " + currentSlide);
 			System.out.println("Root element: " + slideList.item(0).getNodeName());
 			Node currentNode = slideList.item(j);
@@ -176,7 +184,7 @@ public class XMLParser {
 					shapeParse(currentNode);
 				}else if(currentNode.getNodeName() == "line") {
 					lineParse(currentNode);
-				}else if(currentNode.getNodeName() == "3dmodel") {
+				}else if(currentNode.getNodeName() == "model") {
 					modelParse(currentNode);
 				}else{
 					if(currentNode instanceof Element) {
@@ -253,7 +261,8 @@ public class XMLParser {
 			getSubNodes(currentNode.getChildNodes());
 		}else{}
 		try {
-		videoLayers.get(currentSlide).addVideo(urlName, startTime, loop, xStart, 0);
+			videoLayers.add(new VideoLayer(640*1280/100,360*720/100, videos));
+			videoLayers.get(currentSlide).addVideo(urlName, startTime, loop, xStart, 0);
 		}catch(IOException e) {
 			System.out.println("Video Unavailable");
 		}
@@ -293,15 +302,32 @@ public class XMLParser {
 				}
 			}
 			System.out.println("");
-		}else{}
+		}else{
+			System.out.println("No Attributes for this node");
+		}
 		if(currentNode.hasChildNodes()) {
 			getSubNodes(currentNode.getChildNodes());
-		}else{}
-		imageLayers.get(currentSlide).add(Paths.get(urlName).toUri().toString(), xStart,yStart,width,height,startTime,endTime,currentSlide);
+		}else{
+			System.out.println("No sub nodes");
+		}
+		if(imageLayers.size() < currentSlide+1) {
+			imageLayers.add(new ImageLayer(width*1280/100, height*720/100, images));
+		}
+		imageLayers.get(currentSlide).add(urlName, xStart,yStart,width,height,startTime,endTime,currentSlide);
+		
 	}
 	public void shapeParse(Node currentNode) {
+		//Shading variables
 		Boolean shading = false;
+		int x1=0;
+		int y1=0;
+		String colour1 =null;
+		int x2=0;
+		int y2=0;
+		String colour2= null;
+		Boolean cyclic= false;
 		
+		//Shape variables
 		String type=null;
 		String id = null;
 		float xStart=0;
@@ -323,22 +349,22 @@ public class XMLParser {
 					}
 				}else if(attMap.item(j).getNodeName().equals("width")) {
 					width = Integer.parseInt(attMap.item(j).getNodeValue());
-				}
-				else if(attMap.item(j).getNodeName().equals("height")) {
+				}else if(attMap.item(j).getNodeName().equals("height")) {
 					height = Integer.parseInt(attMap.item(j).getNodeValue());
-				}
-				else if(attMap.item(j).getNodeName().equals("xstart")) {
+				}else if(attMap.item(j).getNodeName().equals("xstart")) {
 					xStart = Integer.parseInt(attMap.item(j).getNodeValue());
-				}
-				else if(attMap.item(j).getNodeName().equals("ystart")) {
+				}else if(attMap.item(j).getNodeName().equals("ystart")) {
 					yStart = Integer.parseInt(attMap.item(j).getNodeValue());
-				}
-				else if(attMap.item(j).getNodeName().equals("starttime")) {
+				}else if(attMap.item(j).getNodeName().equals("starttime")) {
 					startTime = Integer.parseInt(attMap.item(j).getNodeValue());
 				}else if(attMap.item(j).getNodeName().equals("endtime")) {
 					endTime = Integer.parseInt(attMap.item(j).getNodeValue());
 				}else if(attMap.item(j).getNodeName().equals("fillcolor")) {
 					fillColor = attMap.item(j).getNodeValue();
+				}
+				//SHADING THINGS
+				else if(currentNode.hasChildNodes()) {
+
 				}else{
 					System.out.print(attMap.item(j).getNodeName() + "is not recognized in the shape tag");
 				}
@@ -346,20 +372,50 @@ public class XMLParser {
 			System.out.println("");
 		}else{}
 		if(currentNode.hasChildNodes()) {
-			getSubNodes(currentNode.getChildNodes());
+			for(int k = 0; k<currentNode.getChildNodes().getLength();k++) {
+				if(currentNode.getChildNodes().item(k).getNodeName().equals("shading")) {
+					shading = true;
+					currentNode = currentNode.getChildNodes().item(k);
+					NamedNodeMap attMap = currentNode.getAttributes();
+					attMap = currentNode.getAttributes();
+					for(int i=0 ; i<attMap.getLength();i++) {
+						if(attMap.item(i).getNodeName().equals("x1")) {
+							x1 = Integer.parseInt(attMap.item(i).getNodeValue());
+						}else if(attMap.item(i).getNodeName().equals("y1")) {
+							y1 = Integer.parseInt(attMap.item(i).getNodeValue());
+						}else if(attMap.item(i).getNodeName().equals("x2")) {
+							x2 = Integer.parseInt(attMap.item(i).getNodeValue());
+						}else if(attMap.item(i).getNodeName().equals("y2")) {
+							y2 = Integer.parseInt(attMap.item(i).getNodeValue());
+						}else if(attMap.item(i).getNodeName().equals("color1")) {
+							colour1 = attMap.item(i).getNodeValue();
+						}else if(attMap.item(i).getNodeName().equals("color2")) {
+							colour2 = attMap.item(i).getNodeValue();
+						}else if(attMap.item(i).getNodeName().equals("cyclic")) {
+							cyclic = Boolean.parseBoolean(attMap.item(i).getNodeValue());
+						}else {
+							System.out.print(attMap.item(i).getNodeName() + "is not recognized in the shading tag");
+						}
+					}
+				}else{
+					shading = false;
+				}
+			}
+			//getSubNodes(currentNode.getChildNodes());
 		}else{}
-		
+		g2dLayers.add(new Graphics2D(1280, 680, shapes));
 		if(type.equals("oval") & !shading) {
 			g2dLayers.get(currentSlide).registerOval(xStart, yStart,width, height, fillColor, startTime, endTime, currentSlide);
 		}else if(type.equals("rectangle") & !shading) {
 			g2dLayers.get(currentSlide).registerRectangle(xStart, yStart,width, height, fillColor, id, startTime, endTime, currentSlide);
 		}else if(type.equals("oval") & shading) {
-			g2dLayers.get(currentSlide).registerOval(xStart, yStart,width, height, fillColor, startTime, endTime, currentSlide);
+			g2dLayers.get(currentSlide).registerOval(xStart, yStart, width, height, x1, y1, colour1, x2, y2, colour2, cyclic, startTime, endTime, currentSlide);
 		}else if(type.equals("rectangle") & shading) {
-			g2dLayers.get(currentSlide).registerRectangle(xStart, yStart,width, height, fillColor, id, startTime, endTime, currentSlide);
+			g2dLayers.get(currentSlide).registerRectangle(xStart, yStart, width, height, x1, y1, colour1, x2, y2, colour2, cyclic, startTime, endTime, currentSlide);
 		}else {}
 	}
 	public void textParse(Node currentNode) {
+		textLayers.add(new TextLayer(50*1280/100, 10*720/100, slideText));
 		textLayers.get(currentSlide).add(currentNode, currentSlide);
 	}
 	
@@ -389,7 +445,8 @@ public class XMLParser {
 		if(currentNode.hasChildNodes()) {
 			getSubNodes(currentNode.getChildNodes());
 		}else{}
-		audioLayers.get(currentSlide).add();
+		audioLayers.add(new AudioLayer(200, 100, audio));
+		audioLayers.get(currentSlide).add(urlName,startTime, loop, true,0,0,200,100,currentSlide);
 	}
 	public void lineParse(Node currentNode) {
 		float xStart=0;
@@ -428,11 +485,16 @@ public class XMLParser {
 		if(currentNode.hasChildNodes()) {
 			getSubNodes(currentNode.getChildNodes());
 		}else{}
+		g2dLayers.add(new Graphics2D(1280, 680, shapes));
 		g2dLayers.get(currentSlide).registerLine(xStart,xEnd, yStart, yEnd,lineColor,startTime, endTime, currentSlide);
 	}
 	public void modelParse(Node currentNode) {
-		
-		/*System.out.println(currentNode.getNodeName());
+		String urlName = null;
+		int xStart = 0;
+		int yStart = 0;
+		int modelWidth = 0;
+		int modelHeight = 0;
+		System.out.println(currentNode.getNodeName());
 		if(currentNode.hasAttributes()) {
 			NamedNodeMap attMap = currentNode.getAttributes();
 			System.out.print("Attributes= ");
@@ -444,14 +506,10 @@ public class XMLParser {
 					xStart = Integer.parseInt(attMap.item(j).getNodeValue());
 				}else if(attMap.item(j).getNodeName().equals("ystart")) {
 					yStart = Integer.parseInt(attMap.item(j).getNodeValue());
-				}else if(attMap.item(j).getNodeName().equals("endtime")) {
-					endTime = Integer.parseInt(attMap.item(j).getNodeValue());
-				}else if(attMap.item(j).getNodeName().equals("starttime")) {
-					startTime = Integer.parseInt(attMap.item(j).getNodeValue());
 				}else if(attMap.item(j).getNodeName().equals("width")) {
-					width = Integer.parseInt(attMap.item(j).getNodeValue());
+					modelWidth = Integer.parseInt(attMap.item(j).getNodeValue());
 				}else if(attMap.item(j).getNodeName().equals("height")) {
-					height = Integer.parseInt(attMap.item(j).getNodeValue());
+					modelHeight = Integer.parseInt(attMap.item(j).getNodeValue());
 				}else{
 					System.out.print(attMap.item(j).getNodeName() + "is not recognized in the image tag");
 				}
@@ -461,7 +519,16 @@ public class XMLParser {
 		if(currentNode.hasChildNodes()) {
 			getSubNodes(currentNode.getChildNodes());
 		}else{}
-		graphics3DLayers.get(currentSlide).add();*/
+		graphics3DLayers.add(new Graphics3DLayer(modelWidth, modelHeight,models));
+		graphics3DLayers.get(currentSlide).add(urlName, modelWidth, modelHeight, xStart, yStart);;
+	}
+
+	public int getSlideCount() {
+		return slideCount;
+	}
+
+	public void setSlideCount(int slideCount) {
+		this.slideCount = slideCount;
 	}
 	
 }

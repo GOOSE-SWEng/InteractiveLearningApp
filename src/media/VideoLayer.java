@@ -13,9 +13,10 @@ public class VideoLayer {
 	ArrayList<Video> videos = new ArrayList<Video>();
 	SubScene window = new SubScene(sp, width, height);
 
-	public VideoLayer(int width, int height) {
+	public VideoLayer(int width, int height, ArrayList<Video> videos) {
 		this.height = height;
 		this.width = width;
+		this.videos = videos;
 		sp.setMinSize(width, height);
 	}
 

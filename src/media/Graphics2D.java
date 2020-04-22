@@ -18,10 +18,10 @@ public class Graphics2D {
 	StackPane sp = new StackPane();
 	
 	// constructor
-	public Graphics2D(int width, int height) {
+	public Graphics2D(int width, int height, ArrayList<Shape> shapes) {
 		this.paneHeight = height;
 		this.paneWidth = width;
-		//this.shapes = shapes; // clones arrayList
+		this.shapes = shapes; // clones arrayList
 		Window = new SubScene(sp,paneWidth,paneHeight);//creates the layer subscene
 	}
 	
@@ -46,7 +46,6 @@ public class Graphics2D {
 		shape.addPoint(xStart,yStart+height);
 		shapes.add(shape);
 		sp.getChildren().add(shape.get());
-		
 	}
 	//draw rectangle with gradient fill
 	public void registerRectangle(float xStart, float yStart, float width, float height, float shading_x1, float shading_y1, String shading_colour1, float shading_x2, float shading_y2, String shading_colour2, Boolean shading_cyclic, int startTime, int endTime, int slideNumber) {

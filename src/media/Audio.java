@@ -1,7 +1,7 @@
 package media;
 
-import java.awt.Color;
 import java.io.File;
+import java.nio.file.Paths;
 
 import javafx.scene.SubScene;
 import javafx.scene.layout.StackPane;
@@ -13,18 +13,19 @@ public class Audio {
 	Boolean controls;
 	SubScene subScene;
 	MediaPlayer player;
-	StackPane sp;
+	StackPane sp = new StackPane();
 	int startTime;
 	int slideNumber;
 	
 	public Audio(String urlName, int startTime, Boolean looping, Boolean controls, int controlX, int controlY, int width, int height, int slideNumber) {
 		
-		player = new MediaPlayer(new Media(new File(urlName).toURI().toString()));
+		player = new MediaPlayer(new Media(Paths.get(urlName).toUri().toString()));
 		if (looping) {
 			player.setCycleCount(MediaPlayer.INDEFINITE);
 		} else {
 			player.setCycleCount(1);
 		}
+		player.setVolume(0.1);
 		source = urlName;
 		subScene = new SubScene(sp,width,height);
 		this.startTime= startTime;

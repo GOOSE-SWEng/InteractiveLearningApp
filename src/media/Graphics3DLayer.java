@@ -1,30 +1,31 @@
 package media;
 
 import java.util.ArrayList;
-
 import javafx.scene.SubScene;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.StackPane;
 
 public class Graphics3DLayer {
-	int height;
-	int width;
+	int paneHeight;
+	int paneWidth;
 	StackPane sp = new StackPane();
-	Canvas canvas = new Canvas(width,height);
-	ArrayList<Graphics3D> graphics3D = new ArrayList<Graphics3D>();
-	SubScene window = new SubScene(sp,width,height);
+	ArrayList<Model> models = new ArrayList<Model>();
+	SubScene window;
 	
-	public Graphics3DLayer(int width,int height){
-		this.height = height;
-		this.width = width;
-		sp.getChildren().add(canvas);
+	public Graphics3DLayer(int width,int height, ArrayList<Model> models){
+		this.paneHeight = height;
+		this.paneWidth = width;
+		//sp.getChildren().add(canvas);
+		sp.setMinSize(width, height);
+		window = new SubScene(sp, width, height);
 	}
 	
-	public void add() {
-		//constructor for the audio object
+	public void add(String url, int modelWidth, int modelHeight, int xStart, int yStart) {
+		Model model =  new Model(url, modelWidth, modelHeight, paneWidth, paneHeight, xStart, yStart);
+		models.add(model);
+		sp.getChildren().add(model.getModelScene());
 	}
 	
-	public void remove(Graphics3D object) {
+	public void remove(Model object) {
 		sp.getChildren().remove(object);
 	}
 	

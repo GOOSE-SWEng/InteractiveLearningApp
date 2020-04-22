@@ -34,9 +34,10 @@ public class SlideImage {
     // Calculate pixel values for x, y, w and h
     int x = Math.toIntExact(Math.round((floatX / 100) * sceneWidth));
     int y = Math.toIntExact(Math.round((floatY / 100) * sceneHeight));
-    int w = Math.toIntExact(Math.round((floatW / 100) * sceneWidth));
-    int h = Math.toIntExact(Math.round((floatH / 100) * sceneHeight));
+    int w = sceneWidth;//Math.toIntExact(Math.round((floatW / 100) * sceneWidth));
+    int h = sceneHeight;//Math.toIntExact(Math.round((floatH / 100) * sceneHeight));
 
+    System.out.println("Image Added: " + x + ", " + y + " On a subScene of size: " + sceneWidth + "," + sceneHeight);
     //Load image and create canvas
     Image picture = new Image(url, w, h, false, true);
     toDisplay = new Canvas((double) w + x, (double) h + y);
