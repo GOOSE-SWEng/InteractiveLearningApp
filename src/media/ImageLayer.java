@@ -11,13 +11,14 @@ public class ImageLayer {
 	int sceneHeight;
 	int sceneWidth;
 	StackPane sp = new StackPane();
-	ArrayList<SlideImage> images = new ArrayList<SlideImage>();
+	public ArrayList<SlideImage> images;
 	SubScene window;
 	
 	public ImageLayer(int width,int height, ArrayList<SlideImage> images){
 		sceneHeight = height;
 		sceneWidth = width;
 		sp.setMinSize(sceneWidth,sceneHeight);
+		sp.setPickOnBounds(false);
 		sp.setAlignment(Pos.TOP_LEFT);
 		this.images = images;
 		System.out.println("Image Layer created: " + width + ", " + height);
@@ -28,6 +29,8 @@ public class ImageLayer {
 		SlideImage image = new SlideImage(urlName, xStart, yStart, width, height, startTime, endTime, slideNumber, sceneWidth, sceneHeight);
 		images.add(image);
 		sp.getChildren().add(image.get());
+		image.get().setLayoutX(xStart);
+		image.get().setLayoutY(yStart);
 		
 	}
 	
@@ -35,9 +38,9 @@ public class ImageLayer {
 		sp.getChildren().remove(object.get());
 	}
 	
-	public SubScene get() {
-    window = new SubScene(sp,sceneWidth,sceneHeight);
-		return (window);
+	public StackPane get() {
+    //window = new SubScene(sp,sceneWidth,sceneHeight);
+		return (sp);
   }
   
   public ArrayList<SlideImage> getList() {

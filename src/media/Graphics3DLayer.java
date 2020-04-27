@@ -8,19 +8,21 @@ public class Graphics3DLayer {
 	int paneHeight;
 	int paneWidth;
 	StackPane sp = new StackPane();
-	ArrayList<Model> models = new ArrayList<Model>();
+	ArrayList<Model> models;
 	SubScene window;
 	
 	public Graphics3DLayer(int width,int height, ArrayList<Model> models){
 		this.paneHeight = height;
 		this.paneWidth = width;
+		this.models = models;
+		sp.setPickOnBounds(false);
 		//sp.getChildren().add(canvas);
 		sp.setMinSize(width, height);
 		window = new SubScene(sp, width, height);
 	}
 	
 	public void add(String url, int modelWidth, int modelHeight, int xStart, int yStart) {
-		Model model =  new Model(url, modelWidth, modelHeight, paneWidth, paneHeight, xStart, yStart);
+		Model model =  new Model(url, modelWidth, modelHeight, xStart, yStart);
 		models.add(model);
 		sp.getChildren().add(model.getModelScene());
 	}
@@ -30,6 +32,6 @@ public class Graphics3DLayer {
 	}
 	
 	public SubScene get() {
-		return (window);
+		return window;
 	}
 }

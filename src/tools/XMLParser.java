@@ -33,7 +33,7 @@ public class XMLParser {
 	static Document xmlDoc;
 	int currentSlide = 0;
 	int slideCount;
-	public static ArrayList<Slide> slides = new ArrayList<>();
+	public static ArrayList<Slide> slides;
 	public static ArrayList<AudioLayer> audioLayers = new ArrayList<>();
 	public static ArrayList<VideoLayer> videoLayers = new ArrayList<>();
 	public static ArrayList<TextLayer> textLayers = new ArrayList<>();
@@ -42,16 +42,26 @@ public class XMLParser {
 	public static ArrayList<Graphics3DLayer> graphics3DLayers = new ArrayList<>();
 	
 	static ArrayList<Audio> audio = new ArrayList<Audio>();
-	static ArrayList<Graphics2D> graphics2d = new ArrayList<Graphics2D>();
 	static ArrayList<Model> models = new ArrayList<Model>();
 	static ArrayList<SlideImage> images = new ArrayList<SlideImage>();
 	static ArrayList<Shape> shapes = new ArrayList<Shape>();
 	static ArrayList<SlideText> slideText = new ArrayList<SlideText>();
 	static ArrayList<Video> videos = new ArrayList<Video>();
 
-	public XMLParser(String fileDir, ArrayList<AudioLayer> audioLayers, ArrayList<VideoLayer> videoLayers, ArrayList<TextLayer> textLayers, ArrayList<ImageLayer> imageLayers,ArrayList<Graphics2D> g2dLayers, ArrayList<Graphics3DLayer> graphics3DLayers,
-			ArrayList<Audio> audio,ArrayList<Graphics2D> graphics2d,ArrayList<Model> models,ArrayList<SlideImage> images,ArrayList<Shape> shapes,ArrayList<SlideText> slideText, ArrayList<Video> videos) {
-
+	public XMLParser(String fileDir, ArrayList<Slide> slides, 
+										ArrayList<AudioLayer> audioLayers, 
+										ArrayList<VideoLayer> videoLayers, 
+										ArrayList<TextLayer> textLayers, 
+										ArrayList<ImageLayer> imageLayers,
+										ArrayList<Graphics2D> g2dLayers, 
+										ArrayList<Graphics3DLayer> graphics3DLayers,
+										ArrayList<Audio> audio,
+										ArrayList<Model> models,
+										ArrayList<SlideImage> images,
+										ArrayList<Shape> shapes,
+										ArrayList<SlideText> slideText, 
+										ArrayList<Video> videos) {
+		this.slides = slides;
 		this.audioLayers = audioLayers;
 		this.videoLayers = videoLayers;
 		this.textLayers = textLayers;
@@ -60,7 +70,6 @@ public class XMLParser {
 		this.graphics3DLayers = graphics3DLayers;
 		
 		this.audio = audio;
-		this.graphics2d = graphics2d;
 		this.models = models;
 		this.images =images;
 		this.shapes = shapes;
@@ -142,16 +151,28 @@ public class XMLParser {
 		for(int j=0;j<slideList.getLength();j++) {
 			System.out.println("CurrentSlide: " + currentSlide);
 			System.out.println("Root element: " + slideList.item(0).getNodeName());
+			int slideDuration = 0;
+			String slideTitle = null;
+			
 			Node currentNode = slideList.item(j);
 			if(currentNode.hasAttributes()) {
 				NamedNodeMap attMap = currentNode.getAttributes();
 				for(int i=0; i< attMap.getLength();i++) {
 					Node attNode = attMap.item(i);
 					System.out.println(attNode.getNodeName() + ": " + attNode.getTextContent());
+					if(attNode.getNodeName().equals("id")) {
+						slideTitle = attNode.getNodeValue();
+					}else if(attNode.getNodeName().equals("duration")) {
+						slideDuration = Integer.parseInt(attNode.getNodeValue());
+					}else {
+						System.out.println(attNode.getNodeName() + " is an unrecognised node name");
+					}
 				}
+			slides.add(new Slide(1280,720,slideTitle, slideDuration));
 			}else{
 				System.out.println("No attributes");
 			}
+			
 			if(currentNode.hasChildNodes()) {
 				getSubNodes(currentNode.getChildNodes());
 			}
@@ -261,9 +282,10 @@ public class XMLParser {
 			getSubNodes(currentNode.getChildNodes());
 		}else{}
 		try {
-			videoLayers.add(new VideoLayer(640*1280/100,360*720/100, videos));
-			videoLayers.get(currentSlide).addVideo(urlName, startTime, loop, xStart, 0);
+			videoLayers.add(new VideoLayer(100*1280/100,100*720/100, videos));
+			videoLayers.get(currentSlide).addVideo(urlName, startTime, loop, xStart, 200);
 		}catch(IOException e) {
+			e.printStackTrace();
 			System.out.println("Video Unavailable");
 		}
 	}
@@ -311,7 +333,7 @@ public class XMLParser {
 			System.out.println("No sub nodes");
 		}
 		if(imageLayers.size() < currentSlide+1) {
-			imageLayers.add(new ImageLayer(width*1280/100, height*720/100, images));
+			imageLayers.add(new ImageLayer(100*1280/100, 100*720/100, images));
 		}
 		imageLayers.get(currentSlide).add(urlName, xStart,yStart,width,height,startTime,endTime,currentSlide);
 		
@@ -415,7 +437,7 @@ public class XMLParser {
 		}else {}
 	}
 	public void textParse(Node currentNode) {
-		textLayers.add(new TextLayer(50*1280/100, 10*720/100, slideText));
+		textLayers.add(new TextLayer(100*1280/100, 100*720/100, slideText));
 		textLayers.get(currentSlide).add(currentNode, currentSlide);
 	}
 	
@@ -445,7 +467,7 @@ public class XMLParser {
 		if(currentNode.hasChildNodes()) {
 			getSubNodes(currentNode.getChildNodes());
 		}else{}
-		audioLayers.add(new AudioLayer(200, 100, audio));
+		audioLayers.add(new AudioLayer(1280,720, audio));
 		audioLayers.get(currentSlide).add(urlName,startTime, loop, true,0,0,200,100,currentSlide);
 	}
 	public void lineParse(Node currentNode) {

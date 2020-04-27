@@ -34,16 +34,15 @@ public class ToolBar {
 	Button minimizeWindowButton;
 	Button maximizeWindowButton;
 	static GridPane gridPane;
-	Text title;
+	static Text title;
 	
-	
-	public static SubScene createToolBar(int winWidth) {
+	public static SubScene createToolBar(int winWidth, String id) {
 		
 		//instantiate the new grid pane, then instantiate the buttons to fill it
 		GridPane gridPane = new GridPane();
 		
 		//To be replaced with icons
-		Text title = new Text("Home Screen");
+		title = new Text(id);
 		title.setId("title");
 		Button openButton = new Button("Open");
 		Button settingsButton = new Button("Settings");
@@ -135,7 +134,7 @@ public class ToolBar {
 		 * 
 		 */
 		System.out.println("Open Button Pressed");
-		FileChooser fileChooser = new FileChooser();
+		//FileChooser fileChooser = new FileChooser();
 		
 		/*
 		 * TODO: Add appropriate file extension filters (e.g. .stl files)
@@ -143,8 +142,9 @@ public class ToolBar {
 		
 		
 		*/
-		fileChooser.setTitle("Open a new Presentation");
-		File selectedFile = fileChooser.showOpenDialog(InteractiveLearningApp.getStage());
+		//fileChooser.setTitle("Open a new Presentation");
+		//File selectedFile = fileChooser.showOpenDialog(InteractiveLearningApp.getStage());
+		InteractiveLearningApp.nextSlide();
 		
 		//from here file can be returned or parsed to another method for scene building
 	}
@@ -199,6 +199,10 @@ public class ToolBar {
 			InteractiveLearningApp.getStage().setMaximized(false);
 		}
 
+	}
+	
+	public void setTitle(String id) {
+		title.setText(id);
 	}
 	
 	public static void ExitButtonPressed() {

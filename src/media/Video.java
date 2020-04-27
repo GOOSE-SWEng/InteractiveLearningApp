@@ -1,6 +1,5 @@
 package media;
 
-
 import java.io.IOException;
 
 import javafx.application.Platform;
@@ -21,7 +20,7 @@ import javafx.scene.media.MediaView;
 import javafx.scene.media.MediaPlayer.Status;
 import javafx.util.Duration;
 
-public class Video{ 
+public class Video {
 
 	int xstart;
 	int ystart;
@@ -41,15 +40,14 @@ public class Video{
 
 	public Video(String urlName, int startTime, Boolean loop, int xStart, int yStart, int canvasWidth, int canvasHeight)
 			throws IOException {
-
 		// Loads the media player layout from a FXML file
-		BorderPane root = FXMLLoader.load(getClass().getClassLoader().getResource("videoPlayer.fxml"));
+		BorderPane root = FXMLLoader.load(getClass().getClassLoader().getResource("media/videoPlayer.fxml"));
 
 		// creates a subscene
 		subScene = new SubScene(root, 600, 400);
 		// Set subscene position
-		subScene.setLayoutX(xStart);
-		subScene.setLayoutY(yStart);
+		//subScene.setLayoutX(xStart);
+		//subScene.setLayoutY(yStart);
 
 		// Video control bar, retrieved from the root
 		toolbarNode = (Pane) root.getBottom();
@@ -72,7 +70,6 @@ public class Video{
 				mp.setVolume(volumeSlider.getValue() / 100);
 			}
 		});
-
 
 		// Set the video to auto play[Not sure if needed, video is auto played when the
 		// there is a delay set
@@ -213,5 +210,8 @@ public class Video{
 		} else {
 			label.setText(min + ":" + sec);
 		}
+	}
+	public void play() {
+		mp.play();
 	}
 }

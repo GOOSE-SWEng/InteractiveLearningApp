@@ -1,5 +1,6 @@
 package userInterface;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
@@ -15,16 +16,20 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import main.InteractiveLearningApp;
 
 public class StartScreen {
 	static double xOffset = 0;
 	static double yOffset = 0;
 	static Group logo3D;
 	static Scene startScreen;
+	static String title = "Start Screen";
+	static File xml;
 	public static Scene createStartScreen(Stage mainStage, int defaultXSize, int defaultYSize) {
-		SubScene toolBar = ToolBar.createToolBar(defaultXSize);
+		SubScene toolBar = ToolBar.createToolBar(defaultXSize, title);
 		SubScene resizeBar = ResizeBar.CreateResizeBar(defaultXSize);
 		
 		toolBar.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -50,8 +55,11 @@ public class StartScreen {
 		
 		//Setup left size of the screen
 		Button openButton =  new Button("Open");
-		openButton.setOnMouseClicked(e->nightmodeStyle());
+		openButton.setOnMouseClicked(e->{
+			InteractiveLearningApp.run();
+			});
 		Button settingsButton = new Button("Settings");
+		
 		Button quitButton = new Button("Quit");
 		GridPane gp = new GridPane();
 		gp.setPadding(new Insets(100,100,100,100));
@@ -94,6 +102,12 @@ public class StartScreen {
 		return startScreen;
 	}
 	
+	public static File openPres() {
+	
+		FileChooser fc = new FileChooser();
+		xml = fc.showOpenDialog(null);
+		return xml;
+	}
 	
 	public static void nightmodeStyle() {
 		startScreen.getStylesheets().add("style/startScreenNight.css");

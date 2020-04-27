@@ -5,20 +5,23 @@ import java.util.ArrayList;
 import com.interactivemesh.jfx.importer.ModelImporter;
 import com.interactivemesh.jfx.importer.stl.StlMeshImporter;
 import com.interactivemesh.jfx.importer.tds.TdsModelImporter;
-import com.sun.media.sound.ModelWavetable;
 
+import javafx.animation.Animation.Status;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.geometry.Pos;
 import javafx.scene.Camera;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.SceneAntialiasing;
 import javafx.scene.SubScene;
-import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Button;
+import javafx.scene.control.Slider;
 import javafx.scene.input.PickResult;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.MeshView;
@@ -40,22 +43,18 @@ public class Model {
 	
 	SubScene modelScene; //Scene of the model
 	int width; //Width of SubScene
-	int height; //Height of SubScene
-	int paneWidth;
-	int paneHeight;
-	int xStart;
-	int yStart;
-	Canvas canvas;
+	int height; //Height of SubScenes
+	int xStart; //X value for position
+	int yStart; //Y value for position
 	Group modelGroup; //Group containing all 3D Elements
-	Camera camera;
+	Camera camera; //Global camera
+	Timeline timeline; //Timeline for animations
 	ArrayList<InteractivePoints> points = new ArrayList<InteractivePoints>(); //Arraylist of interactive points
 	ArrayList<Sphere> spheres = new ArrayList<Sphere>(); //Arraylist of Sphere buttons
 	
-	public Model(String url, int modelWidth, int modelHeight, int paneWidth, int paneHeight, int xStart, int yStart){
+	public Model(String url, int modelWidth, int modelHeight, int xStart, int yStart){
 		this.width = modelWidth; //Width of SubScene
 		this.height = modelHeight; //Height of SubScene
-		this.paneWidth = paneWidth;
-		this.paneHeight = paneHeight;
 		this.xStart = xStart;
 		this.yStart = yStart;
 		modelScene = createModel(url); //Create the and store scene
@@ -81,11 +80,12 @@ public class Model {
 	        stlImporter.read(url);
 	        TriangleMesh cylinderHeadMesh = stlImporter.getImport(); //Store in a mesh
 	        MeshView cylinderHeadMeshView = new MeshView(); //Creates new Mesh view
-	        cylinderHeadMeshView.setMaterial(new PhongMaterial(Color.GRAY)); //Sets material of model
+	        cylinderHeadMeshView.setMaterial(new PhongMaterial(Color.AQUA)); //Sets material of model
 	        cylinderHeadMeshView.setMesh(cylinderHeadMesh); //Sets the mesh for the mesh view
 	        stlImporter.close();
 			modelGroup = new Group();
 			modelGroup.getChildren().addAll(cylinderHeadMeshView);
+			
 	        //addPoints(); //Add clickable points
 		}
 		else if(url.endsWith(".obj")) {
@@ -112,7 +112,7 @@ public class Model {
 		camera.getTransforms().add(new Translate(-width/2,-height/2,-300));
 		
 		//Setup Animation
-        Timeline timeline = new Timeline(
+        timeline = new Timeline(
                 new KeyFrame(
                         Duration.seconds(0), 
                         new KeyValue(yRotate.angleProperty(), 0) //Start with angle of 0
@@ -123,7 +123,7 @@ public class Model {
                 )
         );
         timeline.setCycleCount(Timeline.INDEFINITE); //Loop animation
-        //timeline.play(); //Run animation
+        timeline.play(); //Run animation
         
         //Return 3D mouse click point
         modelGroup.setOnMouseClicked(e->{
@@ -149,10 +149,17 @@ public class Model {
         pivot.setY(modelGroup.getTranslateY());
         pivot.setZ(modelGroup.getTranslateZ());
         
+        GridPane controls = createControls();
+        BorderPane bp = new BorderPane();
+        
         //Create subscene
-		SubScene modelSubScene = new SubScene(modelGroup, width, height, true, SceneAntialiasing.BALANCED);
+		SubScene modelSubScene = new SubScene(modelGroup, width, height-40, true, SceneAntialiasing.BALANCED);
 		modelSubScene.setCamera(camera); //Apply the camera
-		return modelSubScene;
+		bp.setCenter(modelSubScene);
+		bp.setBottom(controls);
+		bp.setAlignment(controls, Pos.CENTER);
+		SubScene graphics3d = new SubScene(bp, width, height);
+		return graphics3d;
 	}
 	
 	public Group get() {
@@ -160,6 +167,39 @@ public class Model {
 	}
 	public SubScene getScene() {
 		return modelScene;
+	}
+	
+	public GridPane createControls() {
+		GridPane gp = new GridPane();
+		Button zoomIn = new Button("+");
+		Button zoomOut = new Button("-");
+		Button rotateLeft = new Button("<");
+		Button rotateRight = new Button(">");
+		Button play = new Button("Pause");
+		
+		zoomIn.setOnMouseClicked(e->scale(1.1, 1.1, 1.1));
+		zoomOut.setOnMouseClicked(e->scale(0.9, 0.9, 0.9));
+		rotateLeft.setOnMouseClicked(e->rotate(0, 0, 20));
+		rotateRight.setOnMouseClicked(e->rotate(0, 0, -20));
+		play.setOnMouseClicked(e->playAnimation(play));
+		
+		gp.add(zoomIn, 0,0);
+		gp.add(zoomOut, 1,0);
+		gp.add(rotateLeft, 2,0);
+		gp.add(rotateRight, 3,0);
+		gp.add(play, 4, 0);
+		gp.setAlignment(Pos.CENTER);
+		return gp;
+	}
+	
+	public void playAnimation(Button play) {
+		if(timeline.getStatus() == Status.RUNNING) {
+			timeline.pause();
+			play.setText("Play");
+		}else{
+			timeline.play();
+			play.setText("Pause");
+		}
 	}
 	
 	public void addPoints() {

@@ -15,6 +15,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Settings {
+	static String title = "Settings";
 	static SubScene toolBar;
 	static SubScene resizeBar;
 	static String currentLanguage = "English";
@@ -25,7 +26,7 @@ public class Settings {
 	
 	public static Scene createSettings(Stage stage,int defaultXSize, int defaultYSize) {
 		//Create top and bottom tool bars
-		toolBar = ToolBar.createToolBar(defaultXSize);
+		toolBar = ToolBar.createToolBar(defaultXSize, title);
 		resizeBar = ResizeBar.CreateResizeBar(defaultXSize);
 		//Create Layouts
 		BorderPane bp = new BorderPane();
@@ -36,8 +37,8 @@ public class Settings {
 		Text textSize = new Text("Text Size");
 		Text font = new Text("Font");
 		Text language = new Text("Language");
-		Text captions = new Text("Captions");
-		Text audioDesc = new Text("Audio Description");
+		//Text captions = new Text("Captions");
+		//Text audioDesc = new Text("Audio Description");
 		//Create Check Boxes
 		CheckBox cBBox = new CheckBox();
 		CheckBox nMBox = new CheckBox();
@@ -107,14 +108,14 @@ public class Settings {
 		gp.add(nightMode, 0, 3);
 		gp.add(nMBox, 1, 3);
 		
-		gp.add(colourBlindFilter, 0, 4);
-		gp.add(cBBox, 1, 4);
+		//gp.add(colourBlindFilter, 0, 4);
+		//gp.add(cBBox, 1, 4);
 		
-		gp.add(captions, 0, 5);
-		gp.add(captionsBox, 1, 5);
+		//gp.add(captions, 0, 5);
+		//gp.add(captionsBox, 1, 5);
 		
-		gp.add(audioDesc, 0, 6);
-		gp.add(audioDescBox, 1, 6);
+		//gp.add(audioDesc, 0, 6);
+		//gp.add(audioDescBox, 1, 6);
 		
 		gp.add(apply, 0, 7);
 		gp.add(setDefault, 1, 7);

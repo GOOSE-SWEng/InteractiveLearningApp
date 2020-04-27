@@ -13,7 +13,7 @@ public class Graphics2D {
 	int paneHeight;
 	int paneWidth;
 	SubScene Window;
-	ArrayList<Shape> shapes = new ArrayList<Shape>();
+	public ArrayList<Shape> shapes = new ArrayList<Shape>();
 	int currentPoly = 0;
 	StackPane sp = new StackPane();
 	
@@ -22,6 +22,7 @@ public class Graphics2D {
 		this.paneHeight = height;
 		this.paneWidth = width;
 		this.shapes = shapes; // clones arrayList
+		sp.setPickOnBounds(false);
 		Window = new SubScene(sp,paneWidth,paneHeight);//creates the layer subscene
 	}
 	

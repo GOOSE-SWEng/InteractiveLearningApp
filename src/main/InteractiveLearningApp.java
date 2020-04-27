@@ -1,4 +1,5 @@
 package main;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -13,6 +14,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import userInterface.*;
 import slides.*;
@@ -27,8 +29,10 @@ public class InteractiveLearningApp extends Application{
 	private double xOffset = 0;
 	private static Scene start;
 	private static Scene settings;
+	private static Scene loading;
 	private static Stage mainStage;
 	private static int slideCount;
+	private static int currentSlide;
 	
 	//Triggers Exhibit Mode
 	private boolean exhibitMode = false;
@@ -52,7 +56,8 @@ public class InteractiveLearningApp extends Application{
 	static ArrayList<AudioLayer> audioLayers = new ArrayList<AudioLayer>();
 	
 	//String vidUrl = Paths.get("src/Sun.mp4").toUri().toString();
-	String xml = "src/resources/xml.xml";
+	//String xml = "src/resources/xml.xml";
+	static String xml;
 	
 /*MEDIA ARRAYLIST DECLARATION
  * ETC...
@@ -73,31 +78,43 @@ public class InteractiveLearningApp extends Application{
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		//////////////////REMOVE THIS//////////////////////
-		new XMLParser(xml, audioLayers, videoLayers, textLayers, imageLayers, graphics2dLayers, graphics3dLayers, 
-				audio,graphics2d,models,images,shapes,slideText,videos);
-		//////////////////REMOVE THIS//////////////////////
 		mainStage = primaryStage;
 		mainStage.setMinWidth(defaultXSize);
 		mainStage.setMinHeight(defaultYSize);
 		start = StartScreen.createStartScreen(mainStage, defaultXSize, defaultYSize);
 		settings = Settings.createSettings(mainStage, defaultXSize, defaultYSize);
+		loading = LoadingScreen.createLoadingScreen(mainStage, defaultXSize, defaultYSize);
+		
+		//////////////////REMOVE THIS//////////////////////
+
+		//slideCount = parser.getSlideCount();
+		//////////////////REMOVE THIS//////////////////////
+		
 		//mainStage.setScene(start);
-		mainStage.setScene(start);
+		//mainStage.setScene(settings);
 		
 		/*LOADING PROCESS*/
-		Scene slide1 = createSlide(0);
+		//LOADING SCREEN
+		//SlideAssembler.createSlides(slideCount, slides, videoLayers, graphics2dLayers, graphics3dLayers, imageLayers, textLayers, audioLayers);
+		//Scene slide1 = createSlide(0);
 
-		mainStage.setScene(slide1);
+		mainStage.setScene(start);
 		mainStage.show();
 	}
 	
 	public static void run() {
-		FileBrowser fb = new FileBrowser();
+		//FileBrowser fb = new FileBrowser();
+		File file = new FileChooser().showOpenDialog(null);
+		xml = file.getPath();
 		//File file = RETURN FILE FROM BROWSER
 		//parseXML(file, ArrayLists HERE);
 		//createSlides(ARRAYLISTS);
-		showSlide(1);
+		mainStage.setScene(loading);
+		//showSlide(1);
+		SlideAssembler.createSlides(xml, slides, videoLayers, graphics2d, 
+									graphics3dLayers, imageLayers, textLayers, audioLayers, 
+									shapes, images, audio, slideText, videos, models);
+		showSlide(0);
 	}
 	
 	public Scene createSlide(int slideNo) throws IOException{
@@ -116,7 +133,8 @@ public class InteractiveLearningApp extends Application{
 		SubScene audioScene = audioLayers.get(slideNo).get();
 		
 		imageScene.setTranslateX(-defaultXSize/2 + imageScene.getWidth()/2);
-		//videoScene.setTranslateX(-defaultXSize/2 + videoScene.getWidth()/2);
+		//videoScene.setTranslateX(defaultXSize/2 - videoScene.getWidth()/2);
+		//videoScene.setTranslateY(defaultYSize/2 - videoScene.getHeight()/2);
 		//modelScene.setTranslateX(-defaultXSize/2 + modelScene.getWidth()/2);
 		textScene.setTranslateY(defaultYSize/2 - textScene.getHeight()+30);
 		shapesScene.setTranslateX(-defaultXSize/2 + shapesScene.getWidth()/2);
@@ -124,15 +142,17 @@ public class InteractiveLearningApp extends Application{
 		
 		sp.getChildren().add(shapesScene);
 		sp.getChildren().add(imageScene);
-		sp.getChildren().add(textScene);
-		sp.getChildren().add(videoScene);
+		//sp.getChildren().add(textScene);
+		
 		sp.getChildren().add(modelScene);
 		sp.getChildren().add(audioScene);
+		sp.getChildren().add(videoScene);
 		
-		slideText.get(slideNo).start();
+		//slideText.get(slideNo).start();
 		images.get(slideNo).start();
 		audio.get(slideNo).start();
-		//images.get(slideNo+1).start();
+		videos.get(slideNo).play();
+		images.get(slideNo+1).start();
 		for(int i = 0; i< shapes.size();i++) {
 			if(shapes.get(i).getSlideNumber() == slideNo) {
 				shapes.get(i).create();
@@ -141,28 +161,53 @@ public class InteractiveLearningApp extends Application{
 		
 		bp.setCenter(sp);
 		Scene scene1 = new Scene(bp, defaultXSize, defaultYSize);
-		scene1.getStylesheets().add("style/startScreen.css");
+		scene1.getStylesheets().add("style/contentScreen.css");
 		return scene1;
 	}
 	
-	public void assembleSlides() {
+	/*public void assembleSlides() {
 		XMLParser parser = new XMLParser(xml, audioLayers, videoLayers, textLayers, imageLayers, graphics2dLayers, graphics3dLayers, 
 				audio,graphics2d,models,images,shapes,slideText,videos);
 		slideCount = parser.getSlideCount();
 		for(int i =0;i<slideCount;i++) {
-			slides.add(new Slide(mainStage, defaultXSize, defaultYSize,xOffset,yOffset));
+			//slides.add(new Slide(mainStage, defaultXSize, defaultYSize,xOffset,yOffset));
 		}
-	}
+	}*/
 	
 	public static Stage getStage() {
 		return mainStage;
 	}
+	
+	public static void nextSlide() {
+		try {
+			System.out.println("NEXT SLIDE BABY");
+			mainStage.setScene(slides.get(currentSlide+1).getSlide());
+			currentSlide++;
+		}catch(NullPointerException | IndexOutOfBoundsException e) {
+			System.out.println("Presentation Restarted");
+			mainStage.setScene(slides.get(0).getSlide());
+			currentSlide = 0;
+		}
+	}
+	
+	/*public static void prevSlide() {
+		try {
+			System.out.println("NEXT SLIDE BABY");
+			mainStage.setScene(slides.get(currentSlide+1).getSlide());
+			currentSlide++;
+		}catch(NullPointerException | IndexOutOfBoundsException e) {
+			System.out.println("Presentation Restarted");
+			mainStage.setScene(slides.get(0).getSlide());
+			currentSlide = 0;
+		}
+	}*/
 
 	public static void setMainStage(Stage mainStage) {
 		InteractiveLearningApp.mainStage = mainStage;
 	}
 
 	public static void showSlide(int index) {
-		mainStage.setScene(slides.get(index).update());
+		mainStage.setScene(slides.get(index).getSlide());
+		currentSlide = index;
 	}
 }

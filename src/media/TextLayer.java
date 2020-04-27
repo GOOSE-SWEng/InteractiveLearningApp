@@ -20,6 +20,7 @@ public class TextLayer {
 		this.height = height;
 		this.width = width;
 		sp.setMinSize(width,height);
+		sp.setPickOnBounds(false);
 		this.slideText = slideText;
 		sp.setAlignment(Pos.TOP_LEFT);
 		System.out.println("Text Layer created: " + width + ", " + height);
@@ -36,9 +37,9 @@ public class TextLayer {
 		sp.getChildren().remove(object.get());
 	}
 	
-	public SubScene get() {
-    window = new SubScene(sp,width,height);
-		return (window);
+	public StackPane get() {
+    //window = new SubScene(sp,width,height);
+		return (sp);
   }
   
   public ArrayList<SlideText> getList() {
