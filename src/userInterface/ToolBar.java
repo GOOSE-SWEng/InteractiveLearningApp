@@ -44,9 +44,9 @@ public class ToolBar {
 		//To be replaced with icons
 		title = new Text(id);
 		title.setId("title");
-		Button openButton = new Button("Open");
+		Button openButton = new Button("Next");
 		Button settingsButton = new Button("Settings");
-		Button newFileButton = new Button("New File");
+		Button newFileButton = new Button("Previous");
 		Button minimizeWindowButton = new Button("Minimize to Tray");
 		Button maximizeWindowButton = new Button("Maximize Window");
 		Button exitButton = new Button("Exit");
@@ -123,7 +123,7 @@ public class ToolBar {
 		SubScene toolBar = new SubScene(gridPane, winWidth, 20);
 		
 		toolBar.widthProperty().bind(InteractiveLearningApp.getStage().widthProperty());
-		toolBar.setUserAgentStylesheet("style/hotBar.css");
+		toolBar.setUserAgentStylesheet("style/Extras/toolBar.css");
 		return toolBar;
 	}
 	
@@ -154,7 +154,7 @@ public class ToolBar {
 	 * TOOD maybe have the settings scene as a separate class?
 	 * This is just a basic idea of what it should do
 	 */
-		System.out.println("Settings Button Pressed");
+		/*System.out.println("Settings Button Pressed");
 		Label settingsLabel = new Label("This will be the settings screen");
 		
 		StackPane settingsLayout = new StackPane();
@@ -169,11 +169,13 @@ public class ToolBar {
 		settingsWindow.setX(InteractiveLearningApp.getStage().getX() + 200);
 		settingsWindow.setY(InteractiveLearningApp.getStage().getX() + 100);
 		
-		settingsWindow.show();
+		settingsWindow.show();*/
+		InteractiveLearningApp.showSettings();
 	}
 	
 	public static void NewFileButtonPressed() {
 		System.out.println("New File Button Pressed");
+		InteractiveLearningApp.prevSlide();
 		//TODO add functionality so a new empty scene opens??
 		//not sure abt this one 
 	}

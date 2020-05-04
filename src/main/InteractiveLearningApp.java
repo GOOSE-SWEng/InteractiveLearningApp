@@ -31,8 +31,19 @@ public class InteractiveLearningApp extends Application{
 	private static Scene settings;
 	private static Scene loading;
 	private static Stage mainStage;
-	private static int slideCount;
-	private static int currentSlide;
+	public static int currentSlide;
+	public static int slideCount;
+	
+	public static Boolean presRunning = false;
+	
+	public static String defaultLanguage = "English";
+	public static String defaultFont = "Arial";
+	public static String defaultTextSize = "16pt";
+	
+	public static String defaultBGColour = "White";
+	public static String defaultLineColour = "Black";
+	public static String defaultFontColour = "Black";
+	public static String defaultFillColour = "Black";
 	
 	//Triggers Exhibit Mode
 	private boolean exhibitMode = false;
@@ -55,20 +66,7 @@ public class InteractiveLearningApp extends Application{
 	static ArrayList<TextLayer> textLayers = new ArrayList<TextLayer>();
 	static ArrayList<AudioLayer> audioLayers = new ArrayList<AudioLayer>();
 	
-	//String vidUrl = Paths.get("src/Sun.mp4").toUri().toString();
-	//String xml = "src/resources/xml.xml";
 	static String xml;
-	
-/*MEDIA ARRAYLIST DECLARATION
- * ETC...
- * 2DGraphics
- * 3DGraphics
- * Images
- * Video
- * Text
- * Audio
- * Buttons links
- */
 	
 	public static void main(String[] args) {
 		System.out.println("Running...");
@@ -84,103 +82,52 @@ public class InteractiveLearningApp extends Application{
 		start = StartScreen.createStartScreen(mainStage, defaultXSize, defaultYSize);
 		settings = Settings.createSettings(mainStage, defaultXSize, defaultYSize);
 		loading = LoadingScreen.createLoadingScreen(mainStage, defaultXSize, defaultYSize);
-		
-		//////////////////REMOVE THIS//////////////////////
-
-		//slideCount = parser.getSlideCount();
-		//////////////////REMOVE THIS//////////////////////
-		
-		//mainStage.setScene(start);
-		//mainStage.setScene(settings);
-		
+			
 		/*LOADING PROCESS*/
 		//LOADING SCREEN
 		//SlideAssembler.createSlides(slideCount, slides, videoLayers, graphics2dLayers, graphics3dLayers, imageLayers, textLayers, audioLayers);
-		//Scene slide1 = createSlide(0);
-
 		mainStage.setScene(start);
 		mainStage.show();
 	}
 	
+	//Run App
 	public static void run() {
-		//FileBrowser fb = new FileBrowser();
+		presRunning = false;
+		//Create File Browser
 		File file = new FileChooser().showOpenDialog(null);
-		xml = file.getPath();
-		//File file = RETURN FILE FROM BROWSER
-		//parseXML(file, ArrayLists HERE);
-		//createSlides(ARRAYLISTS);
-		mainStage.setScene(loading);
-		//showSlide(1);
-		SlideAssembler.createSlides(xml, slides, videoLayers, graphics2d, 
-									graphics3dLayers, imageLayers, textLayers, audioLayers, 
-									shapes, images, audio, slideText, videos, models);
-		showSlide(0);
-	}
-	
-	public Scene createSlide(int slideNo) throws IOException{
-		BorderPane bp = new BorderPane();
-		bp.setTop(ToolBar.createToolBar(defaultXSize));
-		bp.setBottom(ResizeBar.CreateResizeBar(defaultXSize));
-		//imageLayers.add(new ImageLayer(defaultXSize, defaultYSize-100, images));
-		//imageLayers.get(0).add("https://cdn.eso.org/images/screen/eso1907a.jpg", 0, 0, 110, 110, 0, 1000, 0);
-		//images.get(0).start();
-		StackPane sp = new StackPane();
-		SubScene imageScene = imageLayers.get(slideNo).get();
-		SubScene videoScene = videoLayers.get(slideNo).get();
-		SubScene modelScene = graphics3dLayers.get(slideNo).get();
-		SubScene textScene = textLayers.get(slideNo).get();
-		SubScene shapesScene = graphics2dLayers.get(slideNo).get();
-		SubScene audioScene = audioLayers.get(slideNo).get();
-		
-		imageScene.setTranslateX(-defaultXSize/2 + imageScene.getWidth()/2);
-		//videoScene.setTranslateX(defaultXSize/2 - videoScene.getWidth()/2);
-		//videoScene.setTranslateY(defaultYSize/2 - videoScene.getHeight()/2);
-		//modelScene.setTranslateX(-defaultXSize/2 + modelScene.getWidth()/2);
-		textScene.setTranslateY(defaultYSize/2 - textScene.getHeight()+30);
-		shapesScene.setTranslateX(-defaultXSize/2 + shapesScene.getWidth()/2);
-		shapesScene.setTranslateY(-defaultYSize/2 + shapesScene.getHeight()/2+20);
-		
-		sp.getChildren().add(shapesScene);
-		sp.getChildren().add(imageScene);
-		//sp.getChildren().add(textScene);
-		
-		sp.getChildren().add(modelScene);
-		sp.getChildren().add(audioScene);
-		sp.getChildren().add(videoScene);
-		
-		//slideText.get(slideNo).start();
-		images.get(slideNo).start();
-		audio.get(slideNo).start();
-		videos.get(slideNo).play();
-		images.get(slideNo+1).start();
-		for(int i = 0; i< shapes.size();i++) {
-			if(shapes.get(i).getSlideNumber() == slideNo) {
-				shapes.get(i).create();
-			}
+		try{
+			xml = file.getPath(); //Get File path
+			mainStage.setScene(loading);
+			//Create slides using XML
+			SlideAssembler.createSlides(xml, slides, videoLayers, graphics2d, 
+										graphics3dLayers, imageLayers, textLayers, audioLayers, 
+										shapes, images, audio, slideText, videos, models);
+			showSlide(0); //Show first slide of presentation
+			presRunning = true;
+		}catch(NullPointerException e) {
+			showStart();
 		}
-		
-		bp.setCenter(sp);
-		Scene scene1 = new Scene(bp, defaultXSize, defaultYSize);
-		scene1.getStylesheets().add("style/contentScreen.css");
-		return scene1;
 	}
-	
-	/*public void assembleSlides() {
-		XMLParser parser = new XMLParser(xml, audioLayers, videoLayers, textLayers, imageLayers, graphics2dLayers, graphics3dLayers, 
-				audio,graphics2d,models,images,shapes,slideText,videos);
-		slideCount = parser.getSlideCount();
-		for(int i =0;i<slideCount;i++) {
-			//slides.add(new Slide(mainStage, defaultXSize, defaultYSize,xOffset,yOffset));
-		}
-	}*/
 	
 	public static Stage getStage() {
 		return mainStage;
 	}
 	
+	public static void showSettings() {
+		mainStage.setScene(settings); //Show settings screen
+	}
+	
+	public static void showStart() {
+		mainStage.setScene(start); //Show settings screen
+	}
+	
+	public static void showMap() {
+		//mainStage.setScene(map);
+	}
+	
 	public static void nextSlide() {
 		try {
-			System.out.println("NEXT SLIDE BABY");
+			System.out.println("NEXT SLIDE");
 			mainStage.setScene(slides.get(currentSlide+1).getSlide());
 			currentSlide++;
 		}catch(NullPointerException | IndexOutOfBoundsException e) {
@@ -190,17 +137,17 @@ public class InteractiveLearningApp extends Application{
 		}
 	}
 	
-	/*public static void prevSlide() {
+	public static void prevSlide() {
 		try {
-			System.out.println("NEXT SLIDE BABY");
-			mainStage.setScene(slides.get(currentSlide+1).getSlide());
-			currentSlide++;
+			System.out.println("PREV SLIDE");
+			mainStage.setScene(slides.get(currentSlide-1).getSlide());
+			currentSlide--;
 		}catch(NullPointerException | IndexOutOfBoundsException e) {
 			System.out.println("Presentation Restarted");
 			mainStage.setScene(slides.get(0).getSlide());
 			currentSlide = 0;
 		}
-	}*/
+	}
 
 	public static void setMainStage(Stage mainStage) {
 		InteractiveLearningApp.mainStage = mainStage;
@@ -209,5 +156,77 @@ public class InteractiveLearningApp extends Application{
 	public static void showSlide(int index) {
 		mainStage.setScene(slides.get(index).getSlide());
 		currentSlide = index;
+	}
+	
+	public static int getDefaultWidth() {
+		return defaultXSize;
+	}
+
+	public static void setDefaultWidth(int defaultXSize) {
+		InteractiveLearningApp.defaultXSize = defaultXSize;
+	}
+
+	public static int getDefaultHeight() {
+		return defaultYSize;
+	}
+
+	public static void setDefaultHeight(int defaultYSize) {
+		InteractiveLearningApp.defaultYSize = defaultYSize;
+	}
+
+	public static String getDefaultLanguage() {
+		return defaultLanguage;
+	}
+
+	public static void setDefaultLanguage(String defaultLanguage) {
+		InteractiveLearningApp.defaultLanguage = defaultLanguage;
+	}
+
+	public static String getDefaultFont() {
+		return defaultFont;
+	}
+
+	public static void setDefaultFont(String defaultFont) {
+		InteractiveLearningApp.defaultFont = defaultFont;
+	}
+
+	public static String getDefaultTextSize() {
+		return defaultTextSize;
+	}
+
+	public static void setDefaultTextSize(String defaultTextSize) {
+		InteractiveLearningApp.defaultTextSize = defaultTextSize;
+	}
+
+	public String getDefaultBGColour() {
+		return defaultBGColour;
+	}
+
+	public static void setDefaultBGColour(String defaultBGColour) {
+		InteractiveLearningApp.defaultBGColour = defaultBGColour;
+	}
+
+	public String getDefaultLineColour() {
+		return defaultLineColour;
+	}
+
+	public static void setDefaultLineColour(String defaultLineColour) {
+		InteractiveLearningApp.defaultLineColour = defaultLineColour;
+	}
+
+	public String getDefaultFontColour() {
+		return defaultFontColour;
+	}
+
+	public static void setDefaultFontColour(String defaultFontColour) {
+		InteractiveLearningApp.defaultFontColour = defaultFontColour;
+	}
+
+	public static String getDefaultFillColour() {
+		return defaultFillColour;
+	}
+
+	public static void setDefaultFillColour(String defaultFillColour) {
+		InteractiveLearningApp.defaultFillColour = defaultFillColour;
 	}
 }

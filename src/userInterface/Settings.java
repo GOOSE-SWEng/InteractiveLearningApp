@@ -13,32 +13,36 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import main.InteractiveLearningApp;
 
 public class Settings {
-	static String title = "Settings";
-	static SubScene toolBar;
-	static SubScene resizeBar;
-	static String currentLanguage = "English";
-	Boolean colourBlind = false;
-	Boolean darkMode = false;
-	static String currentFont = "Arial";
-	static String currentTextSize = "16pt";
+	private static String title = "Settings";
+	private static Scene settings;
+	private static SubScene toolBar;
+	private static SubScene resizeBar;
 	
+	private static String currentLanguage = "English";
+	private Boolean colourBlind = false;
+	private Boolean darkMode = false;
+	private static String currentFont = "Arial";
+	private static String currentTextSize = "16pt";
+		
 	public static Scene createSettings(Stage stage,int defaultXSize, int defaultYSize) {
 		//Create top and bottom tool bars
 		toolBar = ToolBar.createToolBar(defaultXSize, title);
 		resizeBar = ResizeBar.CreateResizeBar(defaultXSize);
+		
 		//Create Layouts
 		BorderPane bp = new BorderPane();
 		GridPane gp =  new GridPane();
+		
 		//Create Labels
 		Text colourBlindFilter = new Text("Colour Blind Filter");
 		Text nightMode = new Text("Dark Mode");
 		Text textSize = new Text("Text Size");
 		Text font = new Text("Font");
 		Text language = new Text("Language");
-		//Text captions = new Text("Captions");
-		//Text audioDesc = new Text("Audio Description");
+		
 		//Create Check Boxes
 		CheckBox cBBox = new CheckBox();
 		CheckBox nMBox = new CheckBox();
@@ -91,9 +95,11 @@ public class Settings {
 		//Apply and default buttons
 		Button apply = new Button("Apply");
 		Button setDefault = new Button("Return to Default");
+		Button back = new Button("Back");
 		//Apply event listeners
 		apply.setOnAction(e -> applyButtonPressed());
 		setDefault.setOnAction(e -> defaultButtonPressed());
+		back.setOnAction(e-> backButtonPressed());
 		
 		//Add all elements to the grid pane
 		gp.add(textSize, 0, 0);
@@ -107,18 +113,11 @@ public class Settings {
 		
 		gp.add(nightMode, 0, 3);
 		gp.add(nMBox, 1, 3);
-		
-		//gp.add(colourBlindFilter, 0, 4);
-		//gp.add(cBBox, 1, 4);
-		
-		//gp.add(captions, 0, 5);
-		//gp.add(captionsBox, 1, 5);
-		
-		//gp.add(audioDesc, 0, 6);
-		//gp.add(audioDescBox, 1, 6);
-		
+				
 		gp.add(apply, 0, 7);
 		gp.add(setDefault, 1, 7);
+		gp.add(back, 2, 7);
+		
 		//Set insets and layout
 		gp.setVgap(10);
 		gp.setHgap(50);
@@ -131,20 +130,60 @@ public class Settings {
 		bp.setBottom(resizeBar);
 		bp.setCenter(gp);
 		//Create the scene
-		Scene settings  = new Scene(bp,defaultXSize,defaultYSize);
-		settings.getStylesheets().add("style/settingsScreen.css");
+		settings  = new Scene(bp,defaultXSize,defaultYSize);
+		settings.getStylesheets().add("style/SettingsScreen/settingsScreen.css");
 		return settings;
 	}
 	
 	public static void applyButtonPressed() {
-		
-		
-		
+		currentFont = "arial";
+		currentTextSize = "24";
+		currentLanguage = "English";
+		Stage settingsPopUp = new Stage();
+		Text text = new Text("To apply these settings, the presentation must restart.");
+		Button apply = new Button("Apply");
+		Button cancel = new Button("Cancel");
+		GridPane gp = new GridPane();
+		gp.add(text, 0, 0);
+		gp.setColumnSpan(text, 2);
+		gp.add(apply, 0, 1);
+		gp.add(cancel, 1, 1);
+		Scene applyPopUp = new Scene(gp,400,100);
+		settingsPopUp.setScene(applyPopUp);
+		settingsPopUp.show();
+		apply.setOnMouseClicked(e->{
+			currentFont = "arial";
+			currentTextSize = "24";
+			currentLanguage = "English";
+			settingsPopUp.hide();
+			InteractiveLearningApp.showStart();
+		});
+		cancel.setOnMouseClicked(e->settingsPopUp.hide());
 	}
 	public static void defaultButtonPressed() {
-		
-		
-		
-		
+		currentFont = InteractiveLearningApp.defaultFont;
+		currentTextSize = InteractiveLearningApp.defaultTextSize;
+		currentLanguage = InteractiveLearningApp.defaultLanguage;
+	}
+	public static void backButtonPressed() {
+		if(InteractiveLearningApp.presRunning == true) {
+			InteractiveLearningApp.showSlide(InteractiveLearningApp.currentSlide);
+		}else {
+			InteractiveLearningApp.showStart();
+		}
+	}
+	public static void defaultStyle() {
+		settings.getStylesheets().clear();
+		settings.getStylesheets().add("style/settings/settingsScreen.css");
+	}
+	
+	public static void nightmodeStyle() {
+		settings.getStylesheets().clear();
+		settings.getStylesheets().add("style/settings/settingsScreenNight.css");
+	}
+	
+	public static void colourblindStyle() {
+		settings.getStylesheets().clear();
+		settings.getStylesheets().add("style/settings/settingsScreenCB.css");
 	}
 }

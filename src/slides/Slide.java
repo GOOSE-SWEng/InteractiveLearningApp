@@ -13,14 +13,12 @@ import userInterface.ResizeBar;
 import userInterface.ToolBar;
 import media.*;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
-//THIS IS THE SLIDE OBJECT
 
 public class Slide {
-	SubScene toolBar;// = ToolBar.createToolBar(1280);
-	SubScene resizeBar;
+	private SubScene toolBar;// = ToolBar.createToolBar(1280);
+	private SubScene resizeBar;
 	private VideoLayer videoLayer;
 	private AudioLayer audioLayer;
 	private ImageLayer imageLayer;
@@ -28,6 +26,7 @@ public class Slide {
 	private Graphics2D graphics2D;
 	private Graphics3DLayer graphics3DLayer;
 	private Scene slide;
+	
 	private BorderPane bp = new BorderPane();
 	private StackPane sp = new StackPane();
 	private int width;
@@ -35,10 +34,9 @@ public class Slide {
 	private double xOff;
 	private double yOff;
 	
-	
 	private String id;
 	private int duration;
-	/////////////////////////////
+	
 	SubScene test;
 	Graphics2D graphics;
 	public Slide(Stage mainStage, int width, int height, double xOffset, double yOffset,
@@ -48,6 +46,7 @@ public class Slide {
 		this.width = width;
 		this.height = height;
 		toolBar = ToolBar.createToolBar(width, id);
+		resizeBar = ResizeBar.CreateResizeBar(width);
 
 		xOff = xOffset;
 		yOff = yOffset;
@@ -116,18 +115,32 @@ public class Slide {
 		});
 		sp.setPickOnBounds(false);
 		slide = new Scene(bp,width, height);
-		slide.getStylesheets().add("style/contentScreen.css");
+		slide.getStylesheets().add("style/ContentScreen/contentScreen.css");
 	}
+	
 	public void applyLayers() {
-
 		sp.getChildren().add(audioLayer.get());
 		sp.getChildren().add(graphics2D.get());
 		sp.getChildren().add(videoLayer.get());
-		sp.getChildren().add(graphics3DLayer.get());
 		sp.getChildren().add(textLayer.get());
 		sp.getChildren().add(imageLayer.get());
+		sp.getChildren().add(graphics3DLayer.get());
 	}
 	
+	public void defaultStyle() {
+		slide.getStylesheets().clear();
+		slide.getStylesheets().add("style/ContentScreen/contentScreen.css");
+	}
+	
+	public void nightmodeStyle() {
+		slide.getStylesheets().clear();
+		slide.getStylesheets().add("style/ContentScreen/contentScreenNight.css");
+	}
+	
+	public void colourblindStyle() {
+		slide.getStylesheets().clear();
+		slide.getStylesheets().add("style/ContentScreen/contentScreenCB.css");
+	}
 	
 	public Scene getSlide() {
 		return slide;

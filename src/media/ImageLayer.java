@@ -31,7 +31,6 @@ public class ImageLayer {
 		sp.getChildren().add(image.get());
 		image.get().setLayoutX(xStart);
 		image.get().setLayoutY(yStart);
-		
 	}
 	
 	public void remove(SlideImage object) {

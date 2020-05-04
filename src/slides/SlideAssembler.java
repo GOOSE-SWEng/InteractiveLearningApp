@@ -76,7 +76,6 @@ public class SlideAssembler {
 			slides.get(i).setGraphics3DLayer(graphics3dLayers.get(i));
 			slides.get(i).applyLayers();
 
-			
 			slides.get(i).getImageLayer().images.get(i).start();
 			slides.get(i).getVideoLayer().videos.get(i).play();
 			slides.get(i).getAudioLayer().audio.get(i).start();

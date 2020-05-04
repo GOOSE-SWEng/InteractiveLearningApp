@@ -22,6 +22,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import main.InteractiveLearningApp;
 import media.*;
 import slides.Slide;
 
@@ -79,6 +80,7 @@ public class XMLParser {
 		//Store the document in memory
 		xmlDoc = getDocument(fileDir); 
 		xmlDoc.getDocumentElement().normalize();
+		
 		/*try {
 			validateXML(xmlDoc);
 		}catch(SAXException|IOException e) {
@@ -129,8 +131,27 @@ public class XMLParser {
 		 */
 		for(int i=0;i<defaultsNodeList.getLength();i++) { 
 			defaultNode = defaultsNodeList.item(i); 
-			if(defaultNode instanceof Element) { 
+			if(defaultNode instanceof Element) {
 				System.out.println(defaultNode.getNodeName() + ": " + defaultNode.getTextContent());
+				if(defaultNode.getNodeName().equals("backgroundcolor")) {
+					InteractiveLearningApp.setDefaultBGColour(defaultNode.getTextContent());
+				}else if(defaultNode.getNodeName().equals("font")) {
+					InteractiveLearningApp.setDefaultFont(defaultNode.getTextContent());
+				}else if(defaultNode.getNodeName().equals("fontsize")) {
+					InteractiveLearningApp.setDefaultTextSize(defaultNode.getTextContent());
+				}else if(defaultNode.getNodeName().equals("fontcolor")) {
+					InteractiveLearningApp.setDefaultFontColour(defaultNode.getTextContent());
+				}else if(defaultNode.getNodeName().equals("linecolor")) {
+					InteractiveLearningApp.setDefaultLineColour(defaultNode.getTextContent());
+				}else if(defaultNode.getNodeName().equals("fillcolor")) {
+					InteractiveLearningApp.setDefaultFillColour(defaultNode.getTextContent());
+				}else if(defaultNode.getNodeName().equals("slidewidth")) {
+					InteractiveLearningApp.setDefaultWidth(Integer.parseInt(defaultNode.getTextContent()));
+				}else if(defaultNode.getNodeName().equals("slideheight")) {
+					InteractiveLearningApp.setDefaultHeight(Integer.parseInt(defaultNode.getTextContent()));
+				}else {
+					System.out.println(defaultNode.getNodeName() + " is an unrecognisable default tag");
+				}
 			}
 		}
 		
@@ -437,7 +458,7 @@ public class XMLParser {
 		}else {}
 	}
 	public void textParse(Node currentNode) {
-		textLayers.add(new TextLayer(100*1280/100, 100*720/100, slideText));
+		textLayers.add(new TextLayer((int)InteractiveLearningApp.getStage().getWidth(), (int)InteractiveLearningApp.getStage().getHeight(), slideText));
 		textLayers.get(currentSlide).add(currentNode, currentSlide);
 	}
 	
@@ -552,5 +573,4 @@ public class XMLParser {
 	public void setSlideCount(int slideCount) {
 		this.slideCount = slideCount;
 	}
-	
 }

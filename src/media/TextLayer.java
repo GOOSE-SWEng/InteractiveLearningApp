@@ -13,8 +13,8 @@ public class TextLayer {
 	int height;
 	int width;
 	StackPane sp = new StackPane();
-	public ArrayList<SlideText> slideText = new ArrayList<SlideText>();
-  SubScene window;
+	public ArrayList<SlideText> slideText;
+	SubScene window;
 	
 	public TextLayer(int width,int height, ArrayList<SlideText>slideText){
 		this.height = height;
@@ -30,6 +30,7 @@ public class TextLayer {
 		//constructor for the text object
 		SlideText text = new SlideText(node, slideNumber, width, height);
 		slideText.add(text);
+		//text.get().setLayoutX();
 		sp.getChildren().add(text.get());
 	}
 	

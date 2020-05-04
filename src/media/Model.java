@@ -51,12 +51,20 @@ public class Model {
 	Timeline timeline; //Timeline for animations
 	ArrayList<InteractivePoints> points = new ArrayList<InteractivePoints>(); //Arraylist of interactive points
 	ArrayList<Sphere> spheres = new ArrayList<Sphere>(); //Arraylist of Sphere buttons
+	Boolean showControls = true;
 	
 	public Model(String url, int modelWidth, int modelHeight, int xStart, int yStart){
 		this.width = modelWidth; //Width of SubScene
 		this.height = modelHeight; //Height of SubScene
 		this.xStart = xStart;
 		this.yStart = yStart;
+		modelScene = createModel(url); //Create the and store scene
+	}
+	
+	public Model(String url, int modelWidth, int modelHeight){
+		this.width = modelWidth; //Width of SubScene
+		this.height = modelHeight; //Height of SubScene
+		showControls = false;
 		modelScene = createModel(url); //Create the and store scene
 	}
 	
@@ -80,7 +88,7 @@ public class Model {
 	        stlImporter.read(url);
 	        TriangleMesh cylinderHeadMesh = stlImporter.getImport(); //Store in a mesh
 	        MeshView cylinderHeadMeshView = new MeshView(); //Creates new Mesh view
-	        cylinderHeadMeshView.setMaterial(new PhongMaterial(Color.AQUA)); //Sets material of model
+	        cylinderHeadMeshView.setMaterial(new PhongMaterial(Color.BEIGE)); //Sets material of model
 	        cylinderHeadMeshView.setMesh(cylinderHeadMesh); //Sets the mesh for the mesh view
 	        stlImporter.close();
 			modelGroup = new Group();
@@ -101,7 +109,7 @@ public class Model {
         // Create Shape3D
 		System.out.println("Model Imported");
 		
-		modelGroup.getTransforms().add(new Rotate(90, Rotate.X_AXIS));
+		//modelGroup.getTransforms().add(new Rotate(90, Rotate.X_AXIS));
 
         Translate pivot = new Translate(); //Create pivot
         //Setup rotates
@@ -109,7 +117,8 @@ public class Model {
         Rotate xRotate = new Rotate(0, Rotate.X_AXIS);
         Rotate zRotate = new Rotate(0, Rotate.Z_AXIS);
 		camera.getTransforms().addAll(pivot, yRotate, zRotate, xRotate);
-		camera.getTransforms().add(new Translate(-width/2,-height/2,-300));
+		//modelGroup.getTransforms().add(new Translate(width/2, -height/2),0));
+		camera.getTransforms().add(new Translate(-width/2,-height/2,0));
 		
 		//Setup Animation
         timeline = new Timeline(
@@ -149,15 +158,17 @@ public class Model {
         pivot.setY(modelGroup.getTranslateY());
         pivot.setZ(modelGroup.getTranslateZ());
         
-        GridPane controls = createControls();
         BorderPane bp = new BorderPane();
         
         //Create subscene
 		SubScene modelSubScene = new SubScene(modelGroup, width, height-40, true, SceneAntialiasing.BALANCED);
 		modelSubScene.setCamera(camera); //Apply the camera
 		bp.setCenter(modelSubScene);
-		bp.setBottom(controls);
-		bp.setAlignment(controls, Pos.CENTER);
+		if(showControls) {
+	        GridPane controls = createControls();
+			bp.setBottom(controls);
+			bp.setAlignment(controls, Pos.CENTER);
+		}
 		SubScene graphics3d = new SubScene(bp, width, height);
 		return graphics3d;
 	}
@@ -246,7 +257,7 @@ public class Model {
 	}
 	//Move Camera function
 	public void moveCam(int x,int y, int z) {
-		modelScene.getCamera().getTransforms().add(new Translate(x,y,z));
+		camera.getTransforms().add(new Translate(x,y,z));
 	}
 	
 	//Rotate function
