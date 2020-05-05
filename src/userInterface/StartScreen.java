@@ -72,13 +72,14 @@ public class StartScreen {
 		borderPane.setBottom(resizeBar); //Add resize bar to bottom of scene
 		
 		//Import 3D goose model
-		Model gooseModel = new Model(Paths.get("src/resources/3D_Models/startScreenGoose.stl").toUri().toString(), defaultXSize/2,defaultYSize-40);
-		gooseModel.moveCam(0, 0, 600); //Zoom into model
+		Model gooseModel = new Model(Paths.get("src/resources/3D_Models/startScreenGoose.stl").toUri().toString(), 50,90);
+		gooseModel.moveCam(0, 15, 600); //Zoom into model
 		
 		//Add buttons to the left of the screen
 		borderPane.setLeft(gp);
 		//Add model to the left of the screen
 		borderPane.setRight(gooseModel.getModelScene());
+		borderPane.setAlignment(gooseModel.getModelScene(), Pos.CENTER);
 		
 		startScreen = new Scene(borderPane, defaultXSize, defaultYSize);
 		startScreen.getStylesheets().add("style/StartScreen/startScreen.css");	//Default

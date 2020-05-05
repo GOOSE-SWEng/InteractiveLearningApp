@@ -3,6 +3,7 @@ package media;
 import java.util.ArrayList;
 import javafx.scene.SubScene;
 import javafx.scene.layout.StackPane;
+import main.InteractiveLearningApp;
 
 public class Graphics3DLayer {
 	int paneHeight;
@@ -12,13 +13,14 @@ public class Graphics3DLayer {
 	SubScene window;
 	
 	public Graphics3DLayer(int width,int height, ArrayList<Model> models){
-		this.paneHeight = height;
-		this.paneWidth = width;
+		this.paneHeight = height*InteractiveLearningApp.getDefaultHeight()/100;
+		this.paneWidth = width*InteractiveLearningApp.getDefaultWidth()/100;
 		this.models = models;
+		System.out.println(paneWidth + ", " + paneHeight);
 		sp.setPickOnBounds(false);
 		//sp.getChildren().add(canvas);
-		sp.setMinSize(width, height);
-		window = new SubScene(sp, width, height);
+		sp.setMinSize(paneWidth, paneHeight);
+		window = new SubScene(sp, paneWidth, paneHeight);
 	}
 	
 	public void add(String url, int modelWidth, int modelHeight, int xStart, int yStart) {

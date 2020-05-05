@@ -15,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import userInterface.*;
 import slides.*;
@@ -33,6 +34,7 @@ public class InteractiveLearningApp extends Application{
 	private static Stage mainStage;
 	public static int currentSlide;
 	public static int slideCount;
+	public static String style = "default";
 	
 	public static Boolean presRunning = false;
 	
@@ -107,6 +109,9 @@ public class InteractiveLearningApp extends Application{
 		}catch(NullPointerException e) {
 			showStart();
 		}
+		//mainStage.setX((Screen.getPrimary().getVisualBounds().getWidth()-defaultXSize)/2);
+		//mainStage.setY((Screen.getPrimary().getVisualBounds().getHeight()-defaultYSize)/2);
+		//mainStage.setFullScreen(true);
 	}
 	
 	public static Stage getStage() {

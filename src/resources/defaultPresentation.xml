@@ -69,7 +69,7 @@
 		<image urlname='https://cdn.eso.org/images/screen/eso1907a.jpg' xstart='60' ystart='0' width='40' height='40' starttime='0' endtime='100'></image>
 		<image urlname='https://cdn.arstechnica.net/wp-content/uploads/2018/07/Rocket-Report-Intro-3-800x450.jpg' xstart='60' ystart='40' width='40' height='40' starttime='0' endtime='100'></image>
 		<video urlname='https://youtu.be/OnoNITE-CLc' starttime='0' loop='false' xstart='50'></video>
-		<model urlname='C:\Users\User\Documents\HST-3DS\hst.3ds' xstart='0' ystart='0' width='400' height='600'></model>
+		<model urlname='C:\Users\User\Documents\HST-3DS\hst.3ds' xstart='0' ystart='0' width='50' height='80'></model>
 	</slide>
 	<slide id='Rosetta Stone' duration='60'>
 		<text font='arial' fontsize='15' fontcolor='black' xpos='0' ypos='0' starttime='0' endtime='10000'>
@@ -127,7 +127,7 @@
 		<image urlname='https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Rosetta_Stone.JPG/800px-Rosetta_Stone.JPG' xstart='80' ystart='0' width='20' height='32' starttime='0' endtime='100'></image>
 		<image urlname='https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/RosettaStoneAsPartOfOriginalStele_revised.svg/800px-RosettaStoneAsPartOfOriginalStele_revised.svg.png' xstart='70' ystart='32' width='20' height='68' starttime='0' endtime='100'></image>
 		<video urlname='https://www.radiantmediaplayer.com/media/bbb-360p.mp4' starttime='0' loop='false' xstart='0'></video>
-		<model urlname='C:\Users\User\Documents\rosetta-stone.stl' xstart='0' ystart='0' width='400' height='600'></model>
+		<model urlname='C:\Users\User\Documents\rosetta-stone.stl' xstart='0' ystart='0' width='50' height='80'></model>
 	</slide>
 	<slide id='Big Lion' duration='60'>
 		<text font='arial' fontsize='15' fontcolor='black' xpos='70' ypos='0' starttime='0' endtime='10000'>
@@ -188,8 +188,8 @@ cultures, including those of the Maya and Aztec.
 		<audio urlname='C:\Users\User\Documents\CARTOON.mp3' starttime='0' loop='true'></audio>
 		<image urlname='https://cdn.eso.org/images/screen/eso1907a.jpg' xstart='0' ystart='0' width='30' height='30' starttime='0' endtime='100'></image>
 		<image urlname='https://cdn.arstechnica.net/wp-content/uploads/2018/07/Rocket-Report-Intro-3-800x450.jpg' xstart='100' ystart='100' width='40' height='40' starttime='0' endtime='100'></image>
-		<video urlname='https://www.radiantmediaplayer.com/media/bbb-360p.mp4' starttime='0' loop='false' xstart='0'></video>
-		<model urlname='C:\Users\User\Documents\panter.stl' xstart='0' ystart='0' width='400' height='600'></model>
+		<video urlname='https://www.radiantmediaplayer.com/media/bbb-360p.mp4' starttime='0' loop='false' xstart='0' ystart='0'></video>
+		<model urlname='C:\Users\User\Documents\panter.stl' xstart='0' ystart='0' width='40' height='80'></model>
 	</slide>
 	<slide id='Mickey Mouse' duration='60'>
 		<text font='arial' fontsize='15' fontcolor='black' xpos='0' ypos='0' starttime='0' endtime='10000'>
@@ -216,6 +216,6 @@ cultures, including those of the Maya and Aztec.
 		<image urlname='https://cdn.eso.org/images/screen/eso1907a.jpg' xstart='0' ystart='0' width='30' height='30' starttime='0' endtime='100'></image>
 		<image urlname='https://cdn.arstechnica.net/wp-content/uploads/2018/07/Rocket-Report-Intro-3-800x450.jpg' xstart='100' ystart='100' width='40' height='40' starttime='0' endtime='100'></image>
 		<video urlname='https://www.radiantmediaplayer.com/media/bbb-360p.mp4' starttime='0' loop='false' xstart='0'></video>
-		<model urlname='C:\Users\User\Documents\dino.stl' xstart='0' ystart='0' width='400' height='600'></model>
+		<model urlname='C:\Users\User\Documents\dino.stl' xstart='0' ystart='0' width='50' height='80'></model>
 	</slide>
 </slideshow>

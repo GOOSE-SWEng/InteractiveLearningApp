@@ -31,6 +31,7 @@ import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Scale;
 import javafx.scene.transform.Translate;
 import javafx.util.Duration;
+import main.InteractiveLearningApp;
 
 public class Model {
 	
@@ -54,17 +55,19 @@ public class Model {
 	Boolean showControls = true;
 	
 	public Model(String url, int modelWidth, int modelHeight, int xStart, int yStart){
-		this.width = modelWidth; //Width of SubScene
-		this.height = modelHeight; //Height of SubScene
+		this.width = modelWidth * InteractiveLearningApp.getDefaultWidth()/100; //Width of SubScene
+		this.height = modelHeight * InteractiveLearningApp.getDefaultHeight()/100; //Height of SubScene
+		System.out.println(width + ", " + height);
 		this.xStart = xStart;
 		this.yStart = yStart;
 		modelScene = createModel(url); //Create the and store scene
 	}
 	
 	public Model(String url, int modelWidth, int modelHeight){
-		this.width = modelWidth; //Width of SubScene
-		this.height = modelHeight; //Height of SubScene
+		this.width = modelWidth * InteractiveLearningApp.getDefaultWidth()/100; //Width of SubScene
+		this.height = modelHeight * InteractiveLearningApp.getDefaultHeight()/100; //Height of SubScene
 		showControls = false;
+		System.out.println(width + ", " + height);
 		modelScene = createModel(url); //Create the and store scene
 	}
 	
@@ -162,6 +165,7 @@ public class Model {
         
         //Create subscene
 		SubScene modelSubScene = new SubScene(modelGroup, width, height-40, true, SceneAntialiasing.BALANCED);
+		System.out.println(width + ", " + (height-40));
 		modelSubScene.setCamera(camera); //Apply the camera
 		bp.setCenter(modelSubScene);
 		if(showControls) {

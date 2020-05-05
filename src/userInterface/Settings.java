@@ -2,6 +2,7 @@ package userInterface;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -9,13 +10,17 @@ import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import main.InteractiveLearningApp;
+import slides.Slide;
 
 public class Settings {
+	private static double xOffset = 0;	//Screen x offset
+	private static double yOffset = 0;	//Screen y offset
 	private static String title = "Settings";
 	private static Scene settings;
 	private static SubScene toolBar;
@@ -27,10 +32,27 @@ public class Settings {
 	private static String currentFont = "Arial";
 	private static String currentTextSize = "16pt";
 		
-	public static Scene createSettings(Stage stage,int defaultXSize, int defaultYSize) {
+	public static Scene createSettings(Stage mainStage,int defaultXSize, int defaultYSize) {
 		//Create top and bottom tool bars
 		toolBar = ToolBar.createToolBar(defaultXSize, title);
 		resizeBar = ResizeBar.CreateResizeBar(defaultXSize);
+		
+		toolBar.setOnMousePressed(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				xOffset = event.getSceneX();
+				yOffset = event.getSceneY();
+			}
+		});
+		
+		//Move window with mouse
+		toolBar.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				mainStage.setX(event.getScreenX() - xOffset);
+				mainStage.setY(event.getScreenY() - yOffset);	
+			}
+		});
 		
 		//Create Layouts
 		BorderPane bp = new BorderPane();
@@ -42,6 +64,10 @@ public class Settings {
 		Text textSize = new Text("Text Size");
 		Text font = new Text("Font");
 		Text language = new Text("Language");
+		nightMode.setId("fields");
+		textSize.setId("fields");
+		font.setId("fields");
+		language.setId("fields");
 		
 		//Create Check Boxes
 		CheckBox cBBox = new CheckBox();
@@ -91,7 +117,28 @@ public class Settings {
 				currentLanguage = newValue;
 			}
 		});
-
+		nMBox.setOnAction(e->{
+			if(nMBox.isSelected()) {
+				StartScreen.nightmodeStyle();
+				Settings.nightmodeStyle();
+				InteractiveLearningApp.style = "nightmode";
+			}else {
+				StartScreen.defaultStyle();
+				Settings.defaultStyle();
+				InteractiveLearningApp.style = "default";
+			}
+		});
+		cBBox.setOnAction(e->{
+			if(cBBox.isSelected()) {
+				StartScreen.colourblindStyle();
+				Settings.colourblindStyle();
+				InteractiveLearningApp.style = "colourblind";
+			}else {
+				StartScreen.defaultStyle();
+				Settings.defaultStyle();
+				InteractiveLearningApp.style = "default";
+			}
+		});
 		//Apply and default buttons
 		Button apply = new Button("Apply");
 		Button setDefault = new Button("Return to Default");
@@ -174,16 +221,16 @@ public class Settings {
 	}
 	public static void defaultStyle() {
 		settings.getStylesheets().clear();
-		settings.getStylesheets().add("style/settings/settingsScreen.css");
+		settings.getStylesheets().add("style/SettingsScreen/settingsScreen.css");
 	}
 	
 	public static void nightmodeStyle() {
 		settings.getStylesheets().clear();
-		settings.getStylesheets().add("style/settings/settingsScreenNight.css");
+		settings.getStylesheets().add("style/SettingsScreen/settingsScreenNight.css");
 	}
 	
 	public static void colourblindStyle() {
 		settings.getStylesheets().clear();
-		settings.getStylesheets().add("style/settings/settingsScreenCB.css");
+		settings.getStylesheets().add("style/SettingsScreen/settingsScreenCB.css");
 	}
 }

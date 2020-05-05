@@ -1,7 +1,7 @@
 //Settings screen style Sheet
 
 .root{
-	-fx-background-color: #666666;
+	-fx-background-color: Black;
 }
 
 .button{
@@ -12,4 +12,7 @@
 
 .text{
 	-fx-font-family: "arial";
+}
+#fields{
+	-fx-fill: white;
 }
