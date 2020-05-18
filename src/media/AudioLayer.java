@@ -24,11 +24,14 @@ public class AudioLayer {
 	
 	public void add(String urlName, int startTime, Boolean looping, Boolean controls, int controlX, int controlY, int width, int height, int slideNumber) {
 		//constructor for the audio object
-		Audio slideAudio = new Audio(urlName, startTime, looping, controls, controlX, controlY, width, height,  slideNumber);
+		Audio slideAudio = new Audio(urlName, startTime, looping, controls, width, height,  slideNumber);
 		audio.add(slideAudio);
-		sp.getChildren().add(slideAudio.get());
-		//slideAudio.get().setLayoutX(xStart);
-		//slideAudio.get().setLayoutY(yStart);
+		if (controls) {
+			sp.getChildren().add(slideAudio.get());
+			slideAudio.get().setLayoutX(controlX);
+			slideAudio.get().setLayoutY(controlY);
+		}
+
 	}
 	
 	public void remove(Audio object) {
