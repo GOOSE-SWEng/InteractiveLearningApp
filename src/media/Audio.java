@@ -20,7 +20,7 @@ public class Audio {
 	int startTime;
 	int slideNumber;
 	
-	public Audio(String urlName, int startTime, Boolean looping, Boolean controls, int controlX, int controlY, int width, int height, int slideNumber) {
+	public Audio(String urlName, int startTime, Boolean looping, Boolean controls, int width, int height, int slideNumber) {
 		
 		player = new MediaPlayer(new Media(Paths.get(urlName).toUri().toString()));
 		if (looping) {
@@ -33,7 +33,7 @@ public class Audio {
 		subScene = new SubScene(sp,width,height);
 		this.startTime= startTime;
 		this.slideNumber= slideNumber;
-		// construct your subscene in here
+		// construct the SubScene in here
 		if (controls) {
 			
 			//Creating the buttons
@@ -51,15 +51,23 @@ public class Audio {
 			//Making the buttons all equal width inside the GridPane
 			ColumnConstraints audioControls = new ColumnConstraints();
 			audioControls.setPercentWidth(50);
+			//If the percent widths of GridPane elements add up to more than 100, it scales them to a ratio of 100%
 			gp.getColumnConstraints().addAll(audioControls, audioControls, audioControls);
+			
+			sp.getChildren().add(gp);
 		}
 	}
-	public void add() {
-
-	}
-	public void remove() {
-		//remove the object from the pane
-	}
+	/*
+	 * Pretty sure these aren't needed anymore
+	 * 
+	 * public void add() {
+	 * 
+	 * }
+	 * 
+	 * public void remove() {
+	 * 		//remove the object from the pane
+	 * }
+	 */
 	public void start() {
 		// start playing the audio
 		player.play();
