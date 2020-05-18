@@ -117,6 +117,7 @@ public class Settings {
 				currentLanguage = newValue;
 			}
 		});
+		//COULD ADD THIS TO AN APPLY METHOD
 		nMBox.setOnAction(e->{
 			if(nMBox.isSelected()) {
 				StartScreen.nightmodeStyle();
