@@ -1,9 +1,12 @@
 package media;
 
+import java.io.File;
+
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.media.Media;
 
 /**
  * SlideImage class created for Goose-SWEng, as per contract
@@ -39,6 +42,16 @@ public class SlideImage {
 
     System.out.println("Image Added: " + x + ", " + y + " On a subScene of size: " + sceneWidth + "," + sceneHeight);
     //Load image and create canvas
+    
+	if(url.startsWith("https://")) {
+
+	}else if(url.startsWith("src")) {
+		File imgFile = new File(url);
+		url = imgFile.toURI().toString();
+	}else {
+		System.out.println("Unknown image origin.");
+	}
+	
     Image picture = new Image(url, w, h, false, true);
     toDisplay = new Canvas((double) w + x, (double) h + y);
 

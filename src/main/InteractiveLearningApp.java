@@ -15,10 +15,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import userInterface.*;
 import slides.*;
+import tools.Timer;
 import tools.XMLParser;
 import media.*;
 
@@ -49,10 +51,10 @@ public class InteractiveLearningApp extends Application{
 	
 	//Triggers Exhibit Mode
 	private boolean exhibitMode = false;
-	
+	public static Timer timer;
 	Thread runThread;
 	
-	static ArrayList<Slide> slides = new ArrayList<Slide>();
+	public static ArrayList<Slide> slides = new ArrayList<Slide>();
 	static ArrayList<Audio> audio = new ArrayList<Audio>();
 	static ArrayList<Graphics2D> graphics2d = new ArrayList<Graphics2D>();
 	static ArrayList<Model> models = new ArrayList<Model>();
@@ -96,7 +98,15 @@ public class InteractiveLearningApp extends Application{
 	public static void run() {
 		presRunning = false;
 		//Create File Browser
-		File file = new FileChooser().showOpenDialog(null);
+		
+		FileChooser fileChooser = new FileChooser();
+		//Change to another directory when we export as a jar
+		fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+		fileChooser.setInitialFileName("defaultPresentation.xml");
+		fileChooser.setTitle("Choose a file to present...");
+		fileChooser.getExtensionFilters().add(new ExtensionFilter("Presentation Files (*.xml)","*.xml"));
+		
+		File file = fileChooser.showOpenDialog(mainStage);
 		try{
 			xml = file.getPath(); //Get File path
 			mainStage.setScene(loading);
@@ -109,6 +119,8 @@ public class InteractiveLearningApp extends Application{
 		}catch(NullPointerException e) {
 			showStart();
 		}
+		timer = new Timer();
+		timer.start();
 		//mainStage.setX((Screen.getPrimary().getVisualBounds().getWidth()-defaultXSize)/2);
 		//mainStage.setY((Screen.getPrimary().getVisualBounds().getHeight()-defaultYSize)/2);
 		//mainStage.setFullScreen(true);
@@ -130,15 +142,24 @@ public class InteractiveLearningApp extends Application{
 		//mainStage.setScene(map);
 	}
 	
+	// sets slide index to home slide
+	public static void homeSlide() {
+		System.out.println("HOME SLIDE");
+		mainStage.setScene(slides.get(0).getSlide()); // whatever index is needed for home page**
+		currentSlide = 0;
+	}
+	
 	public static void nextSlide() {
 		try {
 			System.out.println("NEXT SLIDE");
 			mainStage.setScene(slides.get(currentSlide+1).getSlide());
 			currentSlide++;
+			timer.resetTimer(currentSlide);
 		}catch(NullPointerException | IndexOutOfBoundsException e) {
 			System.out.println("Presentation Restarted");
 			mainStage.setScene(slides.get(0).getSlide());
 			currentSlide = 0;
+			timer.resetTimer(currentSlide);
 		}
 	}
 	
@@ -147,10 +168,12 @@ public class InteractiveLearningApp extends Application{
 			System.out.println("PREV SLIDE");
 			mainStage.setScene(slides.get(currentSlide-1).getSlide());
 			currentSlide--;
+			timer.resetTimer(currentSlide);
 		}catch(NullPointerException | IndexOutOfBoundsException e) {
 			System.out.println("Presentation Restarted");
 			mainStage.setScene(slides.get(0).getSlide());
 			currentSlide = 0;
+			timer.resetTimer(currentSlide);
 		}
 	}
 

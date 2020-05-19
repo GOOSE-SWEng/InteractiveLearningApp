@@ -31,9 +31,10 @@ public class VideoLayer {
 		videos.add(video);
 		// adds the SubScene(created with the constructor) to the video layer stack pane
 		sp.getChildren().add(video.get());
-		video.get().setLayoutX(xStart);
-		video.get().setLayoutY(yStart);
+		video.get().setTranslateX(-(width/2 - video.get().getWidth()/2) + xStart/2 *width/100);
+		video.get().setTranslateX(-(height/2 - video.get().getHeight()/2) + yStart/2 *height/100);
 	}
+		
 
 	public void removeVideo(Video video) {
 		sp.getChildren().remove(video.get());

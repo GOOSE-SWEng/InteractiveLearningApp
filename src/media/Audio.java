@@ -16,13 +16,23 @@ public class Audio {
 	Boolean controls;
 	SubScene subScene;
 	MediaPlayer player;
-	StackPane sp = new StackPane();
+	//StackPane sp = new StackPane();
 	int startTime;
 	int slideNumber;
 	
 	public Audio(String urlName, int startTime, Boolean looping, Boolean controls, int width, int height, int slideNumber) {
 		
-		player = new MediaPlayer(new Media(Paths.get(urlName).toUri().toString()));
+		Media media = null;
+		if(urlName.startsWith("https://")) {
+			media = new Media(urlName);
+		}else if(urlName.startsWith("src")) {
+			File audioFile = new File(urlName);
+			media = new Media(audioFile.toURI().toString());
+		}else {
+			System.out.println("Unknown audio origin.");
+		}
+		
+		player = new MediaPlayer(media);
 		if (looping) {
 			player.setCycleCount(MediaPlayer.INDEFINITE);
 		} else {
@@ -30,7 +40,7 @@ public class Audio {
 		}
 		player.setVolume(0.1);
 		source = urlName;
-		subScene = new SubScene(sp,width,height);
+		//subScene = new SubScene(sp,width,height);
 		this.startTime= startTime;
 		this.slideNumber= slideNumber;
 		// construct the SubScene in here
@@ -53,8 +63,8 @@ public class Audio {
 			audioControls.setPercentWidth(50);
 			//If the percent widths of GridPane elements add up to more than 100, it scales them to a ratio of 100%
 			gp.getColumnConstraints().addAll(audioControls, audioControls, audioControls);
-			
-			sp.getChildren().add(gp);
+			subScene = new SubScene(gp, width, height);
+			//sp.getChildren().add(gp);
 		}
 	}
 	/*

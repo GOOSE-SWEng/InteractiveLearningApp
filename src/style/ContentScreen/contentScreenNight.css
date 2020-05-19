@@ -1,7 +1,7 @@
 //Content screen style Sheet
 
 .root{
-	-fx-background-color: gray;
+	-fx-background-color: Black;
 }
 
 .button{
@@ -13,6 +13,7 @@
 	-fx-font-family: "arial";
 	-fx-font-style: italic;
     -fx-effect: dropshadow(one-pass-box, black,0,0,0,2);
+    -fx-fill-color: white;
 }
 
 #body{

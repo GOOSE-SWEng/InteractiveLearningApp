@@ -1,5 +1,6 @@
 package media;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import com.interactivemesh.jfx.importer.ModelImporter;
@@ -22,6 +23,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.input.PickResult;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.media.Media;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.MeshView;
@@ -74,6 +76,14 @@ public class Model {
 	//Method to create model scene
 	public SubScene createModel(String url) {
 		camera = new PerspectiveCamera(); //new camera for subscene
+		
+		if(url.startsWith("https://")) {
+		}else if(url.startsWith("src")) {
+			File modelFile = new File(url);
+			url = modelFile.toURI().toString();
+		}else {
+			System.out.println("Unknown model origin.");
+		}
 		
 		//FOR 3DS MODELS
 		if(url.endsWith(".3ds")) {

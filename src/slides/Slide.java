@@ -1,6 +1,7 @@
 package slides;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -12,6 +13,7 @@ import main.InteractiveLearningApp;
 import userInterface.ResizeBar;
 import userInterface.ToolBar;
 import media.*;
+import tools.MediaElement;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 
@@ -36,6 +38,8 @@ public class Slide {
 	
 	private String id;
 	private int duration;
+	
+	private ArrayList<MediaElement> slideElements = new ArrayList<MediaElement>();
 	
 	SubScene test;
 	Graphics2D graphics;
@@ -115,7 +119,15 @@ public class Slide {
 		});
 		sp.setPickOnBounds(false);
 		slide = new Scene(bp,width, height);
-		slide.getStylesheets().add("style/ContentScreen/contentScreen.css");
+		if(InteractiveLearningApp.style.equals("default")) {
+			slide.getStylesheets().add("style/ContentScreen/contentScreen.css");
+		}else if(InteractiveLearningApp.style.equals("nightmode")) {
+			slide.getStylesheets().add("style/ContentScreen/contentScreenNight.css");
+		}else if(InteractiveLearningApp.style.equals("colourblind")) {
+			slide.getStylesheets().add("style/ContentScreen/contentScreenCB.css");
+		}else {
+			System.out.println("Unknown style scheme.");
+		}
 	}
 	
 	public void applyLayers() {
@@ -126,6 +138,12 @@ public class Slide {
 		sp.getChildren().add(imageLayer.get());
 		sp.getChildren().add(graphics3DLayer.get());
 	}
+	
+	/*public void addMediaElements(String type, List elements) {
+		for(int i; i<elements.size();i++) {
+			slideElements.add(elements.get(i).getS
+		}
+	}*/
 	
 	public void defaultStyle() {
 		slide.getStylesheets().clear();
@@ -142,6 +160,10 @@ public class Slide {
 		slide.getStylesheets().add("style/ContentScreen/contentScreenCB.css");
 	}
 	
+	public ArrayList<MediaElement> getSlideElements() {
+		return slideElements;
+	}
+
 	public Scene getSlide() {
 		return slide;
 	}
@@ -196,6 +218,14 @@ public class Slide {
 
 	public void setGraphics3DLayer(Graphics3DLayer graphics3dLayer) {
 		graphics3DLayer = graphics3dLayer;
+	}
+
+	public int getDuration() {
+		return duration;
+	}
+
+	public void setDuration(int duration) {
+		this.duration = duration;
 	}
 
 	/*public Scene update(){

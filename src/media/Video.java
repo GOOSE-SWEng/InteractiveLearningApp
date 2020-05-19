@@ -1,6 +1,8 @@
 package media;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
@@ -19,6 +21,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.media.MediaPlayer.Status;
 import javafx.util.Duration;
+import sun.reflect.ReflectionFactory.GetReflectionFactoryAction;
 
 public class Video {
 
@@ -55,7 +58,16 @@ public class Video {
 		totTimeLabel = (Label) toolbarNode.getChildren().get(9);
 
 		// video media file
-		Media media = new Media(urlName);
+		Media media = null;
+		if(urlName.startsWith("https://")) {
+			media = new Media(urlName);
+		}else if(urlName.startsWith("src")) {
+			File vidFile = new File(urlName);
+			media = new Media(vidFile.toURI().toString());
+		}else {
+			System.out.println("Unknown video origin.");
+		}
+		
 
 		// Create media player with the video media file
 		mp = new MediaPlayer(media);

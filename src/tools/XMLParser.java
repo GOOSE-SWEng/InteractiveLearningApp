@@ -274,7 +274,7 @@ public class XMLParser {
 		int xStart = 0;
 		int yStart = 0;
 		int startTime = 0;
-		
+		int videoId = 0;
 		System.out.println(currentNode.getNodeName());
 		//If the tag has attributes
 		if(currentNode.hasAttributes()) {
@@ -303,9 +303,13 @@ public class XMLParser {
 		
 		try {
 			if(videoLayers.size() < currentSlide+1) { //If there is not a layer for this slide, create one
+				videoId = 0;
 				videoLayers.add(new VideoLayer(InteractiveLearningApp.getDefaultWidth(),InteractiveLearningApp.getDefaultHeight(), videos)); //Create a new layer for this slide
+				
 			}
 			videoLayers.get(currentSlide).addVideo(urlName, startTime, loop, xStart, yStart); //Add a new video to this layer
+			videoId++;
+			slides.get(currentSlide).getSlideElements().add(new MediaElement(currentSlide, startTime, -1, "video", videoId)); //Add media element for timer
 		}catch(IOException e) {
 			e.printStackTrace(); //Prints the error
 			System.out.println("Video Unavailable");
@@ -320,6 +324,7 @@ public class XMLParser {
 		int height=0;
 		int startTime=0;
 		int endTime=0;
+		int imageId = 0;
 		System.out.println(currentNode.getNodeName());
 		if(currentNode.hasAttributes()) {
 			NamedNodeMap attMap = currentNode.getAttributes();
@@ -355,9 +360,13 @@ public class XMLParser {
 			System.out.println("No sub nodes");
 		}
 		if(imageLayers.size() < currentSlide+1) {
+			imageId=0;
 			imageLayers.add(new ImageLayer(InteractiveLearningApp.getDefaultWidth(), InteractiveLearningApp.getDefaultHeight(), images));
+			imageId++;
 		}
 		imageLayers.get(currentSlide).add(urlName, xStart,yStart,width,height,startTime,endTime,currentSlide);
+		imageId++;
+		slides.get(currentSlide).getSlideElements().add(new MediaElement(currentSlide, startTime, endTime, "image", imageId)); //Add media element for timer
 		
 	}
 	public void shapeParse(Node currentNode) {
@@ -371,6 +380,7 @@ public class XMLParser {
 		String colour2= null;
 		Boolean cyclic= false;
 		
+		int shapeId=0;
 		//Shape variables
 		String type=null;
 		String id = null;
@@ -448,16 +458,26 @@ public class XMLParser {
 			//getSubNodes(currentNode.getChildNodes());
 		}else{}
 		if(g2dLayers.size()< currentSlide+1) {
+			shapeId = 0;
 			g2dLayers.add(new Graphics2D(InteractiveLearningApp.getDefaultWidth(), InteractiveLearningApp.getDefaultHeight()-40, shapes));
+			shapeId++;
 		}
 		if(type.equals("oval") & !shading) {
 			g2dLayers.get(currentSlide).registerOval(xStart, yStart,width, height, fillColor, startTime, endTime, currentSlide);
+			shapeId++;
+			slides.get(currentSlide).getSlideElements().add(new MediaElement(currentSlide, startTime, endTime, "shape", shapeId)); //Add media element for timer
 		}else if(type.equals("rectangle") & !shading) {
 			g2dLayers.get(currentSlide).registerRectangle(xStart, yStart,width, height, fillColor, id, startTime, endTime, currentSlide);
+			shapeId++;
+			slides.get(currentSlide).getSlideElements().add(new MediaElement(currentSlide, startTime, endTime, "shape", shapeId)); //Add media element for timer
 		}else if(type.equals("oval") & shading) {
 			g2dLayers.get(currentSlide).registerOval(xStart, yStart, width, height, x1, y1, colour1, x2, y2, colour2, cyclic, startTime, endTime, currentSlide);
+			shapeId++;
+			slides.get(currentSlide).getSlideElements().add(new MediaElement(currentSlide, startTime, endTime, "shape", shapeId)); //Add media element for timer
 		}else if(type.equals("rectangle") & shading) {
 			g2dLayers.get(currentSlide).registerRectangle(xStart, yStart, width, height, x1, y1, colour1, x2, y2, colour2, cyclic, startTime, endTime, currentSlide);
+			shapeId++;
+			slides.get(currentSlide).getSlideElements().add(new MediaElement(currentSlide, startTime, endTime, "shape", shapeId)); //Add media element for timer
 		}else {}
 	}
 	
@@ -466,13 +486,14 @@ public class XMLParser {
 			textLayers.add(new TextLayer((int)InteractiveLearningApp.getStage().getWidth(), (int)InteractiveLearningApp.getStage().getHeight(), slideText));
 		}
 		textLayers.get(currentSlide).add(currentNode, currentSlide);
+		//slides.get(currentSlide).getSlideElements().add(new MediaElement(currentSlide, startTime, -1, "text")); //Add media element for timer
 	}
 	
 	public void audioParse(Node currentNode) {
 		String urlName=null;
 		int startTime = 0;
 		Boolean loop = null;
-		
+		int audioId = 0;
 		System.out.println(currentNode.getNodeName());
 		if(currentNode.hasAttributes()) {
 			NamedNodeMap attMap = currentNode.getAttributes();
@@ -495,9 +516,13 @@ public class XMLParser {
 			getSubNodes(currentNode.getChildNodes());
 		}else{}
 		if(audioLayers.size()< currentSlide+1) {
+			audioId = 0;
 			audioLayers.add(new AudioLayer(InteractiveLearningApp.getDefaultHeight(),InteractiveLearningApp.getDefaultHeight(), audio));
+			audioId++;
 		}
-		audioLayers.get(currentSlide).add(urlName,startTime, loop, true,0,0,200,100,currentSlide);
+		audioLayers.get(currentSlide).add(urlName,startTime, loop, true,90,90,200,100,currentSlide);
+		audioId++;
+		slides.get(currentSlide).getSlideElements().add(new MediaElement(currentSlide, startTime, -1, "audio",audioId)); //Add media element for timer
 	}
 	public void lineParse(Node currentNode) {
 		float xStart=0;
@@ -540,6 +565,8 @@ public class XMLParser {
 			g2dLayers.add(new Graphics2D(InteractiveLearningApp.getDefaultWidth(), InteractiveLearningApp.getDefaultHeight()-40, shapes));
 		}
 		g2dLayers.get(currentSlide).registerLine(xStart,xEnd, yStart, yEnd,lineColor,startTime, endTime, currentSlide);
+		//slides.get(currentSlide).getSlideElements().add(new MediaElement(currentSlide, startTime, endTime, "shape")); //Add media element for timer
+
 	}
 	public void modelParse(Node currentNode) {
 		//Defaults

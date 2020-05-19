@@ -18,7 +18,7 @@ public class LoadingScreen {
 		Text pWait = new Text("Please wait...");
 		bp.setCenter(prezLoad);
 		Scene loadingScene = new Scene(bp,width,height);
-		loadingScene.getStylesheets().add("style/contentScreen.css");
+		loadingScene.getStylesheets().add("style/ContentScreen/contentScreen.css");
 		return loadingScene;
 	}
 }
