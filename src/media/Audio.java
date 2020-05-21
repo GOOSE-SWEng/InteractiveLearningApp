@@ -10,7 +10,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.util.Duration;
 
 public class Audio {
 	String source;
@@ -52,10 +51,6 @@ public class Audio {
 			Button pauseButton = new Button("Pause");
 			Button resetButton = new Button("Reset");
 			
-			playButton.setOnMouseClicked(e->this.play());
-			pauseButton.setOnMouseClicked(e->this.pause());
-			resetButton.setOnMouseClicked(e->this.player.setStartTime(Duration.ZERO));
-			
 			//Creating a GridPane with the 3 buttons in side-by-side
 			GridPane gp = new GridPane();
 			gp.add(playButton, 1, 0);
@@ -83,19 +78,13 @@ public class Audio {
 	 * 		//remove the object from the pane
 	 * }
 	 */
-	public void play() {
+	public void start() {
 		// start playing the audio
 		player.play();
 	}
 	public void stop() {
 		player.stop();
 	}
-	
-	public void pause() {
-		player.pause();
-	}
-	
-	
 	public int getStartTime() {
 		return(startTime);
 	}

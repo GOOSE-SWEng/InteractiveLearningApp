@@ -23,8 +23,14 @@ import javafx.scene.media.MediaPlayer.Status;
 import javafx.util.Duration;
 import sun.reflect.ReflectionFactory.GetReflectionFactoryAction;
 
+/**
+ * Class for the video player
+ * @author - Rimas Radziunas and Cezara-Lidia Jalba
+ * @version - 1.2
+ * @date - 20/04/20
+ */
 public class Video {
-
+	//global variables
 	int xstart;
 	int ystart;
 	int startTime;
@@ -34,13 +40,24 @@ public class Video {
 	Boolean loop;
 	SubScene subScene;
 
-	private MediaPlayer mp;
+	private MediaPlayer mediaPlayer;
 	private Duration totTime;
 	private Pane toolbarNode;
 	private Slider volumeSlider;
 	private Label currentTimeLabel;
 	private Label totTimeLabel;
 
+	/**
+	 * Method to create the video object
+	 * @param urlName - URL of video file to be played
+	 * @param startTime - how long after the slide is opened should the video start
+	 * @param loop - should the video loop
+	 * @param xStart - x coordinate of the top left corner of the video object
+	 * @param yStart - y coordinate of the top left corner of the video object
+	 * @param canvasWidth - width of canvas
+	 * @param canvasHeight - height of canvas
+	 * @throws IOException - if video cannot be found
+	 */
 	public Video(String urlName, int startTime, Boolean loop, int xStart, int yStart, int canvasWidth, int canvasHeight)
 			throws IOException {
 		// Loads the media player layout from a FXML file
@@ -61,25 +78,25 @@ public class Video {
 		Media media = null;
 		if(urlName.startsWith("https://")) {
 			media = new Media(urlName);
-		}else if(urlName.startsWith("src")) {
+		}
+		else if(urlName.startsWith("src")) {
 			File vidFile = new File(urlName);
 			media = new Media(vidFile.toURI().toString());
-		}else {
+		}
+		else {
 			System.out.println("Unknown video origin.");
 		}
 		
-
 		// Create media player with the video media file
-		mp = new MediaPlayer(media);
+		mediaPlayer = new MediaPlayer(media);
 
 		// Volume slider
 		volumeSlider = (Slider) toolbarNode.getChildren().get(6);
-		volumeSlider.setValue(mp.getVolume() * 100);
-
+		volumeSlider.setValue(mediaPlayer.getVolume() * 100);
 		volumeSlider.valueProperty().addListener(new InvalidationListener() {
 			@Override
 			public void invalidated(Observable arg0) {
-				mp.setVolume(volumeSlider.getValue() / 100);
+				mediaPlayer.setVolume(volumeSlider.getValue() / 100);
 			}
 		});
 
@@ -89,7 +106,7 @@ public class Video {
 
 		// Set video to loop
 		if (loop) {
-			mp.setCycleCount(MediaPlayer.INDEFINITE);
+			mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 		}
 
 		// Video control bar
@@ -104,34 +121,34 @@ public class Video {
 			public void invalidated(Observable arg0) {
 
 				if (playbackSlider.isValueChanging() || playbackSlider.isPressed()) {
-					if (mp.getStatus() == Status.PLAYING || mp.getStatus() == Status.PAUSED) {
+					if (mediaPlayer.getStatus() == Status.PLAYING || mediaPlayer.getStatus() == Status.PAUSED) {
 
-						mp.seek(totTime.multiply(playbackSlider.getValue() / 100));
-						setTimeLabel(mp.getCurrentTime(), currentTimeLabel);
+						mediaPlayer.seek(totTime.multiply(playbackSlider.getValue() / 100));
+						setTimeLabel(mediaPlayer.getCurrentTime(), currentTimeLabel);
 					}
 					// When the video is stopped and the slider is moved then set media player to
 					// paused since seek function cannot be used while the status is STOPPED
-					else if (mp.getStatus() == Status.STOPPED) {
-						mp.pause();
-						mp.seek(totTime.multiply(playbackSlider.getValue() / 100));
+					else if (mediaPlayer.getStatus() == Status.STOPPED) {
+						mediaPlayer.pause();
+						mediaPlayer.seek(totTime.multiply(playbackSlider.getValue() / 100));
 					}
 				}
 			}
 		});
 
 		// when the video is paused, change the icon of the play button to play icon
-		mp.setOnPaused(new Runnable() {
+		mediaPlayer.setOnPaused(new Runnable() {
 			@Override
 			public void run() {
 				Button play = (Button) toolbarNode.getChildren().get(0);
 				ImageView playImg = (ImageView) play.getGraphic();
 				playImg.setImage(new Image(getClass().getResourceAsStream("/graphics/play.png")));
-				setTimeLabel(mp.getCurrentTime(), currentTimeLabel);
+				setTimeLabel(mediaPlayer.getCurrentTime(), currentTimeLabel);
 			}
 		});
 
 		// Set on halted: when critical error occurs
-		mp.setOnHalted(new Runnable() {
+		mediaPlayer.setOnHalted(new Runnable() {
 			@Override
 			public void run() {
 				System.out.println("HALTED");
@@ -139,12 +156,12 @@ public class Video {
 		});
 
 		// when video is stopped, time should go back to 0
-		mp.setOnStopped(new Runnable() {
+		mediaPlayer.setOnStopped(new Runnable() {
 			@Override
 			public void run() {
 				playbackSlider.setValue(0);
 				// Sets the current time to 0
-				setTimeLabel(mp.getCurrentTime(), currentTimeLabel);
+				setTimeLabel(mediaPlayer.getCurrentTime(), currentTimeLabel);
 				Button play = (Button) toolbarNode.getChildren().get(0);
 				ImageView playImg = (ImageView) play.getGraphic();
 				//play button should have play icon on
@@ -153,11 +170,11 @@ public class Video {
 		});
 
 		// when the video is ready (loaded), set the total time of the video label
-		mp.setOnReady(new Runnable() {
+		mediaPlayer.setOnReady(new Runnable() {
 			public void run() {
 				Platform.runLater(new Runnable() {
 					public void run() {
-						totTime = mp.getMedia().getDuration();
+						totTime = mediaPlayer.getMedia().getDuration();
 						setTimeLabel(totTime, totTimeLabel);
 					}
 				});
@@ -165,18 +182,18 @@ public class Video {
 		});
 
 		// set the slider to the beginning after video ends and stop the player
-		mp.setOnEndOfMedia(new Runnable() {
+		mediaPlayer.setOnEndOfMedia(new Runnable() {
 			@Override
 			public void run() {
 				if (!loop) {
-					mp.stop();
+					mediaPlayer.stop();
 				}
-				mp.seek(totTime.multiply(playbackSlider.getValue() / 100));
+				mediaPlayer.seek(totTime.multiply(playbackSlider.getValue() / 100));
 			}
 		});
 
 		// Set the play button to display pause icon when the video is playing
-		mp.setOnPlaying(new Runnable() {
+		mediaPlayer.setOnPlaying(new Runnable() {
 			@Override
 			public void run() {
 				Button play = (Button) toolbarNode.getChildren().get(0);
@@ -187,10 +204,10 @@ public class Video {
 
 		// Set the current time label and play back slider to follow the current time of
 		// the video being played
-		mp.currentTimeProperty().addListener(new InvalidationListener() {
+		mediaPlayer.currentTimeProperty().addListener(new InvalidationListener() {
 			@Override
 			public void invalidated(Observable arg0) {
-				Duration currentTime = mp.getCurrentTime();
+				Duration currentTime = mediaPlayer.getCurrentTime();
 				playbackSlider.setValue(currentTime.toMillis() / totTime.toMillis() * 100);
 				setTimeLabel(currentTime, currentTimeLabel);
 			}
@@ -200,7 +217,7 @@ public class Video {
 		Pane p = (Pane) root.getCenter();
 		p.getChildren().get(0);
 		MediaView mv = (MediaView) p.getChildren().get(0);
-		mv.setMediaPlayer(mp);
+		mv.setMediaPlayer(mediaPlayer);
 	}
 
 	public SubScene get() {
@@ -223,7 +240,8 @@ public class Video {
 			label.setText(min + ":" + sec);
 		}
 	}
+	
 	public void play() {
-		mp.play();
+		mediaPlayer.play();
 	}
 }

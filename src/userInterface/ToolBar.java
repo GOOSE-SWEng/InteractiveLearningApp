@@ -26,13 +26,15 @@ import javafx.stage.Stage;
 import main.InteractiveLearningApp;
 import media.Shape;
 
-/*TODO
- * add additional comments
- * when the maximise window button is pressed, update the text on the button to say "minimise window"
+/**
+ * @author - Ivy Price
+ * @version 1.2
+ * @date - 28/02/20
+ * Class used in the creation of the toolbar
+ * Returns a subscene containing the toolbar object
  */
 
 public class ToolBar {
-	
 	//height of tool bar integer value
 	public static int toolBarHeight = InteractiveLearningApp.defaultYSize/20;
 	
@@ -44,13 +46,23 @@ public class ToolBar {
 	Button settingsButton;
 	Button minimizeWindowButton;
 	Button maximizeWindowButton;
+	
+	//gridpane containing toolbar
 	static GridPane gridPane;
+	
+	//title of presentation
 	static Text title;
 	
+	/**
+	 * Method to create toolbar
+	 * @param winWidth width of the window at the current time toolbar is made
+	 * @param id title of the current slide
+	 * @return the toolbar as a subscene
+	 */
 	public static SubScene createToolBar(int winWidth, String id) {
-		
 		//instantiate the new grid pane, then instantiate the buttons to fill it
 		GridPane gridPane = new GridPane();
+		
 		//Adds coloured background to tool bar
 		//x axis size is 2x default x window size
 		Rectangle toolBarBackground = new Rectangle(0,0,InteractiveLearningApp.defaultXSize*2, toolBarHeight);
@@ -58,12 +70,12 @@ public class ToolBar {
         //toolBarBackground.setFill(Color.web("0x3aa9b8"));// !!! need to get this from style sheet
 		gridPane.add(toolBarBackground,0,0);
 		
-		
-		//To be replaced with icons
 		title = new Text(id);
 		title.setId("title");
 		//title.setFill(Color.web("white"));// !!! need to get this from style sheet
 		//title.setStyle("-fx-font: 30 arial;");// !!! need to get this from style sheet
+		
+		//instantiate buttons
 		Button homeButton = new Button();
 		Button prevButton = new Button();
 		Button nextButton = new Button();
@@ -118,13 +130,8 @@ public class ToolBar {
 		GridPane.setHalignment(maximizeWindowButton, HPos.CENTER);
 		GridPane.setHalignment(exitButton, HPos.CENTER);
 		
-
 		//creates column constraints so if the tool bar is resized, the distance between buttons 
 		//remains consistent
-		/*TODO
-		 * work with the design and marketing manager to get the tool bar looking good 
-		 */
-	
 		ColumnConstraints column0 = new ColumnConstraints();
 		column0.setPercentWidth(4);
 		ColumnConstraints column1 = new ColumnConstraints();
@@ -146,18 +153,18 @@ public class ToolBar {
 		//create a sub-scene on top of the grid pane, with a width defined by the window width and tool bar height variables
 		SubScene toolBar = new SubScene(gridPane, winWidth, toolBarHeight);
 		
+		//binding the toolbar to the stage of the program is used when resizing the window
 		toolBar.widthProperty().bind(InteractiveLearningApp.getStage().widthProperty());
+		
 		toolBar.setUserAgentStylesheet("style/Extras/toolBar.css");
 		return toolBar;
 	}
 	
-	//minimises window
 	public static void MinimizeButtonPressed() {
 		System.out.println("Minimize Window Button Pressed");
 		InteractiveLearningApp.getStage().setIconified(true);
 	}
-	
-	//maximises window
+
 	public static void MaximizeButtonPressed() {
 		System.out.println("Maximize Window Button Pressed");
 		
@@ -175,12 +182,10 @@ public class ToolBar {
 
 	}
 	
-	//sets title
 	public void setTitle(String id) {
 		title.setText(id);
 	}
 	
-	//exits application when exit button is pressed
 	public static void ExitButtonPressed() {
 		System.out.println("Exit Button Pressed");
 		InteractiveLearningApp.getStage().close();
@@ -188,7 +193,11 @@ public class ToolBar {
 	}
 	
 	
-	//adds image from file path to a button
+	/**
+	 * adds image from file path to a button
+	 * @param button - id of button to contain image
+	 * @param filepath - filepath of the image to be used
+	 */
 	public static void addImageToButton(Button button, String filePath) {
 		try {
 			Image homeIcon = new Image(new FileInputStream(filePath));

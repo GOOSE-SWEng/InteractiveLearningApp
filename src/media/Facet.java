@@ -9,7 +9,8 @@ public class Facet {
 	private double tempy;
 	private double tempz;
 	
-	public Facet(double xa, double ya, double za, double xb, double yb, double zb, double xc, double yc, double zc, double xn, double yn, double zn) {
+	public Facet(double xa, double ya, double za, double xb, double yb, double zb, 
+			     double xc, double yc, double zc, double xn, double yn, double zn) {
 		point0.setX(xa);
 		point0.setY(ya);
 		point0.setZ(za);
