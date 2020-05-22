@@ -24,6 +24,15 @@ import tools.Timer;
 import tools.XMLParser;
 import media.*;
 
+/**
+ * main class of the program
+ * mostly contains getter and setters
+ * majority of presentation is built and run in other packages
+ * @author - Tom Pound, Alex Marchant, Ivy Price, Hugh Mayoh
+ * @version - 1.6
+ * @date - 21/05/20
+ *
+ */
 public class InteractiveLearningApp extends Application{
 	public static int defaultXSize = 1280;
 	public static int defaultYSize = 720;
@@ -58,6 +67,7 @@ public class InteractiveLearningApp extends Application{
 	private boolean exhibitMode = false;
 	public static Timer timer;
 	
+	//arrays for the media objects and the layers that hold these media objects
 	public static ArrayList<Slide> slides = new ArrayList<Slide>();
 	static ArrayList<Audio> audio = new ArrayList<Audio>();
 	static ArrayList<Graphics2D> graphics2d = new ArrayList<Graphics2D>();
@@ -111,13 +121,15 @@ public class InteractiveLearningApp extends Application{
 		
 		File file = fileChooser.showOpenDialog(mainStage);
 		try{
-			xml = file.getPath(); //Get File path
+			//Get File path
+			xml = file.getPath(); 
 			mainStage.setScene(loading);
 			//Create slides using XML
 			SlideAssembler.createSlides(xml, slides, videoLayers, graphics2d, 
 										graphics3dLayers, imageLayers, textLayers, audioLayers, 
 										shapes, images, audio, slideText, videos, models);
-			showSlide(0); //Show first slide of presentation
+			//Show first slide of presentation
+			showSlide(0); 
 			presRunning = true;
 		}catch(NullPointerException e) {
 			showStart();
@@ -133,22 +145,25 @@ public class InteractiveLearningApp extends Application{
 		return mainStage;
 	}
 	
+	/** Show settings screen */
 	public static void showSettings() {
-		mainStage.setScene(settings); //Show settings screen
+		mainStage.setScene(settings); 
 	}
 	
+	/** Show settings screen */
 	public static void showStart() {
-		mainStage.setScene(start); //Show settings screen
+		mainStage.setScene(start); 
 	}
 	
 	public static void showMap() {
 		//mainStage.setScene(map);
 	}
 	
-	// sets slide index to home slide
+	/** sets slide index to home slide */
 	public static void homeSlide() {
 		System.out.println("HOME SLIDE");
-		mainStage.setScene(slides.get(0).getSlide()); // whatever index is needed for home page**
+		// whatever index is needed for home page**
+		mainStage.setScene(slides.get(0).getSlide()); 
 		currentSlide = 0;
 	}
 	

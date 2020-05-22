@@ -11,28 +11,39 @@ import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
 import javafx.scene.shape.Polygon;
-
+/**
+ * Class for drawing the 2D shapes
+ * @author - Alex Marchant
+ * @version - 1.0
+ * @date 28/04/20
+ */
 public class Shape {
 	private Color fill = null;
 	private Color line = null;
-	private Group group;//to be returned
+	//to be returned
+	private Group group;
 	private Canvas canvas; 
-	private GraphicsContext gc; 
-	private List<Double> pointsX = new ArrayList<Double>(); //points for the polygons
+	private GraphicsContext gc;
+	//points for the polygons
+	private List<Double> pointsX = new ArrayList<Double>(); 
 	private List<Double> pointsY = new ArrayList<Double>();
 	private boolean oval = false;
-	private int oheight = 0;//oval height
-	private int owidth = 0;
-	private int ocx = 0;//oval reference coordinates
-	private int ocy = 0;
-	private float width;//frame size
+	//oval height
+	private int ovalHeight = 0;
+	private int ovalWidth = 0;
+	//oval reference coordinates
+	private int ovalCentreX = 0;
+	private int ovalCentreY = 0;
+	//frame size
+	private float width;
 	private float height;
 	private int startTime = 0;
 	private int endTime;
 	private int slideNumber;
 
-	
-	public Shape(Color lineColour, Color fillColour,int w, int h, int lw, int startTime, int endTime, int slideNumber) { // constructor for a solid colour shape
+	/** Constructor for a solid colour shape */
+	public Shape(Color lineColour, Color fillColour,int w, int h, int lw, 
+			     int startTime, int endTime, int slideNumber) { 
 		System.out.println("SHAPE CREATED");
 		group = new Group();
 		fill = fillColour;
@@ -48,7 +59,12 @@ public class Shape {
 		this.endTime = endTime;
 		this.slideNumber = slideNumber;
 	}
-	public Shape(int w, int h, int lw, Color c1, Color c2, float c1x, float c1y, float c2x, float c2y, Boolean Cyclical, int startTime, int endTime, int slideNumber) { //constructor for a shape with a colour gradient
+
+	/**constructor for a shape with a colour gradient */
+	public Shape(int w, int h, int lw, Color c1, Color c2, float c1x, float c1y, 
+			     float c2x, float c2y, Boolean Cyclical, int startTime, 
+			     int endTime, int slideNumber) { 
+
 		System.out.println("SHAPE CREATED");
 		group = new Group();
 		width = w;
@@ -59,13 +75,15 @@ public class Shape {
 		this.endTime = endTime;
 		this.slideNumber = slideNumber;
 		
-		if (Cyclical == true) {//sets up a cyclical gradient pattern
+		//sets up a cyclical gradient pattern
+		if (Cyclical == true) {
 			Stop[] stops = new Stop[] {new Stop(0,c1), new Stop(1,c2)};
 			LinearGradient lg = new LinearGradient(c1x,c1y,c2x,c2y,false,CycleMethod.REFLECT,stops);
 			gc.setFill(lg);
 			gc.setStroke(Color.TRANSPARENT);
 		}
-		else {//standard linear gradient
+		//standard linear gradient
+		else {
 			Stop[] stops = new Stop[] {new Stop(0,c1), new Stop(1,c2)};
 			LinearGradient lg = new LinearGradient(c1x,c1y,c2x,c2y,false,CycleMethod.NO_CYCLE,stops);
 			gc.setFill(lg);
@@ -73,27 +91,32 @@ public class Shape {
 		}
 	}
 	
-	public void addPoint(double x, double y) {//adds point to the polygon
+	/**adds point to the polygon */
+	public void addPoint(double x, double y) {
 		pointsX.add(x);
 		pointsY.add(y);
 	}
 	
-	public void drawOval (int width, int height, int cx, int cy) {// draws an oval, cx,cy correspond to distance from the top left corner to enclosing box
-		oval = true; // changes shape from polygon to oval
-		oheight = height;
-		owidth = width;
-		ocx = cx;
-		ocy = cy;
+	/** draws an oval, cx,cy correspond to distance from the top left corner to enclosing box */
+	public void drawOval (int width, int height, int cx, int cy) {
+		// changes shape from polygon to oval
+		oval = true; 
+		ovalHeight = height;
+		ovalWidth = width;
+		ovalCentreX = cx;
+		ovalCentreY = cy;
 	}
 	
+	/** method to create shapes */
 	public void create() {
 		if (oval == true) {
-			gc.fillOval(ocx,ocy,owidth,oheight);
-			gc.strokeOval(ocx,ocy,owidth,oheight);
+			gc.fillOval(ovalCentreX,ovalCentreY,ovalWidth,ovalHeight);
+			gc.strokeOval(ovalCentreX,ovalCentreY,ovalWidth,ovalHeight);
 			group.getChildren().add(canvas);
 		}
+		// used to create an array of points from an arraylist
 		else {
-			double[] pointX = new double[pointsX.size()];// used to create an array of points from an arraylist
+			double[] pointX = new double[pointsX.size()];
 			double[] pointY = new double[pointsY.size()];
 			
 			//adding arraylist points to an array
@@ -105,9 +128,12 @@ public class Shape {
 				pointY[i] = pointsY.get(i);
 			}
 			
-			gc.strokePolygon(pointX,pointY,pointsX.size());//creates a polygon outline
-			gc.fillPolygon(pointX,pointY,pointsX.size());//creates the polygon solid
-			group.getChildren().add(canvas);//adds canvas to the group
+			//creates a polygon outline
+			gc.strokePolygon(pointX,pointY,pointsX.size());
+			//creates the polygon solid
+			gc.fillPolygon(pointX,pointY,pointsX.size());
+			//adds canvas to the group
+			group.getChildren().add(canvas);
 		}
 		
 	}
@@ -115,14 +141,17 @@ public class Shape {
 		return group;
 	}
 
-	public void destroy() {//removes the canvas from the group
+
+	/** removes the canvas from the group */
+	public void destroy() {
 		if(group.getChildren().contains(canvas)) {
 			group.getChildren().remove(canvas);
 		}else{
 			System.err.println("Tried to remove undrawn shape");
 		}
-			
 	}
+
+
 	
 	public int getSlideNumber() {
 		return(slideNumber);

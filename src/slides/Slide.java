@@ -17,10 +17,13 @@ import tools.MediaElement;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 
-
+/**
+ * Class for automating scene assembly
+ */
 public class Slide {
 	private SubScene toolBar;// = ToolBar.createToolBar(1280);
 	private SubScene resizeBar;
+	//global media layer variables
 	private VideoLayer videoLayer;
 	private AudioLayer audioLayer;
 	private ImageLayer imageLayer;
@@ -28,7 +31,8 @@ public class Slide {
 	private Graphics2D graphics2D;
 	private Graphics3DLayer graphics3DLayer;
 	private Scene slide;
-	
+
+	//global variables for scene size 
 	private BorderPane bp = new BorderPane();
 	private StackPane sp = new StackPane();
 	private int width;
@@ -36,6 +40,7 @@ public class Slide {
 	private double xOff;
 	private double yOff;
 	
+	//id and duration of slide
 	private String id;
 	private int duration;
 	private ArrayList<Object> elements = new ArrayList<Object>();
@@ -46,20 +51,48 @@ public class Slide {
 	private ArrayList<Shape> slideShapes = new ArrayList<Shape>();*/
 	
 	private ArrayList<MediaElement> slideElements = new ArrayList<MediaElement>();
-	
 	SubScene test;
 	Graphics2D graphics;
+	/**
+	 * Method for instantiating the objects to be placed on the scene
+	 * @param mainStage - main stage of window
+	 * @param width - width of window
+	 * @param height - height of window
+	 * @param xOffset - X coordinate offset 
+	 * @param yOffset - Y coordinate offset
+	 * @param vl - video layer
+	 * @param al - audio layer
+	 * @param il - image layer
+	 * @param tl - text layer
+	 * @param G2D - 2D graphics layer
+	 * @param G3D - 3D graphics layer
+	 * @param shapes - shapes
+	 * @param images - images
+	 * @param audio - audio
+	 * @param slideTexts - text
+	 */
 	public Slide(Stage mainStage, int width, int height, double xOffset, double yOffset,
-			ArrayList<VideoLayer> vl, ArrayList<AudioLayer> al, ArrayList<ImageLayer> il, ArrayList<TextLayer> tl, ArrayList<Graphics2D> G2D, ArrayList<Graphics3DLayer> G3D,
-			ArrayList<Shape> shapes, ArrayList<SlideImage> images, ArrayList<Audio> audio, ArrayList<SlideText> slideTexts) {
-		
+			     ArrayList<VideoLayer> vl, 
+			     ArrayList<AudioLayer> al, 
+			     ArrayList<ImageLayer> il, 
+			     ArrayList<TextLayer> tl, 
+			     ArrayList<Graphics2D> G2D, 
+			     ArrayList<Graphics3DLayer> G3D,
+			     ArrayList<Shape> shapes, 
+			     ArrayList<SlideImage> images, 
+			     ArrayList<Audio> audio, 
+			     ArrayList<SlideText> slideTexts) {
+		//stores variables from main program 
 		this.width = width;
 		this.height = height;
+		
+		//create toolbar and resize bar
 		toolBar = ToolBar.createToolBar(width, id);
 		resizeBar = ResizeBar.CreateResizeBar(width);
 
 		xOff = xOffset;
 		yOff = yOffset;
+		
 		sp.setMinSize(width,height);
 		sp.setAlignment(Pos.TOP_LEFT);
 		

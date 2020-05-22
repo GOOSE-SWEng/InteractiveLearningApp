@@ -19,6 +19,12 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 
+/**
+ * Class containing the controls for the video handler object
+ * @author - Rimas Radziunas and Cezara-Lidia Jalba
+ * @version - 1.2
+ * @date - 20/04/20
+ */
 public class VideoController {
 	@FXML
 	private Button play;
@@ -37,7 +43,7 @@ public class VideoController {
 
 	private Bounds vidSubBounds;
 
-	// Play button control
+	/** Play button control */
 	@FXML
 	public void play(ActionEvent event) {
 
@@ -49,13 +55,13 @@ public class VideoController {
 		}
 	}
 
-	// Stop button control
+	/** Stop button control */
 	public void stop(ActionEvent event) {
 		mediaView.getMediaPlayer().stop();
 		play.setText("Play");
 	}
 
-	// Full screen button control
+	/** Full screen button control */
 	public void setFullScreen(ActionEvent event) {
 		// Retrieve the correct containers
 		// TODO: adapt to the main program
@@ -104,7 +110,7 @@ public class VideoController {
 		//need .srt file, .srt parser and implementation onto the video
 	}
 
-	// Mute and unmute the audio
+	/** Mute and unmute the audio */
 	public void muteAudio(ActionEvent event) {
 		// mute
 		if (mediaView.getMediaPlayer().isMute() == false) {
