@@ -10,6 +10,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 
 public class Audio {
 	String source;
@@ -45,7 +46,6 @@ public class Audio {
 		this.slideNumber= slideNumber;
 		// construct the SubScene in here
 		if (controls) {
-			
 			//Creating the buttons
 			Button playButton  = new Button("Play");
 			Button pauseButton = new Button("Pause");

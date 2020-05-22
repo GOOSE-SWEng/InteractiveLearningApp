@@ -7,6 +7,10 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import main.InteractiveLearningApp;
+import tools.MediaElement;
+import tools.XMLParser;
+
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -60,12 +64,39 @@ public class SlideText {
       fontName = fontNode.getTextContent();
     }
 
+    /* 
+     * Edited by GOOSE
+     * To account for settings page adjustments
+     * 
+     */
     Color fontFill = Color.web(fontColor);
-    Font basic = Font.font(fontName, fontSize);
+    if(InteractiveLearningApp.style == "nightmode") {
+        fontFill = Color.WHITE;
+    }
+    
+    Font basic = Font.font(fontName, fontSize);	
     Font italic = Font.font(fontName, FontPosture.ITALIC, fontSize);
     Font bold = Font.font(fontName, FontWeight.BOLD, fontSize);
-    Text partialText;
+    if(!InteractiveLearningApp.getDefaultFont().equals(InteractiveLearningApp.getChosenFont()) & 
+    		InteractiveLearningApp.getDefaultTextSize() != InteractiveLearningApp.getChosenTextSize()) { //
+    	basic = Font.font(InteractiveLearningApp.getChosenFont(), InteractiveLearningApp.getChosenTextSize());
+        italic = Font.font(InteractiveLearningApp.getChosenFont(), FontPosture.ITALIC, InteractiveLearningApp.getChosenTextSize());
+        bold = Font.font(InteractiveLearningApp.getChosenFont(), FontWeight.BOLD, InteractiveLearningApp.getChosenTextSize());
 
+    }else if(!InteractiveLearningApp.getDefaultFont().equals(InteractiveLearningApp.getChosenFont())) {
+    	basic = Font.font(InteractiveLearningApp.getChosenFont(), fontSize);
+        italic = Font.font(InteractiveLearningApp.getChosenFont(), FontPosture.ITALIC, fontSize);
+        bold = Font.font(InteractiveLearningApp.getChosenFont(), FontWeight.BOLD, fontSize);
+        
+    }else if(InteractiveLearningApp.getDefaultTextSize() != InteractiveLearningApp.getChosenTextSize()) {
+    	basic = Font.font(fontName, InteractiveLearningApp.getChosenTextSize());
+        italic = Font.font(fontName, FontPosture.ITALIC, InteractiveLearningApp.getChosenTextSize());
+        bold = Font.font(fontName, FontWeight.BOLD, InteractiveLearningApp.getChosenTextSize());
+	}
+    //END OF EDITS
+    
+    Text partialText;
+    
     // Add each text element to the TextFlow
     NodeList children = node.getChildNodes();
     for (int i = 0; i < children.getLength(); i++) {

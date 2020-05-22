@@ -18,7 +18,7 @@
 		<slideheight>720</slideheight>
 	</defaults>
 	<slide id='Rockets' duration='10000'>
-		<text font='helvetica' fontsize='15' fontcolor='Black' xpos='0' ypos='4' starttime='0' endtime='10000'>
+		<text font='helvetica' fontsize='15' fontcolor='Black' xpos='0' ypos='4' starttime='1000' endtime='10000'>
 	A <b>rocket</b> (from Italian: rocchetto, lit. 
 	'bobbin')[nb 1][1] is a <i>missile</i>, 
 	spacecraft, aircraft or other vehicle 
@@ -49,30 +49,30 @@
 	recreational uses date back to at 
 	least 13th-century China.
 		</text>
-		<line xstart='0' ystart='0' xend='1280' yend='0' linecolor='Black' starttime='10' endtime='100'></line>
-		<line xstart='1280' ystart='0' xend='1280' yend='680' linecolor='Black' starttime='10' endtime='100'></line>
-		<line xstart='1280' ystart='680' xend='0' yend='680' linecolor='Black' starttime='10' endtime='100'></line>
-		<line xstart='0' ystart='680' xend='0' yend='0' linecolor='Black' starttime='10' endtime='100'></line>
-		<line xstart='400' ystart='0' xend='400' yend='680' linecolor='Black' starttime='10' endtime='100'></line>
-		<line xstart='880' ystart='0' xend='880' yend='680' linecolor='Black' starttime='10' endtime='100'></line>
-		<shape type='rectangle' xstart='0' ystart='0' width='400' height='680' fillcolor='Black' starttime='10' endtime='100'>
+		<line xstart='0' ystart='0' xend='1280' yend='0' linecolor='Black' starttime='100' endtime='10000'></line>
+		<line xstart='1280' ystart='0' xend='1280' yend='680' linecolor='Black' starttime='200' endtime='10000'></line>
+		<line xstart='1280' ystart='680' xend='0' yend='680' linecolor='Black' starttime='300' endtime='10000'></line>
+		<line xstart='0' ystart='680' xend='0' yend='0' linecolor='Black' starttime='400' endtime='10000'></line>
+		<line xstart='400' ystart='0' xend='400' yend='680' linecolor='Black' starttime='500' endtime='10000'></line>
+		<line xstart='880' ystart='0' xend='880' yend='680' linecolor='Black' starttime='600' endtime='10000'></line>
+		<shape type='rectangle' xstart='0' ystart='0' width='400' height='680' fillcolor='Black' starttime='700' endtime='10000'>
 			<shading x1='0' y1='0' color1='Black' x2='100' y2='100' color2='Orange' cyclic='True'></shading>
 		</shape>
-		<shape type='oval' xstart='880' ystart='200' width='400' height='200' fillcolor='pink' starttime='100' endtime='10000'>
+		<shape type='oval' xstart='880' ystart='200' width='400' height='200' fillcolor='pink' starttime='800' endtime='10000'>
 			<shading x1='0' y1='0' color1='Black' x2='100' y2='100' color2='Blue' cyclic='True'></shading>
 		</shape>
-		<shape type='rectangle' xstart='880' ystart='0' width='400' height='680' fillcolor='pink' starttime='100' endtime='10000'>
+		<shape type='rectangle' xstart='880' ystart='0' width='400' height='680' fillcolor='pink' starttime='900' endtime='10000'>
 		</shape>
-		<shape type='oval' xstart='880' ystart='400' width='400' height='200' fillcolor='blue' starttime='100' endtime='10000'>
+		<shape type='oval' xstart='880' ystart='400' width='400' height='200' fillcolor='blue' starttime='1000' endtime='10000'>
 		</shape>
-		<audio urlname='src/resources/slide1/audio/CARTOON.mp3' starttime='2000' loop='true'></audio>
+		<audio urlname='src/resources/slide1/audio/audio1.wav' starttime='10' loop='false'></audio>
 		<image urlname='https://cdn.eso.org/images/screen/eso1907a.jpg' xstart='60' ystart='0' width='40' height='40' starttime='1000' endtime='10000'></image>
-		<image urlname='https://cdn.arstechnica.net/wp-content/uploads/2018/07/Rocket-Report-Intro-3-800x450.jpg' xstart='60' ystart='40' width='40' height='40' starttime='5000' endtime='10000'></image>
-		<video urlname='https://youtu.be/OnoNITE-CLc' starttime='5000' loop='false' xstart='80' ystart='40'></video>
-		<model urlname='src/resources/slide1/models/HST-3DS\hst.3ds' xstart='0' ystart='0' width='50' height='80'></model>
+		<image urlname='https://cdn.arstechnica.net/wp-content/uploads/2018/07/Rocket-Report-Intro-3-800x450.jpg' xstart='60' ystart='40' width='40' height='40' starttime='1500' endtime='10000'></image>
+		<video urlname='https://youtu.be/OnoNITE-CLc' starttime='1000' loop='false' xstart='90' ystart='90'></video>
+		<model urlname='src/resources/slide1/models/HST-3DS\hst.3ds' xstart='0' ystart='0' width='33' height='80'></model>
 	</slide>
 	<slide id='Rosetta Stone' duration='6000'>
-		<text font='arial' fontsize='15' fontcolor='black' xpos='0' ypos='0' starttime='0' endtime='10000'>
+		<text font='arial' fontsize='15' fontcolor='black' xpos='0' ypos='0' starttime='1000' endtime='10000'>
 	The Rosetta Stone is a granodiorite stele 
 	discovered in 1799 which is inscribed with three
 	versions of a decreebissued in Memphis, 
@@ -112,25 +112,25 @@
 	the British Museum almost continuously since 
 	1802 and is the most visited object there.
 		</text>
-		<line xstart='0' ystart='0' xend='1280' yend='0' linecolor='Black' starttime='0' endtime='100'></line>
-		<shape type='rectangle' xstart='0' ystart='0' width='400' height='680' fillcolor='Black' starttime='0' endtime='100'>
+		<line xstart='0' ystart='0' xend='1280' yend='0' linecolor='Black' starttime='100' endtime='10000'></line>
+		<shape type='rectangle' xstart='0' ystart='0' width='400' height='680' fillcolor='Black' starttime='10000' endtime='100'>
 			<shading x1='0' y1='0' color1='Black' x2='100' y2='100' color2='Orange' cyclic='True'></shading>
 		</shape>
-		<shape type='oval' xstart='880' ystart='200' width='400' height='200' fillcolor='pink' starttime='0' endtime='100'>
+		<shape type='oval' xstart='880' ystart='200' width='400' height='200' fillcolor='pink' starttime='10000' endtime='100'>
 			<shading x1='0' y1='0' color1='Black' x2='100' y2='100' color2='Blue' cyclic='True'></shading>
 		</shape>
-		<shape type='rectangle' xstart='880' ystart='0' width='400' height='680' fillcolor='pink' starttime='0' endtime='100'>
+		<shape type='rectangle' xstart='880' ystart='0' width='400' height='680' fillcolor='pink' starttime='10000' endtime='100'>
 		</shape>
-		<shape type='oval' xstart='880' ystart='400' width='400' height='200' fillcolor='blue' starttime='0' endtime='100'>
+		<shape type='oval' xstart='880' ystart='400' width='400' height='200' fillcolor='blue' starttime='10000' endtime='100'>
 		</shape>
-		<audio urlname='src/resources/slide2/audio/CARTOON.mp3' starttime='0' loop='true'></audio>
-		<image urlname='https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Rosetta_Stone.JPG/800px-Rosetta_Stone.JPG' xstart='80' ystart='0' width='20' height='32' starttime='10' endtime='100'></image>
-		<image urlname='https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/RosettaStoneAsPartOfOriginalStele_revised.svg/800px-RosettaStoneAsPartOfOriginalStele_revised.svg.png' xstart='70' ystart='32' width='20' height='68' starttime='10' endtime='100'></image>
-		<video urlname='src/resources/slide2/video/Sun.mp4' starttime='10' loop='false' xstart='70' ystart='40'></video>
+		<audio urlname='src/resources/slide2/audio/audio1.wav' starttime='10' loop='false'></audio>
+		<image urlname='https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Rosetta_Stone.JPG/800px-Rosetta_Stone.JPG' xstart='80' ystart='0' width='20' height='32' starttime='1000' endtime='10000'></image>
+		<image urlname='https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/RosettaStoneAsPartOfOriginalStele_revised.svg/800px-RosettaStoneAsPartOfOriginalStele_revised.svg.png' xstart='70' ystart='32' width='20' height='68' starttime='1000' endtime='20000'></image>
+		<video urlname='src/resources/slide2/video/Sun.mp4' starttime='1000' loop='false' xstart='70' ystart='80'></video>
 		<model urlname='src/resources/slide2/models/alien.stl' xstart='0' ystart='0' width='50' height='80'></model>
 	</slide>
 	<slide id='Big Lion' duration='6000'>
-		<text font='arial' fontsize='15' fontcolor='black' xpos='70' ypos='0' starttime='0' endtime='10000'>
+		<text font='arial' fontsize='15' fontcolor='black' xpos='70' ypos='0' starttime='100' endtime='10000'>
 The jaguar (Panthera onca) is a large felid species 
 and the only extant member of the genus Panthera 
 native to the Americas. The jaguar's present range 
@@ -185,23 +185,23 @@ cultures, including those of the Maya and Aztec.
 		</shape>
 		<shape type='oval' xstart='880' ystart='400' width='400' height='200' fillcolor='blue' starttime='0' endtime='100'>
 		</shape>
-		<audio urlname='src/resources/slide3/audio/CARTOON.mp3' starttime='0' loop='true'></audio>
-		<image urlname='https://cdn.eso.org/images/screen/eso1907a.jpg' xstart='0' ystart='0' width='30' height='30' starttime='0' endtime='100'></image>
-		<image urlname='https://cdn.arstechnica.net/wp-content/uploads/2018/07/Rocket-Report-Intro-3-800x450.jpg' xstart='100' ystart='100' width='40' height='40' starttime='0' endtime='100'></image>
-		<video urlname='src/resources/slide3/video/sun.mp4' starttime='0' loop='false' xstart='50' ystart='50'></video>
+		<audio urlname='src/resources/slide3/audio/audio1.wav' starttime='10' loop='false'></audio>
+		<image urlname='https://cdn.eso.org/images/screen/eso1907a.jpg' xstart='0' ystart='0' width='30' height='30' starttime='100' endtime='10000'></image>
+		<image urlname='https://cdn.arstechnica.net/wp-content/uploads/2018/07/Rocket-Report-Intro-3-800x450.jpg' xstart='100' ystart='100' width='40' height='40' starttime='100' endtime='10000'></image>
+		<video urlname='src/resources/slide3/video/sun.mp4' starttime='1000' loop='false' xstart='40' ystart='20'></video>
 		<model urlname='src/resources/slide3/models/panter.stl' xstart='0' ystart='0' width='40' height='80'></model>
 	</slide>
 	<slide id='Mickey Mouse' duration='8000'>
-		<text font='arial' fontsize='15' fontcolor='black' xpos='0' ypos='0' starttime='0' endtime='10000'>
+		<text font='arial' fontsize='15' fontcolor='black' xpos='0' ypos='0' starttime='100' endtime='10000'>
 			HELLO THERE, WE ARE OUT HERE VIBIN <b>You</b> are <i>Gorgeous</i>
 			LOL AT THAT THO I LOVE SAUSAGE ROLLS
 		</text>
-		<line xstart='0' ystart='0' xend='1280' yend='0' linecolor='Black' starttime='0' endtime='100'></line>
-		<line xstart='1280' ystart='0' xend='1280' yend='680' linecolor='Black' starttime='0' endtime='100'></line>
-		<line xstart='1280' ystart='680' xend='0' yend='680' linecolor='Black' starttime='0' endtime='100'></line>
-		<line xstart='0' ystart='680' xend='0' yend='0' linecolor='Black' starttime='0' endtime='100'></line>
-		<line xstart='400' ystart='0' xend='400' yend='680' linecolor='Black' starttime='0' endtime='100'></line>
-		<line xstart='880' ystart='0' xend='880' yend='680' linecolor='Black' starttime='0' endtime='100'></line>
+		<line xstart='0' ystart='0' xend='1280' yend='0' linecolor='Black' starttime='10' endtime='100'></line>
+		<line xstart='1280' ystart='0' xend='1280' yend='680' linecolor='Black' starttime='10' endtime='100'></line>
+		<line xstart='1280' ystart='680' xend='0' yend='680' linecolor='Black' starttime='10' endtime='100'></line>
+		<line xstart='0' ystart='680' xend='0' yend='0' linecolor='Black' starttime='10' endtime='100'></line>
+		<line xstart='400' ystart='0' xend='400' yend='680' linecolor='Black' starttime='10' endtime='100'></line>
+		<line xstart='880' ystart='0' xend='880' yend='680' linecolor='Black' starttime='10' endtime='100'></line>
 		<shape type='rectangle' xstart='0' ystart='0' width='400' height='680' fillcolor='Black' starttime='0' endtime='100'>
 			<shading x1='0' y1='0' color1='Black' x2='100' y2='100' color2='Orange' cyclic='True'></shading>
 		</shape>
@@ -212,10 +212,10 @@ cultures, including those of the Maya and Aztec.
 		</shape>
 		<shape type='oval' xstart='880' ystart='400' width='400' height='200' fillcolor='blue' starttime='0' endtime='100'>
 		</shape>
-		<audio urlname='src/resources/slide4/audio/CARTOON.mp3' starttime='0' loop='true'></audio>
-		<image urlname='https://cdn.eso.org/images/screen/eso1907a.jpg' xstart='0' ystart='0' width='30' height='30' starttime='0' endtime='100'></image>
-		<image urlname='https://cdn.arstechnica.net/wp-content/uploads/2018/07/Rocket-Report-Intro-3-800x450.jpg' xstart='100' ystart='100' width='40' height='40' starttime='0' endtime='100'></image>
-		<video urlname='https://www.radiantmediaplayer.com/media/bbb-360p.mp4' starttime='0' loop='false' xstart='200' ystart='0'></video>
+		<audio urlname='src/resources/slide4/audio/audio1.wav' starttime='10' loop='false'></audio>
+		<image urlname='https://cdn.eso.org/images/screen/eso1907a.jpg' xstart='0' ystart='0' width='30' height='30' starttime='100' endtime='10000'></image>
+		<image urlname='https://cdn.arstechnica.net/wp-content/uploads/2018/07/Rocket-Report-Intro-3-800x450.jpg' xstart='100' ystart='100' width='40' height='40' starttime='100' endtime='10000'></image>
+		<video urlname='https://www.radiantmediaplayer.com/media/bbb-360p.mp4' starttime='1000' loop='false' xstart='0' ystart='0'></video>
 		<model urlname='src/resources/slide4/models/dino.stl' xstart='400' ystart='0' width='20' height='80'></model>
 	</slide>
 </slideshow>

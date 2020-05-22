@@ -8,6 +8,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import main.InteractiveLearningApp;
 
 public class Graphics2D {
 	int paneHeight;
@@ -34,6 +35,7 @@ public class Graphics2D {
 		shape.addPoint(xEnd,yEnd);// creates end point of the line
 		shapes.add(shape);// add shape to the array list
 		sp.getChildren().add(shape.get());
+		InteractiveLearningApp.slides.get(slideNumber).getElements().add(shape);
 	}
 	//draw rectangle with solid colour
 	public void registerRectangle(float xStart, float yStart, float width, float height, String fillColour, String id, int startTime, int endTime, int slideNumber) {
@@ -47,6 +49,7 @@ public class Graphics2D {
 		shape.addPoint(xStart,yStart+height);
 		shapes.add(shape);
 		sp.getChildren().add(shape.get());
+		InteractiveLearningApp.slides.get(slideNumber).getElements().add(shape);
 	}
 	//draw rectangle with gradient fill
 	public void registerRectangle(float xStart, float yStart, float width, float height, float shading_x1, float shading_y1, String shading_colour1, float shading_x2, float shading_y2, String shading_colour2, Boolean shading_cyclic, int startTime, int endTime, int slideNumber) {
@@ -60,6 +63,7 @@ public class Graphics2D {
 		shape.addPoint(xStart,yStart+height);
 		shapes.add(shape);
 		sp.getChildren().add(shape.get());
+		InteractiveLearningApp.slides.get(slideNumber).getElements().add(shape);
 
 	}
 	//draw solid colour oval
@@ -70,6 +74,7 @@ public class Graphics2D {
 		shape.drawOval((int)width,(int)height,(int)xStart,(int)yStart);
 		shapes.add(shape);
 		sp.getChildren().add(shape.get());
+		InteractiveLearningApp.slides.get(slideNumber).getElements().add(shape);
 	}
 	//draw gradient fill oval
 	public void registerOval(float xStart, float yStart, float width, float height, float shading_x1, float shading_y1, String shading_colour1, float shading_x2, float shading_y2, String shading_colour2, Boolean shading_cyclic, int startTime, int endTime, int slideNumber) {
@@ -79,10 +84,11 @@ public class Graphics2D {
 		shape.drawOval((int)width,(int)height,(int)xStart,(int)yStart);
 		shapes.add(shape);
 		sp.getChildren().add(shape.get());
+		InteractiveLearningApp.slides.get(slideNumber).getElements().add(shape);
 	}
 	//returns the subscene
-	public SubScene get() {
-		return Window;
+	public StackPane get() {
+		return sp;
 	}
 }
 		

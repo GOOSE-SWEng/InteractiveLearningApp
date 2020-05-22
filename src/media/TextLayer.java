@@ -8,6 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.SubScene;
 import javafx.scene.layout.StackPane;
+import main.InteractiveLearningApp;
 
 public class TextLayer {
 	int height;
@@ -30,7 +31,7 @@ public class TextLayer {
 		//constructor for the text object
 		SlideText text = new SlideText(node, slideNumber, width, height);
 		slideText.add(text);
-		//text.get().setLayoutX();
+		InteractiveLearningApp.slides.get(slideNumber).getElements().add(text);
 		sp.getChildren().add(text.get());
 	}
 	

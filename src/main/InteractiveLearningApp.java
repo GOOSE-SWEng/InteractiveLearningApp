@@ -42,17 +42,21 @@ public class InteractiveLearningApp extends Application{
 	
 	public static String defaultLanguage = "English";
 	public static String defaultFont = "Arial";
-	public static String defaultTextSize = "16pt";
-	
+	public static int defaultTextSize = 16;
 	public static String defaultBGColour = "White";
 	public static String defaultLineColour = "Black";
 	public static String defaultFontColour = "Black";
 	public static String defaultFillColour = "Black";
 	
+	public static String chosenFont = "Arial";
+	public static int chosenTextSize = 16;
+	public static String chosenLanguage = "English";
+	
+
+
 	//Triggers Exhibit Mode
 	private boolean exhibitMode = false;
 	public static Timer timer;
-	Thread runThread;
 	
 	public static ArrayList<Slide> slides = new ArrayList<Slide>();
 	static ArrayList<Audio> audio = new ArrayList<Audio>();
@@ -98,7 +102,6 @@ public class InteractiveLearningApp extends Application{
 	public static void run() {
 		presRunning = false;
 		//Create File Browser
-		
 		FileChooser fileChooser = new FileChooser();
 		//Change to another directory when we export as a jar
 		fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
@@ -152,8 +155,8 @@ public class InteractiveLearningApp extends Application{
 	public static void nextSlide() {
 		try {
 			System.out.println("NEXT SLIDE");
-			mainStage.setScene(slides.get(currentSlide+1).getSlide());
 			currentSlide++;
+			mainStage.setScene(slides.get(currentSlide).getSlide());
 			timer.resetTimer(currentSlide);
 		}catch(NullPointerException | IndexOutOfBoundsException e) {
 			System.out.println("Presentation Restarted");
@@ -166,8 +169,8 @@ public class InteractiveLearningApp extends Application{
 	public static void prevSlide() {
 		try {
 			System.out.println("PREV SLIDE");
-			mainStage.setScene(slides.get(currentSlide-1).getSlide());
 			currentSlide--;
+			mainStage.setScene(slides.get(currentSlide).getSlide());
 			timer.resetTimer(currentSlide);
 		}catch(NullPointerException | IndexOutOfBoundsException e) {
 			System.out.println("Presentation Restarted");
@@ -218,11 +221,11 @@ public class InteractiveLearningApp extends Application{
 		InteractiveLearningApp.defaultFont = defaultFont;
 	}
 
-	public static String getDefaultTextSize() {
+	public static int getDefaultTextSize() {
 		return defaultTextSize;
 	}
 
-	public static void setDefaultTextSize(String defaultTextSize) {
+	public static void setDefaultTextSize(int defaultTextSize) {
 		InteractiveLearningApp.defaultTextSize = defaultTextSize;
 	}
 
@@ -256,5 +259,28 @@ public class InteractiveLearningApp extends Application{
 
 	public static void setDefaultFillColour(String defaultFillColour) {
 		InteractiveLearningApp.defaultFillColour = defaultFillColour;
+	}
+	public static String getChosenFont() {
+		return chosenFont;
+	}
+
+	public static void setChosenFont(String chosenFont) {
+		InteractiveLearningApp.chosenFont = chosenFont;
+	}
+
+	public static int getChosenTextSize() {
+		return chosenTextSize;
+	}
+
+	public static void setChosenTextSize(int chosenTextSize) {
+		InteractiveLearningApp.chosenTextSize = chosenTextSize;
+	}
+
+	public String getChosenLanguage() {
+		return chosenLanguage;
+	}
+
+	public static void setChosenLanguage(String chosenLanguage) {
+		InteractiveLearningApp.chosenLanguage = chosenLanguage;
 	}
 }

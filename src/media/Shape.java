@@ -33,6 +33,7 @@ public class Shape {
 
 	
 	public Shape(Color lineColour, Color fillColour,int w, int h, int lw, int startTime, int endTime, int slideNumber) { // constructor for a solid colour shape
+		System.out.println("SHAPE CREATED");
 		group = new Group();
 		fill = fillColour;
 		line = lineColour;
@@ -48,6 +49,7 @@ public class Shape {
 		this.slideNumber = slideNumber;
 	}
 	public Shape(int w, int h, int lw, Color c1, Color c2, float c1x, float c1y, float c2x, float c2y, Boolean Cyclical, int startTime, int endTime, int slideNumber) { //constructor for a shape with a colour gradient
+		System.out.println("SHAPE CREATED");
 		group = new Group();
 		width = w;
 		height = h;
@@ -114,7 +116,12 @@ public class Shape {
 	}
 
 	public void destroy() {//removes the canvas from the group
-		group.getChildren().remove(canvas);
+		if(group.getChildren().contains(canvas)) {
+			group.getChildren().remove(canvas);
+		}else{
+			System.err.println("Tried to remove undrawn shape");
+		}
+			
 	}
 	
 	public int getSlideNumber() {

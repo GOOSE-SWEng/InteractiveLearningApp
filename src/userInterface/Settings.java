@@ -30,8 +30,8 @@ public class Settings {
 	private Boolean colourBlind = false;
 	private Boolean darkMode = false;
 	private static String currentFont = "Arial";
-	private static String currentTextSize = "16pt";
-		
+	private static int currentTextSize = 16;
+	
 	public static Scene createSettings(Stage mainStage,int defaultXSize, int defaultYSize) {
 		//Create top and bottom tool bars
 		toolBar = ToolBar.createToolBar(defaultXSize, title);
@@ -86,7 +86,8 @@ public class Settings {
 		textSizeMenu.valueProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue observable, String oldValue, String newValue) {
-				currentTextSize = newValue;
+				newValue = newValue.replace("pt", "");
+				currentTextSize = Integer.parseInt(newValue);
 			}
 		});
 		//Create font drop down menu
@@ -184,9 +185,9 @@ public class Settings {
 	}
 	
 	public static void applyButtonPressed() {
-		currentFont = "arial";
-		currentTextSize = "24";
-		currentLanguage = "English";
+		/*currentFont = "arial";
+		currentTextSize = 24;
+		currentLanguage = "English";*/
 		Stage settingsPopUp = new Stage();
 		Text text = new Text("To apply these settings, the presentation must restart.");
 		Button apply = new Button("Apply");
@@ -200,9 +201,9 @@ public class Settings {
 		settingsPopUp.setScene(applyPopUp);
 		settingsPopUp.show();
 		apply.setOnMouseClicked(e->{
-			currentFont = "arial";
-			currentTextSize = "24";
-			currentLanguage = "English";
+			InteractiveLearningApp.setChosenFont(currentFont);
+			InteractiveLearningApp.setChosenTextSize(currentTextSize);
+			InteractiveLearningApp.setChosenLanguage(currentLanguage);
 			settingsPopUp.hide();
 			InteractiveLearningApp.showStart();
 		});

@@ -46,6 +46,7 @@ public class Video {
 		// Loads the media player layout from a FXML file
 		BorderPane root = FXMLLoader.load(getClass().getClassLoader().getResource("media/videoPlayer.fxml"));
 
+		this.urlName = urlName;
 		// creates a subscene
 		subScene = new SubScene(root, 600, 400);
 		// Set subscene position
@@ -201,6 +202,8 @@ public class Video {
 		p.getChildren().get(0);
 		MediaView mv = (MediaView) p.getChildren().get(0);
 		mv.setMediaPlayer(mp);
+		//mp.setAutoPlay(true);
+		mv.autosize();
 	}
 
 	public SubScene get() {
@@ -225,5 +228,14 @@ public class Video {
 	}
 	public void play() {
 		mp.play();
+		System.out.println("VIDEO MEDIA PLAYING" + urlName);
+	}
+	public void stop() {
+		mp.stop();
+		System.out.println("VIDEO MEDIA STOPPING" + urlName);
+	}
+	
+	public MediaPlayer getPlayer() {
+		return mp;
 	}
 }

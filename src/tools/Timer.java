@@ -8,7 +8,6 @@ import main.InteractiveLearningApp;
 public class Timer extends Thread{
 	int currentTimer = 0;
 	int currentSlideNo = 0;
-	//public ArrayList<MediaElement> mediaElements;
 	public void run() {
 		while(InteractiveLearningApp.presRunning == true) {
 			if(InteractiveLearningApp.slides.get(currentSlideNo).getDuration() == currentTimer) {
@@ -19,27 +18,21 @@ public class Timer extends Thread{
 					int id = InteractiveLearningApp.slides.get(currentSlideNo).getSlideElements().get(i).mediaId;
 					switch(InteractiveLearningApp.slides.get(currentSlideNo).getSlideElements().get(i).mediaType) {
 					case AUDIO:
-						InteractiveLearningApp.slides.get(currentSlideNo).getAudioLayer().audio.get(id-1).start();
-						System.out.println("AUDIO PLAYING");
+						InteractiveLearningApp.slides.get(currentSlideNo).getSlideAudio().get(id).start();
 						break;
 					case VIDEO:
-						InteractiveLearningApp.slides.get(currentSlideNo).getVideoLayer().videos.get(id-1).play();
+						InteractiveLearningApp.slides.get(currentSlideNo).getSlideVideos().get(id).play();
 						System.out.println("VIDEO PLAYING");
 						break;
 					case IMAGE:
-						Platform.runLater(() ->InteractiveLearningApp.slides.get(currentSlideNo).getImageLayer().images.get(id-1).start());
-						System.out.println("IMAGE PLAYING");
+						Platform.runLater(() ->InteractiveLearningApp.slides.get(currentSlideNo).getSlideImages().get(id).start());
 						break;
-					case GRAPHICS2D:
-						InteractiveLearningApp.slides.get(currentSlideNo).getGraphics2D().shapes.get(id-1).create();
+					case SHAPE:
+						Platform.runLater(()->InteractiveLearningApp.slides.get(currentSlideNo).getSlideShapes().get(id).create());
 						System.out.println("SHAPE PLAYING");
 						break;
-					/*case GRAPHICS3D:
-						InteractiveLearningApp.slides.get(currentSlideNo).getGraphics3DLayer().models.get(i).;
-						break;*/
 					case TEXT:
-						InteractiveLearningApp.slides.get(currentSlideNo).getTextLayer().slideText.get(id-1).start();
-						System.out.println("TEXT PLAYING");
+						Platform.runLater(()->InteractiveLearningApp.slides.get(currentSlideNo).getSlideTexts().get(id).start());
 						break;
 					default:
 						break;
@@ -49,25 +42,23 @@ public class Timer extends Thread{
 					int id = InteractiveLearningApp.slides.get(currentSlideNo).getSlideElements().get(i).mediaId;
 					switch(InteractiveLearningApp.slides.get(currentSlideNo).getSlideElements().get(i).mediaType) {
 					case AUDIO:
-						InteractiveLearningApp.slides.get(currentSlideNo).getAudioLayer().audio.get(id-1).stop();
-						System.out.println("AUDIO STOPPING");
+						InteractiveLearningApp.slides.get(currentSlideNo).getSlideAudio().get(id).stop();
 						break;
 					case VIDEO:
-						InteractiveLearningApp.slides.get(currentSlideNo).getVideoLayer().videos.get(id-1).remove();
-						System.out.println("VIDEO STOPPING");
+						InteractiveLearningApp.slides.get(currentSlideNo).getSlideVideos().get(id).stop();
 						break;
 					case IMAGE:
-						Platform.runLater(()->InteractiveLearningApp.slides.get(currentSlideNo).getImageLayer().images.get(id-1).remove());
-						System.out.println("IMAGE STOPPING");
+						Platform.runLater(()->InteractiveLearningApp.slides.get(currentSlideNo).getSlideImages().get(id).remove());
 						break;
-					case GRAPHICS2D:
-						InteractiveLearningApp.slides.get(currentSlideNo).getGraphics2D().shapes.get(id-1).destroy();
+					case SHAPE:
+						try {
+							Platform.runLater(()->InteractiveLearningApp.slides.get(currentSlideNo).getSlideShapes().get(id).destroy());
+						}catch (IndexOutOfBoundsException ioobe) {
+							System.err.println("Tried to remove undrawn shape");
+						}
 						break;
-					/*case GRAPHICS3D:
-						InteractiveLearningApp.slides.get(currentSlideNo).getGraphics3DLayer().models.get(i).;
-						break;*/
 					case TEXT:
-						InteractiveLearningApp.slides.get(currentSlideNo).getTextLayer().slideText.get(id-1).remove();
+						Platform.runLater(()->InteractiveLearningApp.slides.get(currentSlideNo).getSlideTexts().get(id).remove());
 						break;
 					default:
 						break;
@@ -77,14 +68,53 @@ public class Timer extends Thread{
 			try {
 				sleep(1);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			currentTimer++;
 		}
 	}
 	public void resetTimer(int currentSlide) {
+		stopSlide();
 		currentTimer = 0;
 		currentSlideNo = currentSlide;
+	}
+	public void stopSlide() {
+		for(int i = 0;i<InteractiveLearningApp.slides.get(currentSlideNo).getElements().size();i++) {
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/*ArrayList<MediaElement> elements = InteractiveLearningApp.slides.get(currentSlideNo).getSlideElements();
+		for(int i=0;i<elements.size();i++) {
+			int id = elements.get(i).mediaId;
+			System.out.println(i+ ", " + currentSlideNo + ", " + id + "Type" + elements.get(i).mediaType);
+			switch(elements.get(i).mediaType) {
+				case AUDIO:
+					InteractiveLearningApp.slides.get(currentSlideNo).getSlideAudio().get(id).stop();
+					break;
+				case VIDEO:
+					InteractiveLearningApp.slides.get(currentSlideNo).getSlideVideos().get(id).getPlayer().stop();
+					break;
+				case IMAGE:
+					Platform.runLater(() ->InteractiveLearningApp.slides.get(currentSlideNo).getSlideImages().get(id).remove());
+					break;
+				case SHAPE:
+					Platform.runLater(()->InteractiveLearningApp.slides.get(currentSlideNo).getSlideShapes().get(id).destroy());
+					break;
+				case TEXT:
+					Platform.runLater(()->InteractiveLearningApp.slides.get(currentSlideNo).getSlideTexts().get(id).remove());
+					break;
+			default:
+				break;
+			}
+		}*/
 	}
 }

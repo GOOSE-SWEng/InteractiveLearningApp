@@ -10,7 +10,7 @@ public class MediaElement {
     enum TYPE{
         TEXT,
         AUDIO,
-        GRAPHICS2D,
+        LINE,
         GRAPHICS3D,
         IMAGE,
         SHAPE,
@@ -39,9 +39,6 @@ public class MediaElement {
             break;
         case "video":
         	this.mediaType = TYPE.VIDEO;
-            break;
-        case "g2d":
-        	this.mediaType = TYPE.GRAPHICS2D;
             break;
         case "g3d":
         	this.mediaType = TYPE.GRAPHICS3D;

@@ -38,6 +38,12 @@ public class Slide {
 	
 	private String id;
 	private int duration;
+	private ArrayList<Object> elements = new ArrayList<Object>();
+	/*private ArrayList<Video> slideVideos = new ArrayList<Video>();
+	private ArrayList<Audio> slideAudio = new ArrayList<Audio>();
+	private ArrayList<SlideText> slideTexts = new ArrayList<SlideText>();
+	private ArrayList<SlideImage> slideImages = new ArrayList<SlideImage>();
+	private ArrayList<Shape> slideShapes = new ArrayList<Shape>();*/
 	
 	private ArrayList<MediaElement> slideElements = new ArrayList<MediaElement>();
 	
@@ -131,12 +137,13 @@ public class Slide {
 	}
 	
 	public void applyLayers() {
-		sp.getChildren().add(audioLayer.get());
 		sp.getChildren().add(graphics2D.get());
+		sp.getChildren().add(audioLayer.get());
 		sp.getChildren().add(videoLayer.get());
 		sp.getChildren().add(textLayer.get());
 		sp.getChildren().add(imageLayer.get());
 		sp.getChildren().add(graphics3DLayer.get());
+
 	}
 	
 	/*public void addMediaElements(String type, List elements) {
@@ -160,6 +167,14 @@ public class Slide {
 		slide.getStylesheets().add("style/ContentScreen/contentScreenCB.css");
 	}
 	
+	public ArrayList<Object> getElements() {
+		return elements;
+	}
+
+	public void setElements(ArrayList<Object> elements) {
+		this.elements = elements;
+	}
+
 	public ArrayList<MediaElement> getSlideElements() {
 		return slideElements;
 	}
