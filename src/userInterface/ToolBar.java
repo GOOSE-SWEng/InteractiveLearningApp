@@ -1,29 +1,42 @@
 package userInterface;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.InteractiveLearningApp;
+import media.Shape;
 
-/*TODO
- * add additional comments
- * when the maximize window button is pressed, update the text on the button to say "minimize window"
+/**
+ * @author - Ivy Price
+ * @version 1.2
+ * @date - 28/02/20
+ * Class used in the creation of the toolbar
+ * Returns a subscene containing the toolbar object
  */
 
 public class ToolBar {
+	//height of tool bar integer value
+	public static int toolBarHeight = InteractiveLearningApp.defaultYSize/20;
 	
 	//Global button/title names
 	Button exitButton;
@@ -33,37 +46,60 @@ public class ToolBar {
 	Button settingsButton;
 	Button minimizeWindowButton;
 	Button maximizeWindowButton;
+	
+	//gridpane containing toolbar
 	static GridPane gridPane;
-	Text title;
 	
+	//title of presentation
+	static Text title;
 	
-	public static SubScene createToolBar(int winWidth) {
-		
+	/**
+	 * Method to create toolbar
+	 * @param winWidth width of the window at the current time toolbar is made
+	 * @param id title of the current slide
+	 * @return the toolbar as a subscene
+	 */
+	public static SubScene createToolBar(int winWidth, String id) {
 		//instantiate the new grid pane, then instantiate the buttons to fill it
 		GridPane gridPane = new GridPane();
 		
-		//To be replaced with icons
-		Text title = new Text("Home Screen");
-		title.setId("title");
-		Button openButton = new Button("Open");
-		Button settingsButton = new Button("Settings");
-		Button newFileButton = new Button("New File");
-		Button minimizeWindowButton = new Button("Minimize to Tray");
-		Button maximizeWindowButton = new Button("Maximize Window");
-		Button exitButton = new Button("Exit");
+		//Adds coloured background to tool bar
+		//x axis size is 2x default x window size
+		Rectangle toolBarBackground = new Rectangle(0,0,InteractiveLearningApp.defaultXSize*2, toolBarHeight);
+		toolBarBackground.setId("toolBarBG");
+        //toolBarBackground.setFill(Color.web("0x3aa9b8"));// !!! need to get this from style sheet
+		gridPane.add(toolBarBackground,0,0);
 		
+		title = new Text(id);
+		title.setId("title");
+		//title.setFill(Color.web("white"));// !!! need to get this from style sheet
+		//title.setStyle("-fx-font: 30 arial;");// !!! need to get this from style sheet
+		
+		//instantiate buttons
+		Button homeButton = new Button();
+		Button prevButton = new Button();
+		Button nextButton = new Button();
+		Button minimizeWindowButton = new Button();
+		Button maximizeWindowButton = new Button();
+		Button exitButton = new Button();
+		
+		//Add images to previously made blank buttons
+		addImageToButton(homeButton, "src/resources/toolbar/homeicon.jpg");
+		addImageToButton(prevButton, "src/resources/toolbar/previcon.jpg");
+		addImageToButton(nextButton, "src/resources/toolbar/nexticon.jpg");
+		addImageToButton(maximizeWindowButton, "src/resources/toolbar/maxicon.jpg");
+		addImageToButton(minimizeWindowButton, "src/resources/toolbar/minicon.jpg");
+		addImageToButton(exitButton, "src/resources/toolbar/exiticon.jpg");
 		
 		//connects each button to its corresponding event
-		openButton.setOnAction(e -> OpenButtonPressed());
-		settingsButton.setOnAction(e -> SettingsButtonPressed());
-		newFileButton.setOnAction(e -> NewFileButtonPressed());
+		homeButton.setOnAction(e -> InteractiveLearningApp.homeSlide());
+		prevButton.setOnAction(e -> InteractiveLearningApp.prevSlide());
+		nextButton.setOnAction(e -> InteractiveLearningApp.nextSlide());
 		minimizeWindowButton.setOnAction(e -> MinimizeButtonPressed());
 		maximizeWindowButton.setOnAction(e -> MaximizeButtonPressed());
 		exitButton.setOnAction(e -> ExitButtonPressed());
 		
-		
-		//adds 10 pixel padding to the top, bottom, left and right of the toolbar
-		
+		//adds 10 pixel padding to the top, bottom, left and right of the tool bar
 		gridPane.setPadding(new Insets(10,0,10,0));
 		
 		//sets the text so it is aligned in the centre of  its bounding box
@@ -71,123 +107,68 @@ public class ToolBar {
 		gridPane.setAlignment(Pos.CENTER);
 		
 		//sets the title to always be in the centre
-		//and resize button to be on the left of the toolbar
-		
+		//and resize button to be on the left of the tool bar
 		GridPane.setHalignment(title, HPos.CENTER);
 		gridPane.setHgap(0);
 		
-		//adding buttons to gridpane
-		gridPane.add(openButton, 0, 0);
-		gridPane.add(settingsButton, 1, 0);
-		gridPane.add(newFileButton, 2, 0);
+		//adding buttons to grid pane
+		gridPane.add(homeButton, 0, 0);
+		gridPane.add(prevButton, 1, 0);
+		gridPane.add(nextButton, 2, 0);
 		gridPane.add(title, 3, 0);
 		gridPane.add(minimizeWindowButton, 4, 0);
 		gridPane.add(maximizeWindowButton, 5, 0);
 		gridPane.add(exitButton, 6, 0);
-		gridPane.setGridLinesVisible(true);
+		gridPane.setGridLinesVisible(false);
 		
 		//Sets to middle of each cell
 		GridPane.setHalignment(title, HPos.CENTER);
-		GridPane.setHalignment(openButton, HPos.CENTER);
-		GridPane.setHalignment(settingsButton, HPos.CENTER);
-		GridPane.setHalignment(newFileButton, HPos.CENTER);
+		GridPane.setHalignment(homeButton, HPos.CENTER);
+		GridPane.setHalignment(prevButton, HPos.CENTER);
+		GridPane.setHalignment(nextButton, HPos.CENTER);
 		GridPane.setHalignment(minimizeWindowButton, HPos.CENTER);
 		GridPane.setHalignment(maximizeWindowButton, HPos.CENTER);
 		GridPane.setHalignment(exitButton, HPos.CENTER);
 		
-
-		//creates column constraints so if the toolbar is resized, the distance between buttons 
+		//creates column constraints so if the tool bar is resized, the distance between buttons 
 		//remains consistent
-		/*TODO
-		 * work with the design and marketing manager to get the toolbar looking good 
-		 */
-	
 		ColumnConstraints column0 = new ColumnConstraints();
-		column0.setPercentWidth(5);
+		column0.setPercentWidth(4);
 		ColumnConstraints column1 = new ColumnConstraints();
-		column1.setPercentWidth(5);
+		column1.setPercentWidth(4);
 		ColumnConstraints column2 = new ColumnConstraints();
-		column2.setPercentWidth(5);
+		column2.setPercentWidth(4);
 		ColumnConstraints column3 = new ColumnConstraints();
-		column3.setPercentWidth(70);
+		column3.setPercentWidth(76);
 		ColumnConstraints column4 = new ColumnConstraints();
-		column4.setPercentWidth(5);
+		column4.setPercentWidth(4);
 		ColumnConstraints column5 = new ColumnConstraints();
-		column5.setPercentWidth(5);
+		column5.setPercentWidth(4);
 		ColumnConstraints column6 = new ColumnConstraints();
-		column6.setPercentWidth(5);
+		column6.setPercentWidth(4);
 
 		gridPane.getColumnConstraints().addAll(column0, column1, column2, column3, 
 											   column4, column5, column6);
 		
-		//great a subscene on top of the gridpane, with a width defined by the windowwidth and a height of 20
-		SubScene toolBar = new SubScene(gridPane, winWidth, 20);
+		//create a sub-scene on top of the grid pane, with a width defined by the window width and tool bar height variables
+		SubScene toolBar = new SubScene(gridPane, winWidth, toolBarHeight);
 		
+		//binding the toolbar to the stage of the program is used when resizing the window
 		toolBar.widthProperty().bind(InteractiveLearningApp.getStage().widthProperty());
-		toolBar.setUserAgentStylesheet("style/hotBar.css");
+		
+		toolBar.setUserAgentStylesheet("style/Extras/toolBar.css");
 		return toolBar;
-	}
-	
-	public static void OpenButtonPressed() {
-		/*
-		 * TODO
-		 * Maybe make our own file browser? (would be a lot of work but could be something to do on the side
-		 * 
-		 */
-		System.out.println("Open Button Pressed");
-		FileChooser fileChooser = new FileChooser();
-		
-		/*
-		 * TODO: Add appropriate file extension filters (e.g. .stl files)
-		fileChooser.getExtensionFilters().addAll(c)
-		
-		
-		*/
-		fileChooser.setTitle("Open a new Presentation");
-		File selectedFile = fileChooser.showOpenDialog(InteractiveLearningApp.getStage());
-		
-		//from here file can be returned or parsed to another method for scene building
-	}
-	
-	public static void SettingsButtonPressed() {
-	/*
-	 * TOOD maybe have the settings scene as a separate class?
-	 * This is just a basic idea of what it should do
-	 */
-		System.out.println("Settings Button Pressed");
-		Label settingsLabel = new Label("This will be the settings screen");
-		
-		StackPane settingsLayout = new StackPane();
-		settingsLayout.getChildren().add(settingsLabel);
-		
-		Stage settingsWindow = new Stage();
-		Scene settingsScene = new Scene(settingsLayout,230,100);
-		
-		settingsWindow.setTitle("Settings Screen");
-		settingsWindow.setScene(settingsScene);
-		
-		settingsWindow.setX(InteractiveLearningApp.getStage().getX() + 200);
-		settingsWindow.setY(InteractiveLearningApp.getStage().getX() + 100);
-		
-		settingsWindow.show();
-	}
-	
-	public static void NewFileButtonPressed() {
-		System.out.println("New File Button Pressed");
-		//TODO add functionality so a new empty scene opens??
-		//not sure abt this one 
 	}
 	
 	public static void MinimizeButtonPressed() {
 		System.out.println("Minimize Window Button Pressed");
 		InteractiveLearningApp.getStage().setIconified(true);
 	}
-	
-	
+
 	public static void MaximizeButtonPressed() {
 		System.out.println("Maximize Window Button Pressed");
 		
-		//if window is not maximized, maximizes the window and sets the value to true
+		//if window is not maximised, maximises the window and sets the value to true
 		if (InteractiveLearningApp.getStage().isMaximized() == false) {
 			InteractiveLearningApp.getStage().setMaximized(true);
 		}
@@ -201,8 +182,32 @@ public class ToolBar {
 
 	}
 	
+	public void setTitle(String id) {
+		title.setText(id);
+	}
+	
 	public static void ExitButtonPressed() {
 		System.out.println("Exit Button Pressed");
 		InteractiveLearningApp.getStage().close();
+		System.exit(1);
 	}
+	
+	
+	/**
+	 * adds image from file path to a button
+	 * @param button - id of button to contain image
+	 * @param filepath - filepath of the image to be used
+	 */
+	public static void addImageToButton(Button button, String filePath) {
+		try {
+			Image homeIcon = new Image(new FileInputStream(filePath));
+			ImageView imageView = new ImageView(homeIcon);
+			imageView.setFitHeight(toolBarHeight);
+			imageView.setPreserveRatio(true);
+			button.setGraphic(imageView);		
+		}catch(IOException ioe) {
+			System.out.println("Image not found");
+		}
+	}
+	
 }

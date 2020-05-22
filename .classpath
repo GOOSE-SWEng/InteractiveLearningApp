@@ -2,5 +2,11 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/User/Documents/Electronic Engineering/Year 3/Software Engineering Project/Software/InteractiveLearningApp/3DModelImporter/jim3dsModelImporterJFX.jar"/>
+	<classpathentry kind="lib" path="C:/Users/User/Documents/Electronic Engineering/Year 3/Software Engineering Project/Software/InteractiveLearningApp/3DModelImporter/jimColModelImporterJFX.jar"/>
+	<classpathentry kind="lib" path="C:/Users/User/Documents/Electronic Engineering/Year 3/Software Engineering Project/Software/InteractiveLearningApp/3DModelImporter/jimFxmlModelImporterJFX.jar"/>
+	<classpathentry kind="lib" path="C:/Users/User/Documents/Electronic Engineering/Year 3/Software Engineering Project/Software/InteractiveLearningApp/3DModelImporter/jimObjModelImporterJFX.jar"/>
+	<classpathentry kind="lib" path="C:/Users/User/Documents/Electronic Engineering/Year 3/Software Engineering Project/Software/InteractiveLearningApp/3DModelImporter/jimStlMeshImporterJFX.jar"/>
+	<classpathentry kind="lib" path="C:/Users/User/Documents/Electronic Engineering/Year 3/Software Engineering Project/Software/InteractiveLearningApp/3DModelImporter/jimX3dModelImporterJFX.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
