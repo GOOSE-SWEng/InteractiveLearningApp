@@ -489,7 +489,6 @@ public class XMLParser {
 		Boolean cyclic= false;
 		
 		//Shape variables
-		int shapeId=0;
 		String type=null;
 		String id = null;
 		float xStart=0;

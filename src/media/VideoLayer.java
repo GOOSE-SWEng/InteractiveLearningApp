@@ -28,7 +28,7 @@ public class VideoLayer {
 	public void addVideo(String urlName, int startTime, Boolean loop, int xStart, int yStart, int slideNumber) throws IOException {
 		// creates the video object and its subscene
 		Video video = new Video(urlName, startTime, loop, xStart, yStart, 0, 0);
-		InteractiveLearningApp.slides.get(slideNumber).getElements().add(video);
+		InteractiveLearningApp.slides.get(slideNumber).getSlideVideos().add(video);
 		// adds the video object to the array list
 		videos.add(video);
 		// adds the SubScene(created with the constructor) to the video layer stack pane

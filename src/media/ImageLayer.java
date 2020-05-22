@@ -29,7 +29,7 @@ public class ImageLayer {
 		//constructor for the image object
 		SlideImage image = new SlideImage(urlName, xStart, yStart, width, height, startTime, endTime, slideNumber, sceneWidth, sceneHeight);
 		images.add(image);
-		InteractiveLearningApp.slides.get(slideNumber).getElements().add(image);
+		InteractiveLearningApp.slides.get(slideNumber).getSlideImages().add(image);
 		sp.getChildren().add(image.get());
 		//image.get().setLayoutX(xStart);
 		//image.get().setLayoutY(yStart);

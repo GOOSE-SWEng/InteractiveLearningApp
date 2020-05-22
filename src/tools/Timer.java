@@ -79,23 +79,10 @@ public class Timer extends Thread{
 		currentSlideNo = currentSlide;
 	}
 	public void stopSlide() {
-		for(int i = 0;i<InteractiveLearningApp.slides.get(currentSlideNo).getElements().size();i++) {
-			
-		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		/*ArrayList<MediaElement> elements = InteractiveLearningApp.slides.get(currentSlideNo).getSlideElements();
+		//for(int i = 0;i<InteractiveLearningApp.slides.get(currentSlideNo).getSlideElements().size();i++) {
+		ArrayList<MediaElement> elements = InteractiveLearningApp.slides.get(currentSlideNo).getSlideElements();
 		for(int i=0;i<elements.size();i++) {
 			int id = elements.get(i).mediaId;
-			System.out.println(i+ ", " + currentSlideNo + ", " + id + "Type" + elements.get(i).mediaType);
 			switch(elements.get(i).mediaType) {
 				case AUDIO:
 					InteractiveLearningApp.slides.get(currentSlideNo).getSlideAudio().get(id).stop();
@@ -107,7 +94,11 @@ public class Timer extends Thread{
 					Platform.runLater(() ->InteractiveLearningApp.slides.get(currentSlideNo).getSlideImages().get(id).remove());
 					break;
 				case SHAPE:
-					Platform.runLater(()->InteractiveLearningApp.slides.get(currentSlideNo).getSlideShapes().get(id).destroy());
+					try {
+						Platform.runLater(()->InteractiveLearningApp.slides.get(currentSlideNo).getSlideShapes().get(id).destroy());
+					}catch (IndexOutOfBoundsException e) {
+						
+					}
 					break;
 				case TEXT:
 					Platform.runLater(()->InteractiveLearningApp.slides.get(currentSlideNo).getSlideTexts().get(id).remove());
@@ -115,6 +106,6 @@ public class Timer extends Thread{
 			default:
 				break;
 			}
-		}*/
+		}
 	}
 }

@@ -51,7 +51,7 @@ public class Graphics2D {
 		// add shape to the array list
 		shapes.add(shape);
 		sp.getChildren().add(shape.get());
-		InteractiveLearningApp.slides.get(slideNumber).getElements().add(shape);
+		InteractiveLearningApp.slides.get(slideNumber).getSlideShapes().add(shape);
 	}
 	
 	/**draw rectangle with solid colour */
@@ -67,7 +67,7 @@ public class Graphics2D {
 		shape.addPoint(xStart,yStart+height);
 		shapes.add(shape);
 		sp.getChildren().add(shape.get());
-		InteractiveLearningApp.slides.get(slideNumber).getElements().add(shape);
+		InteractiveLearningApp.slides.get(slideNumber).getSlideShapes().add(shape);
 	}
 	
 	/**draw rectangle with gradient fill */
@@ -86,7 +86,7 @@ public class Graphics2D {
 		shape.addPoint(xStart,yStart+height);
 		shapes.add(shape);
 		sp.getChildren().add(shape.get());
-		InteractiveLearningApp.slides.get(slideNumber).getElements().add(shape);
+		InteractiveLearningApp.slides.get(slideNumber).getSlideShapes().add(shape);
 
 	}
 	/**draw solid colour oval */
@@ -98,7 +98,7 @@ public class Graphics2D {
 		shape.drawOval((int)width,(int)height,(int)xStart,(int)yStart);
 		shapes.add(shape);
 		sp.getChildren().add(shape.get());
-		InteractiveLearningApp.slides.get(slideNumber).getElements().add(shape);
+		InteractiveLearningApp.slides.get(slideNumber).getSlideShapes().add(shape);
 	}
 	
 	/**draw gradient fill oval */
@@ -113,7 +113,7 @@ public class Graphics2D {
 		shape.drawOval((int)width,(int)height,(int)xStart,(int)yStart);
 		shapes.add(shape);
 		sp.getChildren().add(shape.get());
-		InteractiveLearningApp.slides.get(slideNumber).getElements().add(shape);
+		InteractiveLearningApp.slides.get(slideNumber).getSlideShapes().add(shape);
 	}
 	//returns the subscene
 	public StackPane get() {

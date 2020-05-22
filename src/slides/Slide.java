@@ -43,12 +43,12 @@ public class Slide {
 	//id and duration of slide
 	private String id;
 	private int duration;
-	private ArrayList<Object> elements = new ArrayList<Object>();
-	/*private ArrayList<Video> slideVideos = new ArrayList<Video>();
+	//private ArrayList<Object> elements = new ArrayList<Object>();
+	private ArrayList<Video> slideVideos = new ArrayList<Video>();
 	private ArrayList<Audio> slideAudio = new ArrayList<Audio>();
 	private ArrayList<SlideText> slideTexts = new ArrayList<SlideText>();
 	private ArrayList<SlideImage> slideImages = new ArrayList<SlideImage>();
-	private ArrayList<Shape> slideShapes = new ArrayList<Shape>();*/
+	private ArrayList<Shape> slideShapes = new ArrayList<Shape>();
 	
 	private ArrayList<MediaElement> slideElements = new ArrayList<MediaElement>();
 	SubScene test;
@@ -200,13 +200,60 @@ public class Slide {
 		slide.getStylesheets().add("style/ContentScreen/contentScreenCB.css");
 	}
 	
-	public ArrayList<Object> getElements() {
+	
+	
+	
+	public ArrayList<Video> getSlideVideos() {
+		return slideVideos;
+	}
+
+	public void setSlideVideos(ArrayList<Video> slideVideos) {
+		this.slideVideos = slideVideos;
+	}
+
+	public ArrayList<Audio> getSlideAudio() {
+		return slideAudio;
+	}
+
+	public void setSlideAudio(ArrayList<Audio> slideAudio) {
+		this.slideAudio = slideAudio;
+	}
+
+	public ArrayList<SlideText> getSlideTexts() {
+		return slideTexts;
+	}
+
+	public void setSlideTexts(ArrayList<SlideText> slideTexts) {
+		this.slideTexts = slideTexts;
+	}
+
+	public ArrayList<SlideImage> getSlideImages() {
+		return slideImages;
+	}
+
+	public void setSlideImages(ArrayList<SlideImage> slideImages) {
+		this.slideImages = slideImages;
+	}
+
+	public ArrayList<Shape> getSlideShapes() {
+		return slideShapes;
+	}
+
+	public void setSlideShapes(ArrayList<Shape> slideShapes) {
+		this.slideShapes = slideShapes;
+	}
+
+	public void setSlideElements(ArrayList<MediaElement> slideElements) {
+		this.slideElements = slideElements;
+	}
+
+	/*public ArrayList<Object> getElements() {
 		return elements;
 	}
 
 	public void setElements(ArrayList<Object> elements) {
 		this.elements = elements;
-	}
+	}*/
 
 	public ArrayList<MediaElement> getSlideElements() {
 		return slideElements;

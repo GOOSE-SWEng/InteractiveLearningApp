@@ -27,7 +27,7 @@ public class AudioLayer {
 		//constructor for the audio object
 
 		Audio slideAudio = new Audio(urlName, startTime, looping, controls, width, height, slideNumber);
-		InteractiveLearningApp.slides.get(slideNumber).getElements().add(slideAudio);
+		InteractiveLearningApp.slides.get(slideNumber).getSlideAudio().add(slideAudio);
 		audio.add(slideAudio);
 		if (controls) {
 			sp.getChildren().add(slideAudio.get());
