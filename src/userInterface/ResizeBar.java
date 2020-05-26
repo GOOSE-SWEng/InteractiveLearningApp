@@ -40,8 +40,13 @@ public class ResizeBar {
 		resizeButton.setOnMouseDragged(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
 				Stage window = InteractiveLearningApp.getStage();
-				window.setWidth(event.getScreenX() - window.getX());
-				window.setHeight(event.getScreenY() - window.getY());
+				if(window.getMinWidth() < (event.getScreenX() - window.getX())) {
+					window.setWidth(event.getScreenX() - window.getX());
+
+				}
+				if(window.getMinHeight() < (event.getScreenY() - window.getY())) {
+					window.setHeight(event.getScreenY() - window.getY());
+				}
 			}
 		});
 

@@ -103,9 +103,10 @@ public class StartScreen {
 		//Add model to the right of the screen
 		borderPane.setRight(gooseModel.getModelScene());
 		borderPane.setAlignment(gooseModel.getModelScene(), Pos.CENTER);
-		
 		startScreen = new Scene(borderPane, defaultXSize, defaultYSize);
 		startScreen.getStylesheets().add("style/StartScreen/startScreen.css");	//Default
+		borderPane.prefWidthProperty().bind(startScreen.widthProperty());
+		borderPane.prefHeightProperty().bind(startScreen.heightProperty());
 		//startScreen.getStylesheets().add("style/StartScreen/startScreenNight.css");	//Nightmode
 		//startScreen.getStylesheets().add("style/StartScreen/startScreenCB.css");	//Colourblind?
 		return startScreen;

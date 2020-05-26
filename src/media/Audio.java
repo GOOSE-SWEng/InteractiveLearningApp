@@ -1,11 +1,13 @@
 package media;
 
 import java.io.File;
+import java.nio.file.Paths;
 
 import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -24,19 +26,33 @@ public class Audio {
 	//StackPane sp = new StackPane();
 	int startTime;
 	int slideNumber;
+	boolean audioFail = false;
 	
 	public Audio(String urlName, int startTime, Boolean looping, Boolean controls, int width, 
 				 int height, int slideNumber) {
 		Media media = null;
 		if(urlName.startsWith("https://")) {
-			media = new Media(urlName);
+			try {
+				media = new Media(urlName);
+			} catch (Exception e) {
+				audioFail = true;
+				System.out.println("Audio file not found, will not be added to the presentation");
+				return;
+			}
 		}
 		else if(urlName.startsWith("src")) {
-			File audioFile = new File(urlName);
-			media = new Media(audioFile.toURI().toString());
+			try {
+				File audioFile = new File(urlName);
+				media = new Media(audioFile.toURI().toString());
+			} catch (Exception e) {
+				audioFail = true;
+				System.out.println("Audio file not found, will not be added to the presentation");
+				return;
+			}
 		}
 		else {
 			System.out.println("Unknown audio origin.");
+			return;
 		}
 		
 		player = new MediaPlayer(media);

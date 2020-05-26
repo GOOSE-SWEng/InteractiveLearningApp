@@ -71,8 +71,8 @@
 		<video urlname='https://youtu.be/OnoNITE-CLc' starttime='1000' loop='false' xstart='90' ystart='90'></video>
 		<model urlname='src/resources/slide1/models/HST-3DS\hst.3ds' xstart='0' ystart='0' width='33' height='80'></model>
 	</slide>
-	<slide id='Rosetta Stone' duration='6000'>
-		<text font='arial' fontsize='15' fontcolor='black' xpos='0' ypos='0' starttime='1000' endtime='10000'>
+	<slide id='Rosetta Stone' duration='10000'>
+		<text font='arial' fontsize='15' fontcolor='black' xpos='0' ypos='0' starttime='100' endtime='10000'>
 	The Rosetta Stone is a granodiorite stele 
 	discovered in 1799 which is inscribed with three
 	versions of a decreebissued in Memphis, 
@@ -112,22 +112,16 @@
 	the British Museum almost continuously since 
 	1802 and is the most visited object there.
 		</text>
-		<line xstart='0' ystart='0' xend='1280' yend='0' linecolor='Black' starttime='100' endtime='10000'></line>
-		<shape type='rectangle' xstart='0' ystart='0' width='400' height='680' fillcolor='Black' starttime='10000' endtime='100'>
-			<shading x1='0' y1='0' color1='Black' x2='100' y2='100' color2='Orange' cyclic='True'></shading>
+		<shape type='rectangle' xstart='10' ystart='5' width='310' height='630' fillcolor='dimgray' starttime='50' endtime='10000'>
+			<shading x1='155' y1='500' color1='dimgray' x2='155' y2='630' color2='white' cyclic='False'></shading>
 		</shape>
-		<shape type='oval' xstart='880' ystart='200' width='400' height='200' fillcolor='pink' starttime='10000' endtime='100'>
-			<shading x1='0' y1='0' color1='Black' x2='100' y2='100' color2='Blue' cyclic='True'></shading>
-		</shape>
-		<shape type='rectangle' xstart='880' ystart='0' width='400' height='680' fillcolor='pink' starttime='10000' endtime='100'>
-		</shape>
-		<shape type='oval' xstart='880' ystart='400' width='400' height='200' fillcolor='blue' starttime='10000' endtime='100'>
+		<shape type='rectangle' xstart='940' ystart='5' width='310' height='630' fillcolor='dimgray' starttime='100' endtime='10000'>
 		</shape>
 		<audio urlname='src/resources/slide2/audio/audio1.wav' starttime='10' loop='false'></audio>
 		<image urlname='https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Rosetta_Stone.JPG/800px-Rosetta_Stone.JPG' xstart='80' ystart='0' width='20' height='32' starttime='1000' endtime='10000'></image>
 		<image urlname='https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/RosettaStoneAsPartOfOriginalStele_revised.svg/800px-RosettaStoneAsPartOfOriginalStele_revised.svg.png' xstart='70' ystart='32' width='20' height='68' starttime='1000' endtime='20000'></image>
 		<video urlname='src/resources/slide2/video/Sun.mp4' starttime='1000' loop='false' xstart='70' ystart='80'></video>
-		<model urlname='src/resources/slide2/models/alien.stl' xstart='0' ystart='0' width='50' height='80'></model>
+		<model urlname='src/resources/slide2/models/alien.stl' xstart='0' ystart='0' width='40' height='80'></model>
 	</slide>
 	<slide id='Big Lion' duration='6000'>
 		<text font='arial' fontsize='15' fontcolor='black' xpos='70' ypos='0' starttime='100' endtime='10000'>
@@ -196,21 +190,21 @@ cultures, including those of the Maya and Aztec.
 			HELLO THERE, WE ARE OUT HERE VIBIN <b>You</b> are <i>Gorgeous</i>
 			LOL AT THAT THO I LOVE SAUSAGE ROLLS
 		</text>
-		<line xstart='0' ystart='0' xend='1280' yend='0' linecolor='Black' starttime='10' endtime='100'></line>
-		<line xstart='1280' ystart='0' xend='1280' yend='680' linecolor='Black' starttime='10' endtime='100'></line>
-		<line xstart='1280' ystart='680' xend='0' yend='680' linecolor='Black' starttime='10' endtime='100'></line>
-		<line xstart='0' ystart='680' xend='0' yend='0' linecolor='Black' starttime='10' endtime='100'></line>
-		<line xstart='400' ystart='0' xend='400' yend='680' linecolor='Black' starttime='10' endtime='100'></line>
-		<line xstart='880' ystart='0' xend='880' yend='680' linecolor='Black' starttime='10' endtime='100'></line>
-		<shape type='rectangle' xstart='0' ystart='0' width='400' height='680' fillcolor='Black' starttime='0' endtime='100'>
+		<line xstart='0' ystart='0' xend='1280' yend='0' linecolor='Black' starttime='10' endtime='1000'></line>
+		<line xstart='1280' ystart='0' xend='1280' yend='680' linecolor='Black' starttime='10' endtime='1000'></line>
+		<line xstart='1280' ystart='680' xend='0' yend='680' linecolor='Black' starttime='10' endtime='1000'></line>
+		<line xstart='0' ystart='680' xend='0' yend='0' linecolor='Black' starttime='10' endtime='1000'></line>
+		<line xstart='400' ystart='0' xend='400' yend='680' linecolor='Black' starttime='10' endtime='1000'></line>
+		<line xstart='880' ystart='0' xend='880' yend='680' linecolor='Black' starttime='10' endtime='1000'></line>
+		<shape type='rectangle' xstart='0' ystart='0' width='400' height='680' fillcolor='Black' starttime='0' endtime='1000'>
 			<shading x1='0' y1='0' color1='Black' x2='100' y2='100' color2='Orange' cyclic='True'></shading>
 		</shape>
-		<shape type='oval' xstart='880' ystart='200' width='400' height='200' fillcolor='pink' starttime='0' endtime='100'>
+		<shape type='oval' xstart='880' ystart='200' width='400' height='200' fillcolor='pink' starttime='0' endtime='1000'>
 			<shading x1='0' y1='0' color1='Black' x2='100' y2='100' color2='Blue' cyclic='True'></shading>
 		</shape>
-		<shape type='rectangle' xstart='880' ystart='0' width='400' height='680' fillcolor='pink' starttime='0' endtime='100'>
+		<shape type='rectangle' xstart='880' ystart='0' width='400' height='680' fillcolor='pink' starttime='0' endtime='1000'>
 		</shape>
-		<shape type='oval' xstart='880' ystart='400' width='400' height='200' fillcolor='blue' starttime='0' endtime='100'>
+		<shape type='oval' xstart='880' ystart='400' width='400' height='200' fillcolor='blue' starttime='0' endtime='1000'>
 		</shape>
 		<audio urlname='src/resources/slide4/audio/audio1.wav' starttime='10' loop='false'></audio>
 		<image urlname='https://cdn.eso.org/images/screen/eso1907a.jpg' xstart='0' ystart='0' width='30' height='30' starttime='100' endtime='10000'></image>

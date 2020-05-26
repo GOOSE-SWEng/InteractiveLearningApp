@@ -50,6 +50,7 @@ public class Model {
 	int height; //Height of SubScenes
 	int xStart; //X value for position
 	int yStart; //Y value for position
+	boolean modelFail = false;
 	
 	 //Group containing all 3D Elements
 	Group modelGroup;
@@ -93,8 +94,15 @@ public class Model {
 		if(url.startsWith("https://")) {
 		}
 		else if(url.startsWith("src")) {
-			File modelFile = new File(url);
-			url = modelFile.toURI().toString();
+			try {
+				File modelFile = new File(url);
+				url = modelFile.toURI().toString();
+			} catch (Exception e) {
+				modelFail = true;
+				System.out.println("3D Model not found, will not be added to presentation");
+				return null;
+			}
+			
 		}
 		else {
 			System.out.println("Unknown model origin.");

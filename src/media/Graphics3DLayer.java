@@ -25,8 +25,11 @@ public class Graphics3DLayer {
 	
 	public void add(String url, int modelWidth, int modelHeight, int xStart, int yStart) {
 		Model model =  new Model(url, modelWidth, modelHeight, xStart, yStart);
-		models.add(model);
-		sp.getChildren().add(model.getModelScene());
+		if(model.modelFail == false) {
+			models.add(model);
+			sp.getChildren().add(model.getModelScene());
+		}
+		
 	}
 	
 	public void remove(Model object) {

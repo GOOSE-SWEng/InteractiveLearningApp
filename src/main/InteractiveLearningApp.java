@@ -95,8 +95,8 @@ public class InteractiveLearningApp extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		mainStage = primaryStage;
-		mainStage.setMinWidth(defaultXSize);
-		mainStage.setMinHeight(defaultYSize);
+		mainStage.setMinWidth(defaultXSize*0.75);
+		mainStage.setMinHeight(defaultYSize*0.75);
 		start = StartScreen.createStartScreen(mainStage, defaultXSize, defaultYSize);
 		settings = Settings.createSettings(mainStage, defaultXSize, defaultYSize);
 		loading = LoadingScreen.createLoadingScreen(mainStage, defaultXSize, defaultYSize);

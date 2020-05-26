@@ -39,6 +39,7 @@ public class Video {
 	String urlName;
 	Boolean loop;
 	SubScene subScene;
+	boolean videoFail = false;
 
 	private MediaPlayer mediaPlayer;
 	private Duration totTime;
@@ -63,7 +64,6 @@ public class Video {
 		// Loads the media player layout from a FXML file
 		BorderPane root = FXMLLoader.load(getClass().getClassLoader().getResource("media/videoPlayer.fxml"));
 
-		this.urlName = urlName;
 		// creates a subscene
 		subScene = new SubScene(root, 600, 400);
 		// Set subscene position
@@ -78,11 +78,24 @@ public class Video {
 		// video media file
 		Media media = null;
 		if(urlName.startsWith("https://")) {
-			media = new Media(urlName);
+			try {
+				media = new Media(urlName);
+			} catch (Exception e) {
+				videoFail = true;
+				System.out.println("Video file not found, will not be added to the presentation");
+				return;
+			}	
 		}
 		else if(urlName.startsWith("src")) {
-			File vidFile = new File(urlName);
-			media = new Media(vidFile.toURI().toString());
+			try {
+				File vidFile = new File(urlName);
+				media = new Media(vidFile.toURI().toString());
+			} catch (Exception e) {
+				videoFail = true;
+				System.out.println("Video file not found, will not be added to the presentation");
+				return;
+			}
+			
 		}
 		else {
 			System.out.println("Unknown video origin.");
@@ -188,8 +201,9 @@ public class Video {
 			public void run() {
 				if (!loop) {
 					mediaPlayer.stop();
+					mediaPlayer.seek(totTime.multiply(playbackSlider.getValue() / 100));
 				}
-				mediaPlayer.seek(totTime.multiply(playbackSlider.getValue() / 100));
+				
 			}
 		});
 
@@ -218,10 +232,6 @@ public class Video {
 		Pane p = (Pane) root.getCenter();
 		p.getChildren().get(0);
 		MediaView mv = (MediaView) p.getChildren().get(0);
-
-		//mv.setMediaPlayer(mp);
-		//mp.setAutoPlay(true);
-		mv.autosize();
 		mv.setMediaPlayer(mediaPlayer);
 	}
 
@@ -248,14 +258,5 @@ public class Video {
 	
 	public void play() {
 		mediaPlayer.play();
-		System.out.println("VIDEO MEDIA PLAYING" + urlName);
-	}
-	public void stop() {
-		mediaPlayer.stop();
-		System.out.println("VIDEO MEDIA STOPPING" + urlName);
-	}
-	
-	public MediaPlayer getPlayer() {
-		return mediaPlayer;
 	}
 }
