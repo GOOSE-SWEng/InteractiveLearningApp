@@ -40,7 +40,7 @@ public class Audio {
 				return;
 			}
 		}
-		else if(urlName.startsWith("src")) {
+		else if(urlName.startsWith("resources/")) {
 			try {
 				File audioFile = new File(urlName);
 				media = new Media(audioFile.toURI().toString());

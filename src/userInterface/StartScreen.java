@@ -94,7 +94,7 @@ public class StartScreen {
 		borderPane.setBottom(resizeBar);
 		
 		//Import 3D goose model
-		Model gooseModel = new Model(Paths.get("src/resources/3D_Models/startScreenGoose.stl").toUri().toString(), 50,90);
+		Model gooseModel = new Model(Paths.get("resources/3D_Models/startScreenGoose.stl").toUri().toString(), 50,90);
 		//Zoom into model
 		gooseModel.moveCam(0, 15, 600); 
 		

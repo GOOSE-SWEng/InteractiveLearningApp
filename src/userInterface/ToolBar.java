@@ -84,12 +84,12 @@ public class ToolBar {
 		Button exitButton = new Button();
 		
 		//Add images to previously made blank buttons
-		addImageToButton(homeButton, "src/resources/toolbar/homeicon.jpg");
-		addImageToButton(prevButton, "src/resources/toolbar/previcon.jpg");
-		addImageToButton(nextButton, "src/resources/toolbar/nexticon.jpg");
-		addImageToButton(maximizeWindowButton, "src/resources/toolbar/maxicon.jpg");
-		addImageToButton(minimizeWindowButton, "src/resources/toolbar/minicon.jpg");
-		addImageToButton(exitButton, "src/resources/toolbar/exiticon.jpg");
+		addImageToButton(homeButton, "resources/toolbar/homeicon.jpg");
+		addImageToButton(prevButton, "resources/toolbar/previcon.jpg");
+		addImageToButton(nextButton, "resources/toolbar/nexticon.jpg");
+		addImageToButton(maximizeWindowButton, "resources/toolbar/maxicon.jpg");
+		addImageToButton(minimizeWindowButton, "resources/toolbar/minicon.jpg");
+		addImageToButton(exitButton, "resources/toolbar/exiticon.jpg");
 		
 		//connects each button to its corresponding event
 		homeButton.setOnAction(e -> InteractiveLearningApp.homeSlide());

@@ -92,8 +92,9 @@ public class Model {
 		camera = new PerspectiveCamera(); 
 		
 		if(url.startsWith("https://")) {
+			System.out.println("Online source");
 		}
-		else if(url.startsWith("src")) {
+		else if(url.startsWith("resources")) {
 			try {
 				File modelFile = new File(url);
 				url = modelFile.toURI().toString();

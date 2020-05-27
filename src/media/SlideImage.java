@@ -46,7 +46,7 @@ public class SlideImage {
     
 	if(url.startsWith("https://")) {
 
-	}else if(url.startsWith("src")) {
+	}else if(url.startsWith("resources/")) {
 		try {
 			File imgFile = new File(url);
 			url = imgFile.toURI().toString();

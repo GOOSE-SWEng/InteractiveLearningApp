@@ -24,7 +24,7 @@ public class VideoLayer {
 		window = new SubScene(sp, width, height);
 	}
 
-	public void addVideo(String urlName, int startTime, Boolean loop, int xStart, int yStart) throws IOException {
+	public void addVideo(String urlName, int startTime, Boolean loop, int xStart, int yStart, int slideNo) throws IOException {
 		// creates the video object and its subscene
 		Video video = new Video(urlName, startTime, loop, xStart, yStart, 0, 0);
 		

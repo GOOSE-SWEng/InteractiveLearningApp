@@ -86,7 +86,7 @@ public class Video {
 				return;
 			}	
 		}
-		else if(urlName.startsWith("src")) {
+		else if(urlName.startsWith("resources/")) {
 			try {
 				File vidFile = new File(urlName);
 				media = new Media(vidFile.toURI().toString());
@@ -255,8 +255,17 @@ public class Video {
 			label.setText(min + ":" + sec);
 		}
 	}
-	
+		
 	public void play() {
 		mediaPlayer.play();
+		System.out.println("VIDEO MEDIA PLAYING" + urlName);
+	}
+	public void stop() {
+		mediaPlayer.stop();
+		System.out.println("VIDEO MEDIA STOPPING" + urlName);
+	}
+	
+	public MediaPlayer getPlayer() {
+		return mediaPlayer;
 	}
 }
