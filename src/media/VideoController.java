@@ -19,12 +19,6 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 
-/**
- * Class containing the controls for the video handler object
- * @author - Rimas Radziunas and Cezara-Lidia Jalba
- * @version - 1.2
- * @date - 20/04/20
- */
 public class VideoController {
 	@FXML
 	private Button play;
@@ -42,8 +36,13 @@ public class VideoController {
 	private ImageView muteBtImg;
 
 	private Bounds vidSubBounds;
-
-	/** Play button control */
+	
+	/*@Override
+		public void initialize(URL arg0, ResourceBundle arg1) {
+			// TODO Auto-generated method stub
+			subtitleLB.setOpacity(0);
+		}*/
+	// Play button control
 	@FXML
 	public void play(ActionEvent event) {
 
@@ -55,13 +54,13 @@ public class VideoController {
 		}
 	}
 
-	/** Stop button control */
+	// Stop button control
 	public void stop(ActionEvent event) {
 		mediaView.getMediaPlayer().stop();
 		play.setText("Play");
 	}
 
-	/** Full screen button control */
+	// Full screen button control
 	public void setFullScreen(ActionEvent event) {
 		// Retrieve the correct containers
 		// TODO: adapt to the main program
@@ -106,11 +105,17 @@ public class VideoController {
 	}
 
 	public void captionOn(ActionEvent event) throws IOException, InterruptedException {
-		// TODO: turn on captions
-		//need .srt file, .srt parser and implementation onto the video
+		if(subtitleLB.getOpacity() > 0) {
+			subtitleLB.setOpacity(0);
+			System.out.println("subtitle off");
+		}
+		else {
+			subtitleLB.setOpacity(1);
+			System.out.println("subtitle on");
+		}
 	}
 
-	/** Mute and unmute the audio */
+	// Mute and unmute the audio
 	public void muteAudio(ActionEvent event) {
 		// mute
 		if (mediaView.getMediaPlayer().isMute() == false) {

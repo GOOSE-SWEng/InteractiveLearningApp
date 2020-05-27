@@ -70,7 +70,6 @@ public class InteractiveLearningApp extends Application{
 	//arrays for the media objects and the layers that hold these media objects
 	public static ArrayList<Slide> slides = new ArrayList<Slide>();
 	static ArrayList<Audio> audio = new ArrayList<Audio>();
-	static ArrayList<Graphics2D> graphics2d = new ArrayList<Graphics2D>();
 	static ArrayList<Model> models = new ArrayList<Model>();
 	static ArrayList<SlideImage> images = new ArrayList<SlideImage>();
 	static ArrayList<Shape> shapes = new ArrayList<Shape>();
@@ -78,7 +77,7 @@ public class InteractiveLearningApp extends Application{
 	static ArrayList<Video> videos = new ArrayList<Video>();
 	
 	static ArrayList<VideoLayer> videoLayers = new ArrayList<VideoLayer>();
-	static ArrayList<Graphics2D> graphics2dLayers = new ArrayList<Graphics2D>();
+	static ArrayList<Graphics2D> graphics2d = new ArrayList<Graphics2D>();
 	static ArrayList<Graphics3DLayer> graphics3dLayers = new ArrayList<Graphics3DLayer>();
 	static ArrayList<ImageLayer> imageLayers = new ArrayList<ImageLayer>();
 	static ArrayList<TextLayer> textLayers = new ArrayList<TextLayer>();
@@ -95,8 +94,9 @@ public class InteractiveLearningApp extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		mainStage = primaryStage;
-		mainStage.setMinWidth(defaultXSize*0.75);
-		mainStage.setMinHeight(defaultYSize*0.75);
+		mainStage.setMinWidth(defaultXSize);
+		mainStage.setMinHeight(defaultYSize);
+		//mainStage.setHeight(defaultYSize);
 		start = StartScreen.createStartScreen(mainStage, defaultXSize, defaultYSize);
 		settings = Settings.createSettings(mainStage, defaultXSize, defaultYSize);
 		loading = LoadingScreen.createLoadingScreen(mainStage, defaultXSize, defaultYSize);
@@ -110,6 +110,20 @@ public class InteractiveLearningApp extends Application{
 	
 	//Run App
 	public static void run() {
+		//Clear All
+		if(presRunning == true) {
+			xml = null;
+			slides.clear();
+			images.clear();
+			videos.clear();
+			audio.clear();
+			slideText.clear();
+			models.clear();
+			
+			//graphics2d.clear();
+			
+			
+		}else{}
 		presRunning = false;
 		//Create File Browser
 		FileChooser fileChooser = new FileChooser();
@@ -140,6 +154,9 @@ public class InteractiveLearningApp extends Application{
 		//mainStage.setY((Screen.getPrimary().getVisualBounds().getHeight()-defaultYSize)/2);
 		//mainStage.setFullScreen(true);
 	}
+	public static void resumePres() {
+		showSlide(currentSlide);
+	}
 	
 	public static Stage getStage() {
 		return mainStage;
@@ -150,7 +167,7 @@ public class InteractiveLearningApp extends Application{
 		mainStage.setScene(settings); 
 	}
 	
-	/** Show settings screen */
+	/** Show start screen */
 	public static void showStart() {
 		mainStage.setScene(start); 
 	}
@@ -159,13 +176,6 @@ public class InteractiveLearningApp extends Application{
 		//mainStage.setScene(map);
 	}
 	
-	/** sets slide index to home slide */
-	public static void homeSlide() {
-		System.out.println("HOME SLIDE");
-		// whatever index is needed for home page**
-		mainStage.setScene(slides.get(0).getSlide()); 
-		currentSlide = 0;
-	}
 	
 	public static void nextSlide() {
 		try {
@@ -175,9 +185,13 @@ public class InteractiveLearningApp extends Application{
 			timer.resetTimer(currentSlide);
 		}catch(NullPointerException | IndexOutOfBoundsException e) {
 			System.out.println("Presentation Restarted");
-			mainStage.setScene(slides.get(0).getSlide());
-			currentSlide = 0;
-			timer.resetTimer(currentSlide);
+			if(presRunning == false) {
+				mainStage.setScene(start);
+			}else {
+				mainStage.setScene(slides.get(0).getSlide());
+				currentSlide = 0;
+				timer.resetTimer(currentSlide);
+			}
 		}
 	}
 	
@@ -189,12 +203,23 @@ public class InteractiveLearningApp extends Application{
 			timer.resetTimer(currentSlide);
 		}catch(NullPointerException | IndexOutOfBoundsException e) {
 			System.out.println("Presentation Restarted");
-			mainStage.setScene(slides.get(0).getSlide());
-			currentSlide = 0;
-			timer.resetTimer(currentSlide);
+			if(presRunning == false) {
+				mainStage.setScene(start);
+			}else {
+				mainStage.setScene(slides.get(0).getSlide());
+				currentSlide = 0;
+				timer.resetTimer(currentSlide);
+			}
 		}
 	}
 
+	public static int getStageX() {
+		return (int) mainStage.getWidth();
+	}
+	
+	public static int getStageY() {
+		return (int) mainStage.getHeight();
+	}
 	public static void setMainStage(Stage mainStage) {
 		InteractiveLearningApp.mainStage = mainStage;
 	}

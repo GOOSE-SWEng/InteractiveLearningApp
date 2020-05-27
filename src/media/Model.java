@@ -51,6 +51,7 @@ public class Model {
 	int xStart; //X value for position
 	int yStart; //Y value for position
 	boolean modelFail = false;
+	PhongMaterial material;
 	
 	 //Group containing all 3D Elements
 	Group modelGroup;
@@ -72,6 +73,7 @@ public class Model {
 		this.xStart = xStart;
 		this.yStart = yStart;
 		//Create the and store scene
+		material =  new PhongMaterial(Color.BEIGE);
 		modelScene = createModel(url); 
 	}
 	
@@ -83,7 +85,9 @@ public class Model {
 		showControls = false;
 		System.out.println(width + ", " + height);
 		//Create the and store scene
-		modelScene = createModel(url); 
+		material =  new PhongMaterial(Color.web("#3AA9B8"));
+		modelScene = createModel(url);
+		
 	}
 	
 	//Method to create model scene
@@ -132,7 +136,7 @@ public class Model {
 	        //Creates new Mesh view
 	        MeshView cylinderHeadMeshView = new MeshView();
 	        //Sets material of model
-	        cylinderHeadMeshView.setMaterial(new PhongMaterial(Color.BEIGE));
+	        cylinderHeadMeshView.setMaterial(material);
 	        //Sets the mesh for the mesh view
 	        cylinderHeadMeshView.setMesh(cylinderHeadMesh); 
 	        stlImporter.close();

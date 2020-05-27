@@ -43,7 +43,9 @@ public class Slide {
 	//id and duration of slide
 	private String id;
 	private int duration;
-	//private ArrayList<Object> elements = new ArrayList<Object>();
+	
+	private ArrayList<Object> elements = new ArrayList<Object>();
+	
 	private ArrayList<Video> slideVideos = new ArrayList<Video>();
 	private ArrayList<Audio> slideAudio = new ArrayList<Audio>();
 	private ArrayList<SlideText> slideTexts = new ArrayList<SlideText>();
@@ -93,7 +95,7 @@ public class Slide {
 		xOff = xOffset;
 		yOff = yOffset;
 		
-		sp.setMinSize(width,height);
+		//sp.setMinSize(width,height);
 		sp.setAlignment(Pos.TOP_LEFT);
 		
 		/*videoLayer = new VideoLayer(this.width,this.height);
@@ -139,6 +141,7 @@ public class Slide {
 
 		bp.setTop(toolBar);
 		bp.setCenter(sp);
+
 		bp.setBottom(resizeBar);
 		toolBar.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
@@ -157,7 +160,10 @@ public class Slide {
 			}
 		});
 		sp.setPickOnBounds(false);
+		//sp.prefHeightProperty().bind(InteractiveLearningApp.getStage().heightProperty());
+		bp.prefHeightProperty().bind(InteractiveLearningApp.getStage().heightProperty());
 		slide = new Scene(bp,width, height);
+
 		if(InteractiveLearningApp.style.equals("default")) {
 			slide.getStylesheets().add("style/ContentScreen/contentScreen.css");
 		}else if(InteractiveLearningApp.style.equals("nightmode")) {
@@ -199,9 +205,6 @@ public class Slide {
 		slide.getStylesheets().clear();
 		slide.getStylesheets().add("style/ContentScreen/contentScreenCB.css");
 	}
-	
-	
-	
 	
 	public ArrayList<Video> getSlideVideos() {
 		return slideVideos;

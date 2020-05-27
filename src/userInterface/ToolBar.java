@@ -92,7 +92,7 @@ public class ToolBar {
 		addImageToButton(exitButton, "resources/toolbar/exiticon.jpg");
 		
 		//connects each button to its corresponding event
-		homeButton.setOnAction(e -> InteractiveLearningApp.homeSlide());
+		homeButton.setOnAction(e -> InteractiveLearningApp.showStart());
 		prevButton.setOnAction(e -> InteractiveLearningApp.prevSlide());
 		nextButton.setOnAction(e -> InteractiveLearningApp.nextSlide());
 		minimizeWindowButton.setOnAction(e -> MinimizeButtonPressed());

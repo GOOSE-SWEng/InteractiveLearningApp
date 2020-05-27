@@ -30,6 +30,7 @@ public class StartScreen {
 	
 	private static Scene startScreen;
 	private static String title = "Start Screen";
+	private static Button resumeButton;
 	
 	/**
 	 * Method used to create the start screen
@@ -68,11 +69,20 @@ public class StartScreen {
 		//Setup left side of the screen
 		//Create buttons
 		Button openButton =  new Button("Open");
+		resumeButton = new Button("Resume");
+		resumeButton.setStyle("-fx-background-color: gray");
 		Button settingsButton = new Button("Settings");
 		Button quitButton = new Button("Quit");
 		
 		//Setup button actions
 		openButton.setOnMouseClicked(e->InteractiveLearningApp.run());
+		resumeButton.setOnMouseClicked(e->{
+			if(InteractiveLearningApp.presRunning == false) {
+				//Do nothing
+			}else if(InteractiveLearningApp.presRunning == true) {
+				InteractiveLearningApp.resumePres();
+			}
+		});
 		settingsButton.setOnMouseClicked(e->InteractiveLearningApp.showSettings());
 		quitButton.setOnMouseClicked(e->System.exit(1));
 		
@@ -80,8 +90,9 @@ public class StartScreen {
 		GridPane gp = new GridPane();
 		gp.setPadding(new Insets(100,100,100,100));
 		gp.add(openButton, 0, 0);
-		gp.add(settingsButton, 0, 1);	
-		gp.add(quitButton, 0, 2);	
+		gp.add(resumeButton, 0, 1);
+		gp.add(settingsButton, 0, 2);	
+		gp.add(quitButton, 0, 3);	
 		
 		//Center gridpane to center of location
 		gp.setAlignment(Pos.CENTER);	
@@ -103,15 +114,16 @@ public class StartScreen {
 		//Add model to the right of the screen
 		borderPane.setRight(gooseModel.getModelScene());
 		borderPane.setAlignment(gooseModel.getModelScene(), Pos.CENTER);
-		startScreen = new Scene(borderPane, defaultXSize, defaultYSize);
+		borderPane.prefHeightProperty().bind(InteractiveLearningApp.getStage().heightProperty());
+		startScreen = new Scene(borderPane, mainStage.getWidth(), mainStage.getHeight());
 		startScreen.getStylesheets().add("style/StartScreen/startScreen.css");	//Default
 		borderPane.prefWidthProperty().bind(startScreen.widthProperty());
 		borderPane.prefHeightProperty().bind(startScreen.heightProperty());
-		//startScreen.getStylesheets().add("style/StartScreen/startScreenNight.css");	//Nightmode
-		//startScreen.getStylesheets().add("style/StartScreen/startScreenCB.css");	//Colourblind?
 		return startScreen;
 	}
-	
+	public Button getResumeButton() {
+		return resumeButton;
+	}
 	/** sets style of startscreen to default */
 	public static void defaultStyle() {
 		startScreen.getStylesheets().clear();

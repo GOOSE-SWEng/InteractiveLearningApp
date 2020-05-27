@@ -19,7 +19,7 @@ public class Graphics3DLayer {
 		System.out.println(paneWidth + ", " + paneHeight);
 		sp.setPickOnBounds(false);
 		//sp.getChildren().add(canvas);
-		sp.setMinSize(paneWidth, paneHeight);
+		//sp.setMinSize(paneWidth, paneHeight);
 		window = new SubScene(sp, paneWidth, paneHeight);
 	}
 	

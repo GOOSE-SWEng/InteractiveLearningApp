@@ -8,6 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.SubScene;
 import javafx.scene.layout.StackPane;
+import main.InteractiveLearningApp;
 
 public class TextLayer {
 	int height;
@@ -19,10 +20,11 @@ public class TextLayer {
 	public TextLayer(int width,int height, ArrayList<SlideText>slideText){
 		this.height = height;
 		this.width = width;
-		sp.setMinSize(width,height);
+		//sp.setMinSize(width,height);
 		sp.setPickOnBounds(false);
 		this.slideText = slideText;
 		sp.setAlignment(Pos.TOP_LEFT);
+		
 		System.out.println("Text Layer created: " + width + ", " + height);
 	}
 	
@@ -32,6 +34,7 @@ public class TextLayer {
 		slideText.add(text);
 		//text.get().setLayoutX();
 		sp.getChildren().add(text.get());
+		InteractiveLearningApp.slides.get(slideNumber).getSlideTexts().add(text);
 	}
 	
 	public void remove(SlideText object) {

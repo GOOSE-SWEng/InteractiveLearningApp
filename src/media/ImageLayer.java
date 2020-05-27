@@ -6,6 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.SubScene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.StackPane;
+import main.InteractiveLearningApp;
 
 public class ImageLayer {
 	int sceneHeight;
@@ -15,11 +16,15 @@ public class ImageLayer {
 	SubScene window;
 	
 	public ImageLayer(int width,int height, ArrayList<SlideImage> images){
-		sceneHeight = height;
-		sceneWidth = width;
-		sp.setMinSize(sceneWidth,sceneHeight);
+		//sceneHeight = height;
+		//sceneWidth = width;
+		/*sceneHeight = InteractiveLearningApp.getStageY();
+		sceneWidth = InteractiveLearningApp.getStageX();*/
+		
+		//sp.setMinSize(sceneWidth,sceneHeight);
 		sp.setPickOnBounds(false);
 		sp.setAlignment(Pos.TOP_LEFT);
+		
 		this.images = images;
 		System.out.println("Image Layer created: " + width + ", " + height);
 	}
@@ -30,6 +35,7 @@ public class ImageLayer {
 		if(image.imageFail == false) {
 			images.add(image);
 			sp.getChildren().add(image.get());
+			InteractiveLearningApp.slides.get(slideNumber).getSlideImages().add(image);
 			//image.get().setLayoutX(xStart);
 			//image.get().setLayoutY(yStart);
 		}

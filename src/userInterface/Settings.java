@@ -29,6 +29,8 @@ public class Settings {
 	//Screen X and Y offsets
 	private static double xOffset = 0;	
 	private static double yOffset = 0;
+	private static int width;
+	private static int height;
 	
 	private static String title = "Settings";
 	
@@ -203,9 +205,10 @@ public class Settings {
 		bp.setTop(toolBar);
 		bp.setBottom(resizeBar);
 		bp.setCenter(gp);
-		
+		bp.prefHeightProperty().bind(InteractiveLearningApp.getStage().heightProperty());
+		bp.prefWidthProperty().bind(InteractiveLearningApp.getStage().widthProperty());
 		//Create the scene
-		settings  = new Scene(bp,defaultXSize,defaultYSize);
+		settings  = new Scene(bp,mainStage.getWidth(),mainStage.getHeight());
 		settings.getStylesheets().add("style/SettingsScreen/settingsScreen.css");
 		return settings;
 	}
@@ -275,4 +278,6 @@ public class Settings {
 		settings.getStylesheets().clear();
 		settings.getStylesheets().add("style/SettingsScreen/settingsScreenCB.css");
 	}
+	
+	
 }

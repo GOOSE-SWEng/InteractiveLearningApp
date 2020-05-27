@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javafx.scene.SubScene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.StackPane;
+import main.InteractiveLearningApp;
 
 public class AudioLayer {
 	int height;
@@ -19,6 +20,7 @@ public class AudioLayer {
 		this.width = width;
 		this.audio = audio;
 		sp.getChildren().add(canvas);
+		
 		sp.setPickOnBounds(false);
 	}
 	
@@ -27,6 +29,7 @@ public class AudioLayer {
 		Audio slideAudio = new Audio(urlName, startTime, looping, controls, width, height, slideNumber);
 		if(slideAudio.audioFail == false) {
 			audio.add(slideAudio);
+			InteractiveLearningApp.slides.get(slideNumber).getSlideAudio().add(slideAudio);
 			if (controls) {
 				sp.getChildren().add(slideAudio.get());
 				slideAudio.get().setTranslateX(controlX*width/100);
