@@ -1,6 +1,8 @@
 package media;
 
 import java.util.ArrayList;
+
+import javafx.geometry.Pos;
 import javafx.scene.SubScene;
 import javafx.scene.layout.StackPane;
 import main.InteractiveLearningApp;
@@ -13,14 +15,16 @@ public class Graphics3DLayer {
 	SubScene window;
 	
 	public Graphics3DLayer(int width,int height, ArrayList<Model> models){
-		this.paneHeight = height*InteractiveLearningApp.getDefaultHeight()/100;
-		this.paneWidth = width*InteractiveLearningApp.getDefaultWidth()/100;
+		this.paneHeight = height-40;//*InteractiveLearningApp.getDefaultHeight()/100;
+		this.paneWidth = width;//*InteractiveLearningApp.getDefaultWidth()/100;
+		
+		//this.modelHeight = InteractiveLearningApp.getDefaultHeight();
+		//this.modelWidth = InteractiveLearningApp.getDefaultWidth();
 		this.models = models;
 		System.out.println(paneWidth + ", " + paneHeight);
 		sp.setPickOnBounds(false);
-		//sp.getChildren().add(canvas);
-		//sp.setMinSize(paneWidth, paneHeight);
-		window = new SubScene(sp, paneWidth, paneHeight);
+		sp.setAlignment(Pos.TOP_LEFT);
+		//window = new SubScene(sp, paneWidth, paneHeight);
 	}
 	
 	public void add(String url, int modelWidth, int modelHeight, int xStart, int yStart) {
@@ -28,6 +32,8 @@ public class Graphics3DLayer {
 		if(model.modelFail == false) {
 			models.add(model);
 			sp.getChildren().add(model.getModelScene());
+			model.getModelScene().setTranslateX(xStart*InteractiveLearningApp.getStageWidth()/100);
+			model.getModelScene().setTranslateY(yStart*InteractiveLearningApp.getStageHeight()/100);
 		}
 		
 	}
@@ -36,7 +42,7 @@ public class Graphics3DLayer {
 		sp.getChildren().remove(object);
 	}
 	
-	public SubScene get() {
-		return window;
+	public StackPane get() {
+		return sp;
 	}
 }

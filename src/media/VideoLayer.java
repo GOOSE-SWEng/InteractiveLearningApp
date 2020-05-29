@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.sun.jmx.snmp.internal.SnmpSubSystem;
 
+import javafx.geometry.Pos;
 import javafx.scene.SubScene;
 import javafx.scene.layout.StackPane;
 import main.InteractiveLearningApp;
@@ -14,15 +15,15 @@ public class VideoLayer {
 	int width;
 	StackPane sp = new StackPane();
 	public ArrayList<Video> videos;
-	SubScene window;
 
 	public VideoLayer(int width, int height, ArrayList<Video> videos) {
 		this.height = height;
 		this.width = width;
 		this.videos = videos;
 		sp.setPickOnBounds(false);
+		sp.setAlignment(Pos.TOP_LEFT);
 		//sp.setMinSize(width, height);
-		window = new SubScene(sp, width, height/2);
+		//window = new SubScene(sp, width, height/2);
 	}
 
 	public void addVideo(String urlName, int startTime, Boolean loop, int xStart, int yStart, int slideNumber) throws IOException {
@@ -35,8 +36,8 @@ public class VideoLayer {
 			InteractiveLearningApp.slides.get(slideNumber).getSlideVideos().add(video);
 			// adds the SubScene(created with the constructor) to the video layer stack pane
 			sp.getChildren().add(video.get());
-			video.get().setTranslateX(-(width/2 - video.get().getWidth()/2) + xStart/2 *width/100);
-			video.get().setTranslateX(-(height/2 - video.get().getHeight()/2) + yStart/2 *height/100);
+			video.get().setTranslateX(xStart*InteractiveLearningApp.getStageWidth()/100);
+			video.get().setTranslateX(yStart*InteractiveLearningApp.getStageHeight()/100);
 		}
 		
 	}
@@ -47,7 +48,7 @@ public class VideoLayer {
 	}
 
 	//please comment on what this exactly is
-	public SubScene get() {
-		return (window);
+	public StackPane get() {
+		return sp;
 	}
 }

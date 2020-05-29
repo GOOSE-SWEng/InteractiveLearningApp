@@ -61,6 +61,8 @@ public class SlideAssembler {
 			slides.get(i).setImageLayer(imageLayers.get(i));
 			slides.get(i).setGraphics3DLayer(graphics3dLayers.get(i));
 			slides.get(i).applyLayers();
+			
+			System.out.println("For slide: " + i + " Shape items: " + slides.get(i).getSlideShapes().size());
 		}
 	}
 }

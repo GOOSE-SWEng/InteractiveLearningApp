@@ -65,9 +65,9 @@ public class Model {
 	Boolean showControls = true;
 	
 	public Model(String url, int modelWidth, int modelHeight, int xStart, int yStart){
-		//Width of SubScene
+		//Width of SubScene as a percentage
 		this.width = modelWidth * InteractiveLearningApp.getDefaultWidth()/100; 
-		//Height of SubScene
+		//Height of SubScene as a percentage
 		this.height = modelHeight * InteractiveLearningApp.getDefaultHeight()/100; 
 		System.out.println(width + ", " + height);
 		this.xStart = xStart;

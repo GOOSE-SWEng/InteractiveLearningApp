@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import userInterface.*;
 import slides.*;
 import tools.Timer;
+import tools.Timer_2;
 import tools.XMLParser;
 import media.*;
 
@@ -61,11 +62,10 @@ public class InteractiveLearningApp extends Application{
 	public static int chosenTextSize = 16;
 	public static String chosenLanguage = "English";
 	
-
-
 	//Triggers Exhibit Mode
 	private boolean exhibitMode = false;
 	public static Timer timer;
+	public static Timer_2 timer2;
 	
 	//arrays for the media objects and the layers that hold these media objects
 	public static ArrayList<Slide> slides = new ArrayList<Slide>();
@@ -114,16 +114,21 @@ public class InteractiveLearningApp extends Application{
 		if(presRunning == true) {
 			xml = null;
 			slides.clear();
+			
 			images.clear();
 			videos.clear();
 			audio.clear();
 			slideText.clear();
 			models.clear();
+			shapes.clear();
 			
-			//graphics2d.clear();
-			
-			
-		}else{}
+			graphics2d.clear();
+			graphics3dLayers.clear();
+			imageLayers.clear();
+			audioLayers.clear();
+			videoLayers.clear();
+			textLayers.clear();
+		}else{
 		presRunning = false;
 		//Create File Browser
 		FileChooser fileChooser = new FileChooser();
@@ -148,11 +153,14 @@ public class InteractiveLearningApp extends Application{
 		}catch(NullPointerException e) {
 			showStart();
 		}
-		timer = new Timer();
-		timer.start();
+		timer2 = new Timer_2(shapes, audio,images,slideText,videos,models,graphics2d,audioLayers,imageLayers,textLayers,videoLayers,graphics3dLayers);
+		timer2.start();
+		//timer = new Timer();
+		//timer.start();
 		//mainStage.setX((Screen.getPrimary().getVisualBounds().getWidth()-defaultXSize)/2);
 		//mainStage.setY((Screen.getPrimary().getVisualBounds().getHeight()-defaultYSize)/2);
 		//mainStage.setFullScreen(true);
+		}
 	}
 	public static void resumePres() {
 		showSlide(currentSlide);
@@ -213,11 +221,11 @@ public class InteractiveLearningApp extends Application{
 		}
 	}
 
-	public static int getStageX() {
+	public static int getStageWidth() {
 		return (int) mainStage.getWidth();
 	}
 	
-	public static int getStageY() {
+	public static int getStageHeight() {
 		return (int) mainStage.getHeight();
 	}
 	public static void setMainStage(Stage mainStage) {

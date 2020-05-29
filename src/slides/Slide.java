@@ -182,7 +182,6 @@ public class Slide {
 		sp.getChildren().add(textLayer.get());
 		sp.getChildren().add(imageLayer.get());
 		sp.getChildren().add(graphics3DLayer.get());
-
 	}
 	
 	/*public void addMediaElements(String type, List elements) {

@@ -29,7 +29,7 @@ public class StartScreen {
 	private static double yOffset = 0;	
 	
 	private static Scene startScreen;
-	private static String title = "Start Screen";
+	private static String title = "Exhibit+";
 	private static Button resumeButton;
 	
 	/**

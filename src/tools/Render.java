@@ -52,7 +52,7 @@ public class Render extends Canvas {
                     g2.drawString((String) element.getDrawableContent(), element.getX(), element.getY());
                     break;
                 case AUDIO:
-                    ((Audio) element).start();
+                    ((Audio) element).play();
                     break;
                 case IMAGE:
                     // TODO: add render options for these

@@ -18,7 +18,7 @@ public class Timer extends Thread{
 					int id = InteractiveLearningApp.slides.get(currentSlideNo).getSlideElements().get(i).mediaId;
 					switch(InteractiveLearningApp.slides.get(currentSlideNo).getSlideElements().get(i).mediaType) {
 					case AUDIO:
-						InteractiveLearningApp.slides.get(currentSlideNo).getSlideAudio().get(id).start();
+						InteractiveLearningApp.slides.get(currentSlideNo).getSlideAudio().get(id).play();
 						break;
 					case VIDEO:
 						InteractiveLearningApp.slides.get(currentSlideNo).getSlideVideos().get(id).play();
@@ -26,6 +26,7 @@ public class Timer extends Thread{
 						break;
 					case IMAGE:
 						Platform.runLater(() ->InteractiveLearningApp.slides.get(currentSlideNo).getSlideImages().get(id).start());
+						System.out.println("IMAGE PLAYING");
 						break;
 					case SHAPE:
 						Platform.runLater(()->InteractiveLearningApp.slides.get(currentSlideNo).getSlideShapes().get(id).create());

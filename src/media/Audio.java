@@ -10,6 +10,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
+import main.InteractiveLearningApp;
 
 /**
  * Class for the audio handler
@@ -23,7 +25,6 @@ public class Audio {
 	Boolean controls = true;
 	SubScene subScene;
 	MediaPlayer player;
-	//StackPane sp = new StackPane();
 	int startTime;
 	int slideNumber;
 	boolean audioFail = false;
@@ -75,10 +76,16 @@ public class Audio {
 			Button playButton  = new Button("Play");
 			Button pauseButton = new Button("Pause");
 			Button resetButton = new Button("Reset");
+			 
+			playButton.setOnMouseClicked(e->this.play());
+			pauseButton.setOnMouseClicked(e->this.pause());
+			resetButton.setOnMouseClicked(e->{this.stop();
+											this.player.seek(Duration.ZERO);
+										});
 			
 			//Creating a GridPane with the 3 buttons in side-by-side
 			GridPane gp = new GridPane();
-			gp.add(playButton, 1, 0);
+			gp.add(playButton, 0, 0);
 			gp.add(pauseButton, 1, 0);
 			gp.add(resetButton, 2, 0);
 			gp.setHgap(5);
@@ -88,17 +95,21 @@ public class Audio {
 			audioControls.setPercentWidth(50);
 			//If the percent widths of GridPane elements add up to more than 100, it scales them to a ratio of 100%
 			gp.getColumnConstraints().addAll(audioControls, audioControls, audioControls);
-			subScene = new SubScene(gp, width, height);
+			subScene = new SubScene(gp, width*InteractiveLearningApp.getStageWidth()/100, height*InteractiveLearningApp.getStageHeight()/100);
 			//sp.getChildren().add(gp);
 		}
 	}
 	
-	public void start() {
+	public void play() {
 		player.play();
 	}
 	public void stop() {
 		player.stop();
 	}
+	public void pause() {
+		player.pause();
+	}
+	
 	public int getStartTime() {
 		return(startTime);
 	}

@@ -65,11 +65,11 @@
 		</shape>
 		<shape type='oval' xstart='880' ystart='400' width='400' height='200' fillcolor='blue' starttime='1000' endtime='10000'>
 		</shape>
-		<audio urlname='resources/slide1/audio/audio1.wav' starttime='10' loop='false'></audio>
+		<audio urlname='resources/slide1/audio/CARTOON.mp3' starttime='10' loop='false'></audio>
 		<image urlname='https://cdn.eso.org/images/screen/eso1907a.jpg' xstart='60' ystart='0' width='40' height='40' starttime='1000' endtime='10000'></image>
 		<image urlname='https://cdn.arstechnica.net/wp-content/uploads/2018/07/Rocket-Report-Intro-3-800x450.jpg' xstart='60' ystart='40' width='40' height='40' starttime='1500' endtime='10000'></image>
-		<video urlname='https://youtu.be/OnoNITE-CLc' starttime='1000' loop='false' xstart='90' ystart='90'></video>
-		<model urlname='resources/slide1/models/HST-3DS\hst.3ds' xstart='0' ystart='0' width='33' height='50'></model>
+		<video urlname='https://youtu.be/OnoNITE-CLc' starttime='1000' loop='false' xstart='60' ystart='90'></video>
+		<model urlname='resources/slide1/models/HST-3DS\hst.3ds' xstart='33' ystart='0' width='33' height='80'></model>
 	</slide>
 	<slide id='2. Rosetta Stone' duration='10000'>
 		<text font='arial' fontsize='15' fontcolor='black' xpos='0' ypos='0' starttime='100' endtime='10000'>
@@ -181,7 +181,7 @@ cultures, including those of the Maya and Aztec.
 		</shape>
 		<audio urlname='resources/slide3/audio/audio1.wav' starttime='10' loop='false'></audio>
 		<image urlname='https://cdn.eso.org/images/screen/eso1907a.jpg' xstart='0' ystart='0' width='30' height='30' starttime='100' endtime='10000'></image>
-		<image urlname='https://cdn.arstechnica.net/wp-content/uploads/2018/07/Rocket-Report-Intro-3-800x450.jpg' xstart='100' ystart='100' width='40' height='40' starttime='100' endtime='10000'></image>
+		<image urlname='https://cdn.arstechnica.net/wp-content/uploads/2018/07/Rocket-Report-Intro-3-800x450.jpg' xstart='50' ystart='70' width='40' height='40' starttime='100' endtime='10000'></image>
 		<video urlname='resources/slide3/video/sun.mp4' starttime='1000' loop='false' xstart='40' ystart='20'></video>
 		<model urlname='resources/slide3/models/panter.stl' xstart='0' ystart='0' width='40' height='80'></model>
 	</slide>
@@ -208,7 +208,7 @@ cultures, including those of the Maya and Aztec.
 		</shape>
 		<audio urlname='resources/slide4/audio/audio1.wav' starttime='10' loop='false'></audio>
 		<image urlname='https://cdn.eso.org/images/screen/eso1907a.jpg' xstart='0' ystart='0' width='30' height='30' starttime='100' endtime='10000'></image>
-		<image urlname='https://cdn.arstechnica.net/wp-content/uploads/2018/07/Rocket-Report-Intro-3-800x450.jpg' xstart='100' ystart='100' width='40' height='40' starttime='100' endtime='10000'></image>
+		<image urlname='https://cdn.arstechnica.net/wp-content/uploads/2018/07/Rocket-Report-Intro-3-800x450.jpg' xstart='50' ystart='50' width='40' height='40' starttime='100' endtime='10000'></image>
 		<video urlname='https://www.radiantmediaplayer.com/media/bbb-360p.mp4' starttime='1000' loop='false' xstart='0' ystart='0'></video>
 		<model urlname='resources/slide4/models/dino.stl' xstart='400' ystart='0' width='20' height='80'></model>
 	</slide>

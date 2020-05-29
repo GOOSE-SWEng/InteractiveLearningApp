@@ -63,7 +63,8 @@ public class Video {
 			throws IOException {
 		// Loads the media player layout from a FXML file
 		BorderPane root = FXMLLoader.load(getClass().getClassLoader().getResource("media/videoPlayer.fxml"));
-
+		this.urlName = urlName;
+		
 		// creates a subscene
 		subScene = new SubScene(root, 600, 400);
 		// Set subscene position
@@ -258,11 +259,11 @@ public class Video {
 		
 	public void play() {
 		mediaPlayer.play();
-		System.out.println("VIDEO MEDIA PLAYING" + urlName);
+		System.out.println("VIDEO MEDIA PLAYING " + urlName);
 	}
 	public void stop() {
 		mediaPlayer.stop();
-		System.out.println("VIDEO MEDIA STOPPING" + urlName);
+		System.out.println("VIDEO MEDIA STOPPING " + urlName);
 	}
 	
 	public MediaPlayer getPlayer() {

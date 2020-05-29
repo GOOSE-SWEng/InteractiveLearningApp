@@ -18,8 +18,8 @@ public class ImageLayer {
 	public ImageLayer(int width,int height, ArrayList<SlideImage> images){
 		//sceneHeight = height;
 		//sceneWidth = width;
-		/*sceneHeight = InteractiveLearningApp.getStageY();
-		sceneWidth = InteractiveLearningApp.getStageX();*/
+		sceneHeight = InteractiveLearningApp.getStageHeight();
+		sceneWidth = InteractiveLearningApp.getStageWidth();
 		
 		//sp.setMinSize(sceneWidth,sceneHeight);
 		sp.setPickOnBounds(false);
