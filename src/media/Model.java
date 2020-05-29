@@ -31,6 +31,7 @@ import javafx.scene.shape.Sphere;
 import javafx.scene.shape.TriangleMesh;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Scale;
+import javafx.scene.transform.Transform;
 import javafx.scene.transform.Translate;
 import javafx.util.Duration;
 import main.InteractiveLearningApp;
@@ -63,6 +64,9 @@ public class Model {
 	ArrayList<InteractivePoints> points = new ArrayList<InteractivePoints>(); 
 	ArrayList<Sphere> spheres = new ArrayList<Sphere>(); //Arraylist of Sphere buttons
 	Boolean showControls = true;
+	Transform reqTransform;
+	Transform reqTranslate;
+	Scale reqScale;
 	
 	public Model(String url, int modelWidth, int modelHeight, int xStart, int yStart){
 		//Width of SubScene as a percentage
@@ -73,6 +77,9 @@ public class Model {
 		this.xStart = xStart;
 		this.yStart = yStart;
 		//Create the and store scene
+		reqTransform = new Rotate(-90, Rotate.X_AXIS);
+		reqTranslate = new Translate(0,0,0);
+		reqScale =  new Scale(3,3,3);
 		material =  new PhongMaterial(Color.BEIGE);
 		modelScene = createModel(url); 
 	}
@@ -85,6 +92,9 @@ public class Model {
 		showControls = false;
 		System.out.println(width + ", " + height);
 		//Create the and store scene
+		reqTransform = new Translate();
+		reqTranslate = new Translate();
+		reqScale = new Scale();
 		material =  new PhongMaterial(Color.web("#3AA9B8"));
 		modelScene = createModel(url);
 		
@@ -159,7 +169,7 @@ public class Model {
         // Create Shape3D
 		System.out.println("Model Imported");
 		
-		//modelGroup.getTransforms().add(new Rotate(90, Rotate.X_AXIS));
+		modelGroup.getTransforms().addAll(reqTransform, reqTranslate, reqScale);
 
 		//Create pivot
         Translate pivot = new Translate(); 

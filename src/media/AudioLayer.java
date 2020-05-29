@@ -13,7 +13,7 @@ public class AudioLayer {
 	int width;
 	StackPane sp = new StackPane();
 	public ArrayList<Audio> audio;
-	SubScene window = new SubScene(sp,width,height);
+	//SubScene window = new SubScene(sp,width,height);
 	
 	public AudioLayer(int width,int height, ArrayList<Audio> audio){
 		this.height = height;

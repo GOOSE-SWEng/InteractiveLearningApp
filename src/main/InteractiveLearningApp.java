@@ -153,10 +153,10 @@ public class InteractiveLearningApp extends Application{
 		}catch(NullPointerException e) {
 			showStart();
 		}
-		timer2 = new Timer_2(shapes, audio,images,slideText,videos,models,graphics2d,audioLayers,imageLayers,textLayers,videoLayers,graphics3dLayers);
-		timer2.start();
-		//timer = new Timer();
-		//timer.start();
+		//timer2 = new Timer_2(shapes, audio,images,slideText,videos,models,graphics2d,audioLayers,imageLayers,textLayers,videoLayers,graphics3dLayers);
+		//timer2.start();
+		timer = new Timer();
+		timer.start();
 		//mainStage.setX((Screen.getPrimary().getVisualBounds().getWidth()-defaultXSize)/2);
 		//mainStage.setY((Screen.getPrimary().getVisualBounds().getHeight()-defaultYSize)/2);
 		//mainStage.setFullScreen(true);
