@@ -92,17 +92,26 @@ public class Timer extends Thread{
 					InteractiveLearningApp.slides.get(currentSlideNo).getSlideVideos().get(id).getPlayer().stop();
 					break;
 				case IMAGE:
-					Platform.runLater(() ->InteractiveLearningApp.slides.get(currentSlideNo-1).getSlideImages().get(id).remove());
+					try {
+						Platform.runLater(() ->InteractiveLearningApp.slides.get(currentSlideNo-1).getSlideImages().get(id).remove());
+					}catch(Exception e) {
+						Platform.runLater(()->InteractiveLearningApp.slides.get(InteractiveLearningApp.slides.size()-1).getSlideImages().get(id).remove());
+					}
 					break;
 				case SHAPE:
 					try {
 						Platform.runLater(()->InteractiveLearningApp.slides.get(currentSlideNo-1).getSlideShapes().get(id).destroy());
-					}catch (IndexOutOfBoundsException e) {
-						
+					}catch (Exception e) {
+						Platform.runLater(()->InteractiveLearningApp.slides.get(InteractiveLearningApp.slides.size()-1).getSlideShapes().get(id).destroy());
 					}
 					break;
 				case TEXT:
-					Platform.runLater(()->InteractiveLearningApp.slides.get(currentSlideNo-1).getSlideTexts().get(id).remove());
+					try{
+						Platform.runLater(()->InteractiveLearningApp.slides.get(currentSlideNo-1).getSlideTexts().get(id).remove());
+					}catch(Exception e) {
+						Platform.runLater(()->InteractiveLearningApp.slides.get(InteractiveLearningApp.slides.size()-1).getSlideTexts().get(id).remove());
+
+					}
 					break;
 			default:
 				break;

@@ -74,14 +74,17 @@ public class Model {
 		//Height of SubScene as a percentage
 		this.height = modelHeight * InteractiveLearningApp.getDefaultHeight()/100; 
 		System.out.println(width + ", " + height);
-		this.xStart = xStart;
-		this.yStart = yStart;
+		this.xStart = (xStart*InteractiveLearningApp.getDefaultWidth())/100;
+		this.yStart = (yStart*InteractiveLearningApp.getDefaultWidth())/100;
 		//Create the and store scene
 		reqTransform = new Rotate(-90, Rotate.X_AXIS);
 		reqTranslate = new Translate(0,0,0);
 		reqScale =  new Scale(3,3,3);
 		material =  new PhongMaterial(Color.BEIGE);
-		modelScene = createModel(url); 
+		modelScene = createModel(url);
+		
+		modelScene.setTranslateX(this.xStart);
+		modelScene.setTranslateY(this.yStart);
 	}
 	
 	public Model(String url, int modelWidth, int modelHeight){

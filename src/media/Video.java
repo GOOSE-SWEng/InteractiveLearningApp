@@ -36,6 +36,7 @@ public class Video {
 	int startTime;
 	int canvasWidth;
 	int canvasHeight;
+	int slideNumber;
 	String urlName;
 	Boolean loop;
 	SubScene subScene;
@@ -59,10 +60,12 @@ public class Video {
 	 * @param canvasHeight - height of canvas
 	 * @throws IOException - if video cannot be found
 	 */
-	public Video(String urlName, int startTime, Boolean loop, int xStart, int yStart, int canvasWidth, int canvasHeight)
+	public Video(String urlName, int startTime, Boolean loop, int xStart, int yStart, int canvasWidth, int canvasHeight, int slideNumber)
 			throws IOException {
 		// Loads the media player layout from a FXML file
 		BorderPane root = FXMLLoader.load(getClass().getClassLoader().getResource("media/videoPlayer.fxml"));
+		this.startTime = startTime;
+		this.slideNumber = slideNumber;
 		this.urlName = urlName;
 		
 		// creates a subscene
@@ -268,5 +271,11 @@ public class Video {
 	
 	public MediaPlayer getPlayer() {
 		return mediaPlayer;
+	}
+	public int getSlideNumber() {
+		return(slideNumber);
+	}
+	public int getStartTime() {
+		return(startTime);
 	}
 }
