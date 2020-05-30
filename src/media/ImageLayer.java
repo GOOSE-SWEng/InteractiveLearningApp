@@ -16,11 +16,15 @@ public class ImageLayer {
 	SubScene window;
 	
 	public ImageLayer(int width,int height, ArrayList<SlideImage> images){
-		sceneHeight = height;
-		sceneWidth = width;
-		sp.setMinSize(sceneWidth,sceneHeight);
+		//sceneHeight = height;
+		//sceneWidth = width;
+		sceneHeight = InteractiveLearningApp.getStageHeight();
+		sceneWidth = InteractiveLearningApp.getStageWidth();
+		
+		//sp.setMinSize(sceneWidth,sceneHeight);
 		sp.setPickOnBounds(false);
 		sp.setAlignment(Pos.TOP_LEFT);
+		
 		this.images = images;
 		System.out.println("Image Layer created: " + width + ", " + height);
 	}
@@ -28,11 +32,14 @@ public class ImageLayer {
 	public void add(String urlName, int xStart, int yStart, int width, int height, int startTime, int endTime, int slideNumber) {
 		//constructor for the image object
 		SlideImage image = new SlideImage(urlName, xStart, yStart, width, height, startTime, endTime, slideNumber, sceneWidth, sceneHeight);
-		images.add(image);
-		InteractiveLearningApp.slides.get(slideNumber).getSlideImages().add(image);
-		sp.getChildren().add(image.get());
-		//image.get().setLayoutX(xStart);
-		//image.get().setLayoutY(yStart);
+		if(image.imageFail == false) {
+			images.add(image);
+			sp.getChildren().add(image.get());
+			InteractiveLearningApp.slides.get(slideNumber).getSlideImages().add(image);
+			//image.get().setLayoutX(xStart);
+			//image.get().setLayoutY(yStart);
+		}
+		
 	}
 	
 	public void remove(SlideImage object) {

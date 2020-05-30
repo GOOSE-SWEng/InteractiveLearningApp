@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.sun.jmx.snmp.internal.SnmpSubSystem;
 
+import javafx.geometry.Pos;
 import javafx.scene.SubScene;
 import javafx.scene.layout.StackPane;
 import main.InteractiveLearningApp;
@@ -14,27 +15,31 @@ public class VideoLayer {
 	int width;
 	StackPane sp = new StackPane();
 	public ArrayList<Video> videos;
-	SubScene window;
 
 	public VideoLayer(int width, int height, ArrayList<Video> videos) {
 		this.height = height;
 		this.width = width;
 		this.videos = videos;
 		sp.setPickOnBounds(false);
-		sp.setMinSize(width, height);
-		//window = new SubScene(sp, width, height);
+		sp.setAlignment(Pos.TOP_LEFT);
+		//sp.setMinSize(width, height);
+		//window = new SubScene(sp, width, height/2);
 	}
 
 	public void addVideo(String urlName, int startTime, Boolean loop, int xStart, int yStart, int slideNumber) throws IOException {
 		// creates the video object and its subscene
 		Video video = new Video(urlName, startTime, loop, xStart, yStart, 0, 0);
-		InteractiveLearningApp.slides.get(slideNumber).getSlideVideos().add(video);
-		// adds the video object to the array list
-		videos.add(video);
-		// adds the SubScene(created with the constructor) to the video layer stack pane
-		sp.getChildren().add(video.get());
-		video.get().setTranslateX(-(width/2 - video.get().getWidth()/2) + xStart/2 *width/100);
-		video.get().setTranslateY(-(height/2 - video.get().getHeight()/2) + yStart/2 *height/100);
+		
+		if(video.videoFail == false) {
+			// adds the video object to the array list
+			videos.add(video);
+			InteractiveLearningApp.slides.get(slideNumber).getSlideVideos().add(video);
+			// adds the SubScene(created with the constructor) to the video layer stack pane
+			sp.getChildren().add(video.get());
+			video.get().setTranslateX(xStart*InteractiveLearningApp.getStageWidth()/100);
+			video.get().setTranslateX(yStart*InteractiveLearningApp.getStageHeight()/100);
+		}
+		
 	}
 		
 

@@ -22,6 +22,7 @@ public class SlideImage {
   private Group group = null;
   private int startTime = 0;
   private int endTime = 0;
+  boolean imageFail = false;
 
   public SlideImage(String url, float floatX, float floatY, float floatW, float floatH,
       int startTime, int endTime, int slideNumber, int sceneWidth, int sceneHeight) {
@@ -45,9 +46,16 @@ public class SlideImage {
     
 	if(url.startsWith("https://")) {
 
-	}else if(url.startsWith("src")) {
-		File imgFile = new File(url);
-		url = imgFile.toURI().toString();
+	}else if(url.startsWith("resources/")) {
+		try {
+			File imgFile = new File(url);
+			url = imgFile.toURI().toString();
+		} catch (Exception e) {
+			imageFail = true;
+			System.out.println("Image not found, will not be added to presentation");
+			return;
+		}
+		
 	}else {
 		System.out.println("Unknown image origin.");
 	}

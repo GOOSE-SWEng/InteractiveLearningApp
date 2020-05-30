@@ -1,10 +1,15 @@
 package userInterface;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.SubScene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -19,6 +24,7 @@ import main.InteractiveLearningApp;
 public class ResizeBar {
 	//global button variable
 	Button resizeButton;
+	static int height = 20;
 	
 	/**
 	 * Method to create a subscene containg the button to resize the window
@@ -28,7 +34,18 @@ public class ResizeBar {
 	public static SubScene CreateResizeBar(int winWidth) {
 		//gridpane to hold elements
 		GridPane gridPane = new GridPane();
-		Button resizeButton = new Button("Resize");
+		Button resizeButton = new Button();
+		try {
+			Image homeIcon = new Image(new FileInputStream("resources/toolbar/resizeHandle.png"));
+			ImageView imageView = new ImageView(homeIcon);
+			imageView.setFitHeight(height);
+			imageView.setPreserveRatio(true);
+			resizeButton.setGraphic(imageView);		
+		}catch(IOException ioe) {
+			System.out.println("Image not found");
+		}
+		resizeButton.setId("resizeButton");
+		resizeButton.setStyle("-fx-background-color: transparent");
 		
 		//settings alignment and padding of the column to contain the resize button
 		gridPane.setAlignment(Pos.CENTER_RIGHT);
@@ -40,16 +57,20 @@ public class ResizeBar {
 		resizeButton.setOnMouseDragged(new EventHandler<MouseEvent>() {
 			public void handle(MouseEvent event) {
 				Stage window = InteractiveLearningApp.getStage();
-				window.setWidth(event.getScreenX() - window.getX());
-				window.setHeight(event.getScreenY() - window.getY());
+				if(window.getMinWidth() < (event.getScreenX() - window.getX())) {
+					window.setWidth(event.getScreenX() - window.getX());
+
+				}
+				if(window.getMinHeight() < (event.getScreenY() - window.getY())) {
+					window.setHeight(event.getScreenY() - window.getY());
+				}
 			}
 		});
 
-		SubScene resizeBar = new SubScene(gridPane, winWidth, 20);
+		SubScene resizeBar = new SubScene(gridPane, winWidth, height);
 		
 		//resize bar must be binded with the main window to allow resize to work
 		resizeBar.widthProperty().bind(InteractiveLearningApp.getStage().widthProperty());
-		
 		resizeBar.setUserAgentStylesheet("style/Extras/toolBar.css");
 		return resizeBar;
 	}

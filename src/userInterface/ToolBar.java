@@ -57,9 +57,10 @@ public class ToolBar {
 	 * Method to create toolbar
 	 * @param winWidth width of the window at the current time toolbar is made
 	 * @param id title of the current slide
+	 * @param exhibitMode 
 	 * @return the toolbar as a subscene
 	 */
-	public static SubScene createToolBar(int winWidth, String id) {
+	public static SubScene createToolBar(int winWidth, String id, boolean exhibitMode) {
 		//instantiate the new grid pane, then instantiate the buttons to fill it
 		GridPane gridPane = new GridPane();
 		
@@ -84,20 +85,31 @@ public class ToolBar {
 		Button exitButton = new Button();
 		
 		//Add images to previously made blank buttons
-		addImageToButton(homeButton, "src/resources/toolbar/homeicon.jpg");
-		addImageToButton(prevButton, "src/resources/toolbar/previcon.jpg");
-		addImageToButton(nextButton, "src/resources/toolbar/nexticon.jpg");
-		addImageToButton(maximizeWindowButton, "src/resources/toolbar/maxicon.jpg");
-		addImageToButton(minimizeWindowButton, "src/resources/toolbar/minicon.jpg");
-		addImageToButton(exitButton, "src/resources/toolbar/exiticon.jpg");
+		addImageToButton(homeButton, "resources/toolbar/homeicon.jpg");
+		addImageToButton(prevButton, "resources/toolbar/previcon.jpg");
+		addImageToButton(nextButton, "resources/toolbar/nexticon.jpg");
+		addImageToButton(maximizeWindowButton, "resources/toolbar/maxicon.jpg");
+		addImageToButton(minimizeWindowButton, "resources/toolbar/minicon.jpg");
+		addImageToButton(exitButton, "resources/toolbar/exiticon.jpg");
 		
 		//connects each button to its corresponding event
-		homeButton.setOnAction(e -> InteractiveLearningApp.homeSlide());
+		homeButton.setOnAction(e -> InteractiveLearningApp.showStart());
 		prevButton.setOnAction(e -> InteractiveLearningApp.prevSlide());
 		nextButton.setOnAction(e -> InteractiveLearningApp.nextSlide());
 		minimizeWindowButton.setOnAction(e -> MinimizeButtonPressed());
 		maximizeWindowButton.setOnAction(e -> MaximizeButtonPressed());
 		exitButton.setOnAction(e -> ExitButtonPressed());
+		
+		if(exhibitMode == true) {
+			minimizeWindowButton.setVisible(false);
+			maximizeWindowButton.setVisible(false);
+			exitButton.setVisible(false);
+			
+			minimizeWindowButton.managedProperty().bind(minimizeWindowButton.visibleProperty());
+			maximizeWindowButton.managedProperty().bind(maximizeWindowButton.visibleProperty());
+			exitButton.managedProperty().bind(exitButton.visibleProperty());
+			
+		}
 		
 		//adds 10 pixel padding to the top, bottom, left and right of the tool bar
 		gridPane.setPadding(new Insets(10,0,10,0));

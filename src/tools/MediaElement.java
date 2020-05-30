@@ -1,7 +1,5 @@
 package tools;
 
-import media.Audio;
-
 public class MediaElement {
 	int slideNumber = -1;
 	int startTime = -1;

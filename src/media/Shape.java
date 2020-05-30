@@ -58,7 +58,7 @@ public class Shape {
 		this.endTime = endTime;
 		this.slideNumber = slideNumber;
 	}
-
+	
 	/**constructor for a shape with a colour gradient */
 	public Shape(int w, int h, int lw, Color c1, Color c2, float c1x, float c1y, 
 			     float c2x, float c2y, Boolean Cyclical, int startTime, 
@@ -106,35 +106,31 @@ public class Shape {
 	
 	/** method to create shapes */
 	public void create() {
-		if(!group.getChildren().contains(canvas)) {
-			if (oval == true) {
-				gc.fillOval(ovalCentreX,ovalCentreY,ovalWidth,ovalHeight);
-				gc.strokeOval(ovalCentreX,ovalCentreY,ovalWidth,ovalHeight);
-				group.getChildren().add(canvas);
+		if (oval == true) {
+			gc.fillOval(ovalCentreX,ovalCentreY,ovalWidth,ovalHeight);
+			gc.strokeOval(ovalCentreX,ovalCentreY,ovalWidth,ovalHeight);
+			group.getChildren().add(canvas);
+		}
+		// used to create an array of points from an arraylist
+		else {
+			double[] pointX = new double[pointsX.size()];
+			double[] pointY = new double[pointsY.size()];
+			
+			//adding arraylist points to an array
+			for (int i = 0; i<pointsX.size(); i++) {
+				pointX[i] = pointsX.get(i);
 			}
-			// used to create an array of points from an arraylist
-			else {
-				double[] pointX = new double[pointsX.size()];
-				double[] pointY = new double[pointsY.size()];
-				
-				//adding arraylist points to an array
-				for (int i = 0; i<pointsX.size(); i++) {
-					pointX[i] = pointsX.get(i);
-				}
-				
-				for (int i = 0; i<pointsY.size(); i++) {
-					pointY[i] = pointsY.get(i);
-				}
-				
-				//creates a polygon outline
-				gc.strokePolygon(pointX,pointY,pointsX.size());
-				//creates the polygon solid
-				gc.fillPolygon(pointX,pointY,pointsX.size());
-				//adds canvas to the group
-				group.getChildren().add(canvas);
+			
+			for (int i = 0; i<pointsY.size(); i++) {
+				pointY[i] = pointsY.get(i);
 			}
-		}else {
-			System.err.println("Tried to add already drawn shape");
+			
+			//creates a polygon outline
+			gc.strokePolygon(pointX,pointY,pointsX.size());
+			//creates the polygon solid
+			gc.fillPolygon(pointX,pointY,pointsX.size());
+			//adds canvas to the group
+			group.getChildren().add(canvas);
 		}
 		
 	}
@@ -142,17 +138,10 @@ public class Shape {
 		return group;
 	}
 
-
 	/** removes the canvas from the group */
 	public void destroy() {
-		if(group.getChildren().contains(canvas)) {
-			group.getChildren().remove(canvas);
-		}else{
-			System.err.println("Tried to remove undrawn shape");
-		}
+		group.getChildren().remove(canvas);
 	}
-
-
 	
 	public int getSlideNumber() {
 		return(slideNumber);

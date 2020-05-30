@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.SubScene;
 import javafx.scene.canvas.Canvas;
@@ -21,6 +22,7 @@ import javafx.stage.Stage;
 import userInterface.*;
 import slides.*;
 import tools.Timer;
+import tools.Timer_2;
 import tools.XMLParser;
 import media.*;
 
@@ -61,16 +63,14 @@ public class InteractiveLearningApp extends Application{
 	public static int chosenTextSize = 16;
 	public static String chosenLanguage = "English";
 	
-
-
 	//Triggers Exhibit Mode
-	private boolean exhibitMode = false;
+	public static boolean exhibitMode = false;
 	public static Timer timer;
+	public static Timer_2 timer2;
 	
 	//arrays for the media objects and the layers that hold these media objects
 	public static ArrayList<Slide> slides = new ArrayList<Slide>();
 	static ArrayList<Audio> audio = new ArrayList<Audio>();
-	static ArrayList<Graphics2D> graphics2d = new ArrayList<Graphics2D>();
 	static ArrayList<Model> models = new ArrayList<Model>();
 	static ArrayList<SlideImage> images = new ArrayList<SlideImage>();
 	static ArrayList<Shape> shapes = new ArrayList<Shape>();
@@ -78,7 +78,7 @@ public class InteractiveLearningApp extends Application{
 	static ArrayList<Video> videos = new ArrayList<Video>();
 	
 	static ArrayList<VideoLayer> videoLayers = new ArrayList<VideoLayer>();
-	static ArrayList<Graphics2D> graphics2dLayers = new ArrayList<Graphics2D>();
+	static ArrayList<Graphics2D> graphics2d = new ArrayList<Graphics2D>();
 	static ArrayList<Graphics3DLayer> graphics3dLayers = new ArrayList<Graphics3DLayer>();
 	static ArrayList<ImageLayer> imageLayers = new ArrayList<ImageLayer>();
 	static ArrayList<TextLayer> textLayers = new ArrayList<TextLayer>();
@@ -97,9 +97,10 @@ public class InteractiveLearningApp extends Application{
 		mainStage = primaryStage;
 		mainStage.setMinWidth(defaultXSize);
 		mainStage.setMinHeight(defaultYSize);
-		start = StartScreen.createStartScreen(mainStage, defaultXSize, defaultYSize);
-		settings = Settings.createSettings(mainStage, defaultXSize, defaultYSize);
-		loading = LoadingScreen.createLoadingScreen(mainStage, defaultXSize, defaultYSize);
+		//mainStage.setHeight(defaultYSize);
+		start = StartScreen.createStartScreen(mainStage, defaultXSize, defaultYSize, exhibitMode);
+		settings = Settings.createSettings(mainStage, defaultXSize, defaultYSize, exhibitMode);
+		loading = LoadingScreen.createLoadingScreen(mainStage, defaultXSize, defaultYSize, exhibitMode);
 			
 		/*LOADING PROCESS*/
 		//LOADING SCREEN
@@ -110,6 +111,25 @@ public class InteractiveLearningApp extends Application{
 	
 	//Run App
 	public static void run() {
+		//Clear All
+		if(presRunning == true) {
+			xml = null;
+			slides.clear();
+			
+			images.clear();
+			videos.clear();
+			audio.clear();
+			slideText.clear();
+			models.clear();
+			shapes.clear();
+			
+			graphics2d.clear();
+			graphics3dLayers.clear();
+			imageLayers.clear();
+			audioLayers.clear();
+			videoLayers.clear();
+			textLayers.clear();
+		}else{
 		presRunning = false;
 		//Create File Browser
 		FileChooser fileChooser = new FileChooser();
@@ -134,15 +154,35 @@ public class InteractiveLearningApp extends Application{
 		}catch(NullPointerException e) {
 			showStart();
 		}
+		//timer2 = new Timer_2(shapes, audio,images,slideText,videos,models,graphics2d,audioLayers,imageLayers,textLayers,videoLayers,graphics3dLayers);
+		//timer2.start();
 		timer = new Timer();
 		timer.start();
 		//mainStage.setX((Screen.getPrimary().getVisualBounds().getWidth()-defaultXSize)/2);
 		//mainStage.setY((Screen.getPrimary().getVisualBounds().getHeight()-defaultYSize)/2);
 		//mainStage.setFullScreen(true);
+		}
+	}
+	public static void resumePres() {
+		showSlide(currentSlide);
+	}
+	
+	public static Scene getStart() {
+		return start;
 	}
 	
 	public static Stage getStage() {
 		return mainStage;
+	}
+	
+	public static void setStart(Scene start) {
+		InteractiveLearningApp.start = null;
+		InteractiveLearningApp.start = start;
+	}
+	
+	public static void setSettings(Scene settings) {
+		InteractiveLearningApp.settings = null;
+		InteractiveLearningApp.settings = settings;
 	}
 	
 	/** Show settings screen */
@@ -150,7 +190,7 @@ public class InteractiveLearningApp extends Application{
 		mainStage.setScene(settings); 
 	}
 	
-	/** Show settings screen */
+	/** Show start screen */
 	public static void showStart() {
 		mainStage.setScene(start); 
 	}
@@ -159,13 +199,6 @@ public class InteractiveLearningApp extends Application{
 		//mainStage.setScene(map);
 	}
 	
-	/** sets slide index to home slide */
-	public static void homeSlide() {
-		System.out.println("HOME SLIDE");
-		// whatever index is needed for home page**
-		mainStage.setScene(slides.get(0).getSlide()); 
-		currentSlide = 0;
-	}
 	
 	public static void nextSlide() {
 		try {
@@ -175,9 +208,13 @@ public class InteractiveLearningApp extends Application{
 			timer.resetTimer(currentSlide);
 		}catch(NullPointerException | IndexOutOfBoundsException e) {
 			System.out.println("Presentation Restarted");
-			mainStage.setScene(slides.get(0).getSlide());
-			currentSlide = 0;
-			timer.resetTimer(currentSlide);
+			if(presRunning == false) {
+				mainStage.setScene(start);
+			}else {
+				mainStage.setScene(slides.get(0).getSlide());
+				currentSlide = 0;
+				timer.resetTimer(currentSlide);
+			}
 		}
 	}
 	
@@ -189,12 +226,23 @@ public class InteractiveLearningApp extends Application{
 			timer.resetTimer(currentSlide);
 		}catch(NullPointerException | IndexOutOfBoundsException e) {
 			System.out.println("Presentation Restarted");
-			mainStage.setScene(slides.get(0).getSlide());
-			currentSlide = 0;
-			timer.resetTimer(currentSlide);
+			if(presRunning == false) {
+				mainStage.setScene(start);
+			}else {
+				mainStage.setScene(slides.get(0).getSlide());
+				currentSlide = 0;
+				timer.resetTimer(currentSlide);
+			}
 		}
 	}
 
+	public static int getStageWidth() {
+		return (int) mainStage.getWidth();
+	}
+	
+	public static int getStageHeight() {
+		return (int) mainStage.getHeight();
+	}
 	public static void setMainStage(Stage mainStage) {
 		InteractiveLearningApp.mainStage = mainStage;
 	}

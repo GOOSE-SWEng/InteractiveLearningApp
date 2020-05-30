@@ -8,8 +8,6 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import main.InteractiveLearningApp;
-import tools.MediaElement;
-import tools.XMLParser;
 
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -44,6 +42,14 @@ public class SlideText {
     String fontName = this.dfFont;
     int fontSize = this.dfFontSize;
     String fontColor = this.dfFontColor;
+    
+
+    
+    
+    
+    
+    
+    
     
     // Overwrite defaults
     // If size is specified, use it
@@ -94,9 +100,8 @@ public class SlideText {
         bold = Font.font(fontName, FontWeight.BOLD, InteractiveLearningApp.getChosenTextSize());
 	}
     //END OF EDITS
-    
     Text partialText;
-    
+
     // Add each text element to the TextFlow
     NodeList children = node.getChildNodes();
     for (int i = 0; i < children.getLength(); i++) {

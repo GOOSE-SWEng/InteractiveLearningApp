@@ -394,9 +394,9 @@ public class XMLParser {
 				videoLayers.add(new VideoLayer(InteractiveLearningApp.getDefaultWidth(),InteractiveLearningApp.getDefaultHeight(), videos)); //Create a new layer for this slide
 			}
 			//Add a new video to this layer
-			videoLayers.get(currentSlide).addVideo(urlName, startTime, loop, xStart, yStart, currentSlide); //Add a new video to this layer
+			videoLayers.get(currentSlide).addVideo(urlName, startTime, loop, xStart, yStart, currentSlide);
 			//Add media element for timer
-			slides.get(currentSlide).getSlideElements().add(new MediaElement(currentSlide, startTime, -1, "video", videoId)); //Add media element for timer
+			slides.get(currentSlide).getSlideElements().add(new MediaElement(currentSlide, startTime, -1, "video", videoId));
 			videoId++;
 		}catch(IOException e) {
 			//Prints the error
@@ -663,7 +663,7 @@ public class XMLParser {
 			audioId = 0;
 			audioLayers.add(new AudioLayer(InteractiveLearningApp.getDefaultHeight(),InteractiveLearningApp.getDefaultHeight(), audio));
 		}
-		audioLayers.get(currentSlide).add(urlName,startTime, loop, true,90,90,200,100,currentSlide);
+		audioLayers.get(currentSlide).add(urlName,startTime, loop, true,66,90,33,10,currentSlide);
 		//Add media element for timer
 		slides.get(currentSlide).getSlideElements().add(new MediaElement(currentSlide, startTime, -1, "audio",audioId)); //Add media element for timer
 		audioId++;
@@ -773,7 +773,7 @@ public class XMLParser {
 		}
 		else{}
 		if(graphics3DLayers.size()< currentSlide+1) {
-			graphics3DLayers.add(new Graphics3DLayer(modelWidth, modelHeight,models));
+			graphics3DLayers.add(new Graphics3DLayer(InteractiveLearningApp.getStageWidth(), InteractiveLearningApp.getStageHeight(),models));
 		}
 		graphics3DLayers.get(currentSlide).add(urlName, modelWidth, modelHeight, xStart, yStart);;
 	}

@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import main.InteractiveLearningApp;
@@ -29,19 +30,26 @@ public class StartScreen {
 	private static double yOffset = 0;	
 	
 	private static Scene startScreen;
-	private static String title = "Start Screen";
+	private static String title = "Exhibit+";
+	private static Button resumeButton;
 	
 	/**
 	 * Method used to create the start screen
 	 * @param mainStage - Main window of the program. Start screen is placed upon this stage
 	 * @param defaultXSize - default width of the program
 	 * @param defaultYSize - default height of the program
+	 * @param exhibitMode 
 	 * @return Returns a scene with the elements that make up the start screen upon it
 	 */
-	public static Scene createStartScreen(Stage mainStage, int defaultXSize, int defaultYSize) {
+	public static Scene createStartScreen(Stage mainStage, int defaultXSize, int defaultYSize, boolean exhibitMode) {
 		//Create versions of the toolbar and the resize bar
-		SubScene toolBar = ToolBar.createToolBar(defaultXSize, title); 
-		SubScene resizeBar = ResizeBar.CreateResizeBar(defaultXSize); 
+		SubScene toolBar = ToolBar.createToolBar(defaultXSize, title, exhibitMode);
+		BorderPane borderPane = new BorderPane();
+		SubScene resizeBar = null;
+		
+		if(exhibitMode == false) {
+			resizeBar = ResizeBar.CreateResizeBar(defaultXSize); 
+		}
 		
 		//Get coordinate offsets of window when mouse press
 		toolBar.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -62,17 +70,29 @@ public class StartScreen {
 		});
 		
 		//Setting stage style to transparent removes the default toolbar
-		mainStage.initStyle(StageStyle.TRANSPARENT);
-		BorderPane borderPane = new BorderPane();
+		if(mainStage.isShowing()==false) {
+			mainStage.initStyle(StageStyle.TRANSPARENT);
+		}
+		
+		
 		
 		//Setup left side of the screen
 		//Create buttons
 		Button openButton =  new Button("Open");
+		resumeButton = new Button("Resume");
+		resumeButton.setStyle("-fx-background-color: gray");
 		Button settingsButton = new Button("Settings");
 		Button quitButton = new Button("Quit");
 		
 		//Setup button actions
 		openButton.setOnMouseClicked(e->InteractiveLearningApp.run());
+		resumeButton.setOnMouseClicked(e->{
+			if(InteractiveLearningApp.presRunning == false) {
+				//Do nothing
+			}else if(InteractiveLearningApp.presRunning == true) {
+				InteractiveLearningApp.resumePres();
+			}
+		});
 		settingsButton.setOnMouseClicked(e->InteractiveLearningApp.showSettings());
 		quitButton.setOnMouseClicked(e->System.exit(1));
 		
@@ -80,8 +100,9 @@ public class StartScreen {
 		GridPane gp = new GridPane();
 		gp.setPadding(new Insets(100,100,100,100));
 		gp.add(openButton, 0, 0);
-		gp.add(settingsButton, 0, 1);	
-		gp.add(quitButton, 0, 2);	
+		gp.add(resumeButton, 0, 1);
+		gp.add(settingsButton, 0, 2);	
+		gp.add(quitButton, 0, 3);	
 		
 		//Center gridpane to center of location
 		gp.setAlignment(Pos.CENTER);	
@@ -91,10 +112,13 @@ public class StartScreen {
 		//Adds the toolbar to the top of the scene
 		//and resize bar to the bottom
 		borderPane.setTop(toolBar); 
-		borderPane.setBottom(resizeBar);
+		if(resizeBar != null) {
+			borderPane.setBottom(resizeBar);
+		}
+
 		
 		//Import 3D goose model
-		Model gooseModel = new Model(Paths.get("src/resources/3D_Models/startScreenGoose.stl").toUri().toString(), 50,90);
+		Model gooseModel = new Model(Paths.get("resources/3D_Models/startScreenGoose.stl").toUri().toString(), 50,90);
 		//Zoom into model
 		gooseModel.moveCam(0, 15, 600); 
 		
@@ -103,12 +127,15 @@ public class StartScreen {
 		//Add model to the right of the screen
 		borderPane.setRight(gooseModel.getModelScene());
 		borderPane.setAlignment(gooseModel.getModelScene(), Pos.CENTER);
-		
-		startScreen = new Scene(borderPane, defaultXSize, defaultYSize);
+		borderPane.prefHeightProperty().bind(InteractiveLearningApp.getStage().heightProperty());
+		startScreen = new Scene(borderPane, mainStage.getWidth(), mainStage.getHeight());
 		startScreen.getStylesheets().add("style/StartScreen/startScreen.css");	//Default
-		//startScreen.getStylesheets().add("style/StartScreen/startScreenNight.css");	//Nightmode
-		//startScreen.getStylesheets().add("style/StartScreen/startScreenCB.css");	//Colourblind?
+		borderPane.prefWidthProperty().bind(startScreen.widthProperty());
+		borderPane.prefHeightProperty().bind(startScreen.heightProperty());
 		return startScreen;
+	}
+	public Button getResumeButton() {
+		return resumeButton;
 	}
 	
 	/** sets style of startscreen to default */

@@ -31,6 +31,7 @@ import javafx.scene.shape.Sphere;
 import javafx.scene.shape.TriangleMesh;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Scale;
+import javafx.scene.transform.Transform;
 import javafx.scene.transform.Translate;
 import javafx.util.Duration;
 import main.InteractiveLearningApp;
@@ -50,6 +51,8 @@ public class Model {
 	int height; //Height of SubScenes
 	int xStart; //X value for position
 	int yStart; //Y value for position
+	boolean modelFail = false;
+	PhongMaterial material;
 	
 	 //Group containing all 3D Elements
 	Group modelGroup;
@@ -61,16 +64,23 @@ public class Model {
 	ArrayList<InteractivePoints> points = new ArrayList<InteractivePoints>(); 
 	ArrayList<Sphere> spheres = new ArrayList<Sphere>(); //Arraylist of Sphere buttons
 	Boolean showControls = true;
+	Transform reqTransform;
+	Transform reqTranslate;
+	Scale reqScale;
 	
 	public Model(String url, int modelWidth, int modelHeight, int xStart, int yStart){
-		//Width of SubScene
+		//Width of SubScene as a percentage
 		this.width = modelWidth * InteractiveLearningApp.getDefaultWidth()/100; 
-		//Height of SubScene
+		//Height of SubScene as a percentage
 		this.height = modelHeight * InteractiveLearningApp.getDefaultHeight()/100; 
 		System.out.println(width + ", " + height);
 		this.xStart = xStart;
 		this.yStart = yStart;
 		//Create the and store scene
+		reqTransform = new Rotate(-90, Rotate.X_AXIS);
+		reqTranslate = new Translate(0,0,0);
+		reqScale =  new Scale(3,3,3);
+		material =  new PhongMaterial(Color.BEIGE);
 		modelScene = createModel(url); 
 	}
 	
@@ -82,7 +92,12 @@ public class Model {
 		showControls = false;
 		System.out.println(width + ", " + height);
 		//Create the and store scene
-		modelScene = createModel(url); 
+		reqTransform = new Translate();
+		reqTranslate = new Translate();
+		reqScale = new Scale();
+		material =  new PhongMaterial(Color.web("#3AA9B8"));
+		modelScene = createModel(url);
+		
 	}
 	
 	//Method to create model scene
@@ -91,10 +106,18 @@ public class Model {
 		camera = new PerspectiveCamera(); 
 		
 		if(url.startsWith("https://")) {
+			System.out.println("Online source");
 		}
-		else if(url.startsWith("src")) {
-			File modelFile = new File(url);
-			url = modelFile.toURI().toString();
+		else if(url.startsWith("resources")) {
+			try {
+				File modelFile = new File(url);
+				url = modelFile.toURI().toString();
+			} catch (Exception e) {
+				modelFail = true;
+				System.out.println("3D Model not found, will not be added to presentation");
+				return null;
+			}
+			
 		}
 		else {
 			System.out.println("Unknown model origin.");
@@ -123,7 +146,7 @@ public class Model {
 	        //Creates new Mesh view
 	        MeshView cylinderHeadMeshView = new MeshView();
 	        //Sets material of model
-	        cylinderHeadMeshView.setMaterial(new PhongMaterial(Color.BEIGE));
+	        cylinderHeadMeshView.setMaterial(material);
 	        //Sets the mesh for the mesh view
 	        cylinderHeadMeshView.setMesh(cylinderHeadMesh); 
 	        stlImporter.close();
@@ -146,7 +169,7 @@ public class Model {
         // Create Shape3D
 		System.out.println("Model Imported");
 		
-		//modelGroup.getTransforms().add(new Rotate(90, Rotate.X_AXIS));
+		modelGroup.getTransforms().addAll(reqTransform, reqTranslate, reqScale);
 
 		//Create pivot
         Translate pivot = new Translate(); 
