@@ -129,37 +129,37 @@ public class InteractiveLearningApp extends Application{
 			videoLayers.clear();
 			textLayers.clear();
 		}else{
-		presRunning = false;
-		//Create File Browser
-		FileChooser fileChooser = new FileChooser();
-		//Change to another directory when we export as a jar
-		fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
-		fileChooser.setInitialFileName("defaultPresentation.xml");
-		fileChooser.setTitle("Choose a file to present...");
-		fileChooser.getExtensionFilters().add(new ExtensionFilter("Presentation Files (*.xml)","*.xml"));
-		
-		File file = fileChooser.showOpenDialog(mainStage);
-		try{
-			//Get File path
-			xml = file.getPath(); 
-			mainStage.setScene(loading);
-			//Create slides using XML
-			SlideAssembler.createSlides(xml, slides, videoLayers, graphics2d, 
-										graphics3dLayers, imageLayers, textLayers, audioLayers, 
-										shapes, images, audio, slideText, videos, models);
-			//Show first slide of presentation
-			showSlide(0); 
-			presRunning = true;
-		}catch(NullPointerException e) {
-			showStart();
-		}
-		//timer2 = new Timer_2(shapes, audio,images,slideText,videos,models,graphics2d,audioLayers,imageLayers,textLayers,videoLayers,graphics3dLayers);
-		//timer2.start();
-		timer = new Timer();
-		timer.start();
-		//mainStage.setX((Screen.getPrimary().getVisualBounds().getWidth()-defaultXSize)/2);
-		//mainStage.setY((Screen.getPrimary().getVisualBounds().getHeight()-defaultYSize)/2);
-		//mainStage.setFullScreen(true);
+			presRunning = false;
+			//Create File Browser
+			FileChooser fileChooser = new FileChooser();
+			//Change to another directory when we export as a jar
+			fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+			fileChooser.setInitialFileName("defaultPresentation.xml");
+			fileChooser.setTitle("Choose a file to present...");
+			fileChooser.getExtensionFilters().add(new ExtensionFilter("Presentation Files (*.xml)","*.xml"));
+			
+			File file = fileChooser.showOpenDialog(mainStage);
+			try{
+				//Get File path
+				xml = file.getPath(); 
+				mainStage.setScene(loading);
+				//Create slides using XML
+				SlideAssembler.createSlides(xml, slides, videoLayers, graphics2d, 
+											graphics3dLayers, imageLayers, textLayers, audioLayers, 
+											shapes, images, audio, slideText, videos, models);
+				//Show first slide of presentation
+				showSlide(0); 
+				presRunning = true;
+				timer = new Timer();
+				timer.start();
+				//timer2 = new Timer_2(shapes, audio,images,slideText,videos,models,graphics2d,audioLayers,imageLayers,textLayers,videoLayers,graphics3dLayers);
+				//timer2.start();
+			}catch(NullPointerException e) {
+				showStart();
+			}
+			//mainStage.setX((Screen.getPrimary().getVisualBounds().getWidth()-defaultXSize)/2);
+			//mainStage.setY((Screen.getPrimary().getVisualBounds().getHeight()-defaultYSize)/2);
+			//mainStage.setFullScreen(true);
 		}
 	}
 	public static void resumePres() {

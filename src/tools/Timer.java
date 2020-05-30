@@ -8,10 +8,12 @@ import main.InteractiveLearningApp;
 public class Timer extends Thread{
 	int currentTimer = 0;
 	int currentSlideNo = 0;
+	int prevSlide = 0;
 	public void run() {
 		while(InteractiveLearningApp.presRunning == true) {
 			if(InteractiveLearningApp.slides.get(currentSlideNo).getDuration() == currentTimer) {
 				Platform.runLater(()->InteractiveLearningApp.nextSlide());
+				prevSlide = currentSlideNo;
 			}
 			for(int i = 0; i< InteractiveLearningApp.slides.get(currentSlideNo).getSlideElements().size();i++) {
 				if(InteractiveLearningApp.slides.get(currentSlideNo).getSlideElements().get(i).startTime == currentTimer) {
@@ -52,11 +54,13 @@ public class Timer extends Thread{
 						Platform.runLater(()->InteractiveLearningApp.slides.get(currentSlideNo).getSlideImages().get(id).remove());
 						break;
 					case SHAPE:
-						try {
-							Platform.runLater(()->InteractiveLearningApp.slides.get(currentSlideNo).getSlideShapes().get(id).destroy());
-						}catch (IndexOutOfBoundsException ioobe) {
-							System.err.println("Tried to remove undrawn shape");
-						}
+						Platform.runLater(()->{
+							try {
+								InteractiveLearningApp.slides.get(currentSlideNo).getSlideShapes().get(id).destroy();
+							}catch (IndexOutOfBoundsException ioobe) {
+								System.err.println("Tried to remove undrawn shape");
+							}
+						});
 						break;
 					case TEXT:
 						Platform.runLater(()->InteractiveLearningApp.slides.get(currentSlideNo).getSlideTexts().get(id).remove());
@@ -92,21 +96,36 @@ public class Timer extends Thread{
 					InteractiveLearningApp.slides.get(currentSlideNo).getSlideVideos().get(id).getPlayer().stop();
 					break;
 				case IMAGE:
-					Platform.runLater(() ->InteractiveLearningApp.slides.get(currentSlideNo-1).getSlideImages().get(id).remove());
+					Platform.runLater(() ->{
+						try {
+							InteractiveLearningApp.slides.get(prevSlide).getSlideImages().get(id).remove();
+						}catch(IndexOutOfBoundsException e) {
+							InteractiveLearningApp.slides.get(InteractiveLearningApp.slides.size()-1).getSlideImages().get(id).remove();
+						}
+					});
 					break;
 				case SHAPE:
-					try {
-						Platform.runLater(()->InteractiveLearningApp.slides.get(currentSlideNo-1).getSlideShapes().get(id).destroy());
-					}catch (IndexOutOfBoundsException e) {
-						
-					}
+						Platform.runLater(()->{
+							try{
+								InteractiveLearningApp.slides.get(prevSlide).getSlideShapes().get(id).destroy();
+							}catch (IndexOutOfBoundsException e) {
+								InteractiveLearningApp.slides.get(InteractiveLearningApp.slides.size()-1).getSlideShapes().get(id).destroy();
+							}
+						});
 					break;
 				case TEXT:
-					Platform.runLater(()->InteractiveLearningApp.slides.get(currentSlideNo-1).getSlideTexts().get(id).remove());
+					Platform.runLater(()->{
+						try {
+							InteractiveLearningApp.slides.get(prevSlide).getSlideTexts().get(id).remove();
+						}catch(IndexOutOfBoundsException e) {
+							InteractiveLearningApp.slides.get(InteractiveLearningApp.slides.size()-1).getSlideTexts().get(id).remove();
+						}
+					});
 					break;
 			default:
 				break;
 			}
 		}
+		
 	}
 }

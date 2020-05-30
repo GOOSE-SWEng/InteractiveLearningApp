@@ -106,31 +106,35 @@ public class Shape {
 	
 	/** method to create shapes */
 	public void create() {
-		if (oval == true) {
-			gc.fillOval(ovalCentreX,ovalCentreY,ovalWidth,ovalHeight);
-			gc.strokeOval(ovalCentreX,ovalCentreY,ovalWidth,ovalHeight);
-			group.getChildren().add(canvas);
-		}
-		// used to create an array of points from an arraylist
-		else {
-			double[] pointX = new double[pointsX.size()];
-			double[] pointY = new double[pointsY.size()];
-			
-			//adding arraylist points to an array
-			for (int i = 0; i<pointsX.size(); i++) {
-				pointX[i] = pointsX.get(i);
+		if(group.getChildren().contains(canvas)) {
+			System.err.println("Tried to add duplicate shape.");
+		}else {
+			if (oval == true) {
+				gc.fillOval(ovalCentreX,ovalCentreY,ovalWidth,ovalHeight);
+				gc.strokeOval(ovalCentreX,ovalCentreY,ovalWidth,ovalHeight);
+				group.getChildren().add(canvas);
 			}
-			
-			for (int i = 0; i<pointsY.size(); i++) {
-				pointY[i] = pointsY.get(i);
+			// used to create an array of points from an arraylist
+			else {
+				double[] pointX = new double[pointsX.size()];
+				double[] pointY = new double[pointsY.size()];
+				
+				//adding arraylist points to an array
+				for (int i = 0; i<pointsX.size(); i++) {
+					pointX[i] = pointsX.get(i);
+				}
+				
+				for (int i = 0; i<pointsY.size(); i++) {
+					pointY[i] = pointsY.get(i);
+				}
+				
+				//creates a polygon outline
+				gc.strokePolygon(pointX,pointY,pointsX.size());
+				//creates the polygon solid
+				gc.fillPolygon(pointX,pointY,pointsX.size());
+				//adds canvas to the group
+				group.getChildren().add(canvas);
 			}
-			
-			//creates a polygon outline
-			gc.strokePolygon(pointX,pointY,pointsX.size());
-			//creates the polygon solid
-			gc.fillPolygon(pointX,pointY,pointsX.size());
-			//adds canvas to the group
-			group.getChildren().add(canvas);
 		}
 		
 	}

@@ -75,7 +75,14 @@ public class StartScreen {
 		Button quitButton = new Button("Quit");
 		
 		//Setup button actions
-		openButton.setOnMouseClicked(e->InteractiveLearningApp.run());
+		openButton.setOnMouseClicked(e->{
+			InteractiveLearningApp.run();
+			if(InteractiveLearningApp.presRunning == false) {
+				resumeButton.setStyle("-fx-background-color: gray");
+			}else if(InteractiveLearningApp.presRunning == true) {
+				resumeButton.setStyle("-fx-background-color: #3AA9B8");
+			}
+		});
 		resumeButton.setOnMouseClicked(e->{
 			if(InteractiveLearningApp.presRunning == false) {
 				//Do nothing
