@@ -13,18 +13,19 @@ import main.InteractiveLearningApp;
 public class TextLayer {
 	int height;
 	int width;
-	StackPane sp = new StackPane();
+	StackPane sp;// = new StackPane();
 	public ArrayList<SlideText> slideText;
 	SubScene window;
 	
-	public TextLayer(int width,int height, ArrayList<SlideText>slideText){
+	public TextLayer(int width,int height, ArrayList<SlideText>slideText, StackPane sp){
 		this.height = height;
 		this.width = width;
-		//sp.setMinSize(width,height);
-		sp.setPickOnBounds(false);
+
+//		sp.setMinSize(width,height);
+//		sp.setPickOnBounds(false);
 		this.slideText = slideText;
-		sp.setAlignment(Pos.TOP_LEFT);
-		
+		this.sp = sp;
+//		sp.setAlignment(Pos.TOP_LEFT);
 		System.out.println("Text Layer created: " + width + ", " + height);
 	}
 	
@@ -37,13 +38,26 @@ public class TextLayer {
 		InteractiveLearningApp.slides.get(slideNumber).getSlideTexts().add(text);
 	}
 	
-	public void remove(SlideText object) {
-		sp.getChildren().remove(object.get());
+	public void remove(int i) {
+		if (sp.getChildren().contains(slideText.get(i).get())) {
+			sp.getChildren().remove(slideText.get(i).get());
+		}
 	}
+	public void add(int i) {
+		if (sp.getChildren().contains(slideText.get(i).get()) == false) {
+			sp.getChildren().add(slideText.get(i).get());
+			slideText.get(i).start();
+			System.out.println("here"+slideText.get(i).getSlideNumber());
+		}
+	}
+//	public void remove(SlideText object) {
+//		sp.getChildren().remove(object.get());
+//	}
 	
 	public StackPane get() {
     //window = new SubScene(sp,width,height);
 		return (sp);
+		
   }
   
   public ArrayList<SlideText> getList() {

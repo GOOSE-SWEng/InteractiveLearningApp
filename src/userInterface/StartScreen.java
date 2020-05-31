@@ -137,7 +137,7 @@ public class StartScreen {
 	public Button getResumeButton() {
 		return resumeButton;
 	}
-	
+
 	/** sets style of startscreen to default */
 	public static void defaultStyle() {
 		startScreen.getStylesheets().clear();

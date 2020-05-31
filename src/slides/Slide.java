@@ -52,6 +52,7 @@ public class Slide {
 	private ArrayList<SlideImage> slideImages = new ArrayList<SlideImage>();
 	private ArrayList<Shape> slideShapes = new ArrayList<Shape>();
 	
+	
 	private ArrayList<MediaElement> slideElements = new ArrayList<MediaElement>();
 	SubScene test;
 	Graphics2D graphics;
@@ -73,7 +74,7 @@ public class Slide {
 	 * @param audio - audio
 	 * @param slideTexts - text
 	 */
-	public Slide(Stage mainStage, int width, int height, double xOffset, double yOffset,
+	public Slide(Stage mainStage, String id, int width, int height,
 			     ArrayList<VideoLayer> vl, 
 			     ArrayList<AudioLayer> al, 
 			     ArrayList<ImageLayer> il, 
@@ -83,11 +84,13 @@ public class Slide {
 			     ArrayList<Shape> shapes, 
 			     ArrayList<SlideImage> images, 
 			     ArrayList<Audio> audio, 
-			     ArrayList<SlideText> slideTexts) {
+			     ArrayList<SlideText> slideTexts,
+			     ArrayList<Video> slideVideos,
+			     ArrayList<Model> models) {
 		//stores variables from main program 
 		this.width = width;
 		this.height = height;
-		
+		this.id = id;
 		//create toolbar and resize bar
 		toolBar = ToolBar.createToolBar(width, id, InteractiveLearningApp.exhibitMode);
 		resizeBar = ResizeBar.CreateResizeBar(width);
@@ -97,7 +100,14 @@ public class Slide {
 		
 		//sp.setMinSize(width,height);
 		sp.setAlignment(Pos.TOP_LEFT);
+		sp.setPickOnBounds(false);
 		
+		graphics2D = new Graphics2D(width,height,shapes,sp);
+		textLayer = new TextLayer(width,height,slideTexts,sp);
+		audioLayer = new AudioLayer(width,height,audio,sp);
+		imageLayer = new ImageLayer(width,height,images,sp);
+		videoLayer = new VideoLayer(width,height,slideVideos,sp);
+		graphics3DLayer = new Graphics3DLayer(width,height,models,sp);
 		/*videoLayer = new VideoLayer(this.width,this.height);
 		audioLayer = new AudioLayer(this.width,this.height,audio,sp);
 		imageLayer = new ImageLayer(this.width,this.height,images,sp);
@@ -137,8 +147,8 @@ public class Slide {
 		this.id = id;
 		this.duration = duration;
 		toolBar = ToolBar.createToolBar(width, id, InteractiveLearningApp.exhibitMode);
-		resizeBar = ResizeBar.CreateResizeBar(width);
 
+		resizeBar = ResizeBar.CreateResizeBar(width);
 		bp.setTop(toolBar);
 		bp.setCenter(sp);
 
@@ -173,15 +183,61 @@ public class Slide {
 		}else {
 			System.out.println("Unknown style scheme.");
 		}
+		
 	}
 	
+	public int getEndTime() {
+		return(10000);
+	}
+	
+//	public Slide(int width, int height, String id, int duration) {
+//		this.width = width;
+//		this.height = height;
+//		this.id = id;
+//		this.duration = duration;
+//		toolBar = ToolBar.createToolBar(width, id);
+//		resizeBar = ResizeBar.CreateResizeBar(width);
+//		
+//		//System.out.println("-----------------------slidedfsdsdsdsdf--------------------------------------------------------");
+//		bp.setTop(toolBar);
+//		bp.setCenter(sp);
+//		bp.setBottom(resizeBar);
+//		toolBar.setOnMousePressed(new EventHandler<MouseEvent>() {
+//			@Override
+//			public void handle(MouseEvent event) {
+//				xOff = event.getSceneX();
+//				yOff = event.getSceneY();
+//			}
+//		});
+//		
+//		//Move window with mouse
+//		toolBar.setOnMouseDragged(new EventHandler<MouseEvent>() {
+//			@Override
+//			public void handle(MouseEvent event) {
+//				InteractiveLearningApp.getStage().setX(event.getScreenX() - xOff);
+//				InteractiveLearningApp.getStage().setY(event.getScreenY() - yOff);	
+//			}
+//		});
+//		sp.setPickOnBounds(false);
+//		slide = new Scene(bp,width, height);
+//		if(InteractiveLearningApp.style.equals("default")) {
+//			slide.getStylesheets().add("style/ContentScreen/contentScreen.css");
+//		}else if(InteractiveLearningApp.style.equals("nightmode")) {
+//			slide.getStylesheets().add("style/ContentScreen/contentScreenNight.css");
+//		}else if(InteractiveLearningApp.style.equals("colourblind")) {
+//			slide.getStylesheets().add("style/ContentScreen/contentScreenCB.css");
+//		}else {
+//			System.out.println("Unknown style scheme.");
+//		}
+//	}
+	
 	public void applyLayers() {
-		sp.getChildren().add(graphics2D.get());
-		sp.getChildren().add(audioLayer.get());
-		sp.getChildren().add(videoLayer.get());
-		sp.getChildren().add(textLayer.get());
-		sp.getChildren().add(imageLayer.get());
-		sp.getChildren().add(graphics3DLayer.get());
+//		sp.getChildren().add(graphics2D.get());
+//		sp.getChildren().add(audioLayer.get());
+//		sp.getChildren().add(videoLayer.get());
+//		sp.getChildren().add(textLayer.get());
+//		sp.getChildren().add(imageLayer.get());
+//		sp.getChildren().add(graphics3DLayer.get());
 	}
 	
 	/*public void addMediaElements(String type, List elements) {
@@ -205,6 +261,11 @@ public class Slide {
 		slide.getStylesheets().add("style/ContentScreen/contentScreenCB.css");
 	}
 	
+	public Scene getSlide() {
+		return slide;
+	}
+	
+
 	public ArrayList<Video> getSlideVideos() {
 		return slideVideos;
 	}
@@ -261,9 +322,7 @@ public class Slide {
 		return slideElements;
 	}
 
-	public Scene getSlide() {
-		return slide;
-	}
+	
 
 	public void setSlide(Scene slide) {
 		this.slide = slide;

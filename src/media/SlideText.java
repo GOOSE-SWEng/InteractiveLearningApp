@@ -152,7 +152,7 @@ public class SlideText {
     return endTime;
   }
 
-  public int getSlideNo() {
+  public int getSlideNumber() {
     return slideNumber;
   }
 

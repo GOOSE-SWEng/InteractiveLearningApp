@@ -1,23 +1,13 @@
 package main;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.SubScene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import userInterface.*;
 import slides.*;
@@ -38,9 +28,6 @@ import media.*;
 public class InteractiveLearningApp extends Application{
 	public static int defaultXSize = 1280;
 	public static int defaultYSize = 720;
-	//Current screen offset
-	private double yOffset = 0;
-	private double xOffset = 0;
 	private static Scene start;
 	private static Scene settings;
 	private static Scene loading;
@@ -130,6 +117,7 @@ public class InteractiveLearningApp extends Application{
 			videoLayers.clear();
 			textLayers.clear();
 		}else{
+
 		presRunning = false;
 		//Create File Browser
 		FileChooser fileChooser = new FileChooser();
@@ -147,17 +135,17 @@ public class InteractiveLearningApp extends Application{
 			//Create slides using XML
 			SlideAssembler.createSlides(xml, slides, videoLayers, graphics2d, 
 										graphics3dLayers, imageLayers, textLayers, audioLayers, 
-										shapes, images, audio, slideText, videos, models);
+										shapes, images, audio, slideText, videos, models, mainStage);
 			//Show first slide of presentation
 			showSlide(0); 
 			presRunning = true;
 		}catch(NullPointerException e) {
 			showStart();
 		}
-		//timer2 = new Timer_2(shapes, audio,images,slideText,videos,models,graphics2d,audioLayers,imageLayers,textLayers,videoLayers,graphics3dLayers);
-		//timer2.start();
-		timer = new Timer();
-		timer.start();
+		timer2 = new Timer_2(shapes, audio,images,slideText,videos,models,graphics2d,audioLayers,imageLayers,textLayers,videoLayers,graphics3dLayers, slides);
+		timer2.start();
+		//timer = new Timer();
+		//timer.start();
 		//mainStage.setX((Screen.getPrimary().getVisualBounds().getWidth()-defaultXSize)/2);
 		//mainStage.setY((Screen.getPrimary().getVisualBounds().getHeight()-defaultYSize)/2);
 		//mainStage.setFullScreen(true);
@@ -205,7 +193,7 @@ public class InteractiveLearningApp extends Application{
 			System.out.println("NEXT SLIDE");
 			currentSlide++;
 			mainStage.setScene(slides.get(currentSlide).getSlide());
-			timer.resetTimer(currentSlide);
+			timer2.resetTimer(currentSlide);
 		}catch(NullPointerException | IndexOutOfBoundsException e) {
 			System.out.println("Presentation Restarted");
 			if(presRunning == false) {
@@ -213,7 +201,9 @@ public class InteractiveLearningApp extends Application{
 			}else {
 				mainStage.setScene(slides.get(0).getSlide());
 				currentSlide = 0;
-				timer.resetTimer(currentSlide);
+
+				//timer.resetTimer(currentSlide);
+				timer2.resetTimer(currentSlide);
 			}
 		}
 	}
@@ -223,7 +213,7 @@ public class InteractiveLearningApp extends Application{
 			System.out.println("PREV SLIDE");
 			currentSlide--;
 			mainStage.setScene(slides.get(currentSlide).getSlide());
-			timer.resetTimer(currentSlide);
+			timer2.resetTimer(currentSlide);
 		}catch(NullPointerException | IndexOutOfBoundsException e) {
 			System.out.println("Presentation Restarted");
 			if(presRunning == false) {
@@ -231,7 +221,8 @@ public class InteractiveLearningApp extends Application{
 			}else {
 				mainStage.setScene(slides.get(0).getSlide());
 				currentSlide = 0;
-				timer.resetTimer(currentSlide);
+				//timer.resetTimer(currentSlide);
+				timer2.resetTimer(currentSlide);
 			}
 		}
 	}

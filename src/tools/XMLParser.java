@@ -22,6 +22,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import javafx.stage.Stage;
 import main.InteractiveLearningApp;
 import media.*;
 import slides.Slide;
@@ -39,6 +40,7 @@ public class XMLParser {
 	static Schema schema = null;
 	static String xmlName = "src/xml.xml";
 	static Document xmlDoc;
+	int slideCurrent = 0;
 	int currentSlide = 0; //Slide counter
 	int slideCount; //Total slide count
 	
@@ -94,7 +96,8 @@ public class XMLParser {
 									 ArrayList<SlideImage> images,
 									 ArrayList<Shape> shapes,
 									 ArrayList<SlideText> slideText, 
-									 ArrayList<Video> videos) {
+									 ArrayList<Video> videos,
+									 Stage mainStage) {
 		//Store all arrayLists from the main program
 		this.slides = slides;
 		this.audioLayers = audioLayers;
@@ -226,7 +229,10 @@ public class XMLParser {
 			System.out.println("Root element: " + slideList.item(0).getNodeName());
 			int slideDuration = 0;
 			String slideTitle = null;
-			
+			//Slide bodge = new Slide(mainStage,InteractiveLearningApp.getStageWidth(),InteractiveLearningApp.getStageHeight(),
+			//		40,40, videoLayers, audioLayers, imageLayers, textLayers, g2dLayers, graphics3DLayers, shapes, images, audio, slideText, videos, models);
+			//slides.add(bodge);
+//each time a new slide is found
 			Node currentNode = slideList.item(j);
 			if(currentNode.hasAttributes()) {
 				NamedNodeMap attMap = currentNode.getAttributes();
@@ -244,7 +250,10 @@ public class XMLParser {
 					}
 				}
 			//Create a new slide for each loop
-			slides.add(new Slide(InteractiveLearningApp.getDefaultWidth(), InteractiveLearningApp.getDefaultHeight(),slideTitle, slideDuration));
+			Slide newSlide = new Slide(mainStage, slideTitle, InteractiveLearningApp.getStageWidth(),InteractiveLearningApp.getStageHeight(),
+					videoLayers, audioLayers, imageLayers, textLayers, g2dLayers, 
+					graphics3DLayers, shapes, images, audio, slideText, videos, models);
+			slides.add(newSlide);
 			}
 			else{
 				System.out.println("No attributes");
@@ -258,7 +267,9 @@ public class XMLParser {
 			}
 			
 			System.out.println("==============================");
-			currentSlide++; //Increase slide count
+			currentSlide++;
+			//slideCurrent++;
+			//currentSlide = slideCurrent - 1; //Increase slide count
 		}
 	}
 	//Loop for sub tags
@@ -388,11 +399,11 @@ public class XMLParser {
 		
 		try {
 			//If there is not a layer for this slide, create one
-			if(videoLayers.size() < currentSlide+1) { 
-				videoId = 0;
-				//Create a new layer for this slide
-				videoLayers.add(new VideoLayer(InteractiveLearningApp.getDefaultWidth(),InteractiveLearningApp.getDefaultHeight(), videos)); //Create a new layer for this slide
-			}
+//			if(videoLayers.size() < currentSlide+1) { 
+//				videoId = 0;
+//				//Create a new layer for this slide
+//				videoLayers.add(new VideoLayer(InteractiveLearningApp.getDefaultWidth(),InteractiveLearningApp.getDefaultHeight(), videos)); //Create a new layer for this slide
+//			}
 			//Add a new video to this layer
 			videoLayers.get(currentSlide).addVideo(urlName, startTime, loop, xStart, yStart, currentSlide);
 			//Add media element for timer
@@ -462,10 +473,10 @@ public class XMLParser {
 		else{
 			System.out.println("No sub nodes");
 		}
-		if(imageLayers.size() < currentSlide+1) {
-			imageId=0;
-			imageLayers.add(new ImageLayer(InteractiveLearningApp.getDefaultWidth(), InteractiveLearningApp.getDefaultHeight(), images));
-		}
+//		if(imageLayers.size() < currentSlide+1) {
+//			imageId=0;
+//			imageLayers.add(new ImageLayer(InteractiveLearningApp.getDefaultWidth(), InteractiveLearningApp.getDefaultHeight(), images));
+//		}
 		imageLayers.get(currentSlide).add(urlName, xStart,yStart,width,height,startTime,endTime,currentSlide);
 		//Add media element for timer
 		slides.get(currentSlide).getSlideElements().add(new MediaElement(currentSlide, startTime, endTime, "image", imageId)); //Add media element for timer
@@ -581,10 +592,10 @@ public class XMLParser {
 			//getSubNodes(currentNode.getChildNodes());
 		}
 		else{}
-		if(g2dLayers.size()< currentSlide+1) {
-			shapeId = 0;
-			g2dLayers.add(new Graphics2D(InteractiveLearningApp.getDefaultWidth(), InteractiveLearningApp.getDefaultHeight()-40, shapes));
-		}
+//		if(g2dLayers.size()< currentSlide+1) {
+//			shapeId = 0;
+//			g2dLayers.add(new Graphics2D(InteractiveLearningApp.getDefaultWidth(), InteractiveLearningApp.getDefaultHeight()-40, shapes));
+//		}
 		if(type.equals("oval") & !shading) {
 			g2dLayers.get(currentSlide).registerOval(xStart, yStart,width, height, fillColor, startTime, endTime, currentSlide);
 			//Add media element for timer
@@ -610,10 +621,10 @@ public class XMLParser {
 	
 	/** parses text if the text tag is found */
 	public void textParse(Node currentNode) {
-		if(textLayers.size()< currentSlide+1) {
-			textId=0;
-			textLayers.add(new TextLayer((int)InteractiveLearningApp.getStage().getWidth(), (int)InteractiveLearningApp.getStage().getHeight(), slideText));
-		}
+//		if(textLayers.size()< currentSlide+1) {
+//			textId=0;
+//			textLayers.add(new TextLayer((int)InteractiveLearningApp.getStage().getWidth(), (int)InteractiveLearningApp.getStage().getHeight(), slideText));
+//		}
 		textLayers.get(currentSlide).add(currentNode, currentSlide);
 		//Add media element for timer
 		slides.get(currentSlide).getSlideElements().add(new MediaElement(currentSlide, 
@@ -659,11 +670,12 @@ public class XMLParser {
 			getSubNodes(currentNode.getChildNodes());
 		}
 		else{}
-		if(audioLayers.size()< currentSlide+1) {
-			audioId = 0;
-			audioLayers.add(new AudioLayer(InteractiveLearningApp.getDefaultHeight(),InteractiveLearningApp.getDefaultHeight(), audio));
-		}
-		audioLayers.get(currentSlide).add(urlName,startTime, loop, true,66,90,33,10,currentSlide);
+
+//		if(audioLayers.size()< currentSlide+1) {
+//			audioId = 0;
+//			audioLayers.add(new AudioLayer(InteractiveLearningApp.getDefaultHeight(),InteractiveLearningApp.getDefaultHeight(), audio));
+//		}
+		audioLayers.get(currentSlide).add(urlName,startTime, loop, true,90,90,200,100,currentSlide);
 		//Add media element for timer
 		slides.get(currentSlide).getSlideElements().add(new MediaElement(currentSlide, startTime, -1, "audio",audioId)); //Add media element for timer
 		audioId++;
@@ -719,10 +731,10 @@ public class XMLParser {
 			getSubNodes(currentNode.getChildNodes());
 		}
 		else{}
-		if(g2dLayers.size()< currentSlide+1) {
-			shapeId = 0;
-			g2dLayers.add(new Graphics2D(InteractiveLearningApp.getDefaultWidth(), InteractiveLearningApp.getDefaultHeight()-40, shapes));
-		}
+//		if(g2dLayers.size()< currentSlide+1) {
+//			shapeId = 0;
+//			g2dLayers.add(new Graphics2D(InteractiveLearningApp.getDefaultWidth(), InteractiveLearningApp.getDefaultHeight()-40, shapes));
+//		}
 		g2dLayers.get(currentSlide).registerLine(xStart,xEnd, yStart, yEnd,lineColor,startTime, endTime, currentSlide);
 		//Add media element for timer
 		slides.get(currentSlide).getSlideElements().add(new MediaElement(currentSlide, startTime, endTime, "shape", shapeId)); //Add media element for timer
@@ -772,10 +784,11 @@ public class XMLParser {
 			getSubNodes(currentNode.getChildNodes());
 		}
 		else{}
-		if(graphics3DLayers.size()< currentSlide+1) {
-			graphics3DLayers.add(new Graphics3DLayer(InteractiveLearningApp.getStageWidth(), InteractiveLearningApp.getStageHeight(),models));
-		}
-		graphics3DLayers.get(currentSlide).add(urlName, modelWidth, modelHeight, xStart, yStart);;
+
+//		if(graphics3DLayers.size()< currentSlide+1) {
+//			graphics3DLayers.add(new Graphics3DLayer(modelWidth, modelHeight,models));
+//		}
+		graphics3DLayers.get(currentSlide).addModel(urlName, modelWidth, modelHeight, xStart, yStart);;
 	}
 
 	public int getSlideCount() {

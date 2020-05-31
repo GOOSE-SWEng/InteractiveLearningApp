@@ -14,8 +14,8 @@ import main.InteractiveLearningApp;
 /**
  * Class for creating the 2D graphics
  * @author Alex Marchant
- * @version - 1.0
- * @date - 28/04/20
+ * @version - 1.3
+ * @date - 26/05/20
  *
  */
 public class Graphics2D {
@@ -25,16 +25,18 @@ public class Graphics2D {
 	SubScene Window;
 	public ArrayList<Shape> shapes = new ArrayList<Shape>();
 	int currentPoly = 0;
-	StackPane sp = new StackPane();
+	StackPane sp;
 	
 	// constructor
-	public Graphics2D(int width, int height, ArrayList<Shape> shapes) {
+	public Graphics2D(int width, int height, ArrayList<Shape> shapes, StackPane sp) {
 		this.paneHeight = height;
 		this.paneWidth = width;
 		// clones arrayList
 		this.shapes = shapes; 
 		sp.setPickOnBounds(false);
 		sp.setAlignment(Pos.TOP_LEFT);
+		this.sp = sp;
+
 		//creates the layer subscene
 		//Window = new SubScene(sp,paneWidth,paneHeight);
 	}
@@ -52,7 +54,7 @@ public class Graphics2D {
 		shape.addPoint(xEnd,yEnd);
 		// add shape to the array list
 		shapes.add(shape);
-		sp.getChildren().add(shape.get());
+		//sp.getChildren().add(shape.get());
 		InteractiveLearningApp.slides.get(slideNumber).getSlideShapes().add(shape);
 	}
 	
@@ -68,7 +70,7 @@ public class Graphics2D {
 		shape.addPoint(xStart+width,yStart+height);
 		shape.addPoint(xStart,yStart+height);
 		shapes.add(shape);
-		sp.getChildren().add(shape.get());
+		//sp.getChildren().add(shape.get());
 		InteractiveLearningApp.slides.get(slideNumber).getSlideShapes().add(shape);
 	}
 	
@@ -87,7 +89,7 @@ public class Graphics2D {
 		shape.addPoint(xStart+width,yStart+height);
 		shape.addPoint(xStart,yStart+height);
 		shapes.add(shape);
-		sp.getChildren().add(shape.get());
+		//sp.getChildren().add(shape.get());
 		InteractiveLearningApp.slides.get(slideNumber).getSlideShapes().add(shape);
 
 	}
@@ -99,7 +101,7 @@ public class Graphics2D {
 		//oval constructor
 		shape.drawOval((int)width,(int)height,(int)xStart,(int)yStart);
 		shapes.add(shape);
-		sp.getChildren().add(shape.get());
+		//sp.getChildren().add(shape.get());
 		InteractiveLearningApp.slides.get(slideNumber).getSlideShapes().add(shape);
 	}
 	
@@ -114,13 +116,24 @@ public class Graphics2D {
 				                shading_cyclic, startTime, endTime, slideNumber);
 		shape.drawOval((int)width,(int)height,(int)xStart,(int)yStart);
 		shapes.add(shape);
-		sp.getChildren().add(shape.get());
+		//sp.getChildren().add(shape.get());
 		InteractiveLearningApp.slides.get(slideNumber).getSlideShapes().add(shape);
 	}
-	//returns the subscene
-	public StackPane get() {
-		return sp;
+	public void remove(int i) {
+		if (sp.getChildren().contains(shapes.get(i).get())) {
+			sp.getChildren().remove(shapes.get(i).get());
+		}
 	}
+	public void add(int i) {
+		if (sp.getChildren().contains(shapes.get(i).get()) == false) {
+			shapes.get(i).create();
+			sp.getChildren().add(shapes.get(i).get());
+		}
+	}
+	//returns the subscene
+//	public StackPane get() {
+//		return sp;
+//	}
 }
 		
 		

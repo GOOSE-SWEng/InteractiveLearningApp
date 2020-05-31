@@ -222,12 +222,10 @@ public class Settings {
 		
 		//gp.setGridLinesVisible(true);
 		//Add to the borderpane scene
-		bp.setTop(toolBar);
-		
+		bp.setTop(toolBar);	
 		if(resizeBar != null) {
 			bp.setBottom(resizeBar);
 		}
-
 		bp.setCenter(gp);
 		bp.prefHeightProperty().bind(InteractiveLearningApp.getStage().heightProperty());
 		bp.prefWidthProperty().bind(InteractiveLearningApp.getStage().widthProperty());

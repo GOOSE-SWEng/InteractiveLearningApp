@@ -3,6 +3,7 @@ package slides;
 import java.io.File;
 import java.util.ArrayList;
 
+import javafx.stage.Stage;
 import media.Audio;
 import media.AudioLayer;
 import media.Graphics2D;
@@ -47,9 +48,10 @@ public class SlideAssembler {
 														ArrayList<Audio> audio, 
 														ArrayList<SlideText> slideTexts,
 														ArrayList<Video> videos, 
-														ArrayList<Model> models){ //Slide/media arraylists
+														ArrayList<Model> models,
+														Stage mainStage){ //Slide/media arraylists
 
-		XMLParser parser = new XMLParser(xml, slides, audioLayers, videoLayers, textLayers, imageLayers, g2dLayers, graphics3dLayers, audio, models, images, shapes, slideTexts, videos);
+		XMLParser parser = new XMLParser(xml, slides, audioLayers, videoLayers, textLayers, imageLayers, g2dLayers, graphics3dLayers, audio, models, images, shapes, slideTexts, videos, mainStage);
 		slideNo = parser.getSlideCount();
 		
 		//May need to include if statements for blank layers

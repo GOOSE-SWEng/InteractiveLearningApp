@@ -22,6 +22,9 @@ public class SlideImage {
   private Group group = null;
   private int startTime = 0;
   private int endTime = 0;
+
+  private float startX;
+  private float startY;
   boolean imageFail = false;
 
   public SlideImage(String url, float floatX, float floatY, float floatW, float floatH,
@@ -31,7 +34,8 @@ public class SlideImage {
     this.startTime = startTime;
     this.endTime = endTime;
     this.slideNumber = slideNumber;
-
+    startX = floatX;
+    startY = floatY;
     // Create Group
     this.group = new Group();
 
@@ -80,10 +84,15 @@ public class SlideImage {
     return endTime;
   }
 
-  public int getSlideNo() {
+  public int getSlideNumber() {
     return slideNumber;
   }
-
+  public float getStartX() {
+	  return(startX);
+  }
+  public float getStartY() {
+	  return(startY);
+  }
   public void start() {
     if (!group.getChildren().contains(toDisplay)) {
       group.getChildren().add(toDisplay);
