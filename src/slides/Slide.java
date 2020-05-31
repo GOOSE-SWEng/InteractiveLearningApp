@@ -89,7 +89,7 @@ public class Slide {
 		this.height = height;
 		
 		//create toolbar and resize bar
-		toolBar = ToolBar.createToolBar(width, id);
+		toolBar = ToolBar.createToolBar(width, id, InteractiveLearningApp.exhibitMode);
 		resizeBar = ResizeBar.CreateResizeBar(width);
 
 		xOff = xOffset;
@@ -136,7 +136,7 @@ public class Slide {
 		this.height = height;
 		this.id = id;
 		this.duration = duration;
-		toolBar = ToolBar.createToolBar(width, id);
+		toolBar = ToolBar.createToolBar(width, id, InteractiveLearningApp.exhibitMode);
 		resizeBar = ResizeBar.CreateResizeBar(width);
 
 		bp.setTop(toolBar);

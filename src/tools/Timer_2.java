@@ -81,8 +81,6 @@ public class Timer_2 extends Thread{
 			TimingObject TO = new TimingObject(i,1000, false, "model",i);
 			timingObjects.add(TO);
 		}
-		
-		
 	}
 	public void run() {
 		while(InteractiveLearningApp.presRunning){

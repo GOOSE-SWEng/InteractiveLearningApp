@@ -195,15 +195,24 @@ public class XMLParser {
 				}
 				//Update default slide width
 				else if(defaultNode.getNodeName().equals("slidewidth")) {
-					InteractiveLearningApp.setDefaultWidth(Integer.parseInt(defaultNode.getTextContent())); 
+					if(InteractiveLearningApp.exhibitMode == true) {
+						InteractiveLearningApp.setDefaultWidth(InteractiveLearningApp.getStageWidth());
+					}else {
+						InteractiveLearningApp.setDefaultWidth(Integer.parseInt(defaultNode.getTextContent()));
+					}
 				}
 				//Update default slide height
 				else if(defaultNode.getNodeName().equals("slideheight")) {
-					InteractiveLearningApp.setDefaultHeight(Integer.parseInt(defaultNode.getTextContent())); 
+					if(InteractiveLearningApp.exhibitMode == true) {
+						InteractiveLearningApp.setDefaultHeight(InteractiveLearningApp.getStageHeight()); 
+					}else {
+						InteractiveLearningApp.setDefaultHeight(Integer.parseInt(defaultNode.getTextContent()));
+					}
 				}
 				else {
 					System.out.println(defaultNode.getNodeName() + " is an unrecognisable default tag");
 				}
+
 			}
 		}
 		
@@ -245,8 +254,8 @@ public class XMLParser {
 				}
 			//Create a new slide for each loop
 			slides.add(new Slide(InteractiveLearningApp.getDefaultWidth(), InteractiveLearningApp.getDefaultHeight(),slideTitle, slideDuration));
-			}
-			else{
+
+			}else{
 				System.out.println("No attributes");
 			}
 			//If the node has sub nodes
@@ -259,6 +268,7 @@ public class XMLParser {
 			
 			System.out.println("==============================");
 			currentSlide++; //Increase slide count
+			System.out.println("Slide size " + InteractiveLearningApp.getStageWidth() + ", " +InteractiveLearningApp.getStageHeight());
 		}
 	}
 	//Loop for sub tags
@@ -612,7 +622,7 @@ public class XMLParser {
 	public void textParse(Node currentNode) {
 		if(textLayers.size()< currentSlide+1) {
 			textId=0;
-			textLayers.add(new TextLayer((int)InteractiveLearningApp.getStage().getWidth(), (int)InteractiveLearningApp.getStage().getHeight(), slideText));
+			textLayers.add(new TextLayer((int)InteractiveLearningApp.getDefaultWidth(), (int)InteractiveLearningApp.getDefaultHeight(), slideText));
 		}
 		textLayers.get(currentSlide).add(currentNode, currentSlide);
 		//Add media element for timer
@@ -773,7 +783,7 @@ public class XMLParser {
 		}
 		else{}
 		if(graphics3DLayers.size()< currentSlide+1) {
-			graphics3DLayers.add(new Graphics3DLayer(InteractiveLearningApp.getStageWidth(), InteractiveLearningApp.getStageHeight(),models));
+			graphics3DLayers.add(new Graphics3DLayer(InteractiveLearningApp.getDefaultWidth(), InteractiveLearningApp.getDefaultHeight(),models));
 		}
 		graphics3DLayers.get(currentSlide).add(urlName, modelWidth, modelHeight, xStart, yStart);;
 	}

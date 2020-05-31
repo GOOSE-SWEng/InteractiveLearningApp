@@ -35,8 +35,6 @@ import media.*;
  *
  */
 public class InteractiveLearningApp extends Application{
-	public static int defaultXSize = 1280;
-	public static int defaultYSize = 720;
 	//Current screen offset
 	private double yOffset = 0;
 	private double xOffset = 0;
@@ -57,13 +55,15 @@ public class InteractiveLearningApp extends Application{
 	public static String defaultLineColour = "Black";
 	public static String defaultFontColour = "Black";
 	public static String defaultFillColour = "Black";
+	public static int defaultXSize = 1280;
+	public static int defaultYSize = 720;
 	
 	public static String chosenFont = "Arial";
 	public static int chosenTextSize = 16;
 	public static String chosenLanguage = "English";
 	
 	//Triggers Exhibit Mode
-	private boolean exhibitMode = false;
+	public static boolean exhibitMode = false;
 	public static Timer timer;
 	public static Timer_2 timer2;
 	
@@ -97,9 +97,9 @@ public class InteractiveLearningApp extends Application{
 		mainStage.setMinWidth(defaultXSize);
 		mainStage.setMinHeight(defaultYSize);
 		//mainStage.setHeight(defaultYSize);
-		start = StartScreen.createStartScreen(mainStage, defaultXSize, defaultYSize);
-		settings = Settings.createSettings(mainStage, defaultXSize, defaultYSize);
-		loading = LoadingScreen.createLoadingScreen(mainStage, defaultXSize, defaultYSize);
+		start = StartScreen.createStartScreen(mainStage, defaultXSize, defaultYSize, exhibitMode);
+		settings = Settings.createSettings(mainStage, defaultXSize, defaultYSize, exhibitMode);
+		loading = LoadingScreen.createLoadingScreen(mainStage, defaultXSize, defaultYSize, exhibitMode);
 			
 		/*LOADING PROCESS*/
 		//LOADING SCREEN
@@ -142,18 +142,20 @@ public class InteractiveLearningApp extends Application{
 			try{
 				//Get File path
 				xml = file.getPath(); 
-				mainStage.setScene(loading);
+				//mainStage.setScene(loading);
 				//Create slides using XML
 				SlideAssembler.createSlides(xml, slides, videoLayers, graphics2d, 
 											graphics3dLayers, imageLayers, textLayers, audioLayers, 
 											shapes, images, audio, slideText, videos, models);
 				//Show first slide of presentation
+				mainStage.setWidth(defaultXSize);
+				mainStage.setHeight(defaultYSize);
 				showSlide(0); 
 				presRunning = true;
-				timer = new Timer();
-				timer.start();
-				//timer2 = new Timer_2(shapes, audio,images,slideText,videos,models,graphics2d,audioLayers,imageLayers,textLayers,videoLayers,graphics3dLayers);
-				//timer2.start();
+				//timer = new Timer();
+				//timer.start();
+				timer2 = new Timer_2(shapes, audio,images,slideText,videos,models,graphics2d,audioLayers,imageLayers,textLayers,videoLayers,graphics3dLayers);
+				timer2.start();
 			}catch(NullPointerException e) {
 				showStart();
 			}
@@ -164,6 +166,20 @@ public class InteractiveLearningApp extends Application{
 	}
 	public static void resumePres() {
 		showSlide(currentSlide);
+	}
+	
+	public static Scene getStart() {
+		return start;
+	}
+	
+	public static void setStart(Scene start) {
+		InteractiveLearningApp.start = null;
+		InteractiveLearningApp.start = start;
+	}
+	
+	public static void setSettings(Scene settings) {
+		InteractiveLearningApp.settings = null;
+		InteractiveLearningApp.settings = settings;
 	}
 	
 	public static Stage getStage() {

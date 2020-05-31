@@ -37,12 +37,18 @@ public class StartScreen {
 	 * @param mainStage - Main window of the program. Start screen is placed upon this stage
 	 * @param defaultXSize - default width of the program
 	 * @param defaultYSize - default height of the program
+	 * @param exhibitMode 
 	 * @return Returns a scene with the elements that make up the start screen upon it
 	 */
-	public static Scene createStartScreen(Stage mainStage, int defaultXSize, int defaultYSize) {
+	public static Scene createStartScreen(Stage mainStage, int defaultXSize, int defaultYSize, boolean exhibitMode) {
 		//Create versions of the toolbar and the resize bar
-		SubScene toolBar = ToolBar.createToolBar(defaultXSize, title); 
-		SubScene resizeBar = ResizeBar.CreateResizeBar(defaultXSize); 
+		SubScene toolBar = ToolBar.createToolBar(defaultXSize, title, exhibitMode); 
+		BorderPane borderPane = new BorderPane();
+		SubScene resizeBar = null;
+		
+		if(exhibitMode == false) {
+			resizeBar = ResizeBar.CreateResizeBar(defaultXSize); 
+		}
 		
 		//Get coordinate offsets of window when mouse press
 		toolBar.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -63,8 +69,9 @@ public class StartScreen {
 		});
 		
 		//Setting stage style to transparent removes the default toolbar
-		mainStage.initStyle(StageStyle.TRANSPARENT);
-		BorderPane borderPane = new BorderPane();
+		if(mainStage.isShowing()==false) {
+			mainStage.initStyle(StageStyle.TRANSPARENT);
+		}
 		
 		//Setup left side of the screen
 		//Create buttons
@@ -108,8 +115,10 @@ public class StartScreen {
 		
 		//Adds the toolbar to the top of the scene
 		//and resize bar to the bottom
-		borderPane.setTop(toolBar); 
-		borderPane.setBottom(resizeBar);
+		borderPane.setTop(toolBar);
+		if(resizeBar != null) {
+			borderPane.setBottom(resizeBar);
+		}
 		
 		//Import 3D goose model
 		Model gooseModel = new Model(Paths.get("resources/3D_Models/startScreenGoose.stl").toUri().toString(), 50,90);

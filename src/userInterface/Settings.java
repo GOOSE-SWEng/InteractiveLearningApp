@@ -21,7 +21,7 @@ import slides.Slide;
 
 /**
  * Class for the creation of settings scene
- * @author - Tom Pound
+ * @author - Tom Pound, Exhibit mode added by Ivy Price
  * @version - 1.0
  * @date - 01/04/20
  */
@@ -37,27 +37,32 @@ public class Settings {
 	//instantiate the scene and the subscenes
 	private static Scene settings;
 	private static SubScene toolBar;
-	private static SubScene resizeBar;
+	private static SubScene resizeBar = null;
 	
-	//global variables for the settings defulats
+	//global variables for the settings defaults
 	private static String currentLanguage = "English";
 	private Boolean colourBlind = false;
 	private Boolean darkMode = false;
 	private static String currentFont = "Arial";
 	private static int currentTextSize = 16;
-	
+	private static Stage stage;
 		
 	/**
 	 * Method to create the settings screen
 	 * @param mainStage - main stage of the window
 	 * @param defaultXSize - deafult width of window
 	 * @param defaultYSize - default height of window
+	 * @param exhibitMode
 	 * @return returns a completed settings screen as a scene 
 	 */
-	public static Scene createSettings(Stage mainStage,int defaultXSize, int defaultYSize) {
+	public static Scene createSettings(Stage mainStage,int defaultXSize, int defaultYSize, boolean exhibitMode) {
 		//Create top and bottom tool bars
-		toolBar = ToolBar.createToolBar(defaultXSize, title);
-		resizeBar = ResizeBar.CreateResizeBar(defaultXSize);
+		stage = mainStage;
+		toolBar = ToolBar.createToolBar(defaultXSize, title, exhibitMode);
+		
+		if(exhibitMode == false) {
+			resizeBar = ResizeBar.CreateResizeBar(defaultXSize);
+		}
 		
 		toolBar.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
@@ -83,6 +88,7 @@ public class Settings {
 		//Create Labels
 		Text colourBlindFilter = new Text("Colour Blind Filter");
 		Text nightMode = new Text("Dark Mode");
+		Text exhibitModeText = new Text("Exhibit Mode");
 		Text textSize = new Text("Text Size");
 		Text font = new Text("Font");
 		Text language = new Text("Language");
@@ -96,6 +102,13 @@ public class Settings {
 		CheckBox nightModeBox = new CheckBox();
 		CheckBox captionsBox = new CheckBox();
 		CheckBox audioDescBox = new CheckBox();
+		CheckBox exhibitModeBox = new CheckBox();
+		
+		if(exhibitMode == true) {
+			exhibitModeBox.setSelected(true);
+		} else {
+			exhibitModeBox.setSelected(false);
+		}
 		
 		//Create text size drop down menu
 		ComboBox<String> textSizeMenu = new ComboBox<String>();
@@ -171,6 +184,14 @@ public class Settings {
 			}
 		});
 		
+		exhibitModeBox.setOnAction(e->{
+			if(exhibitModeBox.isSelected()) {
+				InteractiveLearningApp.exhibitMode = true;
+			} else {
+				InteractiveLearningApp.exhibitMode = false;
+			}
+		});
+		
 		//Apply, default and back buttons
 		Button apply = new Button("Apply");
 		Button setDefault = new Button("Return to Default");
@@ -189,7 +210,9 @@ public class Settings {
 		gp.add(language, 0, 2);
 		gp.add(languageMenu, 1, 2);
 		gp.add(nightMode, 0, 3);
+		gp.add(exhibitModeText, 0, 4);
 		gp.add(nightModeBox, 1, 3);	
+		gp.add(exhibitModeBox, 1, 4);
 		gp.add(apply, 0, 7);
 		gp.add(setDefault, 1, 7);
 		gp.add(back, 2, 7);
@@ -203,7 +226,11 @@ public class Settings {
 		//gp.setGridLinesVisible(true);
 		//Add to the borderpane scene
 		bp.setTop(toolBar);
-		bp.setBottom(resizeBar);
+		
+		if(resizeBar != null) {
+			bp.setBottom(resizeBar);
+		}
+		
 		bp.setCenter(gp);
 		bp.prefHeightProperty().bind(InteractiveLearningApp.getStage().heightProperty());
 		bp.prefWidthProperty().bind(InteractiveLearningApp.getStage().widthProperty());
@@ -240,6 +267,24 @@ public class Settings {
 			InteractiveLearningApp.setChosenTextSize(currentTextSize);
 			InteractiveLearningApp.setChosenLanguage(currentLanguage);
 			settingsPopUp.hide();
+			if(InteractiveLearningApp.exhibitMode == true && InteractiveLearningApp.presRunning == false) {
+				InteractiveLearningApp.getStage().setMaximized(true);
+				Scene start = StartScreen.createStartScreen(InteractiveLearningApp.getStage(), InteractiveLearningApp.getStageWidth(),
+														    InteractiveLearningApp.getStageHeight(), true);
+				Scene settings = Settings.createSettings(InteractiveLearningApp.getStage(), InteractiveLearningApp.getStageWidth(), 
+														 InteractiveLearningApp.getStageHeight(), true);
+				InteractiveLearningApp.setStart(start);
+				InteractiveLearningApp.setSettings(settings);
+				
+			}else if(InteractiveLearningApp.exhibitMode == false) {
+				Scene start = StartScreen.createStartScreen(InteractiveLearningApp.getStage(), InteractiveLearningApp.defaultXSize,
+					    InteractiveLearningApp.defaultYSize, false);
+				Scene settings = Settings.createSettings(InteractiveLearningApp.getStage(), InteractiveLearningApp.defaultXSize, 
+					 InteractiveLearningApp.defaultYSize, false);
+				InteractiveLearningApp.getStage().setFullScreen(false);;
+				InteractiveLearningApp.setStart(start);
+				InteractiveLearningApp.setSettings(settings);
+			}
 			InteractiveLearningApp.showStart();
 		});
 		cancel.setOnMouseClicked(e->settingsPopUp.hide());
