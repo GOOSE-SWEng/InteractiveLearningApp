@@ -21,6 +21,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.media.MediaPlayer.Status;
 import javafx.util.Duration;
+import main.InteractiveLearningApp;
 import sun.reflect.ReflectionFactory.GetReflectionFactoryAction;
 
 /**
@@ -56,11 +57,9 @@ public class Video {
 	 * @param loop - should the video loop
 	 * @param xStart - x coordinate of the top left corner of the video object
 	 * @param yStart - y coordinate of the top left corner of the video object
-	 * @param canvasWidth - width of canvas
-	 * @param canvasHeight - height of canvas
 	 * @throws IOException - if video cannot be found
 	 */
-	public Video(String urlName, int startTime, Boolean loop, int xStart, int yStart, int canvasWidth, int canvasHeight, int slideNumber)
+	public Video(String urlName, int startTime, Boolean loop, int xStart, int yStart, int slideNumber)
 			throws IOException {
 		// Loads the media player layout from a FXML file
 		BorderPane root = FXMLLoader.load(getClass().getClassLoader().getResource("media/videoPlayer.fxml"));
@@ -69,10 +68,8 @@ public class Video {
 		this.urlName = urlName;
 		
 		// creates a subscene
-		subScene = new SubScene(root, 600, 400);
+		subScene = new SubScene(root, 30*InteractiveLearningApp.getStageWidth()/100, 60*InteractiveLearningApp.getStageHeight()/100);
 		// Set subscene position
-		//subScene.setLayoutX(xStart);
-		//subScene.setLayoutY(yStart);
 
 		// Video control bar, retrieved from the root
 		toolbarNode = (Pane) root.getBottom();
@@ -207,7 +204,6 @@ public class Video {
 					mediaPlayer.stop();
 					mediaPlayer.seek(totTime.multiply(playbackSlider.getValue() / 100));
 				}
-				
 			}
 		});
 
@@ -236,6 +232,9 @@ public class Video {
 		Pane p = (Pane) root.getCenter();
 		p.getChildren().get(0);
 		MediaView mv = (MediaView) p.getChildren().get(0);
+		
+		//mv.setFitHeight(subScene.getHeight()-20);
+		mv.setFitWidth(subScene.getWidth());
 		mv.setMediaPlayer(mediaPlayer);
 	}
 

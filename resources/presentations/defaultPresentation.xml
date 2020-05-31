@@ -112,16 +112,15 @@
 	the British Museum almost continuously since 
 	1802 and is the most visited object there.
 		</text>
-		<shape type='rectangle' xstart='10' ystart='5' width='310' height='630' fillcolor='dimgray' starttime='50' endtime='10000'>
+		<shape type='rectangle' xstart='2' ystart='2' width='30' height='96' fillcolor='dimgray' starttime='100' endtime='10000'></shape>
+		<shape type='rectangle' xstart='34' ystart='2' width='32' height='96' fillcolor='dimgray' starttime='50' endtime='10000'>
 			<shading x1='155' y1='500' color1='dimgray' x2='155' y2='630' color2='white' cyclic='False'></shading>
 		</shape>
-		<shape type='rectangle' xstart='940' ystart='5' width='310' height='630' fillcolor='dimgray' starttime='100' endtime='10000'>
-		</shape>
-		<audio urlname='resources/slide2/audio/audio1.wav' starttime='10' loop='false'></audio>
-		<image urlname='https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Rosetta_Stone.JPG/800px-Rosetta_Stone.JPG' xstart='80' ystart='0' width='20' height='32' starttime='1000' endtime='10000'></image>
-		<image urlname='https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/RosettaStoneAsPartOfOriginalStele_revised.svg/800px-RosettaStoneAsPartOfOriginalStele_revised.svg.png' xstart='70' ystart='32' width='20' height='68' starttime='1000' endtime='20000'></image>
-		<video urlname='resources/slide2/video/Sun.mp4' starttime='1000' loop='false' xstart='70' ystart='80'></video>
-		<model urlname='resources/slide2/models/rosetta-stone-low.stl' xstart='0' ystart='0' width='40' height='80'></model>
+		<shape type='rectangle' xstart='68' ystart='2' width='30' height='96' fillcolor='dimgray' starttime='100' endtime='10000'></shape>
+		<audio urlname='resources/slide2/audio/audio1.wav' starttime='10' loop='false' controls='true'></audio>
+		<image urlname='https://i.pinimg.com/originals/bb/cb/5c/bbcb5c05c92c5ee1505ab124d399e4d4.gif' xstart='70' ystart='4' width='26' height='60' starttime='1000' endtime='10000'></image>
+		<video urlname='resources/slide2/video/Sun.mp4' starttime='1000' loop='false' xstart='70' ystart='10'></video>
+		<model urlname='resources/slide2/models/rosetta-stone-low.stl' xstart='36' ystart='10' width='28' height='70'></model>
 	</slide>
 	<slide id='3. Falcon Relic Box' duration='6000'>
 		<text font='arial' fontsize='15' fontcolor='black' xpos='70' ypos='0' starttime='100' endtime='10000'>

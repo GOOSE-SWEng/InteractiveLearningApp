@@ -622,6 +622,7 @@ public class XMLParser {
 		String urlName=null;
 		int startTime = 0;
 		Boolean loop = null;
+		Boolean controls = false;
 		System.out.println(currentNode.getNodeName());
 		
 		if(currentNode.hasAttributes()) {
@@ -638,6 +639,9 @@ public class XMLParser {
 				else if(attMap.item(j).getNodeName().equals("loop")) {
 					loop = Boolean.parseBoolean(attMap.item(j).getNodeValue());
 				}
+				else if(attMap.item(j).getNodeName().equals("controls")) {
+					controls = Boolean.parseBoolean(attMap.item(j).getNodeValue());
+				}
 				else{
 					System.out.print(attMap.item(j).getNodeName() + "is not recognized in the audio tag");
 				}
@@ -649,7 +653,7 @@ public class XMLParser {
 			getSubNodes(currentNode.getChildNodes());
 		}
 		else{}
-		audioLayers.get(currentSlide).add(urlName,startTime, loop, true,90,90,200,100,currentSlide);
+		audioLayers.get(currentSlide).add(urlName,startTime, loop, controls,72,85,25,10,currentSlide);
 		//Add media element for timer
 		slides.get(currentSlide).getSlideElements().add(new MediaElement(currentSlide, startTime, -1, "audio",audioId)); //Add media element for timer
 		audioId++;

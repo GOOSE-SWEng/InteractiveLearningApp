@@ -30,16 +30,15 @@ public class VideoLayer {
 
 	public void addVideo(String urlName, int startTime, Boolean loop, int xStart, int yStart, int slideNumber) throws IOException {
 		// creates the video object and its subscene
-		Video video = new Video(urlName, startTime, loop, xStart, yStart, 0, 0,0);
+		Video video = new Video(urlName, startTime, loop, xStart, yStart,slideNumber);
 		
 		if(video.videoFail == false) {
 			// adds the video object to the array list
 			videos.add(video);
 			InteractiveLearningApp.slides.get(slideNumber).getSlideVideos().add(video);
 			// adds the SubScene(created with the constructor) to the video layer stack pane
-			sp.getChildren().add(video.get());
 			video.get().setTranslateX(xStart*InteractiveLearningApp.getStageWidth()/100);
-			video.get().setTranslateX(yStart*InteractiveLearningApp.getStageHeight()/100);
+			video.get().setTranslateY(yStart*InteractiveLearningApp.getStageHeight()/100);
 		}
 	}
 		

@@ -88,7 +88,7 @@ public class Audio {
 			gp.add(playButton, 0, 0);
 			gp.add(pauseButton, 1, 0);
 			gp.add(resetButton, 2, 0);
-			gp.setHgap(5);
+			gp.setHgap(1);
 			
 			//Making the buttons all equal width inside the GridPane
 			ColumnConstraints audioControls = new ColumnConstraints();

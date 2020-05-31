@@ -33,7 +33,6 @@ public class Graphics3DLayer {
 	
 	public void addModel(String url, int modelWidth, int modelHeight, int xStart, int yStart) {
 		Model model =  new Model(url, modelWidth, modelHeight, xStart, yStart);
-
 		if(model.modelFail == false) {
 			models.add(model);
 			spIn.getChildren().add(model.getModelScene());

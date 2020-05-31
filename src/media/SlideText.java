@@ -43,14 +43,6 @@ public class SlideText {
     int fontSize = this.dfFontSize;
     String fontColor = this.dfFontColor;
     
-
-    
-    
-    
-    
-    
-    
-    
     // Overwrite defaults
     // If size is specified, use it
     Node sizeNode = node.getAttributes().getNamedItem("fontsize");
@@ -83,18 +75,19 @@ public class SlideText {
     Font basic = Font.font(fontName, fontSize);	
     Font italic = Font.font(fontName, FontPosture.ITALIC, fontSize);
     Font bold = Font.font(fontName, FontWeight.BOLD, fontSize);
-    if(!InteractiveLearningApp.getDefaultFont().equals(InteractiveLearningApp.getChosenFont()) & 
-    		InteractiveLearningApp.getDefaultTextSize() != InteractiveLearningApp.getChosenTextSize()) { //
+    
+    if(!fontName.equals(InteractiveLearningApp.getChosenFont()) && fontSize != InteractiveLearningApp.getChosenTextSize()
+    		&& InteractiveLearningApp.getChosenFont() != null && InteractiveLearningApp.getChosenTextSize() != -1) { //
     	basic = Font.font(InteractiveLearningApp.getChosenFont(), InteractiveLearningApp.getChosenTextSize());
         italic = Font.font(InteractiveLearningApp.getChosenFont(), FontPosture.ITALIC, InteractiveLearningApp.getChosenTextSize());
         bold = Font.font(InteractiveLearningApp.getChosenFont(), FontWeight.BOLD, InteractiveLearningApp.getChosenTextSize());
 
-    }else if(!InteractiveLearningApp.getDefaultFont().equals(InteractiveLearningApp.getChosenFont())) {
+    }else if(!fontName.equals(InteractiveLearningApp.getChosenFont()) && InteractiveLearningApp.getChosenFont() != null) {
     	basic = Font.font(InteractiveLearningApp.getChosenFont(), fontSize);
         italic = Font.font(InteractiveLearningApp.getChosenFont(), FontPosture.ITALIC, fontSize);
         bold = Font.font(InteractiveLearningApp.getChosenFont(), FontWeight.BOLD, fontSize);
         
-    }else if(InteractiveLearningApp.getDefaultTextSize() != InteractiveLearningApp.getChosenTextSize()) {
+    }else if(fontSize != InteractiveLearningApp.getChosenTextSize() && InteractiveLearningApp.getChosenTextSize() != -1) {
     	basic = Font.font(fontName, InteractiveLearningApp.getChosenTextSize());
         italic = Font.font(fontName, FontPosture.ITALIC, InteractiveLearningApp.getChosenTextSize());
         bold = Font.font(fontName, FontWeight.BOLD, InteractiveLearningApp.getChosenTextSize());

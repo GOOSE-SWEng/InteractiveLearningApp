@@ -44,9 +44,9 @@ public class InteractiveLearningApp extends Application{
 	public static String defaultFontColour = "Black";
 	public static String defaultFillColour = "Black";
 	
-	public static String chosenFont = "Arial";
-	public static int chosenTextSize = 16;
-	public static String chosenLanguage = "English";
+	public static String chosenFont = null;
+	public static int chosenTextSize = -1;
+	public static String chosenLanguage = null;
 	
 	//Triggers Exhibit Mode
 	public static boolean exhibitMode = false;

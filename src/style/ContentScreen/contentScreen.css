@@ -5,6 +5,8 @@
 }
 
 .button{
+	-fx-background-color: #3aa9b8;
+	-fx-text-fill: white;
 	-fx-font-size: 24pt;
 
 }
@@ -12,12 +14,10 @@
 	-fx-font-size: 11pt;
 	-fx-font-family: "arial";
 	-fx-font-style: italic;
-    -fx-effect: dropshadow(one-pass-box, black,0,0,0,2);
 }
 
 #body{
 	-fx-font-size: 72pt;
 	-fx-font-family: "arial";
 	-fx-font-style: italic;
-    -fx-effect: dropshadow(one-pass-box, black,0,0,0,2);
 }
