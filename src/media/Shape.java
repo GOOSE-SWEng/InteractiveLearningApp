@@ -131,8 +131,6 @@ public class Shape {
 			gc.fillPolygon(pointX,pointY,pointsX.size());
 			//adds canvas to the group
 			group.getChildren().add(canvas);
-		}else {
-			//System.err.println("Tried to add already drawn shape");
 		}
 		
 	}

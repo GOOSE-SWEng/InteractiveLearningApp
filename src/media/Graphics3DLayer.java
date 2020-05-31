@@ -22,8 +22,8 @@ public class Graphics3DLayer {
 		this.models = models;
 		System.out.println(paneWidth + ", " + paneHeight);
 		spIn = sp;
-		spIn.setPickOnBounds(false);
-  	sp.setAlignment(Pos.TOP_LEFT);
+		//spIn.setPickOnBounds(false);
+		//sp.setAlignment(Pos.TOP_LEFT);
 		//this.sp.getChildren().add(canvas);
 		//this.sp.setMinSize(paneWidth, paneHeight);
 		//window = new SubScene(this.sp, paneWidth, paneHeight);
@@ -36,7 +36,7 @@ public class Graphics3DLayer {
 
 		if(model.modelFail == false) {
 			models.add(model);
-			sp.getChildren().add(model.getModelScene());
+			spIn.getChildren().add(model.getModelScene());
 			model.getModelScene().setTranslateX(xStart*InteractiveLearningApp.getStageWidth()/100);
 			model.getModelScene().setTranslateY(yStart*InteractiveLearningApp.getStageHeight()/100);
 		}
@@ -47,9 +47,9 @@ public class Graphics3DLayer {
 		}
 	}
 	
-	public StackPane get() {
+	/*public StackPane get() {
 		return sp;
-  }
+	}*/
 	public void add(int i) {
 		if (spIn.getChildren().contains(models.get(i).getModelScene()) == false) {
 			spIn.getChildren().add(models.get(i).getModelScene());

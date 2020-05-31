@@ -95,8 +95,8 @@ public class Slide {
 		toolBar = ToolBar.createToolBar(width, id, InteractiveLearningApp.exhibitMode);
 		resizeBar = ResizeBar.CreateResizeBar(width);
 
-		xOff = xOffset;
-		yOff = yOffset;
+		/*xOff = xOffset;
+		yOff = yOffset;*/
 		
 		//sp.setMinSize(width,height);
 		sp.setAlignment(Pos.TOP_LEFT);

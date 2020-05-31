@@ -41,6 +41,7 @@ public class VideoLayer {
 			video.get().setTranslateX(xStart*InteractiveLearningApp.getStageWidth()/100);
 			video.get().setTranslateX(yStart*InteractiveLearningApp.getStageHeight()/100);
 		}
+	}
 		
 		
 	public void remove(int i) {
