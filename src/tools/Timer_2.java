@@ -79,14 +79,9 @@ public class Timer_2 extends Thread{
 			timingObjects.add(TO);
 		}
 		for (int i =0; i<model.size();i++) {//always there
-//			int slideNumber = model.get(i).getSlideNumber();
-//			int startTime = model.get(i).getStartTime();
-//			int endTime = model.get(i).getEndTime();
-			TimingObject TO = new TimingObject(i,1000, false, "model",i);
+			TimingObject TO = new TimingObject(i,0, false, "model",i);
 			timingObjects.add(TO);
 		}
-		
-		
 	}
 	
 	public void run() {
@@ -102,7 +97,35 @@ public class Timer_2 extends Thread{
 			for (int i = 0; i < timingObjects.size(); i++) {
 				if (timingObjects.get(i).getSlideNumber() == slideNumber) {
 					if(timingObjects.get(i).getStartTime()>localTime) {
-						
+						if (timingObjects.get(i).isDrawn()) {
+							//undraw
+							String type = timingObjects.get(i).getType();
+							if (type == "shape") {
+								final int j = i;
+								Platform.runLater(()->graphics2d.get(slideNumber).remove(timingObjects.get(j).getIndex()));
+							}
+							else if(type == "audio") {
+								final int j = i;
+								Platform.runLater(()->audioLayers.get(slideNumber).remove(timingObjects.get(j).getIndex()));
+							}
+							else if(type == "image") {
+								final int j = i;
+								Platform.runLater(()->imageLayers.get(slideNumber).remove(timingObjects.get(j).getIndex()));
+							}
+							else if(type == "text") {
+								final int j = i;
+								Platform.runLater(()->textLayers.get(slideNumber).remove(timingObjects.get(j).getIndex()));
+							}
+							else if(type == "video") {
+								final int j = i;
+								Platform.runLater(()->videoLayers.get(slideNumber).remove(timingObjects.get(j).getIndex()));
+							}
+							else if(type == "model") {
+								final int j = i;
+								Platform.runLater(()->graphics3DLayers.get(slideNumber).remove(timingObjects.get(j).getIndex()));
+							}
+							timingObjects.get(i).setDrawn(false);
+						}
 					}
 					else if ((timingObjects.get(i).getStartTime()<=localTime) & (timingObjects.get(i).getEndTime()>=localTime)) {
 						if (timingObjects.get(i).isDrawn()) {
@@ -122,20 +145,16 @@ public class Timer_2 extends Thread{
 								Platform.runLater(()->audioLayers.get(slideNumber).add(timingObjects.get(j).getIndex()));
 							}
 							else if(type == "image") {
-								final int j = i;
+								final int j = i;								
+								System.out.println("Image index: " + timingObjects.get(i).getIndex());
+								System.out.println(timingObjects.get(i).isDrawn());
 
-								//Platform.runLater(()->imageLayers.get(slideNumber).add(timingObjects.get(j).getIndex()));
-//								Platform.runLater(()->imageLayers.get(slideNumber).add(0));
-//								Platform.runLater(()->imageLayers.get(slideNumber).add(1));
-								//Platform.runLater(()->imageLayers.get(slideNumber).add(2));
-								//Platform.runLater(()->imageLayers.get(slideNumber).add(3));
-								
-								System.out.println(timingObjects.get(i).getIndex());
 								Platform.runLater(()->imageLayers.get(slideNumber).add(timingObjects.get(j).getIndex()));
 							}
 							else if(type == "text") {
 								final int j = i;
 								System.out.println("text drawn");
+								System.out.println("Text index: " + timingObjects.get(i).getIndex());
 								Platform.runLater(()->textLayers.get(slideNumber).add(timingObjects.get(j).getIndex()));
 							}
 							else if(type == "video") {
@@ -187,7 +206,6 @@ public class Timer_2 extends Thread{
 				}
 				else{
 					if (timingObjects.get(i).isDrawn()) {
-						
 						//undraw
 						String type = timingObjects.get(i).getType();
 						if (type == "shape") {
@@ -220,44 +238,7 @@ public class Timer_2 extends Thread{
 			}
 		}
 	}
-	private void clearSlide(int num) {
-/*		//loop through all on previous slide and remove
-		//reset local time
-		for (int i = 0; i < timingObjects.size(); i++) {
-			if (timingObjects.get(i).getSlideNumber() == num) {
-				if(timingObjects.get(num).isDrawn()) {
-					String type = timingObjects.get(i).getType();
-					if (type == "shape") {
-						final int j = i;
-						Platform.runLater(()->graphics2d.get(num).remove(timingObjects.get(j).getIndex()));
-					}
-					else if(type == "audio") {
-						final int j = i;
-						Platform.runLater(()->audioLayers.get(num).remove(timingObjects.get(j).getIndex()));
-					}
-					else if(type == "image") {
-						final int j = i;
-						Platform.runLater(()->imageLayers.get(num).remove(timingObjects.get(j).getIndex()));
-					}
-					else if(type == "text") {
-						final int j = i;
-						Platform.runLater(()->textLayers.get(num).remove(timingObjects.get(j).getIndex()));
-					}
-					else if(type == "video") {
-						final int j = i;
-						Platform.runLater(()->videoLayers.get(num).remove(timingObjects.get(j).getIndex()));
-					}
-					else if(type == "model") {
-						final int j = i;
-						Platform.runLater(()->graphics3DLayers.get(num).remove(timingObjects.get(j).getIndex()));
-					}
-					timingObjects.get(i).setDrawn(false);
-				}
-			}
-		}*/
-	}
 	public void resetTimer(int nextSlide) {
-		clearSlide(slideNumber);
 		slideNumber = nextSlide;
 		localTime = 0;
 		System.out.println("timer reset");

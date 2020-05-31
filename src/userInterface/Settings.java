@@ -264,25 +264,31 @@ public class Settings {
 			
 			settingsPopUp.hide();
 			if(InteractiveLearningApp.exhibitMode == true && InteractiveLearningApp.presRunning == false) {
-				Scene start = StartScreen.createStartScreen(InteractiveLearningApp.getStage(), InteractiveLearningApp.defaultXSize,
-														    InteractiveLearningApp.defaultYSize, true);
-				Scene settings = Settings.createSettings(InteractiveLearningApp.getStage(), InteractiveLearningApp.defaultXSize, 
-														 InteractiveLearningApp.defaultYSize, true);
 				InteractiveLearningApp.getStage().setMaximized(true);
+				Scene start = StartScreen.createStartScreen(InteractiveLearningApp.getStage(), InteractiveLearningApp.getStageWidth(),
+														    InteractiveLearningApp.getStageHeight(), true);
+				Scene settings = Settings.createSettings(InteractiveLearningApp.getStage(), InteractiveLearningApp.getStageWidth(),
+					    InteractiveLearningApp.getStageHeight(), true);
+				Scene loading = LoadingScreen.createLoadingScreen(InteractiveLearningApp.getStage(), InteractiveLearningApp.getStageWidth(),
+					    InteractiveLearningApp.getStageHeight(), true);
+
 				InteractiveLearningApp.setStart(start);
 				InteractiveLearningApp.setSettings(settings);
+				InteractiveLearningApp.setLoading(loading);
 				
 			} 
-			else {
+			else if(InteractiveLearningApp.exhibitMode == false && InteractiveLearningApp.presRunning == false){
+				InteractiveLearningApp.getStage().setMaximized(false);
 				Scene start = StartScreen.createStartScreen(InteractiveLearningApp.getStage(), InteractiveLearningApp.defaultXSize,
 					    									InteractiveLearningApp.defaultYSize, false);
 				Scene settings = Settings.createSettings(InteractiveLearningApp.getStage(), InteractiveLearningApp.defaultXSize, 
 														 InteractiveLearningApp.defaultYSize, false);
+				Scene loading = LoadingScreen.createLoadingScreen(InteractiveLearningApp.getStage(), InteractiveLearningApp.defaultXSize, 
+						 InteractiveLearningApp.defaultYSize, false);
 				InteractiveLearningApp.setStart(start);
 				InteractiveLearningApp.setSettings(settings);
-				InteractiveLearningApp.getStage().setWidth(InteractiveLearningApp.defaultXSize);
-				InteractiveLearningApp.getStage().setHeight(InteractiveLearningApp.defaultYSize);
-				InteractiveLearningApp.getStage().setMaximized(false);
+				InteractiveLearningApp.setLoading(loading);
+	
 			}
 			InteractiveLearningApp.showStart();
 

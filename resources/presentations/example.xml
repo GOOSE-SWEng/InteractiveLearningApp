@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<slideshow>
+	<documentinfo>
+		<author>GOOSE SOFTWARE DEVELOPMENT COMPANY LTD</author>
+		<datemodified>25/02/20</datemodified>
+		<version>1.0</version>
+		<totalslides>20</totalslides>
+		<comment>Slideshow presentation "Interactive Learning Application" to aid students to learn complex topics and facts.</comment>
+	</documentinfo>
+	<defaults>
+		<backgroundcolor>Black</backgroundcolor>
+		<font>Arial</font>
+		<fontsize>24</fontsize>
+		<fontcolor>Black</fontcolor>
+		<linecolor>Black</linecolor>
+		<fillcolor>Black</fillcolor>
+		<slidewidth>1280</slidewidth>
+		<slideheight>720</slideheight>
+	</defaults>
+	<slide id='1. Cronthian Helmet' duration='4000'>
+		<text font='helvetica' fontsize='15' fontcolor='Black' xpos='0' ypos='4' starttime='1000' endtime='10000'>
+	A <b>rocket</b> (from Italian: rocchetto, lit. 
+	'bobbin')[nb 1][1] is a <i>missile</i>, 
+	spacecraft, aircraft or other vehicle 
+	that obtains thrust from a rocket 
+	engine. Rocket engine exhaust is 
+	formed entirely from propellant carried 
+	within the rocket.[2] Rocket engines 
+	work by action and reaction and push
+	rockets forward simply by expelling 
+	their exhaust in the opposite 
+	direction at high speed, and can 
+	therefore work in the vacuum of space.
+	In fact, rockets work more efficiently 
+	in space than in an atmosphere. 
+	Multistage rockets are capable of 
+	attaining escape velocity from Earth 
+	and therefore can achieve unlimited 
+	maximum altitude. Compared with 
+	airbreathing engines, rockets are 
+	lightweight and powerful and capable 
+	of generating large accelerations. 
+	To control their flight, rockets 
+	rely on momentum, airfoils, auxiliary 
+	reaction engines, gimballed thrust,
+	momentum wheels, deflection of the 
+	exhaust stream, propellant flow, spin,
+	or gravity. Rockets for military and 
+	recreational uses date back to at 
+	least 13th-century China.
+		</text>
+		<line xstart='0' ystart='0' xend='1280' yend='0' linecolor='Black' starttime='100' endtime='10000'></line>
+		<line xstart='1280' ystart='0' xend='1280' yend='500' linecolor='Black' starttime='200' endtime='10000'></line>
+		<line xstart='1280' ystart='500' xend='0' yend='500' linecolor='Black' starttime='300' endtime='10000'></line>
+		<line xstart='0' ystart='500' xend='0' yend='0' linecolor='Black' starttime='400' endtime='10000'></line>
+		<line xstart='400' ystart='0' xend='400' yend='500' linecolor='Black' starttime='500' endtime='10000'></line>
+		<line xstart='880' ystart='0' xend='880' yend='500' linecolor='Black' starttime='600' endtime='10000'></line>
+		<shape type='rectangle' xstart='0' ystart='0' width='400' height='500' fillcolor='Black' starttime='700' endtime='10000'>
+			<shading x1='0' y1='0' color1='Black' x2='100' y2='100' color2='Orange' cyclic='True'></shading>
+		</shape>
+		<shape type='oval' xstart='880' ystart='200' width='400' height='200' fillcolor='pink' starttime='800' endtime='10000'>
+			<shading x1='0' y1='0' color1='Black' x2='100' y2='100' color2='Blue' cyclic='True'></shading>
+		</shape>
+		<shape type='rectangle' xstart='880' ystart='0' width='400' height='500' fillcolor='pink' starttime='900' endtime='10000'>
+		</shape>
+		<shape type='oval' xstart='880' ystart='400' width='400' height='200' fillcolor='blue' starttime='1000' endtime='10000'>
+		</shape>
+		<image urlname='https://cdn.eso.org/images/screen/eso1907a.jpg' xstart='60' ystart='0' width='40' height='40' starttime='1000' endtime='10000'></image>
+		<image urlname='https://cdn.arstechnica.net/wp-content/uploads/2018/07/Rocket-Report-Intro-3-800x450.jpg' xstart='60' ystart='40' width='40' height='40' starttime='1500' endtime='10000'></image>
+	</slide>
+		<slide id='2. LOL' duration='2000'>
+		<text font='helvetica' fontsize='15' fontcolor='Black' xpos='0' ypos='4' starttime='1000' endtime='10000'>
+			HABDAHFLWNEALKJFNVKJENVLEJNVLENSJKVE
+		</text>
+		<line xstart='0' ystart='0' xend='1280' yend='0' linecolor='Black' starttime='100' endtime='10000'></line>
+		<line xstart='1280' ystart='0' xend='1280' yend='500' linecolor='Black' starttime='200' endtime='10000'></line>
+		<line xstart='1280' ystart='500' xend='0' yend='500' linecolor='Black' starttime='300' endtime='10000'></line>
+		<line xstart='0' ystart='500' xend='0' yend='0' linecolor='Black' starttime='400' endtime='10000'></line>
+		<line xstart='400' ystart='0' xend='400' yend='500' linecolor='Black' starttime='500' endtime='10000'></line>
+		<line xstart='880' ystart='0' xend='880' yend='500' linecolor='Black' starttime='600' endtime='10000'></line>
+		<shape type='rectangle' xstart='0' ystart='0' width='400' height='500' fillcolor='Black' starttime='700' endtime='10000'>
+			<shading x1='0' y1='0' color1='Black' x2='100' y2='100' color2='Orange' cyclic='True'></shading>
+		</shape>
+		<shape type='oval' xstart='880' ystart='200' width='400' height='200' fillcolor='pink' starttime='800' endtime='10000'>
+			<shading x1='0' y1='0' color1='Black' x2='100' y2='100' color2='Blue' cyclic='True'></shading>
+		</shape>
+		<shape type='rectangle' xstart='880' ystart='0' width='400' height='500' fillcolor='pink' starttime='900' endtime='10000'>
+		</shape>
+		<shape type='oval' xstart='880' ystart='400' width='400' height='200' fillcolor='blue' starttime='1000' endtime='10000'>
+		</shape>
+		<image urlname='https://cdn.eso.org/images/screen/eso1907a.jpg' xstart='60' ystart='0' width='40' height='40' starttime='1000' endtime='10000'></image>
+		<image urlname='https://cdn.arstechnica.net/wp-content/uploads/2018/07/Rocket-Report-Intro-3-800x450.jpg' xstart='60' ystart='40' width='40' height='40' starttime='1500' endtime='10000'></image>
+	</slide>
+</slideshow>

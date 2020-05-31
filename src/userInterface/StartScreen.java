@@ -85,7 +85,10 @@ public class StartScreen {
 		Button quitButton = new Button("Quit");
 		
 		//Setup button actions
-		openButton.setOnMouseClicked(e->InteractiveLearningApp.run());
+		openButton.setOnMouseClicked(e->{
+			InteractiveLearningApp.showLoading();
+			InteractiveLearningApp.run();
+			});
 		resumeButton.setOnMouseClicked(e->{
 			if(InteractiveLearningApp.presRunning == false) {
 				//Do nothing
@@ -127,11 +130,11 @@ public class StartScreen {
 		//Add model to the right of the screen
 		borderPane.setRight(gooseModel.getModelScene());
 		borderPane.setAlignment(gooseModel.getModelScene(), Pos.CENTER);
-		borderPane.prefHeightProperty().bind(InteractiveLearningApp.getStage().heightProperty());
+		
 		startScreen = new Scene(borderPane, mainStage.getWidth(), mainStage.getHeight());
 		startScreen.getStylesheets().add("style/StartScreen/startScreen.css");	//Default
-		borderPane.prefWidthProperty().bind(startScreen.widthProperty());
-		borderPane.prefHeightProperty().bind(startScreen.heightProperty());
+		/*borderPane.prefWidthProperty().bind(startScreen.widthProperty());
+		borderPane.prefHeightProperty().bind(startScreen.heightProperty());*/
 		return startScreen;
 	}
 	public Button getResumeButton() {

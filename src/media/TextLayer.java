@@ -34,7 +34,6 @@ public class TextLayer {
 		SlideText text = new SlideText(node, slideNumber, width, height);
 		slideText.add(text);
 		//text.get().setLayoutX();
-		sp.getChildren().add(text.get());
 		InteractiveLearningApp.slides.get(slideNumber).getSlideTexts().add(text);
 	}
 	

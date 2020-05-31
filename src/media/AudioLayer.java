@@ -55,22 +55,8 @@ public class AudioLayer {
 //		}
 		audio.get(i).play();
 	}
-	public void remove(Audio object) {
-		sp.getChildren().remove(object);
-	}
 	
 	public StackPane get() {
 		return (sp);
   }
-	public void add() {
-		
-
-	}
-	public void remove() {
-		
-	}
-	
-//	public StackPane get() {
-//		return sp;
-//	}
 }

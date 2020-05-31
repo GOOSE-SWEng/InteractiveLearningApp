@@ -17,7 +17,7 @@ public class ImageLayer {
 	
 
 	public ImageLayer(int width,int height, ArrayList<SlideImage> images, StackPane sp){
-    sceneHeight = InteractiveLearningApp.getStageHeight();
+		sceneHeight = InteractiveLearningApp.getStageHeight();
 		sceneWidth = InteractiveLearningApp.getStageWidth();
 //		sp.setMinSize(sceneWidth,sceneHeight);
 //		sp.setPickOnBounds(false);
@@ -32,7 +32,7 @@ public class ImageLayer {
 		SlideImage image = new SlideImage(urlName, xStart, yStart, width, height, startTime, endTime, slideNumber, sceneWidth, sceneHeight);
 		if(image.imageFail == false) {
 			images.add(image);
-			sp.getChildren().add(image.get());
+			//sp.getChildren().add(image.get());
 			InteractiveLearningApp.slides.get(slideNumber).getSlideImages().add(image);
 			//image.get().setLayoutX(xStart);
 			//image.get().setLayoutY(yStart);
@@ -44,11 +44,12 @@ public class ImageLayer {
 		}
 	}
 	public void add(int i) {
+		System.out.println("Image added");
 		if (sp.getChildren().contains(images.get(i).get()) == false) {
 			images.get(i).start();
 			sp.getChildren().add(images.get(i).get());
-			images.get(i).get().setLayoutX(images.get(i).getStartX());
-			images.get(i).get().setLayoutY(images.get(i).getStartY());
+			/*images.get(i).get().setLayoutX(images.get(i).getStartX());
+			images.get(i).get().setLayoutY(images.get(i).getStartY());*/
 			
 		}
 	}
