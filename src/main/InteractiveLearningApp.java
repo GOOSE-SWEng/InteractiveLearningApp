@@ -152,10 +152,10 @@ public class InteractiveLearningApp extends Application{
 				mainStage.setHeight(defaultYSize);
 				showSlide(0); 
 				presRunning = true;
-				//timer = new Timer();
-				//timer.start();
-				timer2 = new Timer_2(shapes, audio,images,slideText,videos,models,graphics2d,audioLayers,imageLayers,textLayers,videoLayers,graphics3dLayers);
-				timer2.start();
+				timer = new Timer();
+				timer.start();
+				//timer2 = new Timer_2(shapes, audio,images,slideText,videos,models,graphics2d,audioLayers,imageLayers,textLayers,videoLayers,graphics3dLayers);
+				//timer2.start();
 			}catch(NullPointerException e) {
 				showStart();
 			}

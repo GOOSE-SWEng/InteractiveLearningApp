@@ -112,6 +112,9 @@
 	the British Museum almost continuously since 
 	1802 and is the most visited object there.
 		</text>
+
+		<shape type='rectangle' xstart='940' ystart='5' width='310' height='630' fillcolor='dimgray' starttime='100' endtime='10000'>
+		</shape>
 		<shape type='rectangle' xstart='10' ystart='5' width='310' height='630' fillcolor='dimgray' starttime='50' endtime='10000'>
 			<shading x1='155' y1='500' color1='dimgray' x2='155' y2='630' color2='white' cyclic='False'></shading>
 		</shape>
