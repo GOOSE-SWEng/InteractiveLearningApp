@@ -20,6 +20,7 @@ public class TextLayer {
 	public TextLayer(int width,int height, ArrayList<SlideText>slideText, StackPane sp){
 		this.height = height;
 		this.width = width;
+
 //		sp.setMinSize(width,height);
 //		sp.setPickOnBounds(false);
 		this.slideText = slideText;
@@ -32,8 +33,9 @@ public class TextLayer {
 		//constructor for the text object
 		SlideText text = new SlideText(node, slideNumber, width, height);
 		slideText.add(text);
+		//text.get().setLayoutX();
+		sp.getChildren().add(text.get());
 		InteractiveLearningApp.slides.get(slideNumber).getSlideTexts().add(text);
-		//sp.getChildren().add(text.get());
 	}
 	
 	public void remove(int i) {

@@ -57,9 +57,10 @@ public class ToolBar {
 	 * Method to create toolbar
 	 * @param winWidth width of the window at the current time toolbar is made
 	 * @param id title of the current slide
+	 * @param exhibitMode 
 	 * @return the toolbar as a subscene
 	 */
-	public static SubScene createToolBar(int winWidth, String id) {
+	public static SubScene createToolBar(int winWidth, String id, boolean exhibitMode) {
 		//instantiate the new grid pane, then instantiate the buttons to fill it
 		GridPane gridPane = new GridPane();
 		
@@ -98,6 +99,17 @@ public class ToolBar {
 		minimizeWindowButton.setOnAction(e -> MinimizeButtonPressed());
 		maximizeWindowButton.setOnAction(e -> MaximizeButtonPressed());
 		exitButton.setOnAction(e -> ExitButtonPressed());
+		
+		if(exhibitMode == true) {
+			minimizeWindowButton.setVisible(false);
+			maximizeWindowButton.setVisible(false);
+			exitButton.setVisible(false);
+			
+			minimizeWindowButton.managedProperty().bind(minimizeWindowButton.visibleProperty());
+			maximizeWindowButton.managedProperty().bind(maximizeWindowButton.visibleProperty());
+			exitButton.managedProperty().bind(exitButton.visibleProperty());
+			
+		}
 		
 		//adds 10 pixel padding to the top, bottom, left and right of the tool bar
 		gridPane.setPadding(new Insets(10,0,10,0));

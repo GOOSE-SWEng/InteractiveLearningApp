@@ -22,11 +22,12 @@ public class LoadingScreen {
 	 * @param stage - main stage of program to place this scene on top of
 	 * @param width - width of window
 	 * @param height - height of window
+	 * @param exhibitMode 
 	 * @return returns a scene containing the loading screen
 	 */
-	public static Scene createLoadingScreen(Stage stage, int width, int height) {
+	public static Scene createLoadingScreen(Stage stage, int width, int height, boolean exhibitMode) {
 		//create toolbar and resize bar for scene
-		toolBar = ToolBar.createToolBar(width, "Loading...");
+		toolBar = ToolBar.createToolBar(width, "Loading...", exhibitMode);
 		resizeBar = ResizeBar.CreateResizeBar(width);
 		
 		//create border pane with loading text

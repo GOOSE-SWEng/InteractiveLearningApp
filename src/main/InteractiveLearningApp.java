@@ -3,6 +3,8 @@ import java.io.File;
 import java.util.ArrayList;
 
 import javafx.application.Application;
+import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -11,6 +13,7 @@ import userInterface.*;
 import slides.*;
 import tools.Timer;
 import tools.Timer_2;
+import tools.XMLParser;
 import media.*;
 
 /**
@@ -48,7 +51,7 @@ public class InteractiveLearningApp extends Application{
 	public static String chosenLanguage = "English";
 	
 	//Triggers Exhibit Mode
-	private boolean exhibitMode = false;
+	public static boolean exhibitMode = false;
 	public static Timer timer;
 	public static Timer_2 timer2;
 	
@@ -82,9 +85,9 @@ public class InteractiveLearningApp extends Application{
 		mainStage.setMinWidth(defaultXSize);
 		mainStage.setMinHeight(defaultYSize);
 		//mainStage.setHeight(defaultYSize);
-		start = StartScreen.createStartScreen(mainStage, defaultXSize, defaultYSize);
-		settings = Settings.createSettings(mainStage, defaultXSize, defaultYSize);
-		loading = LoadingScreen.createLoadingScreen(mainStage, defaultXSize, defaultYSize);
+		start = StartScreen.createStartScreen(mainStage, defaultXSize, defaultYSize, exhibitMode);
+		settings = Settings.createSettings(mainStage, defaultXSize, defaultYSize, exhibitMode);
+		loading = LoadingScreen.createLoadingScreen(mainStage, defaultXSize, defaultYSize, exhibitMode);
 			
 		/*LOADING PROCESS*/
 		//LOADING SCREEN
@@ -114,7 +117,8 @@ public class InteractiveLearningApp extends Application{
 			videoLayers.clear();
 			textLayers.clear();
 		}else{
-		//presRunning = false;
+
+		presRunning = false;
 		//Create File Browser
 		FileChooser fileChooser = new FileChooser();
 		//Change to another directory when we export as a jar
@@ -151,8 +155,22 @@ public class InteractiveLearningApp extends Application{
 		showSlide(currentSlide);
 	}
 	
+	public static Scene getStart() {
+		return start;
+	}
+	
 	public static Stage getStage() {
 		return mainStage;
+	}
+	
+	public static void setStart(Scene start) {
+		InteractiveLearningApp.start = null;
+		InteractiveLearningApp.start = start;
+	}
+	
+	public static void setSettings(Scene settings) {
+		InteractiveLearningApp.settings = null;
+		InteractiveLearningApp.settings = settings;
 	}
 	
 	/** Show settings screen */
@@ -183,6 +201,8 @@ public class InteractiveLearningApp extends Application{
 			}else {
 				mainStage.setScene(slides.get(0).getSlide());
 				currentSlide = 0;
+
+				//timer.resetTimer(currentSlide);
 				timer2.resetTimer(currentSlide);
 			}
 		}
@@ -201,6 +221,7 @@ public class InteractiveLearningApp extends Application{
 			}else {
 				mainStage.setScene(slides.get(0).getSlide());
 				currentSlide = 0;
+				//timer.resetTimer(currentSlide);
 				timer2.resetTimer(currentSlide);
 			}
 		}

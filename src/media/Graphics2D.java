@@ -2,6 +2,7 @@ package media;
 
 import java.util.ArrayList;
 
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.SubScene;
 import javafx.scene.canvas.Canvas;
@@ -31,9 +32,11 @@ public class Graphics2D {
 		this.paneHeight = height;
 		this.paneWidth = width;
 		// clones arrayList
-		this.shapes = shapes;
+		this.shapes = shapes; 
+		sp.setPickOnBounds(false);
+		sp.setAlignment(Pos.TOP_LEFT);
 		this.sp = sp;
-		//sp.setPickOnBounds(false);
+
 		//creates the layer subscene
 		//Window = new SubScene(sp,paneWidth,paneHeight);
 	}

@@ -22,6 +22,7 @@ public class SlideImage {
   private Group group = null;
   private int startTime = 0;
   private int endTime = 0;
+
   private float startX;
   private float startY;
   boolean imageFail = false;

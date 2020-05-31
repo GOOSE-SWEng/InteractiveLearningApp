@@ -43,7 +43,9 @@ public class Slide {
 	//id and duration of slide
 	private String id;
 	private int duration;
-	//private ArrayList<Object> elements = new ArrayList<Object>();
+	
+	private ArrayList<Object> elements = new ArrayList<Object>();
+	
 	private ArrayList<Video> slideVideos = new ArrayList<Video>();
 	private ArrayList<Audio> slideAudio = new ArrayList<Audio>();
 	private ArrayList<SlideText> slideTexts = new ArrayList<SlideText>();
@@ -90,9 +92,13 @@ public class Slide {
 		this.height = height;
 		this.id = id;
 		//create toolbar and resize bar
+		toolBar = ToolBar.createToolBar(width, id, InteractiveLearningApp.exhibitMode);
+		resizeBar = ResizeBar.CreateResizeBar(width);
+
+		xOff = xOffset;
+		yOff = yOffset;
 		
-		
-		sp.setMinSize(width,height);
+		//sp.setMinSize(width,height);
 		sp.setAlignment(Pos.TOP_LEFT);
 		sp.setPickOnBounds(false);
 		
@@ -116,32 +122,36 @@ public class Slide {
 		G2D.add(graphics2D);
 		G3D.add(graphics3DLayer);
 		
-//		toolBar = ToolBar.createToolBar(width, id);
-//		resizeBar = ResizeBar.CreateResizeBar(width);
-//
-//		xOff = xOffset;
-//		yOff = yOffset;
-//		///////// taken from the start screen class
-//		toolBar.setOnMousePressed(new EventHandler<MouseEvent>() {
-//			@Override
-//			public void handle(MouseEvent event) {
-//				xOff = event.getSceneX();
-//				yOff = event.getSceneY();
-//			}
-//		});
-//		
-//		//Move window with mouse
-//		toolBar.setOnMouseDragged(new EventHandler<MouseEvent>() {
-//			@Override
-//			public void handle(MouseEvent event) {
-//				mainStage.setX(event.getScreenX() - xOff);
-//				mainStage.setY(event.getScreenY() - yOff);	
-//			}
-//		});
-		toolBar = ToolBar.createToolBar(width, id);
+		///////// taken from the start screen class
+		toolBar.setOnMousePressed(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				xOff = event.getSceneX();
+				yOff = event.getSceneY();
+			}
+		});
+		
+		//Move window with mouse
+		toolBar.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				mainStage.setX(event.getScreenX() - xOff);
+				mainStage.setY(event.getScreenY() - yOff);	
+			}
+		});
+	}
+	
+	public Slide(int width, int height, String id, int duration) {
+		this.width = width;
+		this.height = height;
+		this.id = id;
+		this.duration = duration;
+		toolBar = ToolBar.createToolBar(width, id, InteractiveLearningApp.exhibitMode);
+
 		resizeBar = ResizeBar.CreateResizeBar(width);
 		bp.setTop(toolBar);
 		bp.setCenter(sp);
+
 		bp.setBottom(resizeBar);
 		toolBar.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
@@ -160,7 +170,10 @@ public class Slide {
 			}
 		});
 		sp.setPickOnBounds(false);
+		//sp.prefHeightProperty().bind(InteractiveLearningApp.getStage().heightProperty());
+		bp.prefHeightProperty().bind(InteractiveLearningApp.getStage().heightProperty());
 		slide = new Scene(bp,width, height);
+
 		if(InteractiveLearningApp.style.equals("default")) {
 			slide.getStylesheets().add("style/ContentScreen/contentScreen.css");
 		}else if(InteractiveLearningApp.style.equals("nightmode")) {
@@ -225,7 +238,6 @@ public class Slide {
 //		sp.getChildren().add(textLayer.get());
 //		sp.getChildren().add(imageLayer.get());
 //		sp.getChildren().add(graphics3DLayer.get());
-
 	}
 	
 	/*public void addMediaElements(String type, List elements) {
@@ -253,7 +265,7 @@ public class Slide {
 		return slide;
 	}
 	
-	
+
 	public ArrayList<Video> getSlideVideos() {
 		return slideVideos;
 	}

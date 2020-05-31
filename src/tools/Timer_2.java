@@ -85,6 +85,8 @@ public class Timer_2 extends Thread{
 			TimingObject TO = new TimingObject(i,1000, false, "model",i);
 			timingObjects.add(TO);
 		}
+		
+		
 	}
 	
 	public void run() {
@@ -96,6 +98,7 @@ public class Timer_2 extends Thread{
 				Platform.runLater(()->InteractiveLearningApp.nextSlide());
 				localTime = 0;
 			}
+
 			for (int i = 0; i < timingObjects.size(); i++) {
 				if (timingObjects.get(i).getSlideNumber() == slideNumber) {
 					if(timingObjects.get(i).getStartTime()>localTime) {
@@ -120,6 +123,14 @@ public class Timer_2 extends Thread{
 							}
 							else if(type == "image") {
 								final int j = i;
+
+								//Platform.runLater(()->imageLayers.get(slideNumber).add(timingObjects.get(j).getIndex()));
+//								Platform.runLater(()->imageLayers.get(slideNumber).add(0));
+//								Platform.runLater(()->imageLayers.get(slideNumber).add(1));
+								//Platform.runLater(()->imageLayers.get(slideNumber).add(2));
+								//Platform.runLater(()->imageLayers.get(slideNumber).add(3));
+								
+								System.out.println(timingObjects.get(i).getIndex());
 								Platform.runLater(()->imageLayers.get(slideNumber).add(timingObjects.get(j).getIndex()));
 							}
 							else if(type == "text") {

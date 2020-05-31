@@ -53,6 +53,8 @@ public class SlideAssembler {
 
 		XMLParser parser = new XMLParser(xml, slides, audioLayers, videoLayers, textLayers, imageLayers, g2dLayers, graphics3dLayers, audio, models, images, shapes, slideTexts, videos, mainStage);
 		slideNo = parser.getSlideCount();
+		
+		//May need to include if statements for blank layers
 		for(int i = 0; i< slideNo;i++) {
 			slides.get(i).setAudioLayer(audioLayers.get(i));
 			slides.get(i).setGraphics2D(g2dLayers.get(i));
@@ -61,6 +63,8 @@ public class SlideAssembler {
 			slides.get(i).setImageLayer(imageLayers.get(i));
 			slides.get(i).setGraphics3DLayer(graphics3dLayers.get(i));
 			slides.get(i).applyLayers();
+			
+			System.out.println("For slide: " + i + " Shape items: " + slides.get(i).getSlideShapes().size());
 		}
 	}
 }
