@@ -27,7 +27,14 @@ public class Timer extends Thread{
 						System.out.println("VIDEO PLAYING");
 						break;
 					case IMAGE:
-						Platform.runLater(() ->InteractiveLearningApp.slides.get(currentSlideNo).getSlideImages().get(id).start());
+						Platform.runLater(() ->{
+							try {
+								InteractiveLearningApp.slides.get(currentSlideNo).getSlideImages().get(id).start();
+							}catch(IndexOutOfBoundsException e) {
+								
+							}
+						});
+						
 						System.out.println("IMAGE PLAYING");
 						break;
 					case SHAPE:
