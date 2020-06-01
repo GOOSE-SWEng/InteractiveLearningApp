@@ -653,7 +653,7 @@ public class XMLParser {
 			getSubNodes(currentNode.getChildNodes());
 		}
 		else{}
-		audioLayers.get(currentSlide).add(urlName,startTime, loop, controls,72,85,25,10,currentSlide);
+		audioLayers.get(currentSlide).add(urlName,startTime, loop, controls,37,85,30,10,currentSlide);
 		//Add media element for timer
 		slides.get(currentSlide).getSlideElements().add(new MediaElement(currentSlide, startTime, -1, "audio",audioId)); //Add media element for timer
 		audioId++;

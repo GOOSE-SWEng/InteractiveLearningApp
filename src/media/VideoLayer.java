@@ -45,13 +45,15 @@ public class VideoLayer {
 		
 	public void remove(int i) {
 		if (sp.getChildren().contains(videos.get(i).get())) {
+			videos.get(i).stop();
 			sp.getChildren().remove(videos.get(i).get());
-			System.out.println(videos.get(i).urlName);
+
 		}
 	}
 	public void add(int i) {
 		if (sp.getChildren().contains(videos.get(i).get()) == false) {
 			sp.getChildren().add(videos.get(i).get());
+			videos.get(i).play();
 		}
 	}
 	public void removeVideo(Video video) {

@@ -42,6 +42,7 @@ public class VideoController {
 			// TODO Auto-generated method stub
 			subtitleLB.setOpacity(0);
 		}*/
+	
 	// Play button control
 	@FXML
 	public void play(ActionEvent event) {

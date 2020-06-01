@@ -12,10 +12,12 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.geometry.Pos;
+import javafx.scene.AmbientLight;
 import javafx.scene.Camera;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.PerspectiveCamera;
+import javafx.scene.PointLight;
 import javafx.scene.SceneAntialiasing;
 import javafx.scene.SubScene;
 import javafx.scene.control.Button;
@@ -107,7 +109,7 @@ public class Model {
 	public SubScene createModel(String url) {
 		//new camera for subscene
 		camera = new PerspectiveCamera(); 
-		
+
 		if(url.startsWith("https://")) {
 			System.out.println("Online source");
 		}
@@ -171,9 +173,7 @@ public class Model {
 		
         // Create Shape3D
 		System.out.println("Model Imported");
-		
 		modelGroup.getTransforms().addAll(reqTransform, reqTranslate, reqScale);
-
 		//Create pivot
         Translate pivot = new Translate(); 
         //Setup rotates

@@ -68,7 +68,7 @@ public class Video {
 		this.urlName = urlName;
 		
 		// creates a subscene
-		subScene = new SubScene(root, 30*InteractiveLearningApp.getStageWidth()/100, 60*InteractiveLearningApp.getStageHeight()/100);
+		subScene = new SubScene(root, 65*InteractiveLearningApp.getStageWidth()/100, 75*InteractiveLearningApp.getStageHeight()/100);
 		// Set subscene position
 
 		// Video control bar, retrieved from the root
@@ -233,7 +233,7 @@ public class Video {
 		p.getChildren().get(0);
 		MediaView mv = (MediaView) p.getChildren().get(0);
 		
-		//mv.setFitHeight(subScene.getHeight()-20);
+		mv.setFitHeight(subScene.getHeight()-20);
 		mv.setFitWidth(subScene.getWidth());
 		mv.setMediaPlayer(mediaPlayer);
 	}

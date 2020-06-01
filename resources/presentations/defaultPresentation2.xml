@@ -1,0 +1,212 @@
+<?xml version="1.0"?>
+<slideshow>
+	<documentinfo>
+		<author>GOOSE SOFTWARE DEVELOPMENT COMPANY LTD</author>
+		<datemodified>25/02/20</datemodified>
+		<version>1.0</version>
+		<totalslides>20</totalslides>
+		<comment>Slideshow presentation "Interactive Learning Application" to aid students to learn complex topics and facts.</comment>
+	</documentinfo>
+	<defaults>
+		<backgroundcolor>Black</backgroundcolor>
+		<font>Arial</font>
+		<fontsize>24</fontsize>
+		<fontcolor>Black</fontcolor>
+		<linecolor>Black</linecolor>
+		<fillcolor>Black</fillcolor>
+		<slidewidth>1280</slidewidth>
+		<slideheight>720</slideheight>
+	</defaults>
+	<slide id='1. Rosetta Stone' duration='10000'>
+		<text font='arial' fontsize='14' fontcolor='black' xpos='0' ypos='2' starttime='100' endtime='100000'>
+	The Rosetta Stone is a granodiorite stele 
+	discovered in 1799 which is inscribed with three
+	versions of a decreebissued in Memphis, 
+	Egypt in 196 BC during the Ptolemaic 
+	dynasty on behalf of King Ptolemy V Epiphanes.
+	The top and middle texts are in
+	Ancient Egyptian using hieroglyphic and 
+	Demotic scripts respectively, while 
+	the bottom is in Ancient Greek. The decree
+	has only minor differences among the three
+	versions, so the Rosetta Stone became key 
+	to deciphering Egyptian hieroglyphs, 
+	thereby opening a window into ancient 
+	Egyptian history.The stone was carved 
+	during the Hellenistic period and is 
+	believed to have originally been displayed 
+	within a temple, possibly at nearby Sais.
+	It was probably moved in late antiquity 
+	or during the Mameluk period, and was 
+	eventually used as building material 
+	in the construction of Fort Julien 
+	near the town of Rashid (Rosetta) in
+	the Nile Delta. It was discovered 
+	there in July 1799 by French soldier
+	Pierre-François Bouchard during the 
+	Napoleonic campaign in Egypt. It 
+	was the first Ancient Egyptian bilingual 
+	text recovered in modern times, and it 
+	aroused widespread public interest with 
+	its potential to decipher this previously 
+	untranslated hieroglyphic script. Lithographic 
+	copies and plaster casts beganbcirculating among
+	European museums and scholars. The British
+	defeated the French and took the stone to
+	London under the Capitulation of Alexandria 
+	in 1801. It has been on public display at 
+	the British Museum almost continuously since 
+	1802 and is the most visited object there.
+		</text>
+		<text font='arial' fontsize='14' fontcolor='black' xpos='37' ypos='80' starttime='100' endtime='10000'>
+<b>Audio: </b>
+		</text>
+		<shape type='rectangle' xstart='10' ystart='10' width='340' height='650' fillcolor='mintcream' starttime='100' endtime='100000'>
+		</shape>
+		<shape type='rectangle' xstart='370' ystart='10' width='540' height='650' fillcolor='mintcream' starttime='50' endtime='100000'>
+			<shading x1='155' y1='500' color1='dimgray' x2='155' y2='650' color2='gray' cyclic='False'></shading>
+		</shape>
+		<shape type='rectangle' xstart='930' ystart='10' width='340' height='650' fillcolor='mintcream' starttime='100' endtime='100000'>
+		</shape>
+		<audio urlname='resources/slide2/audio/audio1.wav' starttime='10' loop='false' controls='true'></audio>
+		<image urlname='https://i.pinimg.com/originals/bb/cb/5c/bbcb5c05c92c5ee1505ab124d399e4d4.gif' xstart='76' ystart='8' width='20' height='48' starttime='1000' endtime='100000'></image>
+		<image urlname='https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/f_auto,q_auto,w_1100/v1555310204/shape/mentalfloss/11869923326_4f4236d8fa_k.jpg' xstart='76' ystart='65' width='20' height='20' starttime='1000' endtime='100000'></image>
+		<video urlname='resources/slide2/video/rosetta-stone.mp4' starttime='10000' loop='false' xstart='100' ystart='20'></video>
+		<model urlname='resources/slide2/models/rosetta-stone-low.stl' xstart='35' ystart='10' width='30' height='70'></model>
+	</slide>
+	<slide id='2. Rosetta Stone Cont.' duration='10000'>
+			<text font='arial' fontsize='14' fontcolor='black' xpos='75' ypos='60' starttime='100' endtime='10000'>
+Discovered by French soldiers during their 
+occupation of Egypt on July 15, 1799, the 
+Rosetta Stone is a most fortunate find. 
+Weighing nearly one ton and covered in three 
+columns of alternating script, the stone 
+provided the key to deciphering hieroglyphics, 
+the ancient Egyptian script that had puzzled 
+scholars for centuries. But while many know 
+its value as a translation tool, few know 
+the turbulent history surrounding its 
+discovery and translation—or what it actually 
+says.
+		</text>
+		<text font='arial' fontsize='14' fontcolor='black' xpos='37' ypos='80' starttime='100' endtime='100000'>
+<b>Audio: </b>
+		</text>
+		<shape type='rectangle' xstart='930' ystart='10' width='340' height='650' fillcolor='mintcream' starttime='100' endtime='100000'>
+		</shape>
+		<audio urlname='resources/slide1/audio/audio1.wav' starttime='10' loop='false' controls='true'></audio>
+		<image urlname='https://i.pinimg.com/originals/bb/cb/5c/bbcb5c05c92c5ee1505ab124d399e4d4.gif' xstart='76' ystart='8' width='20' height='48' starttime='1000' endtime='100000'></image>
+		<video urlname='resources/slide2/video/rosetta-stone.mp4' starttime='100' loop='false' xstart='5' ystart='5'></video>
+		<model urlname='resources/slide2/models/rosetta-stone-low.stl' xstart='100' ystart='2' width='25' height='70'></model>
+	</slide>
+	<slide id='3. Gayer Anderson Cat' duration='8000'>
+		<text font='arial' fontsize='36' fontcolor='black' xpos='0' ypos='0' starttime='100' endtime='10000'>
+			Another Example Layout
+		</text>
+		<shape type='rectangle' xstart='10' ystart='10' width='340' height='650' fillcolor='mintcream' starttime='100' endtime='100000'>
+		</shape>
+		<shape type='rectangle' xstart='370' ystart='10' width='540' height='650' fillcolor='mintcream' starttime='50' endtime='100000'>
+			<shading x1='155' y1='500' color1='dimgray' x2='155' y2='650' color2='gray' cyclic='False'></shading>
+		</shape>
+		<shape type='rectangle' xstart='930' ystart='10' width='340' height='650' fillcolor='mintcream' starttime='100' endtime='100000'>
+		</shape>
+		<audio urlname='resources/slide3/audio/audio1.wav' starttime='10' loop='false'></audio>
+		<image urlname='https://www.bl.uk/britishlibrary/~/media/bl/global/dl%2020th%20century/20th%20century%20collection%20items/british-museum-cat-statue-bm119116001.jpg' xstart='20' ystart='20' width='60' height='60' starttime='100' endtime='10000'></image>
+		<video urlname='https://www.radiantmediaplayer.com/media/bbb-360p.mp4' starttime='1000' loop='false' xstart='0' ystart='0'></video>
+		<model urlname='resources/slide3/models/gayer-anderson-cat-low.stl' xstart='33' ystart='0' width='33' height='80'></model>
+	</slide>
+	<slide id='4 Saint Raymon Colonne' duration='8000'>
+		<text font='arial' fontsize='15' fontcolor='black' xpos='0' ypos='0' starttime='100' endtime='10000'>
+			HELLO THERE, WE ARE OUT HERE VIBIN <b>You</b> are <i>Gorgeous</i>
+			LOL AT THAT THO I LOVE SAUSAGE ROLLS
+		</text>
+		<shape type='rectangle' xstart='10' ystart='10' width='340' height='650' fillcolor='mintcream' starttime='100' endtime='100000'>
+		</shape>
+		<shape type='rectangle' xstart='370' ystart='10' width='540' height='650' fillcolor='mintcream' starttime='50' endtime='100000'>
+			<shading x1='155' y1='500' color1='dimgray' x2='155' y2='650' color2='gray' cyclic='False'></shading>
+		</shape>
+		<shape type='rectangle' xstart='930' ystart='10' width='340' height='650' fillcolor='mintcream' starttime='100' endtime='100000'>
+		</shape>
+		<audio urlname='resources/slide4/audio/audio1.wav' starttime='10' loop='false'></audio>
+		<image urlname='https://cdn.eso.org/images/screen/eso1907a.jpg' xstart='0' ystart='0' width='30' height='30' starttime='100' endtime='10000'></image>
+		<image urlname='https://cdn.arstechnica.net/wp-content/uploads/2018/07/Rocket-Report-Intro-3-800x450.jpg' xstart='50' ystart='50' width='40' height='40' starttime='100' endtime='10000'></image>
+		<video urlname='https://www.radiantmediaplayer.com/media/bbb-360p.mp4' starttime='1000' loop='false' xstart='0' ystart='0'></video>
+		<model urlname='resources/slide4/models/saint-raymond-colonne-low.stl' xstart='33' ystart='0' width='33' height='80'></model>
+	</slide>
+	<slide id='5. scentbottlewomanholdingdove' duration='8000'>
+		<text font='arial' fontsize='15' fontcolor='black' xpos='0' ypos='0' starttime='100' endtime='10000'>
+			HELLO THERE, WE ARE OUT HERE VIBIN <b>You</b> are <i>Gorgeous</i>
+			LOL AT THAT THO I LOVE SAUSAGE ROLLS
+		</text>
+		<shape type='rectangle' xstart='10' ystart='10' width='340' height='650' fillcolor='mintcream' starttime='100' endtime='100000'>
+		</shape>
+		<shape type='rectangle' xstart='370' ystart='10' width='540' height='650' fillcolor='mintcream' starttime='50' endtime='100000'>
+			<shading x1='155' y1='500' color1='dimgray' x2='155' y2='650' color2='gray' cyclic='False'></shading>
+		</shape>
+		<shape type='rectangle' xstart='930' ystart='10' width='340' height='650' fillcolor='mintcream' starttime='100' endtime='100000'>
+		</shape>
+		<audio urlname='resources/slide5/audio/audio1.wav' starttime='10' loop='false'></audio>
+		<image urlname='https://cdn.eso.org/images/screen/eso1907a.jpg' xstart='0' ystart='0' width='30' height='30' starttime='100' endtime='10000'></image>
+		<image urlname='https://cdn.arstechnica.net/wp-content/uploads/2018/07/Rocket-Report-Intro-3-800x450.jpg' xstart='50' ystart='50' width='40' height='40' starttime='100' endtime='10000'></image>
+		<video urlname='https://www.radiantmediaplayer.com/media/bbb-360p.mp4' starttime='1000' loop='false' xstart='0' ystart='0'></video>
+		<model urlname='resources/slide5/models/scentbottlewomanholdingdove.stl' xstart='33' ystart='0' width='33' height='80'></model>
+	</slide>
+	<slide id='6. mycenaean-figure-of-bull-low' duration='8000'>
+		<text font='arial' fontsize='15' fontcolor='black' xpos='0' ypos='0' starttime='100' endtime='10000'>
+			HELLO THERE, WE ARE OUT HERE VIBIN <b>You</b> are <i>Gorgeous</i>
+			LOL AT THAT THO I LOVE SAUSAGE ROLLS
+		</text>
+		<shape type='rectangle' xstart='10' ystart='10' width='340' height='650' fillcolor='mintcream' starttime='100' endtime='100000'>
+		</shape>
+		<shape type='rectangle' xstart='370' ystart='10' width='540' height='650' fillcolor='mintcream' starttime='50' endtime='100000'>
+			<shading x1='155' y1='500' color1='dimgray' x2='155' y2='650' color2='gray' cyclic='False'></shading>
+		</shape>
+		<shape type='rectangle' xstart='930' ystart='10' width='340' height='650' fillcolor='mintcream' starttime='100' endtime='100000'>
+		</shape>
+		<line xstart='0' ystart='0' xend='1280' yend='0' linecolor='Black' starttime='10' endtime='1000'></line>
+		<audio urlname='resources/slide6/audio/audio1.wav' starttime='10' loop='false'></audio>
+		<image urlname='https://cdn.eso.org/images/screen/eso1907a.jpg' xstart='0' ystart='0' width='30' height='30' starttime='100' endtime='10000'></image>
+		<image urlname='https://cdn.arstechnica.net/wp-content/uploads/2018/07/Rocket-Report-Intro-3-800x450.jpg' xstart='50' ystart='50' width='40' height='40' starttime='100' endtime='10000'></image>
+		<video urlname='https://www.radiantmediaplayer.com/media/bbb-360p.mp4' starttime='1000' loop='false' xstart='0' ystart='0'></video>
+		<model urlname='resources/slide6/models/mycenaean-figure-of-bull-low.stl' xstart='33' ystart='0' width='33' height='80'></model>
+	</slide>
+	<slide id='7. hoa-hakananaia-low' duration='8000'>
+		<text font='arial' fontsize='15' fontcolor='black' xpos='0' ypos='0' starttime='100' endtime='10000'>
+			HELLO THERE, WE ARE OUT HERE VIBIN <b>You</b> are <i>Gorgeous</i>
+			LOL AT THAT THO I LOVE SAUSAGE ROLLS
+		</text>
+		<shape type='rectangle' xstart='10' ystart='10' width='340' height='650' fillcolor='mintcream' starttime='100' endtime='100000'>
+		</shape>
+		<shape type='rectangle' xstart='370' ystart='10' width='540' height='650' fillcolor='mintcream' starttime='50' endtime='100000'>
+			<shading x1='155' y1='500' color1='dimgray' x2='155' y2='650' color2='gray' cyclic='False'></shading>
+		</shape>
+		<shape type='rectangle' xstart='930' ystart='10' width='340' height='650' fillcolor='mintcream' starttime='100' endtime='100000'>
+		</shape>
+		<line xstart='0' ystart='0' xend='1280' yend='0' linecolor='Black' starttime='10' endtime='1000'></line>
+		<audio urlname='resources/slide7/audio/audio1.wav' starttime='10' loop='false'></audio>
+		<image urlname='https://cdn.eso.org/images/screen/eso1907a.jpg' xstart='0' ystart='0' width='30' height='30' starttime='100' endtime='10000'></image>
+		<image urlname='https://cdn.arstechnica.net/wp-content/uploads/2018/07/Rocket-Report-Intro-3-800x450.jpg' xstart='50' ystart='50' width='40' height='40' starttime='100' endtime='10000'></image>
+		<video urlname='https://www.radiantmediaplayer.com/media/bbb-360p.mp4' starttime='1000' loop='false' xstart='0' ystart='0'></video>
+		<model urlname='resources/slide7/models/hoa-hakananaia-low.stl' xstart='33' ystart='0' width='33' height='80'></model>
+	</slide>
+	<slide id='8. hoa-hakananaia-low' duration='8000'>
+		<text font='arial' fontsize='15' fontcolor='black' xpos='0' ypos='0' starttime='100' endtime='10000'>
+			HELLO THERE, WE ARE OUT HERE VIBIN <b>You</b> are <i>Gorgeous</i>
+			LOL AT THAT THO I LOVE SAUSAGE ROLLS
+		</text>
+		<shape type='rectangle' xstart='10' ystart='10' width='340' height='650' fillcolor='mintcream' starttime='100' endtime='100000'>
+		</shape>
+		<shape type='rectangle' xstart='370' ystart='10' width='540' height='650' fillcolor='mintcream' starttime='50' endtime='100000'>
+			<shading x1='155' y1='500' color1='dimgray' x2='155' y2='650' color2='gray' cyclic='False'></shading>
+		</shape>
+		<shape type='rectangle' xstart='930' ystart='10' width='340' height='650' fillcolor='mintcream' starttime='100' endtime='100000'>
+		</shape>
+		<line xstart='0' ystart='0' xend='1280' yend='0' linecolor='Black' starttime='10' endtime='1000'></line>
+		<audio urlname='resources/slide8/audio/audio1.wav' starttime='10' loop='false'></audio>
+		<image urlname='https://cdn.eso.org/images/screen/eso1907a.jpg' xstart='0' ystart='0' width='30' height='30' starttime='100' endtime='10000'></image>
+		<image urlname='https://cdn.arstechnica.net/wp-content/uploads/2018/07/Rocket-Report-Intro-3-800x450.jpg' xstart='50' ystart='50' width='40' height='40' starttime='100' endtime='10000'></image>
+		<video urlname='https://www.radiantmediaplayer.com/media/bbb-360p.mp4' starttime='1000' loop='false' xstart='0' ystart='0'></video>
+		<model urlname='resources/slide8/models/hoa-hakananaia-low.stl' xstart='33' ystart='0' width='33' height='80'></model>
+	</slide>
+
+</slideshow>
