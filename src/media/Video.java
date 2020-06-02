@@ -35,8 +35,6 @@ public class Video {
 	//global variables
 	private int startTime;
 	private int slideNumber;
-	private String urlName;
-	private String subUrlName;
 	private SubScene subScene;
 	boolean videoFail = false;
 
@@ -62,7 +60,6 @@ public class Video {
 			throws IOException {
 		// loads the media player layout from a FXML file
 		BorderPane root = FXMLLoader.load(getClass().getClassLoader().getResource("media/videoPlayer.fxml"));
-		this.urlName = urlName;
 		this.startTime = startTime;
 		this.slideNumber = slideNumber;
 		
@@ -94,7 +91,7 @@ public class Video {
 				media = new Media(vidFile.toURI().toString());	
 			} catch (Exception e) {
 				videoFail = true;
-				System.out.println("failed");
+				//failed
 				return;
 			}
 		}
@@ -103,7 +100,7 @@ public class Video {
 			File track = new File(subUrlName);
 			subtitleTrack = new Subtitles(track);
 		} catch (Exception e) {
-			System.out.println(" subfailed");
+			//subfailed
 		}
 		
 		// create media player with the video media file

@@ -98,7 +98,6 @@ says.
 		<audio urlname='resources/slide1/audio/audio1.wav' starttime='10' loop='false' controls='true'></audio>
 		<image urlname='https://i.pinimg.com/originals/bb/cb/5c/bbcb5c05c92c5ee1505ab124d399e4d4.gif' xstart='76' ystart='8' width='20' height='48' starttime='1000' endtime='100000'></image>
 		<video urlname='resources/slide2/video/rosetta-stone.mp4' starttime='100' loop='false' xstart='5' ystart='5'></video>
-		<model urlname='resources/slide2/models/rosetta-stone-low.stl' xstart='100' ystart='2' width='25' height='70'></model>
 	</slide>
 	
 	
@@ -135,7 +134,7 @@ we do...
 		</text>
 		<shape type='rectangle' xstart='10' ystart='10' width='360' height='650' fillcolor='dimgray' starttime='100' endtime='100000'>
 		</shape>
-		<audio urlname='resources/slide4/audio/audio1.wav' starttime='10' loop='false'></audio>
+		<audio urlname='resources/slide4/audio/audio1.wav' starttime='10' loop='false' controls='false'></audio>
 		<image urlname='https://cdn.eso.org/images/screen/eso1907a.jpg' xstart='100' ystart='20' width='20' height='80' starttime='100' endtime='10000'></image>
 		<video urlname='https://www.radiantmediaplayer.com/media/bbb-360p.mp4' starttime='1000' loop='false' xstart='30' ystart='10'></video>
 		<model urlname='resources/slide4/models/saint-raymond-colonne-low.stl' xstart='2' ystart='10' width='25' height='80'></model>
@@ -249,5 +248,7 @@ The Minoan bull leaper is a bronze group of a bull and leaper
 		<video urlname='https://www.radiantmediaplayer.com/media/bbb-360p.mp4' starttime='10000' loop='false' xstart='100' ystart='0'></video>
 		<model urlname='resources/slide8/models/mycenaean-figure-of-bull-low.stl' xstart='33' ystart='45' width='33' height='50'></model>
 	</slide>
+
+	
 
 </slideshow>
