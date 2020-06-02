@@ -1,0 +1,22 @@
+//Content screen style Sheet
+
+.root{
+	-fx-background-color: black;
+}
+
+.button{
+	-fx-background-color: #3aa9b8;
+	-fx-text-fill: white;
+	-fx-font-size: 16pt;
+
+}
+.text{
+	-fx-font-family: "arial";
+	-fx-font-style: italic;
+}
+
+#body{
+	-fx-font-size: 72pt;
+	-fx-font-family: "arial";
+	-fx-font-style: italic;
+}
