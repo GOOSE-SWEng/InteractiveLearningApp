@@ -1,0 +1,70 @@
+Credits:
+Citations for defaultPresentation
+
+All models have been sourced from myminifactory.com
+
+Slide1: Rosetta Stone
+Model: Author - Scan The World
+Text: 
+	Text block: https://en.wikipedia.org/wiki/Rosetta_Stone
+Images: 
+	Image 1: https://www.pinterest.com/pin/300826450093939418/
+		Image address: https://i.pinimg.com/originals/bb/cb/5c/bbcb5c05c92c5ee1505ab124d399e4d4.gif
+	Image 2: https://www.mentalfloss.com/article/82799/15-solid-facts-about-rosetta-stone 
+		Image address: https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/f_auto,q_auto,w_1100/v1555310204/shape/mentalfloss/11869923326_4f4236d8fa_k.jpg
+Video: N/A
+Audio:
+
+Slide2: Rosetta Stone cont.
+
+Images:
+	Image: https://www.pinterest.com/pin/300826450093939418/
+		Image address: https://i.pinimg.com/originals/bb/cb/5c/bbcb5c05c92c5ee1505ab124d399e4d4.gif
+Text:
+	Text block is from https://www.mentalfloss.com/article/82799/15-solid-facts-about-rosetta-stone
+Video:
+	Video: From national geographic https://video.nationalgeographic.com/tv/00000144-be5a-d550-a9ff-bf5e6b5c0000
+Audio:
+
+
+Slide3: Gayer Anderson Cat
+
+Images:
+Text:
+Video:
+Audio:
+
+Slide4: Saint Raymon Colonne
+Model: Author - Musée Saint-Raymond
+Images:
+Text:
+Video:
+Audio:
+
+Slide5: Corinthian Helmet
+
+Images:
+Text:
+Video:
+Audio:
+
+Slide6:
+
+Images:
+Text:
+Video:
+Audio:
+
+Slide7:
+
+Images:
+Text:
+Video:
+Audio:
+
+Slide8:
+
+Images:
+Text:
+Video:
+Audio:
