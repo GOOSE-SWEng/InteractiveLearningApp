@@ -1,0 +1,20 @@
+//Home screen style Sheet
+
+.root{
+	-fx-background-color: Black;
+}
+
+.button{
+	-fx-background-color: #3aa9b8;
+	-fx-text-fill: white;
+	-fx-font-size: 36pt;
+}
+
+.text{
+	
+}
+#centerText{
+	-fx-font-family: "arial";
+	-fx-fill: white;
+	-fx-font-size: 36pt;
+}
