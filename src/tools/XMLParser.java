@@ -345,6 +345,7 @@ public class XMLParser {
 	public void videoParse(Node currentNode) {
 		//Defaults
 		String urlName = "";
+		String subUrlName = "";
 		Boolean loop = false;
 		int xStart = 0;
 		int yStart = 0;
@@ -363,6 +364,8 @@ public class XMLParser {
 				if(attMap.item(j).getNodeName().equals("urlname")) {
 					//Store the value in the node
 					urlName = attMap.item(j).getNodeValue(); 
+				}else if(attMap.item(j).getNodeName().equals("suburlname")) {
+					subUrlName = attMap.item(j).getNodeValue();
 				}
 				//If loop attribute is found
 				else if(attMap.item(j).getNodeName().equals("loop")) { 
@@ -396,7 +399,7 @@ public class XMLParser {
 		
 		try {
 			//Add a new video to this layer
-			videoLayers.get(currentSlide).addVideo(urlName, startTime, loop, xStart, yStart, currentSlide);
+			videoLayers.get(currentSlide).addVideo(urlName,subUrlName, startTime, loop, xStart, yStart, currentSlide);
 			//Add media element for timer
 			slides.get(currentSlide).getSlideElements().add(new MediaElement(currentSlide, startTime, -1, "video", videoId));
 			videoId++;

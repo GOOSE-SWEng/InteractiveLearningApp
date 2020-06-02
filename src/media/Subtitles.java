@@ -9,109 +9,90 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
+/**
+ * Class for the audio handler
+ * @author - Rimas Radziunas and Cezara-Lidia Jalba
+ * @version - 1.1
+ * @date - 21/05/20
+ */
 
 public class Subtitles {
 	BufferedReader reader;
-	ArrayList<SubtitleBlock> subtitleList = new ArrayList();
+	// store the subtitle increments to be displayed 
+	ArrayList<SubtitleBlock> subtitleList = new ArrayList<SubtitleBlock>();
+	// track subtitles
 	private int currentSubBlock = 0; 
 	
-	String displayString = "";//Display string
-	Boolean advance = false; //indicate weather to advance to the next subtitle block
-	Boolean changeSubtitle = true; //weather to change the subtitle label
+	String displayString = "";
+	// indicate whether to advance to the next subtitle block
+	Boolean advance = false; 
+	// indicate whether to change the subtitle label
+	Boolean changeSubtitle = true; 
 	
-	//Gap between the current the next subtitle block
+	// gap between the current the next subtitle block
 	double gapStart;
 	double gapEnd;
 	
+	// read srt file, create subtitle block, store in the list
 	public Subtitles(File subFile) throws IOException {
-		
 		reader = new BufferedReader(new InputStreamReader(new FileInputStream(subFile), "UTF-8"));
-		System.out.println(reader);
 		String line = "";
-		int index = 0;
+		//read until the end of the file
 		while(line != null) {
-			index++;
-			SubtitleBlock subBlock = new SubtitleBlock();
-			
+			// first read of the number
 			if(reader.readLine() == null) {
-				System.out.println("BREAK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 				break;
 			}
-			subBlock.setIndex(index);
-			line = reader.readLine();
-			//System.out.println("line2: " + line);
+			SubtitleBlock subBlock = new SubtitleBlock();
+			// second is the timing information
+			line = reader.readLine(); 
 			subBlock.setTimeFrame(line);
 			String displayString = "";
+			//read subsequent lines which is the text
 			while(!((line = reader.readLine()).isEmpty())) {
-				//System.out.println("line3: " + line);
 				displayString = displayString + line + "\n";
-				
-				//System.out.println("line3: " + line);
-				//System.out.println("line3: " + line);
 			}
-			//System.out.println("line4: " + displayString);
 			subBlock.setText(displayString);
 			subtitleList.add(subBlock);
 		}
-		System.out.println("DONE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	}
 	
-	
-	//need to read the correct line for timing
-	//need to read correct line for the text
 	public double getStartTimeOfText() {
 		return subtitleList.get(currentSubBlock).getStartTime();
 		
 	}
-	
+
 	public double getEndTimeOfText() {
 		return subtitleList.get(currentSubBlock).getEndTime();
 		
 	}
 	
-	//need to find the correct place in the subtitles when the current video time is changed to a random point with a slider
+	// seeks the correct subtitle time frame with for the current time of the video
 	public void seekPosition(Double currentTime) {
+		// if the subtitle is ahead of the current time, cycle back till correct one is reached
 		if(currentTime < getStartTimeOfText()) {
-			System.out.println("start==========================================");
 			while(currentTime < getStartTimeOfText()) {
-				
-				
 				setGapToNextSubtitle();
-				System.out.println("GAP bounds: start: " + formatTime(gapStart) + " end: " + formatTime(gapEnd));
-				
 				if(currentTime > gapStart && currentTime < gapEnd || currentSubBlock == 0) {
-					System.out.println("within the gap, break");
 					break;
 				}
 				reverseSubTrack();
-				System.out.println("sub start: " + formatTime(this.getStartTimeOfText()) + ", end: " + formatTime(this.getEndTimeOfText()));
-				System.out.println("SUbtitle is a head");
 			}
-			System.out.println("end==========================================");
-			
+		// if the subtitle is behind the current time, cycle forwards till correct one is reached
 		} else if(currentTime > getEndTimeOfText()) {
-			System.out.println("start==========================================");
 			while(currentTime > getStartTimeOfText()) {
 				fowardSubTrack();
 				setGapToNextSubtitle();
-				System.out.println("GAP bounds: start: " + formatTime(gapStart) + " end: " + formatTime(gapEnd));
-				
 				if(currentTime > gapStart && currentTime < gapEnd) {
-					
-					System.out.println("within the gap, break");
 					break;
 				}
 				fowardSubTrack();
-				System.out.println("SUbtitle is a late");
 			}
-			System.out.println("sub start: " + formatTime(this.getStartTimeOfText()) + ", end: " + formatTime(this.getEndTimeOfText()));
-			System.out.println("end==========================================");
-			
-		} 
-			
-			
+		} 	
 	}
 	
 	public String getCurrentText() {
@@ -119,36 +100,35 @@ public class Subtitles {
 	}
 	
 	public void fowardSubTrack() {
-		//System.out.println(currentSubBlock);
 		currentSubBlock++;
 		if(currentSubBlock > subtitleList.size()-1) {
 			currentSubBlock--;
-			//System.out.println("tooBig");
 		}
 	}
 	public void reverseSubTrack() {
-		//System.out.println(currentSubBlock);
 		currentSubBlock--;
 		if(currentSubBlock < 0) {
 			currentSubBlock++;
 		}
 	}
 	
+	// set the subtitle text
 	public void setSubtitleText(Label label, MediaPlayer mp) {
 		double currentTime = mp.getCurrentTime().toMillis();
+		// when the current time falls into current subtitle time frame, set opacity to 1 display it
+		// and set the text, stop the change of subtitle text and opacity, enable advancing to the next subTitle
 		if(currentTime > getStartTimeOfText() && currentTime < getEndTimeOfText()) {
-			
 			if(changeSubtitle) {
-				
+				label.setOpacity(1);
 				label.setText(getCurrentText());
-				System.out.println("seting label text:"+  getCurrentText());
 				changeSubtitle = false;
 			}
 			advance = true;
 		}
+		// when the current time leave the time frame, set label opacity to 0, if advance is true
+		// jump to the next subtitle, stop advancement and enable the change of the label
 		else if(currentTime > getEndTimeOfText() || currentTime < getStartTimeOfText()) {
-			//subtitleTrack.fowardSubTrack();
-			label.setText("");
+			label.setOpacity(0);
 			if(advance) {
 				fowardSubTrack();
 				advance = false;
@@ -160,16 +140,6 @@ public class Subtitles {
 	public void setGapToNextSubtitle() {
 		gapStart = (int) subtitleList.get(currentSubBlock).getEndTime();
 		gapEnd = (int) subtitleList.get(currentSubBlock + 1).getStartTime();
-	}
-	
-	public void displaySubtitles() {
-		for(int i = 0; i < subtitleList.size(); i++) {
-			SubtitleBlock newBlock = subtitleList.get(i);
-			System.out.println("id: " + newBlock.getIndex() + "\n" +
-							   "start time: " + newBlock.getStartTime() + "\n"+
-							   "end time: " + newBlock.getEndTime() + "\n" +
-							   "text: " + newBlock.getText());
-		}
 	}
 	
 	public String formatTime(double time) {
@@ -185,5 +155,4 @@ public class Subtitles {
 		}
 		return string;
 	}
-	
 }

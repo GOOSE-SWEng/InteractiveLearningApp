@@ -5,6 +5,7 @@ import javafx.scene.SubScene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import main.InteractiveLearningApp;
 
 /**
  * Class for the loading screen
@@ -16,6 +17,7 @@ public class LoadingScreen {
 	//global variables
 	static SubScene toolBar;
 	static SubScene resizeBar;
+	static Scene loadingScene;
 	
 	/**
 	 * 
@@ -34,10 +36,33 @@ public class LoadingScreen {
 		BorderPane bp = new BorderPane();
 		bp.setTop(toolBar);
 		Text prezLoad = new Text("Your presentation is Loading");
+		prezLoad.setId("centerText");
 		bp.setCenter(prezLoad);
 		
-		Scene loadingScene = new Scene(bp,width,height);
-		loadingScene.getStylesheets().add("style/ContentScreen/contentScreen.css");
+		loadingScene = new Scene(bp,width,height);
+		if(InteractiveLearningApp.style.equals("nightmode")) {
+			nightmodeStyle();
+		}else if(InteractiveLearningApp.style.equals("colourblind")) {
+			colourblindStyle();
+		}else {
+			defaultStyle();	//Default
+		}
 		return loadingScene;
+	}
+	public static void defaultStyle() {
+		loadingScene.getStylesheets().clear();
+		loadingScene.getStylesheets().add("style/LoadingScreen/loadingScreen.css");
+	}
+	
+	/** sets style of loading screen to night mode */
+	public static void nightmodeStyle() {
+		loadingScene.getStylesheets().clear();
+		loadingScene.getStylesheets().add("style/LoadingScreen/loadingScreenNight.css");
+	}
+	
+	/** sets style of loading screen to colour blind */
+	public static void colourblindStyle() {
+		loadingScene.getStylesheets().clear();
+		loadingScene.getStylesheets().add("style/LoadingScreen/loadingScreenCB.css");
 	}
 }

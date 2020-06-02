@@ -11,5 +11,10 @@
 }
 
 .text{
+	
+}
+#centerText{
 	-fx-font-family: "arial";
+	-fx-fill: white;
+	-fx-font-size: 36pt;
 }

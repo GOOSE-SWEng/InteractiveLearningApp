@@ -2,8 +2,6 @@ package tools;
 
 import java.util.ArrayList;
 
-import com.sun.javafx.util.Utils;
-
 import javafx.application.Platform;
 import main.InteractiveLearningApp;
 import media.*;
@@ -75,7 +73,7 @@ public class Timer_2 extends Thread{
 		for (int i =0; i<video.size();i++) {
 			int slideNumber = video.get(i).getSlideNumber();
 			int startTime = video.get(i).getStartTime();
-			TimingObject TO = new TimingObject(i,startTime, false, "video",i);
+			TimingObject TO = new TimingObject(slideNumber,startTime, false, "video",i);
 			timingObjects.add(TO);
 		}
 		for (int i =0; i<model.size();i++) {//always there

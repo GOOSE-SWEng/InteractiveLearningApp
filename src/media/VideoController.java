@@ -2,6 +2,7 @@ package media;
 
 import java.io.IOException;
 
+import javafx.beans.property.DoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
@@ -12,13 +13,19 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
+/**
+ * Class for the audio handler
+ * @author - Rimas Radziunas and Cezara-Lidia Jalba
+ * @version - 1.1
+ * @date - 21/05/20
+ */
 public class VideoController {
 	@FXML
 	private Button play;
@@ -35,18 +42,11 @@ public class VideoController {
 	@FXML
 	private ImageView muteBtImg;
 
-	private Bounds vidSubBounds;
+	private Bounds vidSubBounds; // store the bounds of the video player for returning from full screen
 	
-	/*@Override
-		public void initialize(URL arg0, ResourceBundle arg1) {
-			// TODO Auto-generated method stub
-			subtitleLB.setOpacity(0);
-		}*/
-	
-	// Play button control
+	// play button
 	@FXML
 	public void play(ActionEvent event) {
-
 		if (mediaView.getMediaPlayer().getStatus() == MediaPlayer.Status.PLAYING) {
 			mediaView.getMediaPlayer().pause();
 
@@ -55,68 +55,81 @@ public class VideoController {
 		}
 	}
 
-	// Stop button control
+	// stop button control
 	public void stop(ActionEvent event) {
 		mediaView.getMediaPlayer().stop();
-		play.setText("Play");
 	}
 
 	// Full screen button control
 	public void setFullScreen(ActionEvent event) {
-		// Retrieve the correct containers
-		// TODO: adapt to the main program
-		// This only works for this structure
+		// retrieve the correct containers
 		Scene pane = vidBPane.getScene();
 		Stage mainStage = (Stage) pane.getWindow();
-
-		Scene mainScene = mainStage.getScene();
-		AnchorPane root = (AnchorPane) mainScene.getRoot();
-		Pane slidePane = (Pane) root.getChildren().get(2);
-		Pane videoContainerPane = (Pane) slidePane.getChildren().get(0);
-		SubScene videoSubscene = (SubScene) videoContainerPane.getChildren().get(0);
-
+		Scene parent = vidBPane.getScene();
+		BorderPane bordPane = (BorderPane) parent.getRoot();//Main structure
+		Pane centerPane = (Pane) bordPane.getCenter();//Centre pane/stackpane where the slides go
+		StackPane stackpain = (StackPane) centerPane.getChildren().get(1);//Another stackpane		
+		SubScene videoSubscene = (SubScene) stackpain.getChildren().get(stackpain.getChildren().size()-1);//<last postion in the stack pane. ALWAYS ADD THE VIDEO LAST to the stackpane 
+		// return from full screen
 		if (mainStage.isFullScreen()) {
+			// set main stage to full screen
 			mainStage.setFullScreen(false);
-			videoSubscene.setLayoutX(vidSubBounds.getMinX());
-			videoSubscene.setLayoutY(vidSubBounds.getMinY());
+			// set video subScene position and size back to original
+			videoSubscene.setTranslateX(vidSubBounds.getMinX());
+			videoSubscene.setTranslateY(vidSubBounds.getMinY());
 			videoSubscene.setHeight(vidSubBounds.getHeight());
 			videoSubscene.setWidth(vidSubBounds.getWidth());
+			// set subtitle label size
+			subtitleLB.setPrefWidth(vidSubBounds.getWidth());
+			subtitleLB.setPrefHeight(subtitleLB.getHeight()-20);
+			// decrease subtitle the font size
+			subtitleLB.setFont(new Font("Arial",24));
+			// move subtitles to correct position
+			subtitleLB.layoutYProperty().bind(videoSubscene.layoutYProperty().add(videoSubscene.getHeight()/10*7));
+			// resize media view to fill the subscene
 			mediaView.setFitHeight(vidSubBounds.getHeight() - 50);
 			mediaView.setFitWidth(vidSubBounds.getWidth());
+			// change the button icon
 			fulsrcBtImg.setImage(new Image(getClass().getResourceAsStream("/graphics/fullscreen.png")));
-
+		// set media player to full screen
 		} else {
+			// if the screen is not full screen mode save the bounds
 			if (!mainStage.isFullScreen()) {
 				vidSubBounds = videoSubscene.getBoundsInParent();
 			}
-			// Set the main stage to fullscreen
+			// set the main stage to full screen
 			mainStage.setFullScreen(true);
-			// Put the video to the top left corner
-			videoSubscene.setLayoutX(0);
-			videoSubscene.setLayoutY(0);
-			// setHeight
+			// put the video to the top left corner
+			videoSubscene.setTranslateX(0);
+			videoSubscene.setTranslateY(0);
+			// set the height and the width of the video subscene and media view
 			videoSubscene.setHeight(mainStage.getHeight() - 30);
 			videoSubscene.setWidth(mainStage.getWidth());
-
 			mediaView.setFitHeight(mainStage.getHeight() - 80);
 			mediaView.setFitWidth(mainStage.getWidth());
-
+			// change the width and position of the subtitles to fit with the fullscreen
+			subtitleLB.setPrefWidth(mainStage.getWidth());
+			subtitleLB.setPrefHeight(subtitleLB.getHeight()+20);
+			// set Y position of the subtitles
+			subtitleLB.layoutYProperty().bind(videoSubscene.layoutYProperty().add(videoSubscene.getHeight()/10*8.4));
+			// increase the size of the subtitles
+			subtitleLB.setFont(new Font("Arial", 32));
+			// change the button icon
 			fulsrcBtImg.setImage(new Image(getClass().getResourceAsStream("/graphics/back_from_fullscreen.png")));
 		}
 	}
-
+	
+	// caption button control
 	public void captionOn(ActionEvent event) throws IOException, InterruptedException {
-		if(subtitleLB.getOpacity() > 0) {
-			subtitleLB.setOpacity(0);
-			System.out.println("subtitle off");
+		if(!subtitleLB.isVisible()) {
+			subtitleLB.setVisible(true);
 		}
 		else {
-			subtitleLB.setOpacity(1);
-			System.out.println("subtitle on");
+			subtitleLB.setVisible(false);
 		}
 	}
 
-	// Mute and unmute the audio
+	// mute and unmute the audio
 	public void muteAudio(ActionEvent event) {
 		// mute
 		if (mediaView.getMediaPlayer().isMute() == false) {

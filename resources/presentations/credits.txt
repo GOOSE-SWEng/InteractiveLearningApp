@@ -1,9 +1,100 @@
 Credits:
-Slide1:
-Slide2:
-Slide3:
-Slide4:
-Slide5:
-Slide6:
-Slide7:
-Slide8:
+Citations for defaultPresentation
+
+All models have been sourced from myminifactory.com
+
+Slide1: Rosetta Stone
+Model: Author - Scan The World
+	https://www.myminifactory.com/object/3d-print-rosetta-stone-at-the-british-museum-london-4537
+Text: 
+	Text block: https://en.wikipedia.org/wiki/Rosetta_Stone
+Images: 
+	Image 1: https://www.pinterest.com/pin/300826450093939418/
+		Image address: https://i.pinimg.com/originals/bb/cb/5c/bbcb5c05c92c5ee1505ab124d399e4d4.gif
+	Image 2: https://www.mentalfloss.com/article/82799/15-solid-facts-about-rosetta-stone 
+		Image address: https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/f_auto,q_auto,w_1100/v1555310204/shape/mentalfloss/11869923326_4f4236d8fa_k.jpg
+Video: N/A
+Audio:
+
+==========================
+
+Slide2: Rosetta Stone cont.
+
+Images:
+	Image: https://www.pinterest.com/pin/300826450093939418/
+		Image address: https://i.pinimg.com/originals/bb/cb/5c/bbcb5c05c92c5ee1505ab124d399e4d4.gif
+Text:
+	Text block is from https://www.mentalfloss.com/article/82799/15-solid-facts-about-rosetta-stone
+Video:
+	Video: From national geographic https://video.nationalgeographic.com/tv/00000144-be5a-d550-a9ff-bf5e6b5c0000
+Audio:
+
+==========================
+
+Slide3: Gayer Anderson Cat
+Model: Author - Scan The World
+	https://www.myminifactory.com/object/3d-print-gayer-anderson-cat-at-the-british-museum-london-4010
+Images: 
+	Image from: https://www.bl.uk/collection-items/the-gayer-anderson-cat
+		Image address:https://www.bl.uk/britishlibrary/~/media/bl/global/dl%2020th%20century/20th%20century%20collection%20items/british-museum-cat-statue-bm119116001.jpg
+Text: N/A
+Video: N/A
+Audio:
+
+==========================
+
+Slide4: Saint Raymon Colonne
+Model: Author - Musée Saint-Raymond
+	https://www.myminifactory.com/object/3d-print-column-46622
+Images: N/A
+Text: N/A
+Video:	Placeholder
+Audio:
+
+==========================
+
+Slide5: Corinthian Helmet
+Model: Author - Scan The World
+	https://www.myminifactory.com/object/3d-print-corinthian-helmet-26136
+Images:
+	Image from: https://www.santorini.net/shop/art-collectibles/ancient-greece/corinthian-helmet-bronze-17cm/#
+		Image Address: https://www.santorini.net/wp-content/uploads/helmet_519.jpg
+Text: https://en.wikipedia.org/wiki/Corinthian_helmet
+Video: N/A
+Audio: N/A
+
+==========================
+
+Slide6: Hoa Hakananaia
+Model: Author - Thomas Flynn
+	https://www.myminifactory.com/object/3d-print-hoa-hakananai-a-24991
+Images:
+	Image from: https://en.wikipedia.org/wiki/Hoa_Hakananai%27a#/media/File:Angled_View_of_the_Hoa_Hakananai'a_Statue.JPG
+		Image address: https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Angled_View_of_the_Hoa_Hakananai%27a_Statue.JPG/800px-Angled_View_of_the_Hoa_Hakananai%27a_Statue.JPG
+Text: https://en.wikipedia.org/wiki/Hoa_Hakananai%27a
+Video: N/A
+Audio:
+
+==========================
+
+Slide7: Scent Bottle Woman Holding Dove
+Model: Author - Scan The World
+	https://www.myminifactory.com/object/3d-print-scent-bottle-depicting-a-woman-holding-a-dove-at-the-british-museum-london-18896
+
+Images: N/A
+Text: N/A
+Video: N/A
+Audio:
+
+==========================
+
+Slide8: Mycenaean Figure of a Bull
+Model: Author - Scan The World
+	https://www.myminifactory.com/object/3d-print-mycenaean-figure-of-bull-at-the-british-museum-london-15054
+
+Images:
+	Image from: https://en.wikipedia.org/wiki/Minoan_Bull-leaper#/media/File:Minoan_Bull-leaper.jpg
+		Image address: https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Minoan_Bull-leaper.jpg/1280px-Minoan_Bull-leaper.jpg
+Text: https://en.wikipedia.org/wiki/Minoan_Bull-leaper
+Video: N/A
+Audio:

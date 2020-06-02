@@ -119,7 +119,6 @@ public class StartScreen {
 			borderPane.setBottom(resizeBar);
 		}
 
-		
 		//Import 3D goose model
 		Model gooseModel = new Model(Paths.get("resources/3D_Models/startScreenGoose.stl").toUri().toString(), 50,90);
 		//Zoom into model
@@ -131,10 +130,14 @@ public class StartScreen {
 		borderPane.setRight(gooseModel.getModelScene());
 		borderPane.setAlignment(gooseModel.getModelScene(), Pos.CENTER);
 		
-		startScreen = new Scene(borderPane, mainStage.getWidth(), mainStage.getHeight());
-		startScreen.getStylesheets().add("style/StartScreen/startScreen.css");	//Default
-		/*borderPane.prefWidthProperty().bind(startScreen.widthProperty());
-		borderPane.prefHeightProperty().bind(startScreen.heightProperty());*/
+		startScreen = new Scene(borderPane, defaultXSize, defaultYSize);
+		if(InteractiveLearningApp.style.equals("nightmode")) {
+			nightmodeStyle();
+		}else if(InteractiveLearningApp.style.equals("colourblind")) {
+			colourblindStyle();
+		}else {
+			defaultStyle();	//Default
+		}
 		return startScreen;
 	}
 	public Button getResumeButton() {

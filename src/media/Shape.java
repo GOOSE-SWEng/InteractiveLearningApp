@@ -10,7 +10,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
-import javafx.scene.shape.Polygon;
 /**
  * Class for drawing the 2D shapes
  * @author - Alex Marchant

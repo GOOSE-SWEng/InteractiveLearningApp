@@ -61,21 +61,22 @@
 		<text font='arial' fontsize='14' fontcolor='black' xpos='37' ypos='80' starttime='100' endtime='10000'>
 <b>Audio: </b>
 		</text>
-		<shape type='rectangle' xstart='10' ystart='10' width='340' height='650' fillcolor='mintcream' starttime='100' endtime='100000'>
+		<shape type='rectangle' xstart='2' ystart='2' width='26' height='95' fillcolor='mintcream' starttime='100' endtime='100000'>
 		</shape>
-		<shape type='rectangle' xstart='370' ystart='10' width='540' height='650' fillcolor='mintcream' starttime='50' endtime='100000'>
-			<shading x1='155' y1='500' color1='dimgray' x2='155' y2='650' color2='gray' cyclic='False'></shading>
+		<shape type='rectangle' xstart='29' ystart='2' width='42' height='95' fillcolor='mintcream' starttime='50' endtime='100000'>
+			<shading x1='12' y1='69' color1='dimgray' x2='12' y2='90' color2='gray' cyclic='False'></shading>
 		</shape>
-		<shape type='rectangle' xstart='930' ystart='10' width='340' height='650' fillcolor='mintcream' starttime='100' endtime='100000'>
+		<shape type='rectangle' xstart='73' ystart='2' width='27' height='95' fillcolor='mintcream' starttime='100' endtime='100000'>
 		</shape>
 		<audio urlname='resources/slide2/audio/audio1.wav' starttime='10' loop='false' controls='true'></audio>
 		<image urlname='https://i.pinimg.com/originals/bb/cb/5c/bbcb5c05c92c5ee1505ab124d399e4d4.gif' xstart='76' ystart='8' width='20' height='48' starttime='1000' endtime='100000'></image>
 		<image urlname='https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/f_auto,q_auto,w_1100/v1555310204/shape/mentalfloss/11869923326_4f4236d8fa_k.jpg' xstart='76' ystart='65' width='20' height='20' starttime='1000' endtime='100000'></image>
-		<video urlname='resources/slide2/video/rosetta-stone.mp4' starttime='10000' loop='false' xstart='100' ystart='20'></video>
+		<video urlname='resources/slide2/video/rosetta-stone.mp4' starttime='10000' loop='false' xstart='10' ystart='20'></video>
 		<model urlname='resources/slide2/models/rosetta-stone-low.stl' xstart='35' ystart='10' width='30' height='70'></model>
 	</slide>
+	
 	<slide id='2. Rosetta Stone Cont.' duration='10000'>
-			<text font='arial' fontsize='14' fontcolor='black' xpos='75' ypos='60' starttime='100' endtime='10000'>
+		<text font='arial' fontsize='14' fontcolor='black' xpos='75' ypos='60' starttime='100' endtime='10000'>
 Discovered by French soldiers during their 
 occupation of Egypt on July 15, 1799, the 
 Rosetta Stone is a most fortunate find. 
@@ -92,121 +93,161 @@ says.
 		<text font='arial' fontsize='14' fontcolor='black' xpos='37' ypos='80' starttime='100' endtime='100000'>
 <b>Audio: </b>
 		</text>
-		<shape type='rectangle' xstart='930' ystart='10' width='340' height='650' fillcolor='mintcream' starttime='100' endtime='100000'>
+		<shape type='rectangle' xstart='1395' ystart='15' width='510' height='975' fillcolor='mintcream' starttime='100' endtime='100000'>
 		</shape>
 		<audio urlname='resources/slide1/audio/audio1.wav' starttime='10' loop='false' controls='true'></audio>
 		<image urlname='https://i.pinimg.com/originals/bb/cb/5c/bbcb5c05c92c5ee1505ab124d399e4d4.gif' xstart='76' ystart='8' width='20' height='48' starttime='1000' endtime='100000'></image>
 		<video urlname='resources/slide2/video/rosetta-stone.mp4' starttime='100' loop='false' xstart='5' ystart='5'></video>
 		<model urlname='resources/slide2/models/rosetta-stone-low.stl' xstart='100' ystart='2' width='25' height='70'></model>
 	</slide>
+	
+	
 	<slide id='3. Gayer Anderson Cat' duration='8000'>
-		<text font='arial' fontsize='36' fontcolor='black' xpos='0' ypos='0' starttime='100' endtime='10000'>
-			Another Example Layout
+		<text font='helvetica' fontsize='24' fontcolor='black' xpos='40' ypos='5' starttime='100' endtime='10000'>
+<b>Explore the cat model </b> 
+Observe closely
+the detail of this 
+incredible piece...
+
+
+
+This is one of our
+favourite pieces to
+have in the museum...
+
+
+
+We hope you appreciate
+this piece as much as
+we do...
 		</text>
-		<shape type='rectangle' xstart='10' ystart='10' width='340' height='650' fillcolor='mintcream' starttime='100' endtime='100000'>
-		</shape>
-		<shape type='rectangle' xstart='370' ystart='10' width='540' height='650' fillcolor='mintcream' starttime='50' endtime='100000'>
-			<shading x1='155' y1='500' color1='dimgray' x2='155' y2='650' color2='gray' cyclic='False'></shading>
-		</shape>
-		<shape type='rectangle' xstart='930' ystart='10' width='340' height='650' fillcolor='mintcream' starttime='100' endtime='100000'>
+		<shape type='rectangle' xstart='10' ystart='10' width='1260' height='650' fillcolor='dimgray' starttime='100' endtime='100000'>
 		</shape>
 		<audio urlname='resources/slide3/audio/audio1.wav' starttime='10' loop='false'></audio>
-		<image urlname='https://www.bl.uk/britishlibrary/~/media/bl/global/dl%2020th%20century/20th%20century%20collection%20items/british-museum-cat-statue-bm119116001.jpg' xstart='20' ystart='20' width='60' height='60' starttime='100' endtime='10000'></image>
-		<video urlname='https://www.radiantmediaplayer.com/media/bbb-360p.mp4' starttime='1000' loop='false' xstart='0' ystart='0'></video>
-		<model urlname='resources/slide3/models/gayer-anderson-cat-low.stl' xstart='33' ystart='0' width='33' height='80'></model>
+		<image urlname='https://www.bl.uk/britishlibrary/~/media/bl/global/dl%2020th%20century/20th%20century%20collection%20items/british-museum-cat-statue-bm119116001.jpg' xstart='65' ystart='5' width='30' height='80' starttime='100' endtime='10000'></image>
+		<video urlname='https://www.radiantmediaplayer.com/media/bbb-360p.mp4' starttime='10000' loop='false' xstart='100' ystart='0'></video>
+		<model urlname='resources/slide3/models/gayer-anderson-cat-low.stl' xstart='5' ystart='5' width='33' height='80'></model>
 	</slide>
+	
 	<slide id='4 Saint Raymon Colonne' duration='8000'>
-		<text font='arial' fontsize='15' fontcolor='black' xpos='0' ypos='0' starttime='100' endtime='10000'>
-			HELLO THERE, WE ARE OUT HERE VIBIN <b>You</b> are <i>Gorgeous</i>
-			LOL AT THAT THO I LOVE SAUSAGE ROLLS
+		<text font='arial' fontsize='24' fontcolor='black' xpos='20' ypos='0' starttime='100' endtime='10000'>
+			The incredible Saint Raymon Colonne (Column)
 		</text>
-		<shape type='rectangle' xstart='10' ystart='10' width='340' height='650' fillcolor='mintcream' starttime='100' endtime='100000'>
-		</shape>
-		<shape type='rectangle' xstart='370' ystart='10' width='540' height='650' fillcolor='mintcream' starttime='50' endtime='100000'>
-			<shading x1='155' y1='500' color1='dimgray' x2='155' y2='650' color2='gray' cyclic='False'></shading>
-		</shape>
-		<shape type='rectangle' xstart='930' ystart='10' width='340' height='650' fillcolor='mintcream' starttime='100' endtime='100000'>
+		<shape type='rectangle' xstart='10' ystart='10' width='360' height='650' fillcolor='dimgray' starttime='100' endtime='100000'>
 		</shape>
 		<audio urlname='resources/slide4/audio/audio1.wav' starttime='10' loop='false'></audio>
-		<image urlname='https://cdn.eso.org/images/screen/eso1907a.jpg' xstart='0' ystart='0' width='30' height='30' starttime='100' endtime='10000'></image>
-		<image urlname='https://cdn.arstechnica.net/wp-content/uploads/2018/07/Rocket-Report-Intro-3-800x450.jpg' xstart='50' ystart='50' width='40' height='40' starttime='100' endtime='10000'></image>
-		<video urlname='https://www.radiantmediaplayer.com/media/bbb-360p.mp4' starttime='1000' loop='false' xstart='0' ystart='0'></video>
-		<model urlname='resources/slide4/models/saint-raymond-colonne-low.stl' xstart='33' ystart='0' width='33' height='80'></model>
+		<image urlname='https://cdn.eso.org/images/screen/eso1907a.jpg' xstart='100' ystart='20' width='20' height='80' starttime='100' endtime='10000'></image>
+		<video urlname='https://www.radiantmediaplayer.com/media/bbb-360p.mp4' starttime='1000' loop='false' xstart='30' ystart='10'></video>
+		<model urlname='resources/slide4/models/saint-raymond-colonne-low.stl' xstart='2' ystart='10' width='25' height='80'></model>
 	</slide>
-	<slide id='5. scentbottlewomanholdingdove' duration='8000'>
-		<text font='arial' fontsize='15' fontcolor='black' xpos='0' ypos='0' starttime='100' endtime='10000'>
-			HELLO THERE, WE ARE OUT HERE VIBIN <b>You</b> are <i>Gorgeous</i>
-			LOL AT THAT THO I LOVE SAUSAGE ROLLS
+	
+	<slide id='5. Corinthian Helmet' duration='8000'>
+		<text font='arial' fontsize='36' fontcolor='black' xpos='5' ypos='0' starttime='100' endtime='10000'>
+THE <i>MARVELLOUS</i> CORINTHIAN HELMET
 		</text>
-		<shape type='rectangle' xstart='10' ystart='10' width='340' height='650' fillcolor='mintcream' starttime='100' endtime='100000'>
-		</shape>
-		<shape type='rectangle' xstart='370' ystart='10' width='540' height='650' fillcolor='mintcream' starttime='50' endtime='100000'>
-			<shading x1='155' y1='500' color1='dimgray' x2='155' y2='650' color2='gray' cyclic='False'></shading>
-		</shape>
-		<shape type='rectangle' xstart='930' ystart='10' width='340' height='650' fillcolor='mintcream' starttime='100' endtime='100000'>
-		</shape>
-		<audio urlname='resources/slide5/audio/audio1.wav' starttime='10' loop='false'></audio>
-		<image urlname='https://cdn.eso.org/images/screen/eso1907a.jpg' xstart='0' ystart='0' width='30' height='30' starttime='100' endtime='10000'></image>
-		<image urlname='https://cdn.arstechnica.net/wp-content/uploads/2018/07/Rocket-Report-Intro-3-800x450.jpg' xstart='50' ystart='50' width='40' height='40' starttime='100' endtime='10000'></image>
-		<video urlname='https://www.radiantmediaplayer.com/media/bbb-360p.mp4' starttime='1000' loop='false' xstart='0' ystart='0'></video>
-		<model urlname='resources/slide5/models/scentbottlewomanholdingdove.stl' xstart='33' ystart='0' width='33' height='80'></model>
-	</slide>
-	<slide id='6. mycenaean-figure-of-bull-low' duration='8000'>
-		<text font='arial' fontsize='15' fontcolor='black' xpos='0' ypos='0' starttime='100' endtime='10000'>
-			HELLO THERE, WE ARE OUT HERE VIBIN <b>You</b> are <i>Gorgeous</i>
-			LOL AT THAT THO I LOVE SAUSAGE ROLLS
+		<text font='arial' fontsize='18' fontcolor='black' xpos='5' ypos='10' starttime='100' endtime='10000'>
+The Corinthian helmet originated in ancient Greece and took its name from the city-state of Corinth. 
+It was a helmet made of bronze which in its later styles covered the entire head and neck, 
+with slits for the eyes and mouth. A large curved projection protected the nape of the neck.
+Out of combat, a Greek hoplite would wear the helmet tipped upward for comfort. 
+This practice gave rise to a series of variant forms in Italy, where the slits 
+were almost closed, since the helmet was no longer pulled over the face but worn 
+cap-like. Although the classical Corinthian helmet fell out of use among the 
+Greeks in favour of more open types, the Italo-Corinthian types remained in use 
+until the 1st century AD, being used, among others, by the Roman army.
+
+Herodotus mentions the Corinthian helmet in his Histories when writing of the Machlyes 
+and Auseans, two tribes living along the River Triton in ancient Libya (the portion of 
+ancient Libya he describes is most likely in modern Tunisia). The tribes chose annually 
+two teams of the fairest maidens who fought each other ceremonially with sticks and stones. 
+They were dressed in the finest Greek panoply topped off with a Corinthian helmet. The 
+ritual fight was part of a festival honoring the virgin goddess Athena. Young women who 
+succumbed to their wounds during the ordeal were thought to have been punished by the 
+goddess for lying about their virginity (Histories, 4.180).
 		</text>
-		<shape type='rectangle' xstart='10' ystart='10' width='340' height='650' fillcolor='mintcream' starttime='100' endtime='100000'>
-		</shape>
-		<shape type='rectangle' xstart='370' ystart='10' width='540' height='650' fillcolor='mintcream' starttime='50' endtime='100000'>
-			<shading x1='155' y1='500' color1='dimgray' x2='155' y2='650' color2='gray' cyclic='False'></shading>
-		</shape>
-		<shape type='rectangle' xstart='930' ystart='10' width='340' height='650' fillcolor='mintcream' starttime='100' endtime='100000'>
-		</shape>
-		<line xstart='0' ystart='0' xend='1280' yend='0' linecolor='Black' starttime='10' endtime='1000'></line>
-		<audio urlname='resources/slide6/audio/audio1.wav' starttime='10' loop='false'></audio>
-		<image urlname='https://cdn.eso.org/images/screen/eso1907a.jpg' xstart='0' ystart='0' width='30' height='30' starttime='100' endtime='10000'></image>
-		<image urlname='https://cdn.arstechnica.net/wp-content/uploads/2018/07/Rocket-Report-Intro-3-800x450.jpg' xstart='50' ystart='50' width='40' height='40' starttime='100' endtime='10000'></image>
-		<video urlname='https://www.radiantmediaplayer.com/media/bbb-360p.mp4' starttime='1000' loop='false' xstart='0' ystart='0'></video>
-		<model urlname='resources/slide6/models/mycenaean-figure-of-bull-low.stl' xstart='33' ystart='0' width='33' height='80'></model>
-	</slide>
-	<slide id='7. hoa-hakananaia-low' duration='8000'>
-		<text font='arial' fontsize='15' fontcolor='black' xpos='0' ypos='0' starttime='100' endtime='10000'>
-			HELLO THERE, WE ARE OUT HERE VIBIN <b>You</b> are <i>Gorgeous</i>
-			LOL AT THAT THO I LOVE SAUSAGE ROLLS
-		</text>
-		<shape type='rectangle' xstart='10' ystart='10' width='340' height='650' fillcolor='mintcream' starttime='100' endtime='100000'>
-		</shape>
-		<shape type='rectangle' xstart='370' ystart='10' width='540' height='650' fillcolor='mintcream' starttime='50' endtime='100000'>
-			<shading x1='155' y1='500' color1='dimgray' x2='155' y2='650' color2='gray' cyclic='False'></shading>
-		</shape>
-		<shape type='rectangle' xstart='930' ystart='10' width='340' height='650' fillcolor='mintcream' starttime='100' endtime='100000'>
+		<shape type='rectangle' xstart='40' ystart='42' width='750' height='38' fillcolor='dimgray' starttime='100' endtime='100000'>
 		</shape>
 		<line xstart='0' ystart='0' xend='1280' yend='0' linecolor='Black' starttime='10' endtime='1000'></line>
 		<audio urlname='resources/slide7/audio/audio1.wav' starttime='10' loop='false'></audio>
-		<image urlname='https://cdn.eso.org/images/screen/eso1907a.jpg' xstart='0' ystart='0' width='30' height='30' starttime='100' endtime='10000'></image>
-		<image urlname='https://cdn.arstechnica.net/wp-content/uploads/2018/07/Rocket-Report-Intro-3-800x450.jpg' xstart='50' ystart='50' width='40' height='40' starttime='100' endtime='10000'></image>
-		<video urlname='https://www.radiantmediaplayer.com/media/bbb-360p.mp4' starttime='1000' loop='false' xstart='0' ystart='0'></video>
-		<model urlname='resources/slide7/models/hoa-hakananaia-low.stl' xstart='33' ystart='0' width='33' height='80'></model>
+		<image urlname='https://www.santorini.net/wp-content/uploads/helmet_519.jpg' xstart='30' ystart='70' width='10' height='20' starttime='100' endtime='10000'></image>
+		<video urlname='https://www.radiantmediaplayer.com/media/bbb-360p.mp4' starttime='10000' loop='false' xstart='100' ystart='10'></video>
+		<model urlname='resources/slide5/models/cronthian-helmet.stl' xstart='70' ystart='10' width='28' height='80'></model>
 	</slide>
-	<slide id='8. hoa-hakananaia-low' duration='8000'>
-		<text font='arial' fontsize='15' fontcolor='black' xpos='0' ypos='0' starttime='100' endtime='10000'>
-			HELLO THERE, WE ARE OUT HERE VIBIN <b>You</b> are <i>Gorgeous</i>
-			LOL AT THAT THO I LOVE SAUSAGE ROLLS
+	
+
+	<slide id='6. Hoa Hakananaia' duration='8000'>
+		<text font='arial' fontsize='16' fontcolor='black' xpos='5' ypos='15' starttime='100' endtime='10000'>
+Hoa Hakananai'a is a moai 
+(Easter Island statue) 
+housed in the British 
+Museum in London. It was 
+taken from Orongo, Easter
+Island (Rapa Nui) in 
+November 1868 by the 
+crew of the British ship 
+HMS Topaze,[1] and 
+arrived in England in August 
+1869.[2] Though relatively
+small, it is considered
+to be typical of the 
+island’s statue form,
+[3][4] but distinguished 
+by carvings added to the 
+back, associated with the
+island's birdman cult.[5] 
+It has been described as 
+a "masterpiece"[6] and 
+"without a doubt, the 
+finest example of Easter 
+Island sculpture".
 		</text>
-		<shape type='rectangle' xstart='10' ystart='10' width='340' height='650' fillcolor='mintcream' starttime='100' endtime='100000'>
+		<shape type='oval' xstart='10' ystart='10' width='340' height='650' fillcolor='mintcream' starttime='100' endtime='100000'>
+			<shading x1='0' y1='0' color1='white' x2='340' y2='650' color2='dimgray' cyclic='false'></shading>
 		</shape>
-		<shape type='rectangle' xstart='370' ystart='10' width='540' height='650' fillcolor='mintcream' starttime='50' endtime='100000'>
+		<audio urlname='resources/slide6/audio/audio1.wav' starttime='10' loop='false'></audio>
+		<image urlname='https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Angled_View_of_the_Hoa_Hakananai%27a_Statue.JPG/800px-Angled_View_of_the_Hoa_Hakananai%27a_Statue.JPG' xstart='33' ystart='0' width='30' height='90' starttime='100' endtime='10000'></image>
+		<video urlname='https://www.radiantmediaplayer.com/media/bbb-360p.mp4' starttime='10000' loop='false' xstart='100' ystart='0'></video>
+		<model urlname='resources/slide6/models/hoa-hakananaia-low.stl' xstart='65' ystart='0' width='30' height='80'></model>
+	</slide>
+	
+	<slide id='7. Scent Bottle Woman Holding Dove' duration='8000'>
+		<text font='arial' fontsize='42' fontcolor='black' xpos='56' ypos='20' starttime='100' endtime='10000'>
+A rather obscure piece in 
+our collection.
+
+Can you tell what it is?
+		</text>
+		<line xstart='700' ystart='150' xend='1200' yend='150' linecolor='Black' starttime='100' endtime='10000'></line>
+		<line xstart='1200' ystart='150' xend='1200' yend='500' linecolor='Black' starttime='200' endtime='10000'></line>
+		<line xstart='1200' ystart='500' xend='700' yend='500' linecolor='Black' starttime='300' endtime='10000'></line>
+		<line xstart='700' ystart='500' xend='700' yend='150' linecolor='Black' starttime='400' endtime='10000'></line>
+		<audio urlname='resources/slide7/audio/audio1.wav' starttime='10' loop='false'></audio>
+		<image urlname='https://cdn.eso.org/images/screen/eso1907a.jpg' xstart='100' ystart='0' width='30' height='30' starttime='10000' endtime='10000'></image>
+		<video urlname='https://www.radiantmediaplayer.com/media/bbb-360p.mp4' starttime='10000' loop='false' xstart='100' ystart='0'></video>
+		<model urlname='resources/slide7/models/scentbottlewomanholdingdove.stl' xstart='5' ystart='10' width='40' height='80'></model>
+	</slide>
+	
+	<slide id='8. Mycenaean Figure of a Bull' duration='8000'>
+		<text font='arial' fontsize='24' fontcolor='black' xpos='2' ypos='2' starttime='100' endtime='10000'>
+The Minoan bull leaper is a bronze group of a bull and leaper
+ in the British Museum. It is the only known largely complete 
+ three-dimensional sculpture depicting Minoan bull-leaping.[1]
+ Although bull leaping certainly took place in Crete at this 
+ time, the leap depicted is practically impossible and it has
+ therefore been speculated that the sculpture may be an exaggerated 
+ depiction.[1][2] This speculation has been backed up by the 
+ testaments of modern-day bull leapers from France and Spain.[3]
+		</text>
+		<shape type='rectangle' xstart='10' ystart='10' width='700' height='300' fillcolor='mintcream' starttime='100' endtime='100000'>
+		</shape>
+		<shape type='rectangle' xstart='10' ystart='340' width='1200' height='400' fillcolor='mintcream' starttime='50' endtime='100000'>
 			<shading x1='155' y1='500' color1='dimgray' x2='155' y2='650' color2='gray' cyclic='False'></shading>
-		</shape>
-		<shape type='rectangle' xstart='930' ystart='10' width='340' height='650' fillcolor='mintcream' starttime='100' endtime='100000'>
 		</shape>
 		<line xstart='0' ystart='0' xend='1280' yend='0' linecolor='Black' starttime='10' endtime='1000'></line>
 		<audio urlname='resources/slide8/audio/audio1.wav' starttime='10' loop='false'></audio>
-		<image urlname='https://cdn.eso.org/images/screen/eso1907a.jpg' xstart='0' ystart='0' width='30' height='30' starttime='100' endtime='10000'></image>
-		<image urlname='https://cdn.arstechnica.net/wp-content/uploads/2018/07/Rocket-Report-Intro-3-800x450.jpg' xstart='50' ystart='50' width='40' height='40' starttime='100' endtime='10000'></image>
-		<video urlname='https://www.radiantmediaplayer.com/media/bbb-360p.mp4' starttime='1000' loop='false' xstart='0' ystart='0'></video>
-		<model urlname='resources/slide8/models/hoa-hakananaia-low.stl' xstart='33' ystart='0' width='33' height='80'></model>
+		<image urlname='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Minoan_Bull-leaper.jpg/1280px-Minoan_Bull-leaper.jpg' xstart='60' ystart='0' width='30' height='30' starttime='100' endtime='10000'></image>
+		<video urlname='https://www.radiantmediaplayer.com/media/bbb-360p.mp4' starttime='10000' loop='false' xstart='100' ystart='0'></video>
+		<model urlname='resources/slide8/models/mycenaean-figure-of-bull-low.stl' xstart='33' ystart='45' width='33' height='50'></model>
 	</slide>
 
 </slideshow>

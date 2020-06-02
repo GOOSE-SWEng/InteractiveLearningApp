@@ -13,6 +13,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import main.InteractiveLearningApp;
@@ -94,6 +95,7 @@ public class Settings {
 		textSize.setId("fields");
 		font.setId("fields");
 		language.setId("fields");
+		exhibitModeText.setId("fields");
 		
 		//Create Check Boxes
 		CheckBox colourBlindBox = new CheckBox();
@@ -231,7 +233,13 @@ public class Settings {
 		bp.prefWidthProperty().bind(InteractiveLearningApp.getStage().widthProperty());
 		//Create the scene
 		settings  = new Scene(bp,mainStage.getWidth(),mainStage.getHeight());
-		settings.getStylesheets().add("style/SettingsScreen/settingsScreen.css");
+		if(InteractiveLearningApp.style.equals("nightmode")) {
+			nightmodeStyle();
+		}else if(InteractiveLearningApp.style.equals("colourblind")) {
+			colourblindStyle();
+		}else {
+			defaultStyle();	//Default
+		}
 		return settings;
 	}
 	
@@ -250,9 +258,10 @@ public class Settings {
 		gp.setColumnSpan(text, 2);
 		gp.add(apply, 0, 1);
 		gp.add(cancel, 1, 1);
-		
+		gp.setAlignment(Pos.CENTER);
 		//creates new scene 
 		Scene applyPopUp = new Scene(gp,400,100);
+		applyPopUp.setFill(Color.GRAY);
 		settingsPopUp.setScene(applyPopUp);
 		settingsPopUp.show();
 		

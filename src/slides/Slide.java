@@ -112,7 +112,7 @@ public class Slide {
 		
 		slideSp.setAlignment(Pos.TOP_LEFT);
 		
-		graphics2D = new Graphics2D(width,height,shapes,sp);
+		graphics2D = new Graphics2D(shapes,sp);
 		textLayer = new TextLayer(width,height,slideTexts,sp);
 		audioLayer = new AudioLayer(width,height,audio,intSp);
 		imageLayer = new ImageLayer(width,height,images,sp);
@@ -154,11 +154,11 @@ public class Slide {
 			slide = new Scene(bp,width, height);
 		}
 		if(InteractiveLearningApp.style.equals("default")) {
-			slide.getStylesheets().add("style/ContentScreen/contentScreen.css");
+			defaultStyle();
 		}else if(InteractiveLearningApp.style.equals("nightmode")) {
-			slide.getStylesheets().add("style/ContentScreen/contentScreenNight.css");
+			nightmodeStyle();
 		}else if(InteractiveLearningApp.style.equals("colourblind")) {
-			slide.getStylesheets().add("style/ContentScreen/contentScreenCB.css");
+			colourblindStyle();
 		}else {
 			System.out.println("Unknown style scheme.");
 		}
